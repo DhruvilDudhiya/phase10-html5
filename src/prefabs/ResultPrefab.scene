@@ -1,0 +1,93 @@
+{
+    "id": "60de8010-c6cf-4bd3-9a0a-1576138f04a2",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1080,
+        "borderHeight": 1920
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "3ae3e7cc-f00c-4519-bfe0-78ed7d2a7c2f",
+            "label": "container_1",
+            "components": [],
+            "x": 524,
+            "y": 964,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "3d397f13-af3a-4643-85f3-8f4ee7998e8e",
+                    "label": "transparent_layer",
+                    "components": [],
+                    "texture": {
+                        "key": "transparent-layer"
+                    },
+                    "x": 23,
+                    "scaleY": 0.05
+                },
+                {
+                    "type": "Text",
+                    "id": "93e02b37-145f-4089-a505-16deb6e3cb0e",
+                    "label": "PlayerRank",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -463,
+                    "y": 2,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "1",
+                    "fontSize": "50px"
+                },
+                {
+                    "type": "Text",
+                    "id": "4be2244f-4938-475d-9599-ffe3cd9b0013",
+                    "label": "PlayerName",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -221,
+                    "y": 2,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Dhruvil",
+                    "fontSize": "50px"
+                },
+                {
+                    "type": "Text",
+                    "id": "bffe010b-6b5f-4a9a-8d15-a39cb4aebbd5",
+                    "label": "PlayerScore",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 161,
+                    "y": 2,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Dhruvil",
+                    "fontSize": "50px"
+                },
+                {
+                    "type": "Text",
+                    "id": "1df01c9d-267b-4bfb-ac0d-063debd78411",
+                    "label": "PlayerPrize",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 434,
+                    "y": 2,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Dhruvil",
+                    "fontSize": "50px"
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

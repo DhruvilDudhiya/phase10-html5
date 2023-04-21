@@ -1,0 +1,273 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/images/gameplay/Asset 3@2x.png",
+                "type": "image",
+                "key": "Asset 3@2x"
+            },
+            {
+                "url": "assets/images/gameplay/Asset 5@2x.png",
+                "type": "image",
+                "key": "Asset 5@2x"
+            },
+            {
+                "url": "assets/images/gameplay/Asset 6@2x.png",
+                "type": "image",
+                "key": "Asset 6@2x"
+            },
+            {
+                "url": "assets/images/gameplay/Asset 7@2x.png",
+                "type": "image",
+                "key": "Asset 7@2x"
+            },
+            {
+                "url": "assets/images/gameplay/Asset 8@2x.png",
+                "type": "image",
+                "key": "Asset 8@2x"
+            },
+            {
+                "url": "assets/images/background/background.png",
+                "type": "image",
+                "key": "background"
+            },
+            {
+                "url": "assets/images/gameplay/btn-cancel.png",
+                "type": "image",
+                "key": "btn-cancel"
+            },
+            {
+                "url": "assets/images/gameplay/btn-confirm.png",
+                "type": "image",
+                "key": "btn-confirm"
+            },
+            {
+                "url": "assets/images/gameplay/btn-settings.png",
+                "type": "image",
+                "key": "btn-settings"
+            },
+            {
+                "url": "assets/images/gameplay/btn-shuffle.png",
+                "type": "image",
+                "key": "btn-shuffle"
+            },
+            {
+                "url": "assets/images/wireframe/Button Preview.png",
+                "type": "image",
+                "key": "Button Preview"
+            },
+            {
+                "url": "assets/images/gameplay/card-shadow.png",
+                "type": "image",
+                "key": "card-shadow"
+            },
+            {
+                "url": "assets/images/gameplay/cardCorner-whiteLower.png",
+                "type": "image",
+                "key": "cardCorner-whiteLower"
+            },
+            {
+                "url": "assets/images/gameplay/cardCorner-whiteUpper.png",
+                "type": "image",
+                "key": "cardCorner-whiteUpper"
+            },
+            {
+                "url": "src/components/CardGroup.js",
+                "type": "script",
+                "key": "CardGroup"
+            },
+            {
+                "url": "assets/images/gameplay/cardHighlight.png",
+                "type": "image",
+                "key": "cardHighlight"
+            },
+            {
+                "url": "assets/images/gameplay/cardHolder.png",
+                "type": "image",
+                "key": "cardHolder"
+            },
+            {
+                "url": "src/prefabs/CardPrefab.js",
+                "type": "script",
+                "key": "CardPrefab"
+            },
+            {
+                "url": "src/components/CardPreset.js",
+                "type": "script",
+                "key": "CardPreset"
+            },
+            {
+                "url": "assets/images/gameplay/cardSlicing.png",
+                "type": "image",
+                "key": "cardSlicing"
+            },
+            {
+                "url": "assets/images/gameplay/double-phase.png",
+                "type": "image",
+                "key": "double-phase"
+            },
+            {
+                "url": "assets/images/gameplay/exit (1).png",
+                "type": "image",
+                "key": "exit (1)"
+            },
+            {
+                "url": "assets/images/gameplay/footer.png",
+                "type": "image",
+                "key": "footer"
+            },
+            {
+                "url": "src/managers/GameManager.js",
+                "type": "script",
+                "key": "GameManager"
+            },
+            {
+                "url": "assets/images/gameplay/icons8-synchronize-50.png",
+                "type": "image",
+                "key": "icons8-synchronize-50"
+            },
+            {
+                "url": "src/managers/InputManager.js",
+                "type": "script",
+                "key": "InputManager"
+            },
+            {
+                "url": "assets/images/gameplay/main-cards-deck.png",
+                "type": "image",
+                "key": "main-cards-deck"
+            },
+            {
+                "url": "assets/images/gameplay/opp-player-card-deck.png",
+                "type": "image",
+                "key": "opp-player-card-deck"
+            },
+            {
+                "url": "assets/images/gameplay/player-2-box.png",
+                "type": "image",
+                "key": "player-2-box"
+            },
+            {
+                "url": "assets/images/gameplay/player-3-box.png",
+                "type": "image",
+                "key": "player-3-box"
+            },
+            {
+                "url": "assets/images/gameplay/player-one.png",
+                "type": "image",
+                "key": "player-one"
+            },
+            {
+                "url": "assets/images/gameplay/player-profile-box.png",
+                "type": "image",
+                "key": "player-profile-box"
+            },
+            {
+                "url": "assets/images/gameplay/player-three.png",
+                "type": "image",
+                "key": "player-three"
+            },
+            {
+                "url": "assets/images/gameplay/player-two.png",
+                "type": "image",
+                "key": "player-two"
+            },
+            {
+                "url": "src/managers/PlayerHand.js",
+                "type": "script",
+                "key": "PlayerHand"
+            },
+            {
+                "url": "src/managers/PlayerManager.js",
+                "type": "script",
+                "key": "PlayerManager"
+            },
+            {
+                "url": "src/prefabs/PlayerPrefab.js",
+                "type": "script",
+                "key": "PlayerPrefab"
+            },
+            {
+                "url": "assets/images/gameplay/popup.png",
+                "type": "image",
+                "key": "popup"
+            },
+            {
+                "url": "src/prefabs/ResultPrefab.js",
+                "type": "script",
+                "key": "ResultPrefab"
+            },
+            {
+                "url": "src/managers/Ruleset.js",
+                "type": "script",
+                "key": "Ruleset"
+            },
+            {
+                "url": "assets/images/gameplay/single-phase.png",
+                "type": "image",
+                "key": "single-phase"
+            },
+            {
+                "url": "assets/images/gameplay/single-phase-2.png",
+                "type": "image",
+                "key": "single-phase-2"
+            },
+            {
+                "url": "assets/images/gameplay/single-phase-3.png",
+                "type": "image",
+                "key": "single-phase-3"
+            },
+            {
+                "url": "assets/images/gameplay/skipCard.png",
+                "type": "image",
+                "key": "skipCard"
+            },
+            {
+                "url": "src/managers/SocketManager.js",
+                "type": "script",
+                "key": "SocketManager"
+            },
+            {
+                "url": "assets/images/gameplay/timer-ring.png",
+                "type": "image",
+                "key": "timer-ring"
+            },
+            {
+                "url": "assets/images/gameplay/transparent-layer.png",
+                "type": "image",
+                "key": "transparent-layer"
+            },
+            {
+                "url": "src/managers/TweenManager.js",
+                "type": "script",
+                "key": "TweenManager"
+            },
+            {
+                "url": "src/managers/UIManager.js",
+                "type": "script",
+                "key": "UIManager"
+            },
+            {
+                "url": "assets/images/gameplay/wildCard.png",
+                "type": "image",
+                "key": "wildCard"
+            },
+            {
+                "url": "assets/images/gameplay/yellow-ring.png",
+                "type": "image",
+                "key": "yellow-ring"
+            },
+            {
+                "url": "assets/images/gameplay/yellow-ring-single.png",
+                "type": "image",
+                "key": "yellow-ring-single"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false
+    }
+}

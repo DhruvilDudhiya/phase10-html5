@@ -1,0 +1,124 @@
+{
+    "id": "3a86212a-357b-4143-a9f4-e1140b4b32f5",
+    "sceneType": "SCENE",
+    "settings": {
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "ResultScreen",
+        "borderWidth": 1080,
+        "borderHeight": 1920
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "ec605722-41fb-442a-86b6-8e53b2db02bc",
+            "label": "resultContainer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "59100f6b-9089-47d4-bd79-dbd288eaf549",
+                    "label": "background",
+                    "components": [],
+                    "texture": {
+                        "key": "background"
+                    },
+                    "x": 563,
+                    "y": 959
+                },
+                {
+                    "type": "Container",
+                    "id": "b50c44e6-8410-40a7-b691-ecadb9622a92",
+                    "label": "HaderContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 70,
+                    "y": 897,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "941c370a-32ae-4ff6-84c0-7181e31bfe69",
+                            "label": "transparent_layer",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "transparent-layer"
+                            },
+                            "x": 479,
+                            "y": 3,
+                            "scaleY": 0.06
+                        },
+                        {
+                            "type": "Text",
+                            "id": "48d4f047-5d0a-4920-9d11-e30f34ba5835",
+                            "label": "noHader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "No.",
+                            "fontSize": "50px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "c7767a1a-3646-47ca-8916-86587667d248",
+                            "label": "nameHader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 179,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Name",
+                            "fontSize": "50px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "8bdfd2f8-0340-4e41-9ff7-5a56a319d115",
+                            "label": "scoreHader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 588,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Score",
+                            "fontSize": "50px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "63a440d3-72ee-4172-a5dd-1b6207251a74",
+                            "label": "prizeHader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 883,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Prize",
+                            "fontSize": "50px"
+                        }
+                    ]
+                },
+                {
+                    "prefabId": "60de8010-c6cf-4bd3-9a0a-1576138f04a2",
+                    "id": "bf718c86-7caa-4702-aaa5-c2296307fe47",
+                    "unlock": [
+                        "x",
+                        "y"
+                    ],
+                    "label": "resultPrefab",
+                    "components": [],
+                    "x": 519,
+                    "y": 1008,
+                    "nestedPrefabs": []
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

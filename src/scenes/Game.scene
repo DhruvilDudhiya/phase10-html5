@@ -1,0 +1,836 @@
+{
+    "id": "0e4592fb-ba4f-4f1f-93fe-09608e12dc8e",
+    "sceneType": "SCENE",
+    "settings": {
+        "snapWidth": 256,
+        "snapHeight": 256,
+        "preloadPackFiles": [],
+        "createMethodName": "editorCreate",
+        "sceneKey": "Game",
+        "borderWidth": 1080,
+        "borderHeight": 1920
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "8cf39985-bf01-458e-8b24-20c70b453098",
+            "label": "backgroundImage",
+            "components": [],
+            "y": 2,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "4d9876e8-9bc7-463d-8408-483387dcf220",
+                    "label": "background",
+                    "components": [],
+                    "texture": {
+                        "key": "background"
+                    },
+                    "x": 540,
+                    "y": 960
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "be30b110-a734-4d30-b7f7-931a15a11c73",
+            "label": "discardDeckContainer",
+            "scope": "CLASS",
+            "components": [],
+            "y": 1,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "b9e19ba7-84bd-430f-8a37-d983d43274da",
+                    "label": "openedCardDeck",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "cardHolder"
+                    },
+                    "x": 540,
+                    "y": 875
+                },
+                {
+                    "type": "Image",
+                    "id": "128f3afc-c501-4118-897e-de1086595249",
+                    "label": "closedCardDeck",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "main-cards-deck"
+                    },
+                    "x": 540,
+                    "y": 875
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "579161ab-a4f4-4576-af62-860e7513348e",
+            "label": "footerContainer",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "871f2cb7-4e27-48ce-ae3c-b93609243435",
+                    "label": "footer",
+                    "components": [],
+                    "texture": {
+                        "key": "footer"
+                    },
+                    "x": 540,
+                    "y": 1816.5
+                },
+                {
+                    "type": "Image",
+                    "id": "123e1487-9b99-4d24-af48-dcacca8f9dba",
+                    "label": "btn_settings",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "btn-settings"
+                    },
+                    "x": 80,
+                    "y": 1860
+                },
+                {
+                    "type": "Image",
+                    "id": "fbbc8a47-2ab3-4bb2-80ed-615f5d6756b0",
+                    "label": "btn_shuffle",
+                    "components": [],
+                    "texture": {
+                        "key": "btn-shuffle"
+                    },
+                    "x": 1000,
+                    "y": 1860
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "281dd8fe-4cf3-4ebb-a90f-b2d9b24b328e",
+            "label": "body",
+            "components": [],
+            "y": 1,
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "a172a4f0-f007-4b47-961a-7e23ba5ef2e0",
+                    "label": "phaseContainer",
+                    "components": [],
+                    "y": 1,
+                    "list": [
+                        {
+                            "type": "Container",
+                            "id": "7713e3a3-3578-486d-b0ad-68e0fca7b116",
+                            "label": "doublePhaseContainer",
+                            "scope": "CLASS",
+                            "components": [],
+                            "visible": false,
+                            "list": [
+                                {
+                                    "type": "Image",
+                                    "id": "1c999496-9954-4aab-b32c-e9430984c129",
+                                    "label": "double_phase",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "double-phase"
+                                    },
+                                    "x": 540,
+                                    "y": 1210
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "f7e29e4d-d810-4743-8e7e-b246ccb55073",
+                                    "label": "dp_yellow_ring_1",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 291,
+                                    "y": 1220,
+                                    "visible": false
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "2be913fe-7fec-47e8-8d50-7f789d37864d",
+                                    "label": "dp_yellow_ring_2",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 796,
+                                    "y": 1216,
+                                    "visible": false
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "cb95d833-db09-4731-9e86-740fb463d776",
+                                    "label": "doublePhaseTwoCardContainer",
+                                    "useGameObjectName": true,
+                                    "scope": "CLASS",
+                                    "components": [
+                                        "Ruleset"
+                                    ],
+                                    "x": 795,
+                                    "y": 1220,
+                                    "list": []
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "83cb0ea1-978d-4acc-b81f-b305fef1b85f",
+                                    "label": "doublePhaseOneCardContainer",
+                                    "useGameObjectName": true,
+                                    "scope": "CLASS",
+                                    "components": [
+                                        "Ruleset"
+                                    ],
+                                    "x": 285,
+                                    "y": 1220,
+                                    "list": []
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "id": "f8f37786-f1c2-489d-b783-e97f99aa5deb",
+                            "label": "singlePhaseContainer",
+                            "scope": "CLASS",
+                            "components": [],
+                            "visible": false,
+                            "list": [
+                                {
+                                    "type": "Image",
+                                    "id": "0a2956e9-a982-4129-ae24-744ce051eef6",
+                                    "label": "single_phase",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "single-phase"
+                                    },
+                                    "x": 540,
+                                    "y": 1210
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "f321f6d8-3fc5-4b1a-8519-217efbfb31d7",
+                                    "label": "sp_yellow_ring",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring-single"
+                                    },
+                                    "x": 540,
+                                    "y": 1215,
+                                    "visible": false
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "id": "3c15fca4-02b4-4fce-821b-fd777bd582d2",
+                            "label": "phaseTextContainer",
+                            "components": [],
+                            "list": [
+                                {
+                                    "type": "Text",
+                                    "id": "58dc84a5-e9ba-45ce-900a-45607749e8f1",
+                                    "label": "totalPhasesText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 540,
+                                    "y": 1340,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fixedWidth": 200,
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN PIE Height",
+                                    "fontSize": "32px",
+                                    "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "cca3163b-e80f-484d-a9fc-68ef6c8918de",
+                                    "label": "phaseOneText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 286,
+                                    "y": 1070,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fixedWidth": 450,
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN PIE Height",
+                                    "fontSize": "40px",
+                                    "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "e6bd9fa3-5164-4625-97c8-3dd2691ab3c8",
+                                    "label": "phaseTwoText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 794,
+                                    "y": 1070,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fixedWidth": 450,
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN PIE Height",
+                                    "fontSize": "40px",
+                                    "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "9a808111-36a9-4650-803b-005cfd596d40",
+                                    "label": "phaseMiddleText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 540,
+                                    "y": 1070,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fixedWidth": 450,
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN PIE Height",
+                                    "fontSize": "40px",
+                                    "fontStyle": "bold"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Image",
+                            "id": "40965a90-30a6-4bc3-8b4c-50711c6360c4",
+                            "label": "confirmButton",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "btn-confirm"
+                            },
+                            "x": 795,
+                            "y": 1400,
+                            "visible": false
+                        },
+                        {
+                            "type": "Image",
+                            "id": "a543e928-aa0c-4265-a638-a550ea92cafe",
+                            "label": "cancelButton",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "btn-cancel"
+                            },
+                            "x": 285,
+                            "y": 1400,
+                            "visible": false
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "955d99dd-30d1-4d48-8015-b88eebcbea1a",
+                    "label": "threePlayerContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "y": 1,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Container",
+                            "id": "3198e6ba-250c-4516-86c0-b482815327e4",
+                            "label": "threePlayer2Container",
+                            "components": [],
+                            "list": [
+                                {
+                                    "type": "Image",
+                                    "id": "cbf44286-16ce-484f-896d-719717d3f634",
+                                    "label": "threePlayer2Box",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "player-2-box"
+                                    },
+                                    "x": 285,
+                                    "y": 385
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "id": "05be00e4-bdbe-4091-b065-969713d17e62",
+                            "label": "threePlayer3Container",
+                            "components": [],
+                            "list": [
+                                {
+                                    "type": "Image",
+                                    "id": "c9d10b9a-f99c-4823-a56f-738ea3ecddee",
+                                    "label": "threePlayer3Box",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "player-3-box"
+                                    },
+                                    "x": 825,
+                                    "y": 385
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "62a24bcf-3d67-41f9-a748-c4e2ded2690d",
+                    "label": "twoPlayerContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": -1,
+                    "y": 1,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Container",
+                            "id": "7a65c505-77e2-4a99-b3ba-124ad6eef87f",
+                            "label": "twoPlayer2Container",
+                            "components": [],
+                            "x": 1,
+                            "y": 1,
+                            "list": [
+                                {
+                                    "type": "Image",
+                                    "id": "ad73f8a3-79e2-4dfe-9ee7-417f23d6a1c5",
+                                    "label": "twoPlayer2Box",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "player-2-box"
+                                    },
+                                    "x": 540,
+                                    "y": 385
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "17b932cc-73c9-4c4e-b127-7668b675ac94",
+                                    "label": "secondPlayerUserNameText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 479,
+                                    "y": 300,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "Harsh",
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "28px",
+                                    "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "4ee345e4-2fd8-4a1f-9b07-2a512b009ea4",
+                                    "label": "secondPlayerScoreText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 479,
+                                    "y": 332,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "0",
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "22px",
+                                    "fontStyle": "bold",
+                                    "color": "#f8ca00"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "3194901e-0e8c-4cc0-84c1-f0234ea1cbc0",
+                    "label": "ownPlayerContainer",
+                    "components": [],
+                    "y": -1,
+                    "list": [
+                        {
+                            "type": "Text",
+                            "id": "9b22d755-ee68-46ab-8918-891a481ec032",
+                            "label": "ownPlayerUserNameText",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 538,
+                            "y": 1880,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "YOU",
+                            "align": "center",
+                            "fontFamily": "CHICKEN Pie Height",
+                            "fontSize": "40px",
+                            "fontStyle": "bold"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "dc2b48fb-6eba-4c95-b36a-51d2de09f701",
+                            "label": "ownPlayerScoreText",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 650,
+                            "y": 1880,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "0",
+                            "align": "center",
+                            "fontFamily": "CHICKEN Pie Height",
+                            "fontSize": "22px",
+                            "fontStyle": "bold",
+                            "color": "#f8ca00"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "fc55eaa5-2edc-48e6-a8d7-5e02cfd26f2b",
+            "label": "playerHandContainer",
+            "useGameObjectName": true,
+            "scope": "CLASS",
+            "components": [],
+            "x": 540,
+            "y": 1580,
+            "scaleX": 1.2,
+            "scaleY": 1.2,
+            "visible": false,
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "7c550870-dab5-4a2f-b72c-b012adacb1a1",
+            "label": "tempCardContainer",
+            "scope": "CLASS",
+            "components": [],
+            "y": 2,
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "df63c45c-30c7-49a6-84b6-6dc8ae1dc1fd",
+            "label": "playersContainer",
+            "scope": "CLASS",
+            "components": [],
+            "y": 3,
+            "list": []
+        },
+        {
+            "type": "Container",
+            "id": "cd342657-2878-4d55-b361-4472adc27a61",
+            "label": "popupContainer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "9e408352-4a81-47e7-8f06-087f482347d9",
+                    "label": "transparentLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "transparent-layer"
+                    },
+                    "x": 540,
+                    "y": 959,
+                    "visible": false
+                },
+                {
+                    "type": "Container",
+                    "id": "498f6307-31c0-4737-8c2c-62b15c051f33",
+                    "label": "waitingPopupContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 958,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "055f16d1-7063-41d4-bd21-b8a0ce44291d",
+                            "label": "popup",
+                            "components": [],
+                            "texture": {
+                                "key": "popup"
+                            },
+                            "y": 1
+                        },
+                        {
+                            "type": "Text",
+                            "id": "589de808-edf3-4325-b690-4a11f793844d",
+                            "label": "popUpText",
+                            "scope": "CLASS",
+                            "components": [],
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "WAITING FOR OTHER PLAYERS...",
+                            "align": "center",
+                            "fontFamily": "Comica_BD",
+                            "fontSize": "28px"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "c1b20eac-e7e0-4f01-9164-5992b18718a1",
+                    "label": "leaveTablePopup",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 298,
+                    "y": 873,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "8efa9bbd-8e02-4817-b3d4-05e2842efdc7",
+                            "label": "popupLeave",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 3@2x"
+                            },
+                            "x": 240,
+                            "y": 26,
+                            "scaleX": 0.62,
+                            "scaleY": 0.7
+                        },
+                        {
+                            "type": "Image",
+                            "id": "a04a0de4-8b45-4b7c-bd71-31b02ab272fd",
+                            "label": "yesLeaveBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 6@2x"
+                            },
+                            "x": 8,
+                            "y": 297,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d59c9267-be45-4cff-b281-ce14eed40b4c",
+                            "label": "cancleLeaveBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 5@2x"
+                            },
+                            "x": 450,
+                            "y": 294,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Text",
+                            "id": "cb096e95-4237-4ee6-9598-930affa7fea5",
+                            "label": "yesLeaveTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "y": 297,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "YES",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "2396f2f1-25be-4291-abbf-5ee38792d6ed",
+                            "label": "noLeaveTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 451,
+                            "y": 294,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "NO",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "ec8bcace-3e4e-4ebc-aeb7-f3b147cfe473",
+                            "label": "leaveTableTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 247,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Are you sure you want to\n   leave this table?",
+                            "fontSize": "50px"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "a831902e-0dad-45ff-a039-39f887b1297c",
+                    "label": "refreshTablePopup",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 298,
+                    "y": 873,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "108e0752-1517-427a-8939-50bf6bdb41ea",
+                            "label": "popuprefresh",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 3@2x"
+                            },
+                            "x": 240,
+                            "y": 26,
+                            "scaleX": 0.62,
+                            "scaleY": 0.7
+                        },
+                        {
+                            "type": "Image",
+                            "id": "5c2e5ec1-6e29-4ffd-902d-a7ddf262b5a9",
+                            "label": "yesRefreshBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 6@2x"
+                            },
+                            "x": 8,
+                            "y": 297,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Image",
+                            "id": "8d9b169d-c2ff-4d9d-b6b6-83e791930282",
+                            "label": "cancleRefreshBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 5@2x"
+                            },
+                            "x": 450,
+                            "y": 294,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Text",
+                            "id": "a16f2fd6-5a84-41db-a154-414d1e7c733f",
+                            "label": "yesRefreshTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "y": 297,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "YES",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "8196f34c-4608-4e51-9a5e-07869559aff6",
+                            "label": "noRefreshTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 451,
+                            "y": 294,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "NO",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "15c1db21-8917-45c1-a821-b14fadcdfab0",
+                            "label": "refreshTableTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 247,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Are you sure you want to\n   leave this table?",
+                            "fontSize": "50px"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "a4216ce1-e097-4aa5-8898-2da07e874f58",
+            "label": "manuContainer",
+            "scope": "CLASS",
+            "components": [],
+            "x": 82,
+            "y": 1729,
+            "visible": false,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "c5d04002-d118-4bed-9485-1d90a4620115",
+                    "label": "soundOffBtn",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "Asset 8@2x"
+                    },
+                    "scaleX": 0.3,
+                    "scaleY": 0.3,
+                    "visible": false
+                },
+                {
+                    "type": "Image",
+                    "id": "173f44fb-ca26-433c-aa05-edd9dd338991",
+                    "label": "soundOnBtn",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "Asset 7@2x"
+                    },
+                    "x": 2,
+                    "y": 1,
+                    "scaleX": 0.3,
+                    "scaleY": 0.3
+                },
+                {
+                    "type": "Image",
+                    "id": "cc116a5e-2ce9-4cdd-9cb3-9393d324eacf",
+                    "label": "refreshIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "icons8-synchronize-50"
+                    },
+                    "x": -1,
+                    "y": -87,
+                    "scaleX": 1.5,
+                    "scaleY": 1.5
+                },
+                {
+                    "type": "Image",
+                    "id": "264024b5-66cc-4bd9-b67e-cb9f13265a53",
+                    "label": "exitIcon",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "exit (1)"
+                    },
+                    "x": -2,
+                    "y": -175,
+                    "scaleX": 0.5,
+                    "scaleY": 0.5
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    }
+}

@@ -1,0 +1,233 @@
+{
+    "id": "def19ad3-3c9d-4e3d-9120-70fa6c213ffc",
+    "sceneType": "PREFAB",
+    "settings": {
+        "preloadMethodName": "",
+        "preloadPackFiles": [],
+        "createMethodName": "",
+        "borderWidth": 1080,
+        "borderHeight": 1920
+    },
+    "displayList": [
+        {
+            "type": "Container",
+            "id": "91ae49ca-84b9-45c7-8170-da69f7a3bcf0",
+            "label": "container_2",
+            "components": [
+                "CardPreset"
+            ],
+            "y": -1,
+            "list": [
+                {
+                    "type": "Container",
+                    "id": "e494d85d-11ea-4d87-ae46-6ecc6fecf97e",
+                    "label": "cardBackground",
+                    "scope": "CLASS",
+                    "components": [],
+                    "y": 1,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "6a001a68-1ac0-4544-a3fd-6cc49349d100",
+                            "label": "card_shadow",
+                            "components": [],
+                            "texture": {
+                                "key": "card-shadow"
+                            },
+                            "x": -5,
+                            "y": 1,
+                            "scaleX": 1.3,
+                            "scaleY": 1.3
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d465d695-ce60-4fcd-bf24-c6abfe3f7549",
+                            "label": "card",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "cardSlicing"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "c438b640-ee55-4f95-8aa3-2de5e31f4fca",
+                    "label": "normalCardsContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "list": [
+                        {
+                            "type": "Container",
+                            "id": "1c1733ec-d3cd-4211-ae43-a9eefc84e991",
+                            "label": "cardUIContainer",
+                            "components": [],
+                            "x": -37,
+                            "y": -64,
+                            "list": [
+                                {
+                                    "type": "Sprite",
+                                    "id": "62645eb0-bfb9-4c1b-b8b4-4f6305ae04b0",
+                                    "label": "whiteCornerLower",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "cardCorner-whiteLower"
+                                    },
+                                    "x": 74,
+                                    "y": 137,
+                                    "scaleY": 1.2,
+                                    "tintFill": true
+                                },
+                                {
+                                    "type": "Sprite",
+                                    "id": "6ebafcda-e32f-40a6-811d-9d006eef9ca8",
+                                    "label": "whiteCornerUpper",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "cardCorner-whiteUpper"
+                                    },
+                                    "y": -6,
+                                    "scaleY": 1.2,
+                                    "tintFill": true
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Container",
+                            "id": "0ba1075a-98b8-47f9-8ff1-199a228feaf5",
+                            "label": "cardTextContainer",
+                            "components": [],
+                            "y": -1,
+                            "list": [
+                                {
+                                    "type": "Text",
+                                    "id": "a28cb06f-1bac-49c6-b5be-dabb5e933b9e",
+                                    "label": "textBottomNumber",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 43,
+                                    "y": 80,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "12",
+                                    "align": "center",
+                                    "fontFamily": "Comica BD Bold",
+                                    "fontSize": "24px",
+                                    "fontStyle": "bold",
+                                    "color": "#ffffffff"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "87fb063e-eed8-408f-b027-47410ff22886",
+                                    "label": "textMiddleNumber",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "12",
+                                    "align": "center",
+                                    "fontFamily": "Comica BD Bold",
+                                    "fontSize": "80px",
+                                    "fontStyle": "bold",
+                                    "color": "#ffffff"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "4064cfd7-2692-42d4-9930-d43466dc84a2",
+                                    "label": "textTopNumber",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": -43,
+                                    "y": -80,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "12",
+                                    "align": "center",
+                                    "fontFamily": "Comica BD Bold",
+                                    "fontSize": "24px",
+                                    "fontStyle": "bold",
+                                    "color": "#ffffff"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "b23e9644-2120-4b53-a364-88e434e43fbd",
+                    "label": "specialCardsContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "3bf64cb1-4fa9-4ecc-ad60-5e3bc558b05b",
+                            "label": "wildCard",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "wildCard"
+                            },
+                            "y": -2,
+                            "visible": false
+                        },
+                        {
+                            "type": "Image",
+                            "id": "498d365d-8648-4b57-94cb-9f0a9b55487f",
+                            "label": "skipCard",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "skipCard"
+                            },
+                            "visible": false
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "708bb362-dc12-491d-b55c-d5aba8f07317",
+                    "label": "cardHighlightContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "y": -1,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "14aaee0d-8248-493e-835f-4dab15c49b91",
+                            "label": "cardHighlight",
+                            "components": [],
+                            "texture": {
+                                "key": "cardHighlight"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "plainObjects": [],
+    "meta": {
+        "app": "Phaser Editor 2D - Scene Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType",
+        "version": 3
+    },
+    "prefabProperties": [
+        {
+            "name": "iCardId",
+            "label": "iCardId",
+            "tooltip": "iCardId",
+            "defValue": "",
+            "customDefinition": false,
+            "type": {
+                "id": "string"
+            }
+        }
+    ]
+}

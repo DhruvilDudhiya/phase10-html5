@@ -1,0 +1,78 @@
+{
+    "components": [
+        {
+            "name": "PreloadText",
+            "baseClass": "UserComponent",
+            "gameObjectType": "Phaser.GameObjects.Text",
+            "properties": []
+        },
+        {
+            "name": "CardPreset",
+            "baseClass": "",
+            "gameObjectType": "Phaser.GameObjects.Container",
+            "properties": [
+                {
+                    "name": "cardId",
+                    "label": "cardId",
+                    "tooltip": "cardId",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
+                },
+                {
+                    "name": "cardNumber",
+                    "label": "cardNumber",
+                    "tooltip": "cardNumber",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
+                },
+                {
+                    "name": "cardColor",
+                    "label": "cardColor",
+                    "tooltip": "cardColor",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
+                },
+                {
+                    "name": "lastPosX",
+                    "label": "lastPosX",
+                    "tooltip": "lastPosX",
+                    "defValue": 0,
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
+                },
+                {
+                    "name": "lastPosY",
+                    "label": "lastPosY",
+                    "tooltip": "lastPosY",
+                    "defValue": 0,
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "CardGroup",
+            "baseClass": "",
+            "gameObjectType": "Phaser.GameObjects.Container",
+            "properties": []
+        }
+    ],
+    "meta": {
+        "app": "Phaser Editor 2D - Object Script Editor",
+        "url": "https://phasereditor2d.com",
+        "contentType": "phasereditor2d.core.scene.SceneContentType"
+    }
+}
