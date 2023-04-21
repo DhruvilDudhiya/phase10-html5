@@ -157,9 +157,10 @@ class CardPreset {
 			}
 		}
 	}
-	clearAllPhaseCards(){
-	this.gameObject.scene.doublePhaseOneCardContainer.remove(this.gameObjectPreset);
-	this.gameObject.scene.doublePhaseTwoCardContainer.remove(this.gameObjectPreset);
+	static clearAllPhaseCards(){
+		console.log("Hell0");
+	this.gameObject.scene.doublePhaseOneCardContainer.remove(gameObjectPreset);
+	this.gameObject.scene.doublePhaseTwoCardContainer.remove(gameObjectPreset);
 	}
 
 	/* END-USER-CODE */

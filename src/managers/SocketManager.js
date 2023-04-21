@@ -77,10 +77,8 @@ class SocketManager {
             case "resPhaseData":
                 console.log("resPhaseData ::", data.oData);
                 this.oScene.oGameManager.resetPhaseData();
-                this.oScene.oPlayerManager.setGrup1CurrentData(data.oData);
-                this.oScene.oPlayerManager.setGrup2CurrentData(data.oData);
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
-                this.oScene.oUIManager.setPhaseData(data.oData);
+                this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
 
             case "resHand":

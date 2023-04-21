@@ -34,9 +34,6 @@ class PlayerManager {
     setHandData(data) {
         console.log("ownPlayerHand", data);
         this.oScene.playerHandContainer.setVisible(true);
-        if (data.length != 0) {
-            this.oScene.oTweenManager.startDeckDiscardSeparation();
-        }
         for (var i = 0; i < data.length; i++) {
             if (data[i].nLabel <= 12) {
                 this.oScene.oPlayerHand.setPlayerHand(data[i].nLabel, data[i].eColor, data[i]._id);
@@ -108,9 +105,34 @@ class PlayerManager {
             }
         }
     }
-    // resGameState(oGameData){
+    setPlayerPhaseData(phaseData) {
+        this.oScene.oGameManager.nCurrentPhase = phaseData.nCurrentPhase;
+        this.oScene.oGameManager.nTotalPhasesCount = phaseData.nTotalPhasesCount;
+        //OwnPlayerData
+        if (this.oScene.ownPlayerId == phaseData.iUserId) {
+            this.oScene.totalPhasesText.setText("PHASE " + phaseData.nCurrentPhase + "/" + phaseData.nTotalPhasesCount);
+            if (phaseData.aRules.length == 2) {
+                this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
+                this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
+                this.oScene.phaseOneText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " OF " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
 
-    // }
+                this.oScene.oGameManager.phaseTwoType = phaseData.aRules[1].sRuleType.toUpperCase();
+                this.oScene.oGameManager.phaseTwoTotalCards = phaseData.aRules[1].nNumberOfCards.toString().toUpperCase();
+                this.oScene.phaseTwoText.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " OF " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
+            }
+            else {
+                this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
+                this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
+                this.oScene.phaseMiddleText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " OF " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+            }
+            //setownPlayerGroup
+            this.setGrup1CurrentData(phaseData);
+            this.setGrup2CurrentData(phaseData);
+        }
+
+    }
+
+
 
     changePlayerTurn(playerTurnData) {
         this.currentPlayerTurn = playerTurnData.iUserId;
@@ -119,8 +141,8 @@ class PlayerManager {
             console.log("ownPlayerturn", this.isOwnTurn)
         } else {
             this.isOwnTurn = false;
-            // this.oScene.confirmButton.setAlpha(0.75);
-            // this.oScene.confirmButton.disableInteractive();
+            this.oScene.confirmButton.setAlpha(0.75);
+            this.oScene.confirmButton.disableInteractive();
         }
         for (var i = 0; i < this.oScene.playersContainer.length; i++) {
             if (this.oScene.playersContainer.getAll()[i].name.includes(this.currentPlayerTurn)) {
@@ -140,7 +162,7 @@ class PlayerManager {
         this.oScene.confirmButton.setVisible(true);
         this.oScene.cancelButton.setVisible(true);
     }
-    
+
     handleDeclareButtonsVisibilityOFF() {
         this.oScene.confirmButton.setVisible(false);
         this.oScene.cancelButton.setVisible(false);
@@ -156,7 +178,7 @@ class PlayerManager {
             this.handleDeclareButtonsVisibilityOFF()
         }
         else {
-            console.log("isDeclarePhase",this.oScene.isDeclarePhase);
+            console.log("isDeclarePhase", this.oScene.isDeclarePhase);
             if (this.oScene.isDeclarePhase == true) {
                 this.handleDeclareButtonsVisibilityOFF();
             } else {

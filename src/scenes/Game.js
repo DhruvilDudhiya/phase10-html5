@@ -563,12 +563,10 @@ class Game extends Phaser.Scene {
 		this.scene.start("ResultScreen");
 	}
 	setRoundOver() {
-
 		this.isDeclarePhase = true;
+		this.oGameManager.resetPhaseData();
 		this.oPlayerHand.clearPlayerHandCard();
 		this.oPlayerPrefab.intervalTimeReset();
-		// this.closedCardDeck.visible = false;
-		// this.openedCardDeck.visible = false;
 	}
 	/* END-USER-CODE */
 }
