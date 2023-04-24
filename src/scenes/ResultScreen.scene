@@ -24,7 +24,7 @@
                     "texture": {
                         "key": "background"
                     },
-                    "x": 563,
+                    "x": 540,
                     "y": 959
                 },
                 {
@@ -33,7 +33,7 @@
                     "label": "HaderContainer",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 70,
+                    "x": 540,
                     "y": 897,
                     "list": [
                         {
@@ -45,8 +45,7 @@
                             "texture": {
                                 "key": "transparent-layer"
                             },
-                            "x": 479,
-                            "y": 3,
+                            "y": 1,
                             "scaleY": 0.06
                         },
                         {
@@ -55,6 +54,7 @@
                             "label": "noHader",
                             "scope": "CLASS",
                             "components": [],
+                            "x": -483,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "No.",
@@ -66,7 +66,7 @@
                             "label": "nameHader",
                             "scope": "CLASS",
                             "components": [],
-                            "x": 179,
+                            "x": -304,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "Name",
@@ -78,7 +78,7 @@
                             "label": "scoreHader",
                             "scope": "CLASS",
                             "components": [],
-                            "x": 588,
+                            "x": 105,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "Score",
@@ -90,28 +90,27 @@
                             "label": "prizeHader",
                             "scope": "CLASS",
                             "components": [],
-                            "x": 883,
+                            "x": 400,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "Prize",
                             "fontSize": "50px"
                         }
                     ]
-                },
-                {
-                    "prefabId": "60de8010-c6cf-4bd3-9a0a-1576138f04a2",
-                    "id": "bf718c86-7caa-4702-aaa5-c2296307fe47",
-                    "unlock": [
-                        "x",
-                        "y"
-                    ],
-                    "label": "resultPrefab",
-                    "components": [],
-                    "x": 519,
-                    "y": 1008,
-                    "nestedPrefabs": []
                 }
             ]
+        },
+        {
+            "type": "Text",
+            "id": "04b9bcf0-41b6-40bd-a799-4c0c054e8083",
+            "label": "text_2",
+            "components": [],
+            "x": 540,
+            "y": 524,
+            "originX": 0.5,
+            "originY": 0.5,
+            "text": "Rank",
+            "fontSize": "70px"
         }
     ],
     "plainObjects": [],

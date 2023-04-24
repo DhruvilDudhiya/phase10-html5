@@ -14,8 +14,6 @@
             "id": "3ae3e7cc-f00c-4519-bfe0-78ed7d2a7c2f",
             "label": "container_1",
             "components": [],
-            "x": 524,
-            "y": 964,
             "list": [
                 {
                     "type": "Image",
@@ -31,11 +29,10 @@
                 {
                     "type": "Text",
                     "id": "93e02b37-145f-4089-a505-16deb6e3cb0e",
-                    "label": "PlayerRank",
+                    "label": "playerRank",
                     "scope": "CLASS",
                     "components": [],
                     "x": -463,
-                    "y": 2,
                     "originX": 0.5,
                     "originY": 0.5,
                     "text": "1",
@@ -44,41 +41,50 @@
                 {
                     "type": "Text",
                     "id": "4be2244f-4938-475d-9599-ffe3cd9b0013",
-                    "label": "PlayerName",
+                    "label": "playerName",
                     "scope": "CLASS",
                     "components": [],
-                    "x": -221,
-                    "y": 2,
-                    "originX": 0.5,
+                    "x": -265,
                     "originY": 0.5,
-                    "text": "Dhruvil",
-                    "fontSize": "50px"
+                    "text": "PlayerName",
+                    "fontSize": "40px"
                 },
                 {
                     "type": "Text",
                     "id": "bffe010b-6b5f-4a9a-8d15-a39cb4aebbd5",
-                    "label": "PlayerScore",
+                    "label": "playerScore",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 161,
-                    "y": 2,
+                    "x": 127,
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "Dhruvil",
+                    "text": "0",
                     "fontSize": "50px"
                 },
                 {
                     "type": "Text",
                     "id": "1df01c9d-267b-4bfb-ac0d-063debd78411",
-                    "label": "PlayerPrize",
+                    "label": "winPrize",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 434,
-                    "y": 2,
+                    "x": 415,
                     "originX": 0.5,
                     "originY": 0.5,
-                    "text": "Dhruvil",
+                    "text": "0",
                     "fontSize": "50px"
+                },
+                {
+                    "type": "Image",
+                    "id": "6b69933d-4142-4dbd-969f-e9351b947fc9",
+                    "label": "playerProfile",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "player-one"
+                    },
+                    "x": -322,
+                    "scaleX": 0.4,
+                    "scaleY": 0.4
                 }
             ]
         }

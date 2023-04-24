@@ -67,60 +67,49 @@ class SocketManager {
                     }
                 }
                 break;
-
             case "resUserJoined":
                 console.log("resUserJoined ::", data.oData);
                 this.oScene.oPlayerManager.setUsersData(data.oData, this.ownSocketId);
                 this.oScene.oPlayerManager.setHandData(data.oData.aHand);
                 break;
-
             case "resPhaseData":
                 console.log("resPhaseData ::", data.oData);
                 this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
-
             case "resHand":
                 console.log("resHand ::", data.oData);
                 this.oScene.oPlayerHand.getHandData(data);
                 break;
-
             case "resHighCards":
                 console.log("resHighCards ::", data.oData);
                 this.oScene.oPlayerHand.arrangePlayerHighCards(data.oData);
                 break;
-
             case "resGameInitializeTimer":
                 console.log("resGameInitializeTimer ::", data.oData);
                 this.oScene.oUIManager.startRoundTimer(data.oData);
                 break;
-
             case "resGameState":
                 console.log("resGameState ::", data.oData);
                 // this.oPlayerManager.resGameState(data.oData);
                 this.oScene.tempCardContainer.destroy();
                 this.oScene.oTweenManager.startHandCardsDistribution();
                 break;
-
             case "resPlayerTurn":
                 console.log("Player Turn Change ->", data.oData);
                 this.oScene.oPlayerManager.changePlayerTurn(data.oData);
                 break;
-
             case "resHandCardCount":
                 console.log("resHandCardCount :: ", data.oData);
                 break;
-
             case "resPlayersState":
                 console.log("resPlayersState :: ", data.oData);
                 break;
-
             case "resClosedCard":
                 console.log("RRR :: resClosedCard :: ", data.oData);
-                    this.oScene.oPlayerManager.handleDeclareButtons(); 
+                this.oScene.oPlayerManager.handleDeclareButtons();
                 break;
-
             case "resOpenedDeck":
                 console.log("resOpenDeck :: ", data.oData);
                 // this.oScene.oPlayerManager.handleDeclareButtons();
@@ -141,17 +130,16 @@ class SocketManager {
                 break;
             case "resGameOver":
                 console.log("resGameOver :: ", data.oData);
-                // this.oScene.changeScenes();
-                // this.oScene.declareWinner(data.oData); 
+                this.oScene.scene.stop('Game')
+                this.oScene.scene.start('ResultScreen', { data: data.oData });
+                // this.oScene.oResultScene.winnerScene(data.oData);
                 break;
             case "resClearTable":
-                console.log("resClearTable ::", data.oData);    
+                console.log("resClearTable ::", data.oData);
             // DND - Copy and Paste
             // case "":
             //     console.log(" :: ", data);
             //     break;
-
-
             default:
                 console.log("New Event Detected :: ", data.sEventName, data);
                 break;

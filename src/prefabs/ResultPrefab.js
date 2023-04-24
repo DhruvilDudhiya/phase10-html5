@@ -6,45 +6,52 @@
 class ResultPrefab extends Phaser.GameObjects.Container {
 
 	constructor(scene, x, y) {
-		super(scene, x ?? 524, y ?? 964);
+		super(scene, x ?? 0, y ?? 0);
 
 		// transparent_layer
 		const transparent_layer = scene.add.image(23, 0, "transparent-layer");
 		transparent_layer.scaleY = 0.05;
 		this.add(transparent_layer);
 
-		// PlayerRank
-		const playerRank = scene.add.text(-463, 2, "", {});
+		// playerRank
+		const playerRank = scene.add.text(-463, 0, "", {});
 		playerRank.setOrigin(0.5, 0.5);
 		playerRank.text = "1";
 		playerRank.setStyle({ "fontSize": "50px" });
 		this.add(playerRank);
 
-		// PlayerName
-		const playerName = scene.add.text(-221, 2, "", {});
-		playerName.setOrigin(0.5, 0.5);
-		playerName.text = "Dhruvil";
-		playerName.setStyle({ "fontSize": "50px" });
+		// playerName
+		const playerName = scene.add.text(-265, 0, "", {});
+		playerName.setOrigin(0, 0.5);
+		playerName.text = "PlayerName";
+		playerName.setStyle({ "fontSize": "40px" });
 		this.add(playerName);
 
-		// PlayerScore
-		const playerScore = scene.add.text(161, 2, "", {});
+		// playerScore
+		const playerScore = scene.add.text(127, 0, "", {});
 		playerScore.setOrigin(0.5, 0.5);
-		playerScore.text = "Dhruvil";
+		playerScore.text = "0";
 		playerScore.setStyle({ "fontSize": "50px" });
 		this.add(playerScore);
 
-		// PlayerPrize
-		const playerPrize = scene.add.text(434, 2, "", {});
-		playerPrize.setOrigin(0.5, 0.5);
-		playerPrize.text = "Dhruvil";
-		playerPrize.setStyle({ "fontSize": "50px" });
-		this.add(playerPrize);
+		// winPrize
+		const winPrize = scene.add.text(415, 0, "", {});
+		winPrize.setOrigin(0.5, 0.5);
+		winPrize.text = "0";
+		winPrize.setStyle({ "fontSize": "50px" });
+		this.add(winPrize);
+
+		// playerProfile
+		const playerProfile = scene.add.image(-322, 0, "player-one");
+		playerProfile.scaleX = 0.4;
+		playerProfile.scaleY = 0.4;
+		this.add(playerProfile);
 
 		this.playerRank = playerRank;
 		this.playerName = playerName;
 		this.playerScore = playerScore;
-		this.playerPrize = playerPrize;
+		this.winPrize = winPrize;
+		this.playerProfile = playerProfile;
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
@@ -58,11 +65,18 @@ class ResultPrefab extends Phaser.GameObjects.Container {
 	/** @type {Phaser.GameObjects.Text} */
 	playerScore;
 	/** @type {Phaser.GameObjects.Text} */
-	playerPrize;
+	winPrize;
+	/** @type {Phaser.GameObjects.Image} */
+	playerProfile;
 
 	/* START-USER-CODE */
 
 	// Write your code here.
+	setUserData(oData) {
+		this.playerName.text = oData.sUserName.length == 0 ? oData.sMobile.substring(0, 4) + "****" : oData.sUserName
+		this.playerScore.text = oData.nScore
+		this.winPrize.text = oData.nTotalWinningAmount
+	}
 
 	/* END-USER-CODE */
 }

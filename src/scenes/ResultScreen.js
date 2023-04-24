@@ -20,49 +20,51 @@ class ResultScreen extends Phaser.Scene {
 		const resultContainer = this.add.container(0, 0);
 
 		// background
-		const background = this.add.image(563, 959, "background");
+		const background = this.add.image(540, 959, "background");
 		resultContainer.add(background);
 
 		// HaderContainer
-		const haderContainer = this.add.container(70, 897);
+		const haderContainer = this.add.container(540, 897);
 		resultContainer.add(haderContainer);
 
 		// transparent_layer
-		const transparent_layer = this.add.image(479, 3, "transparent-layer");
+		const transparent_layer = this.add.image(0, 1, "transparent-layer");
 		transparent_layer.scaleY = 0.06;
 		haderContainer.add(transparent_layer);
 
 		// noHader
-		const noHader = this.add.text(0, 0, "", {});
+		const noHader = this.add.text(-483, 0, "", {});
 		noHader.setOrigin(0.5, 0.5);
 		noHader.text = "No.";
 		noHader.setStyle({ "fontSize": "50px" });
 		haderContainer.add(noHader);
 
 		// nameHader
-		const nameHader = this.add.text(179, 0, "", {});
+		const nameHader = this.add.text(-304, 0, "", {});
 		nameHader.setOrigin(0.5, 0.5);
 		nameHader.text = "Name";
 		nameHader.setStyle({ "fontSize": "50px" });
 		haderContainer.add(nameHader);
 
 		// scoreHader
-		const scoreHader = this.add.text(588, 0, "", {});
+		const scoreHader = this.add.text(105, 0, "", {});
 		scoreHader.setOrigin(0.5, 0.5);
 		scoreHader.text = "Score";
 		scoreHader.setStyle({ "fontSize": "50px" });
 		haderContainer.add(scoreHader);
 
 		// prizeHader
-		const prizeHader = this.add.text(883, 0, "", {});
+		const prizeHader = this.add.text(400, 0, "", {});
 		prizeHader.setOrigin(0.5, 0.5);
 		prizeHader.text = "Prize";
 		prizeHader.setStyle({ "fontSize": "50px" });
 		haderContainer.add(prizeHader);
 
-		// resultPrefab
-		const resultPrefab = new ResultPrefab(this, 519, 1008);
-		resultContainer.add(resultPrefab);
+		// text_2
+		const text_2 = this.add.text(540, 524, "", {});
+		text_2.setOrigin(0.5, 0.5);
+		text_2.text = "Rank";
+		text_2.setStyle({ "fontSize": "70px" });
 
 		this.resultContainer = resultContainer;
 		this.haderContainer = haderContainer;
@@ -93,24 +95,35 @@ class ResultScreen extends Phaser.Scene {
 	/* START-USER-CODE */
 
 	// Write your code here
-
+	init(oData) {
+		this.winnerScene(oData.data);
+	}
 	create() {
-
 		this.editorCreate();
-		this.instantiateSocketManager();
-	}
-	instantiateSocketManager() {
-		const queryString = window.location.search;
-		const urlParams = new URLSearchParams(queryString);
-		const eGameType = urlParams.get('eGameType');
-		const authToken = urlParams.get('sAuthToken');
-		const iTableId = urlParams.get('iTableId');
-		const sRootURL = urlParams.get('sRootUrl');
-		const nPracticeChips = urlParams.get('nPracticeChips');
-		this.oSocketManager = new SocketManager(this, eGameType, authToken, iTableId, sRootURL, nPracticeChips);
 	}
 
+	winnerScene(oData) {
+		var resultPrefabX = 517
+		var resultPrefabY = 1004
 
+		const txt_rank = this.add.text(540, 422, "", {});
+		txt_rank.setOrigin(0.5, 0.5);
+		txt_rank.text = "";
+		txt_rank.setStyle({ "fontSize": "130px" });
+
+		for (let i = 0; i < oData.length; i++) {
+			var resultPrefab = new ResultPrefab(this, resultPrefabX, resultPrefabY);
+			this.add.existing(resultPrefab);
+			resultPrefab.setDepth(10)
+			resultPrefab.playerRank.text = i + 1
+			resultPrefab.setUserData(oData[i])
+			if (oData[i].nRank != undefined) {
+				txt_rank.text = oData[i].nRank
+				console.log(oData[i].sUserName)
+			}
+			resultPrefabY += 93
+		}
+	}
 
 	/* END-USER-CODE */
 }
