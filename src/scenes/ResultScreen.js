@@ -110,6 +110,7 @@ class ResultScreen extends Phaser.Scene {
 		txt_rank.setOrigin(0.5, 0.5);
 		txt_rank.text = "";
 		txt_rank.setStyle({ "fontSize": "130px" });
+		txt_rank.setDepth(10)
 
 		for (let i = 0; i < oData.length; i++) {
 			var resultPrefab = new ResultPrefab(this, resultPrefabX, resultPrefabY);
@@ -117,7 +118,8 @@ class ResultScreen extends Phaser.Scene {
 			resultPrefab.setDepth(10)
 			resultPrefab.playerRank.text = i + 1
 			resultPrefab.setUserData(oData[i])
-			if (oData[i].nRank != undefined) {
+			// console.log(txt_rank.text,oData[i].nRank)
+			if (oData[i].nRank !== undefined) {
 				txt_rank.text = oData[i].nRank
 				console.log(oData[i].sUserName)
 			}
