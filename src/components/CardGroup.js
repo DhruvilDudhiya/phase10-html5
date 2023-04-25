@@ -41,7 +41,6 @@ class CardGroup {
 			this.gameObject.getAll().forEach(card => {
 				card.setPosition(nFirstCardPosition - centerGap, 0);
 				nFirstCardPosition += cardGap;
-
 			});
 		}
 	}

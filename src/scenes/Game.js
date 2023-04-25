@@ -174,16 +174,52 @@ class Game extends Phaser.Scene {
 		// secondPlayerUserNameText
 		const secondPlayerUserNameText = this.add.text(479, 300, "", {});
 		secondPlayerUserNameText.setOrigin(0.5, 0.5);
-		secondPlayerUserNameText.text = "Harsh";
+		secondPlayerUserNameText.text = "Waiting..";
 		secondPlayerUserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
 		twoPlayer2Container.add(secondPlayerUserNameText);
 
 		// secondPlayerScoreText
 		const secondPlayerScoreText = this.add.text(479, 332, "", {});
 		secondPlayerScoreText.setOrigin(0.5, 0.5);
-		secondPlayerScoreText.text = "0";
 		secondPlayerScoreText.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "22px", "fontStyle": "bold" });
 		twoPlayer2Container.add(secondPlayerScoreText);
+
+		// emptySeatPlayer2
+		const emptySeatPlayer2 = this.add.container(481, 173);
+		twoPlayer2Container.add(emptySeatPlayer2);
+
+		// player_profile_box
+		const player_profile_box = this.add.image(0, 0, "player-profile-box");
+		player_profile_box.alpha = 0.8;
+		player_profile_box.alphaTopLeft = 0.8;
+		player_profile_box.alphaTopRight = 0.8;
+		player_profile_box.alphaBottomLeft = 0.8;
+		player_profile_box.alphaBottomRight = 0.8;
+		player_profile_box.tintFill = true;
+		player_profile_box.tintTopLeft = 0;
+		player_profile_box.tintTopRight = 0;
+		player_profile_box.tintBottomLeft = 0;
+		player_profile_box.tintBottomRight = 0;
+		emptySeatPlayer2.add(player_profile_box);
+
+		// text_2
+		const text_2 = this.add.text(0, 0, "", {});
+		text_2.setOrigin(0.5, 0.5);
+		text_2.text = "Empty\nSeat";
+		text_2.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		emptySeatPlayer2.add(text_2);
+
+		// declareCardContainer
+		const declareCardContainer = this.add.container(0, 0);
+		twoPlayer2Container.add(declareCardContainer);
+
+		// opponentGrp1PhaseCardContainer
+		const opponentGrp1PhaseCardContainer = this.add.container(0, 0);
+		declareCardContainer.add(opponentGrp1PhaseCardContainer);
+
+		// opponentGrp2PhaseCardContainer
+		const opponentGrp2PhaseCardContainer = this.add.container(0, 0);
+		declareCardContainer.add(opponentGrp2PhaseCardContainer);
 
 		// ownPlayerContainer
 		const ownPlayerContainer = this.add.container(0, -1);
@@ -378,6 +414,10 @@ class Game extends Phaser.Scene {
 		this.twoPlayerContainer = twoPlayerContainer;
 		this.secondPlayerUserNameText = secondPlayerUserNameText;
 		this.secondPlayerScoreText = secondPlayerScoreText;
+		this.emptySeatPlayer2 = emptySeatPlayer2;
+		this.declareCardContainer = declareCardContainer;
+		this.opponentGrp1PhaseCardContainer = opponentGrp1PhaseCardContainer;
+		this.opponentGrp2PhaseCardContainer = opponentGrp2PhaseCardContainer;
 		this.ownPlayerUserNameText = ownPlayerUserNameText;
 		this.ownPlayerScoreText = ownPlayerScoreText;
 		this.playerHandContainer = playerHandContainer;
@@ -452,6 +492,14 @@ class Game extends Phaser.Scene {
 	secondPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
 	secondPlayerScoreText;
+	/** @type {Phaser.GameObjects.Container} */
+	emptySeatPlayer2;
+	/** @type {Phaser.GameObjects.Container} */
+	declareCardContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	opponentGrp1PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	opponentGrp2PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Text} */
 	ownPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -519,6 +567,8 @@ class Game extends Phaser.Scene {
 		this.oGameManager = new GameManager(this);
 		this.phaseContainerOne = new CardGroup(this.doublePhaseOneCardContainer);
 		this.phaseContainerTwo = new CardGroup(this.doublePhaseTwoCardContainer);
+		// this.opponentPhaseContainerOne = new CardGroup(this.opponentGrp1PhaseCardContainer);
+		// this.opponentPhaseContainerTwo = new CardGroup(this.opponentGrp2PhaseCardContainer);
 		this.oPlayerManager = new PlayerManager(this);
 		this.oPlayerHand = new PlayerHand(this);
 		this.oUIManager = new UIManager(this);

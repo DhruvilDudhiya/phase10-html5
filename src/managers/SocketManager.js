@@ -42,6 +42,10 @@ class SocketManager {
 
         // Socket Connection
         this.oRootSocketConn.emit("reqJoinTable", { iTableId: this.iTableId }, (error, data) => {
+            // waiting popup visible
+            this.oScene.waitingPopupContainer.setVisible(true);
+            this.oScene.transparentLayer.setVisible(true);
+            
             this.onReceivedData(data);
         });
 
@@ -52,14 +56,13 @@ class SocketManager {
     }
 
     onReceivedData(data) {
-        console.log(data.sEventName);
-        // console.log(data);
-        // console.log("<===================>");
         switch (data.sEventName) {
             case undefined:
+                // console.log("data",data)
                 this.oScene.oUIManager.setPlayerBoxes(data.oData.nMaxPlayer);
                 if (data.oData.aParticipant.length == data.oData.nMaxPlayer) {
                     for (var i = 0; i <= data.oData.aParticipant.length; i++) {
+                        console.info("data.oData.aParticipant[i] : ",data.oData.aParticipant[i])
                         if (data.oData.aParticipant[i].sRootSocket != this.ownSocketId) {
                             this.oScene.oPlayerManager.setUsersData(data.oData.aParticipant[i]);
                             break;
@@ -68,36 +71,29 @@ class SocketManager {
                 }
                 break;
             case "resUserJoined":
-                console.log("resUserJoined ::", data.oData);
                 this.oScene.oPlayerManager.setUsersData(data.oData, this.ownSocketId);
                 this.oScene.oPlayerManager.setHandData(data.oData.aHand);
                 break;
             case "resPhaseData":
-                console.log("resPhaseData ::", data.oData);
                 this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
             case "resHand":
-                console.log("resHand ::", data.oData);
                 this.oScene.oPlayerHand.getHandData(data);
                 break;
             case "resHighCards":
-                console.log("resHighCards ::", data.oData);
                 this.oScene.oPlayerHand.arrangePlayerHighCards(data.oData);
                 break;
             case "resGameInitializeTimer":
-                console.log("resGameInitializeTimer ::", data.oData);
                 this.oScene.oUIManager.startRoundTimer(data.oData);
                 break;
             case "resGameState":
-                console.log("resGameState ::", data.oData);
                 // this.oPlayerManager.resGameState(data.oData);
                 this.oScene.tempCardContainer.destroy();
                 this.oScene.oTweenManager.startHandCardsDistribution();
                 break;
             case "resPlayerTurn":
-                console.log("Player Turn Change ->", data.oData);
                 this.oScene.oPlayerManager.changePlayerTurn(data.oData);
                 break;
             case "resHandCardCount":
@@ -107,29 +103,27 @@ class SocketManager {
                 console.log("resPlayersState :: ", data.oData);
                 break;
             case "resClosedCard":
-                console.log("RRR :: resClosedCard :: ", data.oData);
                 this.oScene.oPlayerManager.handleDeclareButtons();
                 break;
             case "resOpenedDeck":
-                console.log("resOpenDeck :: ", data.oData);
-                // this.oScene.oPlayerManager.handleDeclareButtons();
+                // console.log("resOpenDeck :: ", data.oData);
                 this.oScene.oPlayerHand.receiveOpenedDeckCard(data.oData);
                 break;
             case 'resHit':
                 console.log('resHit ::', data.oData);
+                this.oScene.oPlayerManager.opponentHitPhaseCard(data.oData)
                 break;
             case "resAutoDiscard":
                 console.log("resAutoDiscard :: ", data.oData);
                 break;
             case "resDeclarePhase":
-                console.log("resDeclarePhase :: ", data.oData);
+                this.oScene.oPlayerManager.opponentDeclarePhase(data.oData)
                 break;
             case "resRoundOver":
                 console.log("resRoundOver :: ", data.oData);
                 this.oScene.setRoundOver();
                 break;
             case "resGameOver":
-                console.log("resGameOver :: ", data.oData);
                 this.oScene.scene.stop('Game')
                 this.oScene.scene.start('ResultScreen', { data: data.oData });
                 // this.oScene.oResultScene.winnerScene(data.oData);

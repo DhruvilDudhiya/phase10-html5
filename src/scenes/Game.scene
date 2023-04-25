@@ -416,7 +416,7 @@
                                     "y": 300,
                                     "originX": 0.5,
                                     "originY": 0.5,
-                                    "text": "Harsh",
+                                    "text": "Waiting..",
                                     "align": "center",
                                     "fontFamily": "CHICKEN Pie Height",
                                     "fontSize": "28px",
@@ -432,12 +432,78 @@
                                     "y": 332,
                                     "originX": 0.5,
                                     "originY": 0.5,
-                                    "text": "0",
                                     "align": "center",
                                     "fontFamily": "CHICKEN Pie Height",
                                     "fontSize": "22px",
                                     "fontStyle": "bold",
                                     "color": "#f8ca00"
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "97bd0fb2-0746-40b8-883d-a325bf761600",
+                                    "label": "emptySeatPlayer2",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 481,
+                                    "y": 173,
+                                    "list": [
+                                        {
+                                            "type": "Image",
+                                            "id": "6f0f397e-b19a-4971-aa5b-12f7e08d134d",
+                                            "label": "player_profile_box",
+                                            "components": [],
+                                            "texture": {
+                                                "key": "player-profile-box"
+                                            },
+                                            "alpha": 0.8,
+                                            "alphaTopLeft": 0.8,
+                                            "alphaTopRight": 0.8,
+                                            "alphaBottomLeft": 0.8,
+                                            "alphaBottomRight": 0.8,
+                                            "tintTopLeft": "#000",
+                                            "tintTopRight": "#000",
+                                            "tintBottomLeft": "#000",
+                                            "tintBottomRight": "#000",
+                                            "tintFill": true
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "e8746490-e8f5-435f-8518-5706798670d4",
+                                            "label": "text_2",
+                                            "components": [],
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "text": "Empty\nSeat",
+                                            "align": "center",
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "d2ff53ce-657f-4c04-b029-cdfc1fbaf2cc",
+                                    "label": "declareCardContainer",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Container",
+                                            "id": "bacb0974-0180-4e71-a301-35f411c49624",
+                                            "label": "opponentGrp1PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "list": []
+                                        },
+                                        {
+                                            "type": "Container",
+                                            "id": "77a9d60f-8973-437a-92bb-47b35dff91f2",
+                                            "label": "opponentGrp2PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "list": []
+                                        }
+                                    ]
                                 }
                             ]
                         }
