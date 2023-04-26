@@ -27,12 +27,13 @@ class PlayerPrefab extends Phaser.GameObjects.Container {
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		this.oScene = scene;
-		this.loadBar = this.oScene.add.graphics();
-		const maskShape = new Phaser.Display.Masks.BitmapMask(this.oScene, this.loadBar);
+		this.shape = this.oScene.add.graphics();
+		this.shape.visible = false;
+
+		const maskShape = this.shape.createGeometryMask();
 		this.timer_ring.setMask(maskShape);
-		this.loadBar.visible = false;
-		this.loadBar.x = this.timer_ring.x;
-		this.loadBar.y = this.timer_ring.y;
+		this.shape.x = this.timer_ring.x;
+		this.shape.y = this.timer_ring.y;
 		/* END-USER-CTR-CODE */
 	}
 
@@ -46,38 +47,51 @@ class PlayerPrefab extends Phaser.GameObjects.Container {
 	/* START-USER-CODE */
 
 	// Write your code here.
-	startTimerInit(x, y, ttl) {
-		this.intervalTimeReset();
-		var totalTimer = 0;
-		var goneTimer = Date.now();
-		var endTimer = Date.now() + ttl;
-		var startTimer = Date.now() - (totalTimer - ttl);
+	startTimerInit(x, y, data) {
 
-		this.intervalTime = setInterval(() => {
-			if(endTimer - goneTimer <= 0) {
-				this.loadBar.clear();
-				this.intervalTimeReset();
+		this.intervalTimeReset();
+
+		this.timer_ring.visible = true
+
+		let nTime = data.nTotalTurnTime / 1000;
+		let ttl = data.ttl / 1000;
+
+		let start = 0;
+		let end = 360 / nTime;
+		let temp = end;
+
+		let self = this;
+
+		if (ttl != nTime) {
+			ttl = (data.nTotalTurnTime - data.ttl) / 1000;
+			end = ttl * 18;
+		}
+
+		console.log(data);
+		if(data.eTurnType === "grace"){
+			this.timer_ring.tintFill = true;
+			this.timer_ring.setTintFill(0xfcba03)
+		}
+
+		this.intervalTimer = setInterval(() => {
+			this.shape.slice(x, y, 128, Phaser.Math.DegToRad(start), Phaser.Math.DegToRad(end)).fill();
+			if(end>=270 && data.eTurnType === "general"){
+				this.timer_ring.tintFill = true;
+				this.timer_ring.setTintFill(0xaa0000);
 			}
-			else {
-				this.updateTimeLoadBar(x, y, parseInt(totalTimer / 1000), (goneTimer - startTimer) / 1000);
-				goneTimer = Date.now();
+			if (end >= 360) {
+				self.intervalTimeReset();
 			}
-		}, 50);
+			end += (temp/10);
+		}, 100)
 	}
 
 	intervalTimeReset() {
-		this.loadBar.clear();
-		clearInterval(this.intervalTime);
-	}
-
-	updateTimeLoadBar(x, y, totalTimer, goneTime) {
-		var startPos = Phaser.Math.DegToRad(280);
-		this.loadBar.clear();
-		this.loadBar.lineStyle(100, 0, 1);
-		this.loadBar.beginPath();
-		this.loadBar.arc(x, y, 64, startPos - Phaser.Math.DegToRad(- startPos - goneTime * 12), startPos - Phaser.Math.DegToRad(0), true);
-		this.loadBar.strokePath();
-		this.loadBar.closePath();
+		this.shape.clear();
+		this.timer_ring.clearTint();
+		this.timer_ring.tintFill = false;
+		this.timer_ring.visible = false
+		clearInterval(this.intervalTimer);
 	}
 	/* END-USER-CODE */
 }

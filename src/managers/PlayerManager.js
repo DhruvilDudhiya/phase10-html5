@@ -211,6 +211,9 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
+
+        console.log("playerTurnData :::: :::: ::::",playerTurnData)
+
         this.currentPlayerTurn = playerTurnData.iUserId;
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.isOwnTurn = true;
@@ -222,12 +225,12 @@ class PlayerManager {
         for (var i = 0; i < this.oScene.playersContainer.length; i++) {
             if (this.oScene.playersContainer.getAll()[i].name.includes(this.currentPlayerTurn)) {
                 this.oScene.playersContainer.getAll()[i + 1].intervalTimeReset();
-                this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData.ttl);
+                this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData);
                 break;
             }
             else {
                 this.oScene.playersContainer.getAll()[i].intervalTimeReset();
-                this.oScene.playersContainer.getAll()[i + 1].startTimerInit(this.oScene.playersContainer.getAll()[i + 1].x, this.oScene.playersContainer.getAll()[i + 1].y, playerTurnData.ttl);
+                this.oScene.playersContainer.getAll()[i + 1].startTimerInit(this.oScene.playersContainer.getAll()[i + 1].x, this.oScene.playersContainer.getAll()[i + 1].y, playerTurnData);
                 break;
             }
         }
