@@ -56,8 +56,10 @@ class PlayerPrefab extends Phaser.GameObjects.Container {
 		let nTime = data.nTotalTurnTime / 1000;
 		let ttl = data.ttl / 1000;
 
-		let start = 0;
+		let start = 90;
 		let end = 360 / nTime;
+		// let start = 360 / nTime // 90;
+		// let end = 90 // 360 / nTime;
 		let temp = end;
 
 		let self = this;
@@ -67,22 +69,21 @@ class PlayerPrefab extends Phaser.GameObjects.Container {
 			end = ttl * 18;
 		}
 
-		console.log(data);
-		if(data.eTurnType === "grace"){
+		if (data.eTurnType === "grace") {
 			this.timer_ring.tintFill = true;
 			this.timer_ring.setTintFill(0xfcba03)
 		}
 
 		this.intervalTimer = setInterval(() => {
-			this.shape.slice(x, y, 128, Phaser.Math.DegToRad(start), Phaser.Math.DegToRad(end)).fill();
-			if(end>=270 && data.eTurnType === "general"){
+			this.shape.slice(x, y, 128, Phaser.Math.DegToRad(start), Phaser.Math.DegToRad(start + end)).fill();
+			if (end >= 270 && data.eTurnType === "general") {
 				this.timer_ring.tintFill = true;
 				this.timer_ring.setTintFill(0xaa0000);
 			}
 			if (end >= 360) {
 				self.intervalTimeReset();
 			}
-			end += (temp/10);
+			end += (temp / 10);
 		}, 100)
 	}
 

@@ -342,6 +342,7 @@
                             "id": "3198e6ba-250c-4516-86c0-b482815327e4",
                             "label": "threePlayer2Container",
                             "components": [],
+                            "x": 2,
                             "list": [
                                 {
                                     "type": "Image",
@@ -352,7 +353,65 @@
                                         "key": "player-2-box"
                                     },
                                     "x": 285,
-                                    "y": 385
+                                    "y": 383
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "67df6543-e56a-4caa-ae75-d9ff2c5f8d98",
+                                    "label": "secondPlayer2UserNameText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 225,
+                                    "y": 295,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "Waiting..",
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "28px",
+                                    "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "90f0945e-ab88-42a0-8af1-37a9b5ae9786",
+                                    "label": "emptySeatTwoPlayer",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 225,
+                                    "y": 170,
+                                    "list": [
+                                        {
+                                            "type": "Image",
+                                            "id": "6987a07e-c82a-46cf-b6c5-34529e1871ef",
+                                            "label": "player_profile_box_1",
+                                            "components": [],
+                                            "texture": {
+                                                "key": "player-profile-box"
+                                            },
+                                            "alpha": 0.8,
+                                            "alphaTopLeft": 0.8,
+                                            "alphaTopRight": 0.8,
+                                            "alphaBottomLeft": 0.8,
+                                            "alphaBottomRight": 0.8,
+                                            "tintTopLeft": "#000",
+                                            "tintTopRight": "#000",
+                                            "tintBottomLeft": "#000",
+                                            "tintBottomRight": "#000",
+                                            "tintFill": true
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "0ec6f210-c230-4ff5-b7fb-63e58fe11ee9",
+                                            "label": "text",
+                                            "components": [],
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "text": "Empty\nSeat",
+                                            "align": "center",
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -361,6 +420,7 @@
                             "id": "05be00e4-bdbe-4091-b065-969713d17e62",
                             "label": "threePlayer3Container",
                             "components": [],
+                            "y": -3,
                             "list": [
                                 {
                                     "type": "Image",
@@ -370,8 +430,66 @@
                                     "texture": {
                                         "key": "player-3-box"
                                     },
-                                    "x": 825,
-                                    "y": 385
+                                    "x": 795,
+                                    "y": 383
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "796913ca-304f-44a1-847a-ea1bdfc9b432",
+                                    "label": "secondPlayer3UserNameText",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 736,
+                                    "y": 294,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "text": "Waiting..",
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "28px",
+                                    "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "2bf228f9-cfcc-4a85-b60d-cc8783e74566",
+                                    "label": "emptySeatThreePlayer",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 734,
+                                    "y": 170,
+                                    "list": [
+                                        {
+                                            "type": "Image",
+                                            "id": "6b87d27a-a015-4bd2-ad35-cd6fe70644d9",
+                                            "label": "player_profile_box_2",
+                                            "components": [],
+                                            "texture": {
+                                                "key": "player-profile-box"
+                                            },
+                                            "alpha": 0.8,
+                                            "alphaTopLeft": 0.8,
+                                            "alphaTopRight": 0.8,
+                                            "alphaBottomLeft": 0.8,
+                                            "alphaBottomRight": 0.8,
+                                            "tintTopLeft": "#000",
+                                            "tintTopRight": "#000",
+                                            "tintBottomLeft": "#000",
+                                            "tintBottomRight": "#000",
+                                            "tintFill": true
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "aad909b5-d2b3-40f7-a3db-226a005d8b2d",
+                                            "label": "text_1",
+                                            "components": [],
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "text": "Empty\nSeat",
+                                            "align": "center",
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        }
+                                    ]
                                 }
                             ]
                         }

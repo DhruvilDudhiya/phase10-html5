@@ -7,7 +7,6 @@ class InputManager {
         //Closed Card Deck
         this.oScene.closedCardDeck.setInteractive().on('pointerdown', () => {
             this.oScene.oSocketManager.emit('reqClosedCard', {}, (error, response) => {
-                console.log("resClosedCard :: ", response, error);
                 if (response.length > this.oScene.playerHandContainer.length) {
                     this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
                 }
@@ -17,7 +16,6 @@ class InputManager {
         //Opened Card Deck
         this.oScene.openedCardDeck.setInteractive().on('pointerdown', () => {
             this.oScene.oSocketManager.emit('reqOpenedCard', {}, (error, response) => {
-                console.log("resOpenedCard :: ", response, error);
                 if (response.length > this.oScene.playerHandContainer.length) {
                     this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
                 }

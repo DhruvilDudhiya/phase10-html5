@@ -93,9 +93,7 @@ class Ruleset {
         this.oScene.oPlayerManager.handleDeclareButtons();
     }
     validateRulesetOfRun(totalCards, containerName) {
-        console.log("totalCards",totalCards)
         this.cardNumbers.sort((a, b) => {
-            console.log(this.cardNumbers);
             if (a === 'w') return 1;
             if (b === 'w') return -1;
             return a - b;
@@ -111,10 +109,8 @@ class Ruleset {
             let cardNum = this.cardNumbers[i];
             if (run.length === 0) {
                 run.push(cardNum);
-                 console.log(run);
             } else {
                 let lastNum = run[run.length - 1];
-                console.log(lastNum);
                 if (lastNum === 'w') {
                     run.pop();
                     wildcardCount--;
@@ -128,7 +124,6 @@ class Ruleset {
                     for (let j = 0; j <= this.cardNumbers.length - 1; j++) {
                         if (parseInt(cardNum) === parseInt(lastNum) + j) {
                             run.push(cardNum);
-                            console.log("run4",run);
                         }
                     }
                 }

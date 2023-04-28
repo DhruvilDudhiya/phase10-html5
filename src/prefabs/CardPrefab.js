@@ -176,7 +176,6 @@ class CardPrefab extends Phaser.GameObjects.Container {
 				this.skipCard.setVisible(true);
 				break;
 			default:
-				console.log("Special Card Unavailable!");
 				break;
 		}
 	}

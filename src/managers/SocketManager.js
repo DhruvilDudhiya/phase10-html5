@@ -22,6 +22,8 @@ class SocketManager {
         this.oRootSocketConn.on('connect', () => {
             this.ownSocketId = this.oRootSocketConn.id;
             console.log("Connected to Socket :: ", this.oRootSocketConn.id, "\nTable ID: ", this.iTableId);
+            
+
             console.log("sRootURL :: ", this.sRootURL);
         });
         this.oRootSocketConn.on('disconnect', () => {
@@ -58,7 +60,6 @@ class SocketManager {
     onReceivedData(data) {
         switch (data.sEventName) {
             case undefined:
-                // console.log("data",data)
                 this.oScene.oUIManager.setPlayerBoxes(data.oData.nMaxPlayer);
                 if (data.oData.aParticipant.length == data.oData.nMaxPlayer) {
                     for (var i = 0; i <= data.oData.aParticipant.length; i++) {
@@ -89,12 +90,12 @@ class SocketManager {
                 this.oScene.oUIManager.startRoundTimer(data.oData);
                 break;
             case "resGameState":
-                // this.oPlayerManager.resGameState(data.oData);
                 this.oScene.tempCardContainer.destroy();
                 this.oScene.oTweenManager.startHandCardsDistribution();
                 break;
             case "resPlayerTurn":
                 this.oScene.oPlayerManager.changePlayerTurn(data.oData);
+                console.log("resPlayerTurn",data.oData);
                 break;
             case "resHandCardCount":
                 console.log("resHandCardCount :: ", data.oData);
@@ -106,11 +107,9 @@ class SocketManager {
                 this.oScene.oPlayerManager.handleDeclareButtons();
                 break;
             case "resOpenedDeck":
-                // console.log("resOpenDeck :: ", data.oData);
                 this.oScene.oPlayerHand.receiveOpenedDeckCard(data.oData);
                 break;
             case 'resHit':
-                console.log('resHit ::', data.oData);
                 this.oScene.oPlayerManager.opponentHitPhaseCard(data.oData)
                 break;
             case "resAutoDiscard":
@@ -120,11 +119,10 @@ class SocketManager {
                 this.oScene.oPlayerManager.opponentDeclarePhase(data.oData)
                 break;
             case "resRoundOver":
-                console.log("resRoundOver :: ", data.oData);
                 this.oScene.setRoundOver();
                 break;
             case "resGameOver":
-                this.oScene.scene.stop('Game')
+                // this.oScene.scene.stop('Game')
                 this.oScene.scene.start('ResultScreen', { data: data.oData });
                 // this.oScene.oResultScene.winnerScene(data.oData);
                 break;

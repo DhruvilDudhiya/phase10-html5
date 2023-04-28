@@ -13,6 +13,13 @@ class ResultPrefab extends Phaser.GameObjects.Container {
 		transparent_layer.scaleY = 0.05;
 		this.add(transparent_layer);
 
+		// ownPlayerbackground
+		const ownPlayerbackground = scene.add.rectangle(23, 0, 1080, 95);
+		ownPlayerbackground.visible = false;
+		ownPlayerbackground.isFilled = true;
+		ownPlayerbackground.fillColor = 3783167;
+		this.add(ownPlayerbackground);
+
 		// playerRank
 		const playerRank = scene.add.text(-463, 0, "", {});
 		playerRank.setOrigin(0.5, 0.5);
@@ -47,6 +54,7 @@ class ResultPrefab extends Phaser.GameObjects.Container {
 		playerProfile.scaleY = 0.4;
 		this.add(playerProfile);
 
+		this.ownPlayerbackground = ownPlayerbackground;
 		this.playerRank = playerRank;
 		this.playerName = playerName;
 		this.playerScore = playerScore;
@@ -55,9 +63,12 @@ class ResultPrefab extends Phaser.GameObjects.Container {
 
 		/* START-USER-CTR-CODE */
 		// Write your code here.
+		this.oScene = scene
 		/* END-USER-CTR-CODE */
 	}
 
+	/** @type {Phaser.GameObjects.Rectangle} */
+	ownPlayerbackground;
 	/** @type {Phaser.GameObjects.Text} */
 	playerRank;
 	/** @type {Phaser.GameObjects.Text} */
@@ -76,6 +87,11 @@ class ResultPrefab extends Phaser.GameObjects.Container {
 		this.playerName.text = oData.sUserName.length == 0 ? oData.sMobile.substring(0, 4) + "****" : oData.sUserName
 		this.playerScore.text = oData.nScore
 		this.winPrize.text = oData.nTotalWinningAmount
+
+	}
+
+	setOwnBackground(result){
+		this.ownPlayerbackground.visible = result;
 	}
 
 	/* END-USER-CODE */

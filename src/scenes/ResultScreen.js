@@ -100,9 +100,12 @@ class ResultScreen extends Phaser.Scene {
 	}
 	create() {
 		this.editorCreate();
-	}
 
+	}
+	
 	winnerScene(oData) {
+		this.oPlayerManager = new PlayerManager(this);
+		
 		var resultPrefabX = 517
 		var resultPrefabY = 1004
 
@@ -118,10 +121,12 @@ class ResultScreen extends Phaser.Scene {
 			resultPrefab.setDepth(10)
 			resultPrefab.playerRank.text = i + 1
 			resultPrefab.setUserData(oData[i])
-			// console.log(txt_rank.text,oData[i].nRank)
+			let isOwnPlayer = oData[i].iUserId === this.oPlayerManager.ownPlayerId ? true : false;
+			resultPrefab.setOwnBackground(isOwnPlayer)
 			if (oData[i].nRank !== undefined) {
-				txt_rank.text = oData[i].nRank
-				console.log(oData[i].sUserName)
+				if (oData[i].iUserId === this.oPlayerManager.ownPlayerId) {
+					txt_rank.text = oData[i].nRank
+				}
 			}
 			resultPrefabY += 93
 		}

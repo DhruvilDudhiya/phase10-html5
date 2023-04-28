@@ -3,10 +3,8 @@ class PlayerManager {
         this.oScene = oScene;
         this.players = new Map();
         this.isOwnTurn = null;
-
-        this.oScene.cancelButton.setInteractive().on('pointerdown', () => {
-            console.log("Cancel Button Clicked");
-        });
+        this.ownPlayerId = this.oScene.ownPlayerId;
+        this.playerCounter = 0;
     }
 
     addPlayer(playerId, player) {
@@ -32,7 +30,6 @@ class PlayerManager {
         }
     }
     setHandData(data) {
-        console.log("ownPlayerHand", data);
         this.oScene.playerHandContainer.setVisible(true);
         for (var i = 0; i < data.length; i++) {
             if (data[i].nLabel <= 12) {
@@ -110,7 +107,6 @@ class PlayerManager {
                     this.oScene.opponentGrp2PhaseCardContainer.add(this.declarePhaseCard)
                 }
                 this.declarePhaseCard.disableInteractive();
-                console.log(this.declarePhaseCard.x, this.declarePhaseCard.y, 'phase : ', phase);
                 if (this.declarePhaseCardInfo[j].nLabel <= 12) {
                     this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].nLabel, this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
                 } else {
@@ -162,22 +158,41 @@ class PlayerManager {
     setUserInfo(playerData, rootSocketId) {
         if (rootSocketId == playerData.sRootSocket) {
             this.oScene.ownPlayerId = playerData.iUserId;
+            this.ownPlayerId = playerData.iUserId;
             this.ownPlayerPrefab = new PlayerPrefab(this.oScene);
             this.ownPlayerPrefab.setName(playerData.iUserId);
             this.ownPlayerPrefab.setPosition(540, 1750);
             this.oScene.playersContainer.add(this.ownPlayerPrefab);
+            this.playerCounter++;
         }
         else {
             if (this.oScene.nMaxPlayer == 2) {
                 this.oScene.emptySeatPlayer2.destroy()
-                this.oScene.secondPlayerUserNameText.setText(playerData.sUserName);
+                this.oScene.secondPlayerUserNameText.text = playerData.sUserName.length == 0 ? playerData.sMobile.substring(0, 4) + "****" : playerData.sUserName;
                 this.oppPlayerPrefab = new PlayerPrefab(this.oScene);
                 this.oppPlayerPrefab.setName(playerData.iUserId);
                 this.oppPlayerPrefab.setPosition(480, 170);
                 this.oScene.playersContainer.add(this.oppPlayerPrefab);
             }
             else if (this.oScene.nMaxPlayer == 3) {
-                console.log("playerData for 3 Player Game :::", playerData)
+                if (this.playerCounter == 1) {
+                    this.oScene.emptySeatTwoPlayer.destroy();
+                    this.oScene.secondPlayer2UserNameText.text = playerData.sUserName.length == 0 ? playerData.sMobile.substring(0, 4) + "****" : playerData.sUserName;
+                    this.oppPlayerOnePrefab = new PlayerPrefab(this.oScene);
+                    this.oppPlayerOnePrefab.setName(playerData.iUserId);
+                    this.oppPlayerOnePrefab.setPosition(227, 170);
+                    this.oScene.playersContainer.add(this.oppPlayerOnePrefab);
+                    this.playerCounter++;
+                }
+                else {
+                    this.oScene.emptySeatThreePlayer.destroy();
+                    this.oScene.secondPlayer3UserNameText.text = playerData.sUserName.length == 0 ? playerData.sMobile.substring(0, 4) + "****" : playerData.sUserName;
+                    this.oppPlayerTwoPrefab = new PlayerPrefab(this.oScene);
+                    this.oppPlayerTwoPrefab.setName(playerData.iUserId);
+                    this.oppPlayerTwoPrefab.setPosition(734, 170);
+                    this.oScene.playersContainer.add(this.oppPlayerTwoPrefab);
+                    this.playerCounter++;
+                }
             }
         }
     }
@@ -211,9 +226,6 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
-
-        console.log("playerTurnData :::: :::: ::::",playerTurnData)
-
         this.currentPlayerTurn = playerTurnData.iUserId;
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.isOwnTurn = true;
@@ -222,17 +234,37 @@ class PlayerManager {
             this.oScene.confirmButton.setAlpha(0.75);
             this.oScene.confirmButton.disableInteractive();
         }
-        for (var i = 0; i < this.oScene.playersContainer.length; i++) {
-            if (this.oScene.playersContainer.getAll()[i].name.includes(this.currentPlayerTurn)) {
-                this.oScene.playersContainer.getAll()[i + 1].intervalTimeReset();
+
+        // console.log('-----------------------------------');
+        // console.log(this.currentPlayerTurn);
+        // console.log(this.oScene.playersContainer.getAll()[0].name,this.oScene.playersContainer.getAll()[1].name,this.oScene.playersContainer.getAll()[2].name)
+
+        // for (var i = 0; i < this.oScene.playersContainer.length; i++) {
+        //     if (this.oScene.playersContainer.getAll()[i].name.includes(this.currentPlayerTurn)) {
+        //         this.oScene.playersContainer.getAll()[i + 1].intervalTimeReset();
+        //         this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData);
+        //         break;
+        //     }
+        //     else {
+        //         this.oScene.playersContainer.getAll()[i].intervalTimeReset();
+        //         this.oScene.playersContainer.getAll()[i + 1].startTimerInit(this.oScene.playersContainer.getAll()[i + 1].x, this.oScene.playersContainer.getAll()[i + 1].y, playerTurnData);
+        //         break;
+        //     }
+        // }
+      
+        for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+            
+            for (let j = 0; j < this.oScene.playersContainer.length; j++) {
+                if (this.oScene.playersContainer.getAll()[j].name !== this.currentPlayerTurn) {
+                    this.oScene.playersContainer.getAll()[j].intervalTimeReset();
+                }
+            }
+            
+            if (this.oScene.playersContainer.getAll()[i].name === this.currentPlayerTurn) {
                 this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData);
                 break;
             }
-            else {
-                this.oScene.playersContainer.getAll()[i].intervalTimeReset();
-                this.oScene.playersContainer.getAll()[i + 1].startTimerInit(this.oScene.playersContainer.getAll()[i + 1].x, this.oScene.playersContainer.getAll()[i + 1].y, playerTurnData);
-                break;
-            }
+
         }
     }
 
@@ -256,7 +288,6 @@ class PlayerManager {
             this.handleDeclareButtonsVisibilityOFF()
         }
         else {
-            console.log("isDeclarePhase", this.oScene.isDeclarePhase);
             if (this.oScene.isDeclarePhase == true) {
                 this.handleDeclareButtonsVisibilityOFF();
             } else {
@@ -271,7 +302,6 @@ class PlayerManager {
                     if (this.isOwnTurn) {
                         this.oScene.confirmButton.setAlpha(1);
                         this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
-                            console.log("Confirm Button Clicked");
                             this.handleRingsVisibilityOFF();
                             this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data)
                             this.oScene.sendPhaseData();

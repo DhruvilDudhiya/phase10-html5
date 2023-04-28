@@ -27,6 +27,19 @@
                     "scaleY": 0.05
                 },
                 {
+                    "type": "Rectangle",
+                    "id": "4f7713a8-9af6-4f40-80e9-336fca75a0e9",
+                    "label": "ownPlayerbackground",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 23,
+                    "visible": false,
+                    "isFilled": true,
+                    "fillColor": "#39b9ff",
+                    "width": 1080,
+                    "height": 95
+                },
+                {
                     "type": "Text",
                     "id": "93e02b37-145f-4089-a505-16deb6e3cb0e",
                     "label": "playerRank",

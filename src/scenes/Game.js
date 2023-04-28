@@ -143,20 +143,84 @@ class Game extends Phaser.Scene {
 		body.add(threePlayerContainer);
 
 		// threePlayer2Container
-		const threePlayer2Container = this.add.container(0, 0);
+		const threePlayer2Container = this.add.container(2, 0);
 		threePlayerContainer.add(threePlayer2Container);
 
 		// threePlayer2Box
-		const threePlayer2Box = this.add.image(285, 385, "player-2-box");
+		const threePlayer2Box = this.add.image(285, 383, "player-2-box");
 		threePlayer2Container.add(threePlayer2Box);
 
+		// secondPlayer2UserNameText
+		const secondPlayer2UserNameText = this.add.text(225, 295, "", {});
+		secondPlayer2UserNameText.setOrigin(0.5, 0.5);
+		secondPlayer2UserNameText.text = "Waiting..";
+		secondPlayer2UserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
+		threePlayer2Container.add(secondPlayer2UserNameText);
+
+		// emptySeatTwoPlayer
+		const emptySeatTwoPlayer = this.add.container(225, 170);
+		threePlayer2Container.add(emptySeatTwoPlayer);
+
+		// player_profile_box_1
+		const player_profile_box_1 = this.add.image(0, 0, "player-profile-box");
+		player_profile_box_1.alpha = 0.8;
+		player_profile_box_1.alphaTopLeft = 0.8;
+		player_profile_box_1.alphaTopRight = 0.8;
+		player_profile_box_1.alphaBottomLeft = 0.8;
+		player_profile_box_1.alphaBottomRight = 0.8;
+		player_profile_box_1.tintFill = true;
+		player_profile_box_1.tintTopLeft = 0;
+		player_profile_box_1.tintTopRight = 0;
+		player_profile_box_1.tintBottomLeft = 0;
+		player_profile_box_1.tintBottomRight = 0;
+		emptySeatTwoPlayer.add(player_profile_box_1);
+
+		// text
+		const text = this.add.text(0, 0, "", {});
+		text.setOrigin(0.5, 0.5);
+		text.text = "Empty\nSeat";
+		text.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		emptySeatTwoPlayer.add(text);
+
 		// threePlayer3Container
-		const threePlayer3Container = this.add.container(0, 0);
+		const threePlayer3Container = this.add.container(0, -3);
 		threePlayerContainer.add(threePlayer3Container);
 
 		// threePlayer3Box
-		const threePlayer3Box = this.add.image(825, 385, "player-3-box");
+		const threePlayer3Box = this.add.image(795, 383, "player-3-box");
 		threePlayer3Container.add(threePlayer3Box);
+
+		// secondPlayer3UserNameText
+		const secondPlayer3UserNameText = this.add.text(736, 294, "", {});
+		secondPlayer3UserNameText.setOrigin(0.5, 0.5);
+		secondPlayer3UserNameText.text = "Waiting..";
+		secondPlayer3UserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
+		threePlayer3Container.add(secondPlayer3UserNameText);
+
+		// emptySeatThreePlayer
+		const emptySeatThreePlayer = this.add.container(734, 170);
+		threePlayer3Container.add(emptySeatThreePlayer);
+
+		// player_profile_box_2
+		const player_profile_box_2 = this.add.image(0, 0, "player-profile-box");
+		player_profile_box_2.alpha = 0.8;
+		player_profile_box_2.alphaTopLeft = 0.8;
+		player_profile_box_2.alphaTopRight = 0.8;
+		player_profile_box_2.alphaBottomLeft = 0.8;
+		player_profile_box_2.alphaBottomRight = 0.8;
+		player_profile_box_2.tintFill = true;
+		player_profile_box_2.tintTopLeft = 0;
+		player_profile_box_2.tintTopRight = 0;
+		player_profile_box_2.tintBottomLeft = 0;
+		player_profile_box_2.tintBottomRight = 0;
+		emptySeatThreePlayer.add(player_profile_box_2);
+
+		// text_1
+		const text_1 = this.add.text(0, 0, "", {});
+		text_1.setOrigin(0.5, 0.5);
+		text_1.text = "Empty\nSeat";
+		text_1.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		emptySeatThreePlayer.add(text_1);
 
 		// twoPlayerContainer
 		const twoPlayerContainer = this.add.container(-1, 1);
@@ -411,6 +475,10 @@ class Game extends Phaser.Scene {
 		this.confirmButton = confirmButton;
 		this.cancelButton = cancelButton;
 		this.threePlayerContainer = threePlayerContainer;
+		this.secondPlayer2UserNameText = secondPlayer2UserNameText;
+		this.emptySeatTwoPlayer = emptySeatTwoPlayer;
+		this.secondPlayer3UserNameText = secondPlayer3UserNameText;
+		this.emptySeatThreePlayer = emptySeatThreePlayer;
 		this.twoPlayerContainer = twoPlayerContainer;
 		this.secondPlayerUserNameText = secondPlayerUserNameText;
 		this.secondPlayerScoreText = secondPlayerScoreText;
@@ -486,6 +554,14 @@ class Game extends Phaser.Scene {
 	cancelButton;
 	/** @type {Phaser.GameObjects.Container} */
 	threePlayerContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	secondPlayer2UserNameText;
+	/** @type {Phaser.GameObjects.Container} */
+	emptySeatTwoPlayer;
+	/** @type {Phaser.GameObjects.Text} */
+	secondPlayer3UserNameText;
+	/** @type {Phaser.GameObjects.Container} */
+	emptySeatThreePlayer;
 	/** @type {Phaser.GameObjects.Container} */
 	twoPlayerContainer;
 	/** @type {Phaser.GameObjects.Text} */
@@ -590,7 +666,6 @@ class Game extends Phaser.Scene {
 		this.oSocketManager = new SocketManager(this, eGameType, authToken, iTableId, sRootURL, nPracticeChips);
 	}
 	sendPhaseData() {
-		console.log("isDeclarePhase", this.isDeclarePhase);
 		this.isDeclarePhase = true;
 		this.oPlayerManager.handleDeclareButtonsVisibilityOFF();
 		console.log("isDeclarePhase", this.isDeclarePhase);

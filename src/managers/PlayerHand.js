@@ -2,6 +2,7 @@ class PlayerHand {
     constructor(oScene) {
         this.oScene = oScene;
         this.playerCard = [];
+        this.oScene.oPlayerManager = oScene.oPlayerManager
         this.playerCardCounter = 0;
     }
 
@@ -89,6 +90,11 @@ class PlayerHand {
     // }
 
     arrangePlayerHighCards(data) {
+
+        // this.oScene.oPlayerManager.ownPlayerId
+
+        console.log('Card Data', data);
+
         let tempCardPosX = 0;
         let tempCardPosY = 0;
 
@@ -98,8 +104,27 @@ class PlayerHand {
                 tempCardPosY = 1550;
             }
             else {
-                tempCardPosX = 540;
-                tempCardPosY = 875;
+                if (this.oScene.nMaxPlayer == 2) {
+                    tempCardPosX = 540;
+                    tempCardPosY = 875;
+                }
+                else {
+                    for (let j = 0; j < this.oScene.playersContainer.length; j++) {
+                        if (this.oScene.playersContainer.getAll()[j].name === data[i].iUserId) {
+                            if (this.oScene.playersContainer.getAll()[j].x < 540) {
+                                console.log(this.oScene.playersContainer.getAll()[j].name);
+                                tempCardPosX = 285;
+                                tempCardPosY = 875;
+                            }
+                            else {
+                                console.log(this.oScene.playersContainer.getAll()[j].name);
+                                tempCardPosX = 795;
+                                tempCardPosY = 875;
+                            }
+                            // this.distributeHighCards(data[i], tempCardPosX, tempCardPosY);
+                        }
+                    }
+                }
             }
             this.distributeHighCards(data[i], tempCardPosX, tempCardPosY);
         }
@@ -112,9 +137,7 @@ class PlayerHand {
         this.oScene.tempCardContainer.add(tempCard);
         tempCard.checkCardInformation(cardData.card.nLabel, cardData.card.eColor, cardData.card._id);
         tempCard.checkHighCard(cardData.isHigh);
-        if (this.oScene.ownPlayerId == tempCard.name) {
-            this.oScene.oTweenManager.startHighCardsDistribution(tempCard, xPos, yPos);
-        }
+        this.oScene.oTweenManager.startHighCardsDistribution(tempCard, xPos, yPos);
     }
 
 
@@ -140,21 +163,18 @@ class PlayerHand {
     }
 
     sendChangeGroupDefault(cardId) {
-        console.log("Group - 0 :: ", cardId);
         this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 0 }], (error, response) => {
             console.log("reqChangeGroup :: ", response, error);
         });
     }
 
     sendChangeGroupOne(cardId) {
-        console.log("Group - 1 :: ", cardId);
         this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 1 }], (error, response) => {
             console.log("reqChangeGroup :: ", response, error);
         });
     }
 
     sendChangeGroupTwo(cardId) {
-        console.log("Group - 2 :: ", cardId);
         this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 2 }], (error, response) => {
             console.log("reqChangeGroup :: ", response, error);
         });
