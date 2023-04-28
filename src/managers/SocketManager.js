@@ -76,12 +76,17 @@ class SocketManager {
                 this.oScene.oPlayerManager.setHandData(data.oData.aHand);
                 break;
             case "resPhaseData":
+                console.log("resPhaseData ::", data.oData);
+                // this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
             case "resHand":
-                this.oScene.oPlayerHand.getHandData(data);
+                console.log("resHand ::", data.oData);
+                // this.oScene.oPlayerHand.getHandData(data);
+                this.oScene.oTweenManager.startHandCardsDistribution(data);
+
                 break;
             case "resHighCards":
                 this.oScene.oPlayerHand.arrangePlayerHighCards(data.oData);
@@ -91,7 +96,6 @@ class SocketManager {
                 break;
             case "resGameState":
                 this.oScene.tempCardContainer.destroy();
-                this.oScene.oTweenManager.startHandCardsDistribution();
                 break;
             case "resPlayerTurn":
                 this.oScene.oPlayerManager.changePlayerTurn(data.oData);

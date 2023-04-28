@@ -7,13 +7,13 @@ class TweenManager {
     startDeckDiscardSeparation() {
         this.oScene.tweens.add({
             targets: this.oScene.closedCardDeck,
-            x: this.oScene.closedCardDeck.x + 180, 
+            x: this.oScene.closedCardDeck.x + 180,
             duration: 500,
             ease: 'Power2',
         });
         this.oScene.tweens.add({
             targets: this.oScene.openedCardDeck,
-            x: this.oScene.openedCardDeck.x - 180, 
+            x: this.oScene.openedCardDeck.x - 180,
             duration: 500,
             ease: 'Power2',
         });
@@ -29,13 +29,14 @@ class TweenManager {
         });
     }
 
-    startHandCardsDistribution() {
-        for(var i = 0; i < 20; i++) {
+    startHandCardsDistribution(data) {
+        let completeCount = 0;
+        var self = this;
+        for (var i = 0; i < 20; i++) {
             this.cards[i] = this.oScene.add.image(540, 875, 'main-cards-deck');
         }
-
-        for(var j = 0; j < 20; j++) {
-            if(j % 2 == 0) {
+        for (var j = 0; j < 20; j++) {
+            if (j % 2 == 0) {
                 this.oScene.tweens.add({
                     targets: this.cards[j],
                     x: 220 + j * 35.5,
@@ -62,21 +63,29 @@ class TweenManager {
             }
         }
 
-        for (var j = 0; j < 20; j++) {
-            if(j % 2 == 0) {
+        for (let j = 0; j < 20; j++) {
+         
+            if (j % 2 == 0) {
                 this.oScene.tweens.add({
                     targets: this.cards[j],
+                    ease: 'Power2',
                     scaleX: 0,
                     scaleY: 1.1,
                     duration: 300,
-                    delay: 3200,
+                    delay : 3000,
                     flipX: true,
                     onComplete: () => {
-                        this.startDeckDiscardSeparation();
-                        this.oScene.playerHandContainer.setVisible(true);
+                        this.cards[j].destroy();
+                        if (j == 18) {
+                            self.startDeckDiscardSeparation();
+                            self.oScene.playerHandContainer.setVisible(true);
+                            self.oScene.oPlayerHand.getHandData(data);
+                        }
                     }
                 });
             }
-		}
+
+        }
+
     }
 }

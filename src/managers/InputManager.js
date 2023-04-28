@@ -6,6 +6,7 @@ class InputManager {
 
         //Closed Card Deck
         this.oScene.closedCardDeck.setInteractive().on('pointerdown', () => {
+            // this.oScene.closedCardDeck.disableInteractive();
             this.oScene.oSocketManager.emit('reqClosedCard', {}, (error, response) => {
                 if (response.length > this.oScene.playerHandContainer.length) {
                     this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
@@ -14,13 +15,15 @@ class InputManager {
         });
 
         //Opened Card Deck
-        this.oScene.openedCardDeck.setInteractive().on('pointerdown', () => {
-            this.oScene.oSocketManager.emit('reqOpenedCard', {}, (error, response) => {
-                if (response.length > this.oScene.playerHandContainer.length) {
-                    this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
-                }
-            });
-        });
+        // this.oScene.openedCardDeck.setInteractive().on('pointerdown', () => {
+        //     console.log("clicked");
+        //     this.oScene.oSocketManager.emit('reqOpenedCard', { nLabel :this.currentOwnCardLabel ,eColor :this.currentOwnCardColor ,_id :this.currentOwnCardId  ,iUserId : this.oScene.ownPlayerId }, (error, response) => {
+        //         console.log("resOpenedCard ::1 ", response, error); //reqOpenedCard
+        //         if (response.length > this.oScene.playerHandContainer.length) {
+        //             this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
+        //         }
+        //     });
+        // });
        
         this.oScene.soundOnBtn.setInteractive().on('pointerdown', () => {
             if (this.oScene.soundOnBtn.visible) {

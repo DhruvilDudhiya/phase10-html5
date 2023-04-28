@@ -205,6 +205,7 @@ class PlayerManager {
             if (phaseData.aRules.length == 2) {
                 this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
+                console.log(" Phase If =====>",this.oScene.oGameManager.phaseOneTotalCards);
                 this.oScene.phaseOneText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " OF " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
 
                 this.oScene.oGameManager.phaseTwoType = phaseData.aRules[1].sRuleType.toUpperCase();
@@ -214,6 +215,7 @@ class PlayerManager {
             else {
                 this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
+                console.log(" Phase Else =====>",this.oScene.oGameManager.phaseOneTotalCards);
                 this.oScene.phaseMiddleText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " OF " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
             }
             //setownPlayerGroup
@@ -226,13 +228,13 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
+        console.log(" changePlayerTurn =====>",this.oScene.oGameManager.phaseOneTotalCards);
+
         this.currentPlayerTurn = playerTurnData.iUserId;
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.isOwnTurn = true;
         } else {
             this.isOwnTurn = false;
-            this.oScene.confirmButton.setAlpha(0.75);
-            this.oScene.confirmButton.disableInteractive();
         }
 
         // console.log('-----------------------------------');
@@ -291,6 +293,7 @@ class PlayerManager {
             if (this.oScene.isDeclarePhase == true) {
                 this.handleDeclareButtonsVisibilityOFF();
             } else {
+                console.log(this.oScene.isDeclarePhase);
                 this.handleDeclareButtonsVisibilityON()
                 if (this.oScene.dp_yellow_ring_1.visible == true && this.oScene.dp_yellow_ring_2.visible == false && this.isOwnTurn) {
                     this.oScene.confirmButton.setAlpha(0.75);
@@ -300,6 +303,7 @@ class PlayerManager {
                     this.oScene.confirmButton.disableInteractive();
                 } else {
                     if (this.isOwnTurn) {
+                    //    this.handleDeclareButtonsVisibilityON()
                         this.oScene.confirmButton.setAlpha(1);
                         this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
                             this.handleRingsVisibilityOFF();

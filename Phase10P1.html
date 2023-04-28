@@ -1,7 +1,8 @@
 <!-- saved from url=(0050)file:///Users/yudiz-dhruvil/Documents/Rummy24.html -->
 <html lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -12,297 +13,300 @@
     <!-- Plugins -->
     <script src="./Phase10_files/socket.io.js"></script>
 
-    <style>
-      body {
-        background: #e7e7e7;
-        margin: 0;
-        padding: 0;
-      }
+  <style>
+    body {
+      background: #e7e7e7;
+      margin: 0;
+      padding: 0;
+    }
 
-      .prelogo {
-        width: auto;
-        height: auto;
-        text-align: center;
-      }
+    .prelogo {
+      width: auto;
+      height: auto;
+      text-align: center;
+    }
 
-      label {
-        color: #fff;
-        width: 100%;
-      }
+    label {
+      color: #fff;
+      width: 100%;
+    }
 
-      .form-select {
-        text-align: center;
-      }
+    .form-select {
+      text-align: center;
+    }
 
-      .form-grp {
-        display: inline-block;
-        text-align: center;
-      }
+    .form-grp {
+      display: inline-block;
+      text-align: center;
+    }
 
-      select {
-        text-align: center;
-      }
+    select {
+      text-align: center;
+    }
 
-      .form-group {
-        text-align: center;
-      }
+    .form-group {
+      text-align: center;
+    }
 
-      .form-group input {
-        display: inline-block;
-        width: auto;
-        text-align: center;
-      }
-    </style>
-  </head>
+    .form-group input {
+      display: inline-block;
+      width: auto;
+      text-align: center;
+    }
+  </style>
+</head>
 
-  <body style="background-color: #242424">
-    <div>
-      <div class="container" id="enterform">
-        <br /><br /><br /><br /><br />
-        <center><img src="./assets/images/logo/phase10-logo.png" alt="Phase10 Game Logo" width="300" height="250"></center>
-        <br /><br /><br /><br /><br />
-        <div class="form-group">
-          <label>Mobile Number</label><br />
-          <input
-            type="text"
-            class="form-control"
-            id="sMobile"
-            value="+911234567890"
-            placeholder="Enter Mobile Number"
-          />
-          />
+<body style="background-color: #242424">
+  <div>
+    <div class="container" id="enterform">
+      <br /><br /><br /><br /><br />
+      <center><img src="./assets/images/logo/phase10-logo.png" alt="Phase10 Game Logo" width="300" height="250">
+      </center>
+      <br /><br /><br /><br /><br />
+      <div class="form-group">
+        <label>Mobile Number</label><br />
+        <input type="text" class="form-control" id="sMobile" value="+919998227834" placeholder="Enter Mobile Number" />
+        />
+      </div>
+      <div class="form-select">
+        <div class="form-grp">
+          <label>Game Type</label>
+          <select id="eGameType">
+            <option selected="">Game Type</option>
+            <option value="practice" selected>Practice</option>
+          </select>
         </div>
-        <div class="form-select">
-          <div class="form-grp">
-            <label>Game Type</label>
-            <select id="eGameType">
-              <option selected="">Game Type</option>
-              <option value="practice" selected>Practice</option>
-            </select>
-          </div>
-          <div class="form-grp">
-            <label>Max Players</label>
-            <select id="nMaxPlayer">
-              <option selected="">Max Player</option>
-              <option value="2" selected>2</option>
-              <option value="3">3</option>
-            </select>
-          </div>
-          <div class="form-grp">
-            <label>Winners</label>
-            <select id="nWinners">
-              <option selected="">Winners</option>
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-            </select>
-          </div>
-          <div class="form-grp">
-            <label>Table Fee</label>
-            <select id="nTableFee">
-              <option selected="">Table Fee</option>
-              <option value="50">50</option>
-              <option value="80">80</option>
-              <option value="100" selected>100</option>
-            </select>
-          </div>
-          <div class="form-grp">
-            <label>Phases</label>
-            <select id="nPhase">
-              <option selected="">Phases</option>
-              <option value="1" selected>1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">1</option>
-            </select>
-          </div>
-          <br />
+        <div class="form-grp">
+          <label>Max Players</label>
+          <select id="nMaxPlayer">
+            <option selected="">Max Player</option>
+            <option value="2" selected>2</option>
+            <option value="3">3</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label>Winners</label>
+          <select id="nWinners">
+            <option selected="">Winners</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label>Table Fee</label>
+          <select id="nTableFee">
+            <option selected="">Table Fee</option>
+            <option value="50">50</option>
+            <option value="80">80</option>
+            <option value="100" selected>100</option>
+          </select>
+        </div>
+        <div class="form-grp">
+          <label>Phases</label>
+          <select id="nPhase">
+            <option selected="">Phases</option>
+            <option value="1" selected>1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">1</option>
+          </select>
         </div>
         <br />
-        <center>
-          <button
-            type="submit"
-            class="btn btn-default"
-            onclick="startLoginProcess()"
-          >
-            Join
-          </button>
-          <button type="submit" class="btn btn-default" onclick="reloadChips()">
-            Reload Chips
-          </button>
-        </center>
       </div>
+      <br />
+      <center>
+        <button type="submit" class="btn btn-default" onclick="startLoginProcess()">
+          Join
+        </button>
+        <button type="submit" class="btn btn-default" onclick="reloadChips()">
+          Reload Chips
+        </button>
+      </center>
     </div>
+  </div>
 
-    <script>
-      var gamePort = 3355;
-      var sRootUrl = "https://phase10-backend.lc.webdevprojects.cloud/api/v1/";
-      // var sRootUrl = "http://192.168.11.126:6002/api/v1/";
-      var sRoot = "https://phase10-backend.lc.webdevprojects.cloud/";
-      var verificationToken;
-      var authToken;
-      function startLoginProcess() {
-        var myHeaders = new Headers();  
-        myHeaders.append("Content-Type", "application/json");
+  <script>
+    var gamePort = 4271;
+    var sRootUrl = "http://3.7.98.19:6002/api/v1/";
+      var sRoot = "3.7.98.19:6002";
+    // var sRootUrl = "https://phase10-backend.lc.webdevprojects.cloud/api/v1/";
+    // // var sRootUrl = "http://192.168.11.126:6002/api/v1/";
+    // var sRoot = "https://phase10-backend.lc.webdevprojects.cloud";
+    var verificationToken;
+    var authToken;
+    function startLoginProcess() {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-          sMobile: $("#sMobile").val(),
-        });
+      var raw = JSON.stringify({
+        sMobile: $("#sMobile").val(),
+      });
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+      console.log("requestOptions", requestOptions);
 
-        let loginObj = fetch(sRootUrl + "auth/login", requestOptions)
-          .then(
-            (response) =>
-              (verificationToken = response.headers.get("verification"))
-          )
-          .then((result) => startOTPVerification(verificationToken))
-          .catch((error) => console.log("error", error));
-      }
+      let loginObj = fetch(sRootUrl + "auth/login", requestOptions)
+        .then(
+          (response) =>
+            (verificationToken = response.headers.get("verification"))
+        )
+        .then((result) => {
+          console.log("result", result);
+          startOTPVerification(verificationToken)
+        })
+        .catch((error) => console.log("error", error));
+    }
 
-      function startOTPVerification(verificationToken) {
-        var myHeaders = new Headers();
-        myHeaders.append("verification", verificationToken);
-        myHeaders.append("Content-Type", "application/json");
+    function startOTPVerification(verificationToken) {
+      var myHeaders = new Headers();
+      myHeaders.append("verification", verificationToken);
+      myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-          code: "1234",
-          sMobile: $("#sMobile").val(),
-        });
+      var raw = JSON.stringify({
+        code: "1234",
+        sMobile: $("#sMobile").val(),
+      });
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-        fetch(sRootUrl + "auth/otp/verify", requestOptions)
-          .then(
-            (response) => (authToken = response.headers.get("authorization"))
-          )
-          .then((result) => joinTable(authToken))
-          .catch((error) => console.log("error", error));
-      }
+      fetch(sRootUrl + "auth/otp/verify", requestOptions)
+        .then(
+          (response) => (authToken = response.headers.get("authorization"))
+        )
+        .then((result) => {
+          console.log("result authorization", result);
+          joinTable(authToken)
+        }
 
-      function joinTable(authToken) {
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", authToken);
-        myHeaders.append("Content-Type", "application/json");
+        )
+        .catch((error) => console.log("error", error));
+    }
 
-        var raw = JSON.stringify({
-          eGameType: $("#eGameType option:selected").val(),
-          nTableFee: $("#nTableFee option:selected").val(),
-          nPhase: $("#nPhase option:selected").val(),
-        });
+    function joinTable(authToken) {
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", authToken);
+      myHeaders.append("Content-Type", "application/json");
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      var raw = JSON.stringify({
+        eGameType: $("#eGameType option:selected").val(),
+        nTableFee: $("#nTableFee option:selected").val(),
+        nPhase: $("#nPhase option:selected").val(),
+      });
 
-        fetch(sRootUrl + "game/table/join", requestOptions)
-          .then((response) => response.text())
-          .then((result) => {
-            let oData = JSON.parse(result);
-            console.log("JoinTableData :: ", oData);
-            const gameUrl =
-              "http://127.0.0.1:" + gamePort + "/editor/external/?";
-            var passString =
-              "eGameType=" + $("#eGameType option:selected").val() + "&";
-            passString = passString + "sAuthToken=" + authToken + "&";
-            passString =
-              passString + "nPracticeChips=" + oData.data.nPracticeChips + "&";
-            passString = passString + "iTableId=" + oData.data.iTableId + "&";
-            passString = passString + "sRootUrl=" + sRoot;
-            window.open(
-              gameUrl + passString,
-              "",
-              "width = 600, height = 1000"
-            );
-          })
-          .catch((error) => console.log("error", error));
-      }
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-      function reloadChips() {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
+      fetch(sRootUrl + "game/table/join", requestOptions)
+        .then((response) => response.text())
+        .then((result) => {
+          let oData = JSON.parse(result);
+          console.log("JoinTableData :: ", oData);
+          const gameUrl =
+            "http://127.0.0.1:" + gamePort + "/editor/external/?";
+          var passString =
+            "eGameType=" + $("#eGameType option:selected").val() + "&";
+          passString = passString + "sAuthToken=" + authToken + "&";
+          passString =
+            passString + "nPracticeChips=" + oData.data.nPracticeChips + "&";
+          passString = passString + "iTableId=" + oData.data.iTableId + "&";
+          passString = passString + "sRootUrl=" + sRoot;
+          window.open(
+            gameUrl + passString,
+            "",
+            "width = 600, height = 1000"
+          );
+        })
+        .catch((error) => console.log("error", error));
+    }
 
-        var raw = JSON.stringify({
-          sMobile: $("#sMobile").val(),
-        });
+    function reloadChips() {
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      var raw = JSON.stringify({
+        sMobile: $("#sMobile").val(),
+      });
 
-        let loginObj = fetch(sRootUrl + "auth/login", requestOptions)
-          .then(
-            (response) =>
-              (verificationToken = response.headers.get("verification"))
-          )
-          .then((result) => reloadChipsSecond(verificationToken))
-          .catch((error) => console.log("error", error));
-      }
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-      function reloadChipsSecond(verificationToken) {
-        var myHeaders = new Headers();
-        myHeaders.append("verification", verificationToken);
-        myHeaders.append("Content-Type", "application/json");
+      let loginObj = fetch(sRootUrl + "auth/login", requestOptions)
+        .then(
+          (response) =>
+            (verificationToken = response.headers.get("verification"))
+        )
+        .then((result) => reloadChipsSecond(verificationToken))
+        .catch((error) => console.log("error", error));
+    }
 
-        var raw = JSON.stringify({
-          code: "1234",
-          sMobile: $("#sMobile").val(),
-        });
+    function reloadChipsSecond(verificationToken) {
+      var myHeaders = new Headers();
+      myHeaders.append("verification", verificationToken);
+      myHeaders.append("Content-Type", "application/json");
 
-        var requestOptions = {
-          method: "POST",
-          headers: myHeaders,
-          body: raw,
-          redirect: "follow",
-        };
+      var raw = JSON.stringify({
+        code: "1234",
+        sMobile: $("#sMobile").val(),
+      });
 
-        fetch(sRootUrl + "auth/otp/verify", requestOptions)
-          .then(
-            (response) => (authToken = response.headers.get("authorization"))
-          )
-          .then((result) => reloadChipsThird(authToken))
-          .catch((error) => console.log("error", error));
-      }
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
 
-      function reloadChipsThird(reloadChipsThird) {
-        var myHeaders = new Headers();
-        myHeaders.append("Authorization", authToken);
+      fetch(sRootUrl + "auth/otp/verify", requestOptions)
+        .then(
+          (response) => (authToken = response.headers.get("authorization"))
+        )
+        .then((result) => reloadChipsThird(authToken))
+        .catch((error) => console.log("error", error));
+    }
 
-        var raw = "";
+    function reloadChipsThird(reloadChipsThird) {
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", authToken);
 
-        var requestOptions = {
-          method: "GET",
-          headers: myHeaders,
-          // body: raw,
-          redirect: "follow",
-        };
+      var raw = "";
 
-        fetch(sRootUrl + "profile/reloadChips", requestOptions)
-          .then((response) => response.text())
-          .then((result) => alert("Chips Refilled!"))
-          .catch((error) => console.log("error", error));
-      }
-    </script>
-  </body>
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        // body: raw,
+        redirect: "follow",
+      };
+
+      fetch(sRootUrl + "profile/reloadChips", requestOptions)
+        .then((response) => response.text())
+        .then((result) => alert("Chips Refilled!"))
+        .catch((error) => console.log("error", error));
+    }
+  </script>
+</body>
+
 </html>

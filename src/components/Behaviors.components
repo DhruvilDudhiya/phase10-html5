@@ -60,6 +60,26 @@
                     "type": {
                         "id": "string"
                     }
+                },
+                {
+                    "name": "cardGroupNo",
+                    "label": "cardGroupNo",
+                    "tooltip": "cardGroupNo",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
+                },
+                {
+                    "name": "cardScore",
+                    "label": "cardScore",
+                    "tooltip": "cardScore",
+                    "defValue": "",
+                    "customDefinition": false,
+                    "type": {
+                        "id": "string"
+                    }
                 }
             ]
         },

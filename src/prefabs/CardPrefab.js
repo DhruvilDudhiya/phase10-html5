@@ -186,7 +186,6 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	}
 
 	setCardText(cardNumber) {
-
 		this.textTopNumber.setText(cardNumber);
 		this.textMiddleNumber.setText(cardNumber);
 		this.textBottomNumber.setText(cardNumber);

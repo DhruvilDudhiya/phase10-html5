@@ -106,25 +106,25 @@ class Game extends Phaser.Scene {
 		// totalPhasesText
 		const totalPhasesText = this.add.text(540, 1340, "", {});
 		totalPhasesText.setOrigin(0.5, 0.5);
-		totalPhasesText.setStyle({ "align": "center", "fixedWidth":200,"fontFamily": "CHICKEN PIE Height", "fontSize": "32px", "fontStyle": "bold" });
+		totalPhasesText.setStyle({ "align": "center", "fixedWidth": 200, "fontFamily": "CHICKEN PIE Height", "fontSize": "32px", "fontStyle": "bold" });
 		phaseTextContainer.add(totalPhasesText);
 
 		// phaseOneText
 		const phaseOneText = this.add.text(286, 1070, "", {});
 		phaseOneText.setOrigin(0.5, 0.5);
-		phaseOneText.setStyle({ "align": "center", "fixedWidth":450,"fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
+		phaseOneText.setStyle({ "align": "center", "fixedWidth": 450, "fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
 		phaseTextContainer.add(phaseOneText);
 
 		// phaseTwoText
 		const phaseTwoText = this.add.text(794, 1070, "", {});
 		phaseTwoText.setOrigin(0.5, 0.5);
-		phaseTwoText.setStyle({ "align": "center", "fixedWidth":450,"fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
+		phaseTwoText.setStyle({ "align": "center", "fixedWidth": 450, "fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
 		phaseTextContainer.add(phaseTwoText);
 
 		// phaseMiddleText
 		const phaseMiddleText = this.add.text(540, 1070, "", {});
 		phaseMiddleText.setOrigin(0.5, 0.5);
-		phaseMiddleText.setStyle({ "align": "center", "fixedWidth":450,"fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
+		phaseMiddleText.setStyle({ "align": "center", "fixedWidth": 450, "fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
 		phaseTextContainer.add(phaseMiddleText);
 
 		// confirmButton
@@ -653,6 +653,8 @@ class Game extends Phaser.Scene {
 		this.oRuleset = new Ruleset(this);
 		this.oPlayerPrefab = new PlayerPrefab(this);
 		this.isDeclarePhase = false;
+		this.isGrabCard = false;
+
 	}
 
 	instantiateSocketManager() {
@@ -668,12 +670,12 @@ class Game extends Phaser.Scene {
 	sendPhaseData() {
 		this.isDeclarePhase = true;
 		this.oPlayerManager.handleDeclareButtonsVisibilityOFF();
-		console.log("isDeclarePhase", this.isDeclarePhase);
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } }, (error, response) => {
 			console.log("reqDeclarePhase :: ", response, error);
 		});
 	}
 	sendDiscardCard(cardDiscard) {
+		console.log("put open deck card");
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDiscardCard', oData: { iCardId: cardDiscard } }, (error, response) => {
 			console.log("reqDiscardCard :: ", response, error);
 		});
@@ -684,14 +686,34 @@ class Game extends Phaser.Scene {
 		});
 
 	}
+	grabOpenDeckCard() {
+		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
+			console.log("handResponse =============>",response,response.length, this.playerHandContainer.length);
+						// if (response.length >= this.playerHandContainer.length) {
+			// 	this.oPlayerHand.getNewCardData(response[response.length - 1]);
+			// }
+			this.playerHandContainer.removeAll(true);
+			for(let i = 0 ; i < response.length ; i++){
+				this.oPlayerHand.getNewCardData(response[i]);
+			}
+		});
+	}
 	changeScenes() {
 		this.scene.start("ResultScreen");
 	}
 	setRoundOver() {
-		this.isDeclarePhase = true;
+		this.isDeclarePhase = false;
+		this.openedCardDeck.visible = false;
+		this.oRuleset.grp1Data = [];
+		this.oRuleset.grp2Data = [];
+		this.closedCardDeck.setX(540);
+		this.openedCardDeck.setX(540);
 		this.oGameManager.resetPhaseData();
 		this.oPlayerHand.clearPlayerHandCard();
 		this.oPlayerPrefab.intervalTimeReset();
+		this.doublePhaseOneCardContainer.removeAll(true);
+		this.doublePhaseTwoCardContainer.removeAll(true);
+
 	}
 	/* END-USER-CODE */
 }

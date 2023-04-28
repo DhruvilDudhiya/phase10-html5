@@ -8,10 +8,12 @@ class Ruleset {
     }
 
     validateRuleset(validateData) {
+        console.log("Fuction validRule ======> ",validateData.list.length ,this.oScene.oGameManager.phaseOneTotalCards ,2 )
         if (validateData.list.length == this.oScene.oGameManager.phaseOneTotalCards || validateData.list.length == this.oScene.oGameManager.phaseTwoTotalCards) {
             this.cardColors = [];
             this.cardNumbers = [];
             this.cardIds = [];
+            console.log(validateData.list.length);
             for (let i = 0; i < validateData.list.length; i++) {
                 this.cardColors.push(validateData.list[i].__CardPreset.cardColor);
                 this.cardNumbers.push(validateData.list[i].__CardPreset.cardNumber);
@@ -30,120 +32,125 @@ class Ruleset {
     }
 
     checkRulesetContainer(containerName, validateData) {
-        switch (containerName) {
-            case "doublePhaseOneCardContainer":
-                this.checkRulesetCondition(this.oScene.oGameManager.phaseOneType, this.oScene.oGameManager.phaseOneTotalCards, containerName, validateData);
-                break;
-
-            case "doublePhaseTwoCardContainer":
-                this.checkRulesetCondition(this.oScene.oGameManager.phaseTwoType, this.oScene.oGameManager.phaseTwoTotalCards, containerName, validateData);
-                break;
-
-            //Extra Case for Single Phase || Container to be added in GameUI
+        console.log("functionCheckRuleset", containerName, validateData);
+        if (containerName == 'doublePhaseOneCardContainer') {
+            this.checkRulesetCondition(this.oScene.oGameManager.phaseOneType, this.oScene.oGameManager.phaseOneTotalCards, containerName, validateData);
+        }
+        if (containerName == 'doublePhaseTwoCardContainer') {
+            this.checkRulesetCondition(this.oScene.oGameManager.phaseTwoType, this.oScene.oGameManager.phaseTwoTotalCards, containerName, validateData);
         }
     }
 
     checkRulesetCondition(ruleType, totalCards, containerName, validateData) {
-        switch (ruleType) {
-            case "SET":
-                this.validateRulesetOfSet(totalCards, containerName, validateData);
-                break;
-
-            case "RUN":
-                this.validateRulesetOfRun(totalCards, containerName, validateData);
-                break;
-
+        console.log("rultype", ruleType);
+        if (ruleType == 'SET') {
+            this.validateRulesetOfSet(totalCards, containerName, validateData);
+        } else if (ruleType == 'RUN') {
+            this.validateRulesetOfRun(totalCards, containerName, validateData);
+        } else if (ruleType == 'color') {
+            this.validateRulesetOfColor(totalCards, containerName, validateData);
         }
     }
-
+    // Rule ==========> set
     validateRulesetOfSet(totalCards, containerName, validateData) {
+        console.log("Function Rule : SET =======>" , totalCards , containerName , validateData);
         this.cardNumbers.sort();
+        console.log("card Numbers :", this.cardNumbers);
         if (this.cardNumbers.every(element => element === this.cardNumbers[0] || element === 'w') && this.cardNumbers.length == totalCards) {
-            if (containerName == "doublePhaseOneCardContainer") {
-                this.grp1Data = [];
-                if(this.oScene.isDeclarePhase == false){
-                    this.preValidateofSetOne();
-                }else{
-                    
+            if(this.cardNumbers.every(element => element !== 's' )){
+                if (containerName == "doublePhaseOneCardContainer") {
+                    this.grp1Data = [];
+                    console.log("isDeclarePhase", this.oScene.isDeclarePhase)
+                    if (this.oScene.isDeclarePhase == false) {
+                        this.oScene.dp_yellow_ring_1.setVisible(true);
+                        this.oScene.oPlayerManager.handleDeclareButtons();
+                    }
+                    for (let i = 0; i < validateData.list.length; i++) {
+                        this.grp1Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
+                    }
                 }
-                for (let i = 0; i < validateData.list.length; i++) {
-                    this.grp1Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardIds[i], _id: this.cardIds[i] })
-                }
-            }
-            if (containerName == "doublePhaseTwoCardContainer") {
-                this.grp2Data = [];
-                if(this.oScene.isDeclarePhase == false){
-                    this.preValidateofSetTwo();
-                }else{
-                 
-                }
-                for (let i = 0; i < validateData.list.length; i++) {
-                    this.grp2Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardIds[i], _id: this.cardIds[i] })
-                }
-            }
-        }
-    }
-
-    preValidateofSetOne() {
-        this.oScene.dp_yellow_ring_1.setVisible(true);
-        this.oScene.oPlayerManager.handleDeclareButtons();
-    }
-    preValidateofSetTwo() {
-        this.oScene.dp_yellow_ring_2.setVisible(true);
-        this.oScene.oPlayerManager.handleDeclareButtons();
-    }
-    validateRulesetOfRun(totalCards, containerName) {
-        this.cardNumbers.sort((a, b) => {
-            if (a === 'w') return 1;
-            if (b === 'w') return -1;
-            return a - b;
-        });
-
-        let run = [];
-        let wildcardCount = 0;
-        for (let i = 0; i < this.cardNumbers.length; i++) {
-            if (this.cardNumbers[i] === 'w') {
-                wildcardCount++;
-                continue;
-            }
-            let cardNum = this.cardNumbers[i];
-            if (run.length === 0) {
-                run.push(cardNum);
-            } else {
-                let lastNum = run[run.length - 1];
-                if (lastNum === 'w') {
-                    run.pop();
-                    wildcardCount--;
-                    run.push(cardNum);
-                } else if (wildcardCount > 0) {
-                    run.push('w');
-                    wildcardCount--;
-                    i--;
-                }
-                else {
-                    for (let j = 0; j <= this.cardNumbers.length - 1; j++) {
-                        if (parseInt(cardNum) === parseInt(lastNum) + j) {
-                            run.push(cardNum);
-                        }
+                if (containerName == "doublePhaseTwoCardContainer") {
+                    this.grp2Data = [];
+                    console.log("isDeclarePhase", this.oScene.isDeclarePhase)
+                    if (this.oScene.isDeclarePhase == false) {
+                        this.oScene.dp_yellow_ring_2.setVisible(true);
+                        this.oScene.oPlayerManager.handleDeclareButtons();
+                    }
+                    for (let i = 0; i < validateData.list.length; i++) {
+                        this.grp2Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
                     }
                 }
             }
         }
+    }
+// Rule ==========> Run
+    validateRulesetOfRun(totalCards, containerName) {
+        let copy = this.cardNumbers;
+        let wildArr = [];
+        let count = 0;
+        let t = 0;
 
-        while (wildcardCount > 0) {
-            run.push('w');
-            wildcardCount--;
+        wildArr = this.cardNumbers.filter((a) => a !== "w").sort((a, b) => a - b);
+        let c = this.cardNumbers.length - wildArr.length;
+        let temp = c;
+        this.cardNumbers = [];
+        let data = 0;
+        for (let i = 0; i < wildArr.length - 1; i++) {
+            data = wildArr[i];
+            count = ((wildArr[i + 1] - wildArr[i]) - 1);
+            t += count;
+            while (count--) {
+                if (c != 0) {
+                    this.cardNumbers.push(++data);
+                    c--;
+                }
+                else {
+                    break;
+                }
+            }
+        }
+        while (c--) {
+            this.cardNumbers.push(wildArr[wildArr.length - 1]++);
         }
 
-        if (this.cardNumbers.length == run.length == totalCards.length) {
-            if (containerName == "doublePhaseOneCardContainer") {
-                this.oScene.dp_yellow_ring_1.setVisible(true);
-                this.oScene.oPlayerManager.handleDeclareButtons()
-            }
-            if (containerName == "doublePhaseTwoCardContainer") {
-                this.oScene.dp_yellow_ring_2.setVisible(true);
-                this.oScene.oPlayerManager.handleDeclareButtons()
-            }
+        t = 0;
+        for (let i = 0; i < wildArr.length - 1; i++) {
+            count = ((wildArr[i + 1] - wildArr[i]) - 1);
+            t += count;
         }
+
+        wildArr.push(...this.cardNumbers);
+        wildArr.sort((a, b) => a - b);
+        console.log("wildArr", wildArr);
+
+        if (temp >= t) {
+            this.grp2Data = [];
+            console.log(copy);
+            for (let i = 0; i < copy.length; i++) {
+                if (copy[i] == "w") {
+                    this.grp2Data.push({ nLabel: 13, eColor: this.cardColors[i], _id: this.cardIds[i] })
+                }
+                else {
+                    this.grp2Data.push({ nLabel: copy[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
+                }
+            }
+            this.oScene.dp_yellow_ring_2.setVisible(true);
+            this.oScene.oPlayerManager.handleDeclareButtons()
+            console.log("yes", this.grp2Data);
+        }
+        else {
+            console.log("no", copy);
+        }
+
+        // if (this.cardNumbers.length == this.run.length == totalthis.cardNumbers.length) {
+        //     if (containerName == "doublePhaseOneCardContainer") {
+        //         this.oScene.dp_yellow_ring_1.setVisible(true);
+        //         this.oScene.oPlayerManager.handleDeclareButtons()
+        //     }
+        //     if (containerName == "doublePhaseTwoCardContainer") {
+        //         this.oScene.dp_yellow_ring_2.setVisible(true);
+        //         this.oScene.oPlayerManager.handleDeclareButtons()
+        //     }
+        // }
     }
 }
