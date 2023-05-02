@@ -137,6 +137,11 @@
                 "key": "main-cards-deck"
             },
             {
+                "url": "assets/images/gameplay/Network.png",
+                "type": "image",
+                "key": "Network"
+            },
+            {
                 "url": "assets/images/gameplay/opp-player-card-deck.png",
                 "type": "image",
                 "key": "opp-player-card-deck"

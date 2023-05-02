@@ -23,6 +23,27 @@ class PlayerManager {
         return this.players.size;
     }
 
+    clearContainerData(target) {
+        target.removeAll(true)
+    }
+
+    resetPhaseData() {
+        let temp = [
+            this.oScene.opponentGrp1PhaseCardContainer,
+            this.oScene.opponentGrp2PhaseCardContainer,
+            this.oScene.opponent2Grp1PhaseCardContainer,
+            this.oScene.opponent2Grp2PhaseCardContainer,
+            this.oScene.opponent3Grp1PhaseCardContainer,
+            this.oScene.opponent3Grp2PhaseCardContainer,
+        ];
+        for (let i = 0; i < temp.length; i++) this.clearContainerData(temp[i])
+
+        for (let j = 0; j < this.oScene.playersContainer.length; j++) {
+            this.oScene.playersContainer.getAll()[j].intervalTimeReset();
+        }
+
+    }
+
     setUsersData(data, rootSocketId) {
         if (!this.players.has(data.iUserId)) {
             this.addPlayer(data.nSeat, data.iUserId);
@@ -86,8 +107,25 @@ class PlayerManager {
     opponentDeclarePhase(data) {
         if (this.oScene.ownPlayerId != data.iUserId) {
             if (this.oScene.nMaxPlayer == 2) {
-                this.opponemtGrpPhaseDeclare(data, 1)
-                this.opponemtGrpPhaseDeclare(data, 2)
+                this.oScene.txt_set2_opponent_info.text = this.oScene.txt_set1_opponent_info.text = "";
+                this.opponemtGrpPhaseDeclare(data, 1);
+                this.opponemtGrpPhaseDeclare(data, 2);
+            }
+            else if (this.oScene.nMaxPlayer == 3) {
+                for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+                    if (this.oScene.playersContainer.getAll()[i].name === data.iUserId) {
+                        if (this.oScene.playersContainer.getAll()[i].x < 540) {
+                            this.oScene.txt_set1_opponent2_info.text = this.oScene.txt_set2_opponent2_info.text = "";
+                            this.opponemt2GrpPhaseDeclare(data, 1, "Player1");
+                            this.opponemt2GrpPhaseDeclare(data, 2, "Player1");
+                        }
+                        else {
+                            this.oScene.txt_set1_opponent3_info.text = this.oScene.txt_set2_opponent3_info.text = "";
+                            this.opponemt2GrpPhaseDeclare(data, 1, "Player2");
+                            this.opponemt2GrpPhaseDeclare(data, 2, "Player2");
+                        }
+                    }
+                }
             }
         }
     }
@@ -100,13 +138,11 @@ class PlayerManager {
             for (let j = 0; j < this.declarePhaseCardInfo.length; j++) {
                 this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
                 this.declarePhaseCard.setScale(0.5)
-                if (phase == 1) {
-                    this.oScene.opponentGrp1PhaseCardContainer.add(this.declarePhaseCard)
-                }
-                else if (phase == 2) {
-                    this.oScene.opponentGrp2PhaseCardContainer.add(this.declarePhaseCard)
-                }
                 this.declarePhaseCard.disableInteractive();
+
+                if (phase == 1) this.oScene.opponentGrp1PhaseCardContainer.add(this.declarePhaseCard)
+                else if (phase == 2) this.oScene.opponentGrp2PhaseCardContainer.add(this.declarePhaseCard)
+
                 if (this.declarePhaseCardInfo[j].nLabel <= 12) {
                     this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].nLabel, this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
                 } else {
@@ -117,41 +153,107 @@ class PlayerManager {
         }
     }
 
-    opponentHitPhaseCard(data) {
-        if (this.oScene.ownPlayerId !== data.iHUserId) {
-            if (data.sGroup === "aGroup-1") {
-                this.oScene.opponentGrp1PhaseCardContainer.destroy();
-                this.opponentGrp1PhaseCardContainer = this.oScene.add.container(0, 0);
-                this.oScene.declareCardContainer.add(this.opponentGrp1PhaseCardContainer);
-                var phaseGrp = 1
-                var startY = 410;
-            }
-            else if (data.sGroup === "aGroup-2") {
-                this.oScene.opponentGrp2PhaseCardContainer.destroy();
-                this.opponentGrp2PhaseCardContainer = this.oScene.add.container(0, 0);
-                this.oScene.declareCardContainer.add(this.opponentGrp2PhaseCardContainer);
-                var startY = 544;
-                var phaseGrp = 2
-            }
+    opponemt2GrpPhaseDeclare(data, phase, player) {
+        this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
+        var startX = player === "Player1" ? 255 : 765;
+        var startY = phase == 1 ? 407 : 543
+        if (this.declarePhaseCardInfo !== undefined) {
+            for (let j = 0; j < this.declarePhaseCardInfo.length; j++) {
 
-            var startX = 510;
-            for (let i = 0; i < data.aCards.length; i++) {
                 this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
                 this.declarePhaseCard.setScale(0.5)
-                if (phaseGrp == 1) {
-                    this.opponentGrp1PhaseCardContainer.add(this.declarePhaseCard)
-                }
-                else if (phaseGrp == 2) {
-                    this.opponentGrp2PhaseCardContainer.add(this.declarePhaseCard)
-                }
                 this.declarePhaseCard.disableInteractive();
-                if (data.aCards[i].nLabel <= 12) {
-                    this.declarePhaseCard.checkCardInformation(data.aCards[i].nLabel, data.aCards[i].eColor, data.aCards[i]._id);
-                } else {
-                    this.declarePhaseCard.checkCardInformation(data.aCards[i].eColor, data.aCards[i]._id);
+
+                if (player === "Player1") {
+                    if (phase == 1) this.oScene.opponent2Grp1PhaseCardContainer.add(this.declarePhaseCard)
+                    else if (phase == 2) this.oScene.opponent2Grp2PhaseCardContainer.add(this.declarePhaseCard)
                 }
+                else {
+                    if (phase == 1) this.oScene.opponent3Grp1PhaseCardContainer.add(this.declarePhaseCard)
+                    else if (phase == 2) this.oScene.opponent3Grp2PhaseCardContainer.add(this.declarePhaseCard)
+                }
+
+                if (this.declarePhaseCardInfo[j].nLabel <= 12) {
+                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].nLabel, this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
+                } else {
+                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
+                }
+
                 startX += 30;
             }
+        }
+    }
+
+
+    opponentHitPhaseCard(data) {
+        let tempContainer;
+        let startY, startX;
+
+        if (this.oScene.ownPlayerId !== data.iHUserId) {
+            if (this.oScene.nMaxPlayer === 2) {
+                if (data.sGroup === "aGroup-1") {
+                    this.clearContainerData(this.oScene.opponentGrp1PhaseCardContainer)
+                    tempContainer = this.oScene.opponentGrp1PhaseCardContainer;
+                    startY = 410;
+                }
+                else if (data.sGroup === "aGroup-2") {
+                    this.clearContainerData(this.oScene.opponentGrp2PhaseCardContainer)
+                    tempContainer = this.oScene.opponentGrp2PhaseCardContainer;
+                    startY = 544;
+                }
+                startX = 510;
+            }
+            else if (this.oScene.nMaxPlayer == 3) {
+                for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+                    if (this.oScene.playersContainer.getAll()[i].name === data.iHUserId) {
+                        if (this.oScene.playersContainer.getAll()[i].x < 540) {
+                            if (data.sGroup === "aGroup-1") {
+                                this.clearContainerData(this.oScene.opponent2Grp1PhaseCardContainer);
+                                tempContainer = this.oScene.opponent2Grp1PhaseCardContainer;
+                                startY = 410;
+                            }
+                            else if (data.sGroup === "aGroup-2") {
+                                this.clearContainerData(this.oScene.opponent2Grp2PhaseCardContainer);
+                                tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
+                                startY = 544;
+                            }
+                            console.log("< 540", tempContainer);
+                            startX = 255;
+                        }
+                        else {
+                            if (data.sGroup === "aGroup-1") {
+                                this.clearContainerData(this.oScene.opponent3Grp1PhaseCardContainer);
+                                tempContainer = this.oScene.opponent3Grp1PhaseCardContainer;
+                                startY = 410;
+                            }
+                            else if (data.sGroup === "aGroup-2") {
+                                this.clearContainerData(this.oScene.opponent3Grp2PhaseCardContainer);
+                                tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
+                                startY = 544;
+                            }
+                            console.log("> 540", tempContainer);
+                            startX = 765;
+                        }
+                    }
+                }
+            }
+            this.setOpponentHitPhaseCard(data, tempContainer, startX, startY);
+        }
+    }
+
+    setOpponentHitPhaseCard(data, container, startX, startY) {
+        for (let i = 0; i < data.aCards.length; i++) {
+            this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
+            this.declarePhaseCard.setScale(0.5)
+            container.add(this.declarePhaseCard)
+            this.declarePhaseCard.disableInteractive();
+
+            if (data.aCards[i].nLabel <= 12) {
+                this.declarePhaseCard.checkCardInformation(data.aCards[i].nLabel, data.aCards[i].eColor, data.aCards[i]._id);
+            } else {
+                this.declarePhaseCard.checkCardInformation(data.aCards[i].eColor, data.aCards[i]._id);
+            }
+            startX += 30;
         }
     }
 
@@ -205,22 +307,46 @@ class PlayerManager {
             if (phaseData.aRules.length == 2) {
                 this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
-                console.log(" Phase If =====>",this.oScene.oGameManager.phaseOneTotalCards);
-                this.oScene.phaseOneText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " OF " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+                this.oScene.phaseOneText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
 
                 this.oScene.oGameManager.phaseTwoType = phaseData.aRules[1].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseTwoTotalCards = phaseData.aRules[1].nNumberOfCards.toString().toUpperCase();
-                this.oScene.phaseTwoText.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " OF " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
+                this.oScene.phaseTwoText.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
             }
             else {
                 this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
-                console.log(" Phase Else =====>",this.oScene.oGameManager.phaseOneTotalCards);
-                this.oScene.phaseMiddleText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " OF " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+                this.oScene.phaseMiddleText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
             }
             //setownPlayerGroup
             this.setGrup1CurrentData(phaseData);
             this.setGrup2CurrentData(phaseData);
+        }
+        else {
+            if (this.oScene.nMaxPlayer == 2) {
+                this.oScene.txt_set1_opponent_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+                this.oScene.txt_set2_opponent_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
+                this.oScene.txt_opponent_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
+                this.oScene.txt_opponent_phase_score.setText(phaseData.nScore);
+            }
+            else if (this.oScene.nMaxPlayer == 3) {
+                for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+                    if (this.oScene.playersContainer.getAll()[i].name === phaseData.iUserId) {
+                        if (this.oScene.playersContainer.getAll()[i].x < 540) {
+                            this.oScene.txt_set1_opponent2_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+                            this.oScene.txt_set2_opponent2_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
+                            this.oScene.txt_opponent2_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
+                            this.oScene.txt_opponent2_phase_score.setText(phaseData.nScore);
+                        }
+                        else {
+                            this.oScene.txt_set1_opponent3_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+                            this.oScene.txt_set2_opponent3_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
+                            this.oScene.txt_opponent3_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
+                            this.oScene.txt_opponent3_phase_score.setText(phaseData.nScore);
+                        }
+                    }
+                }
+            }
         }
 
     }
@@ -228,8 +354,6 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
-        console.log(" changePlayerTurn =====>",this.oScene.oGameManager.phaseOneTotalCards);
-
         this.currentPlayerTurn = playerTurnData.iUserId;
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.isOwnTurn = true;
@@ -237,36 +361,42 @@ class PlayerManager {
             this.isOwnTurn = false;
         }
 
-        // console.log('-----------------------------------');
-        // console.log(this.currentPlayerTurn);
-        // console.log(this.oScene.playersContainer.getAll()[0].name,this.oScene.playersContainer.getAll()[1].name,this.oScene.playersContainer.getAll()[2].name)
-
-        // for (var i = 0; i < this.oScene.playersContainer.length; i++) {
-        //     if (this.oScene.playersContainer.getAll()[i].name.includes(this.currentPlayerTurn)) {
-        //         this.oScene.playersContainer.getAll()[i + 1].intervalTimeReset();
-        //         this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData);
-        //         break;
-        //     }
-        //     else {
-        //         this.oScene.playersContainer.getAll()[i].intervalTimeReset();
-        //         this.oScene.playersContainer.getAll()[i + 1].startTimerInit(this.oScene.playersContainer.getAll()[i + 1].x, this.oScene.playersContainer.getAll()[i + 1].y, playerTurnData);
-        //         break;
-        //     }
-        // }
-      
         for (let i = 0; i < this.oScene.playersContainer.length; i++) {
-            
+
             for (let j = 0; j < this.oScene.playersContainer.length; j++) {
                 if (this.oScene.playersContainer.getAll()[j].name !== this.currentPlayerTurn) {
                     this.oScene.playersContainer.getAll()[j].intervalTimeReset();
                 }
             }
-            
+
             if (this.oScene.playersContainer.getAll()[i].name === this.currentPlayerTurn) {
                 this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData);
                 break;
             }
 
+        }
+    }
+
+    setOpponentHandCardCounter(oData) {
+        console.log("resHandCardCount", oData);
+        let playerId = oData.iUserId;
+        if (this.oScene.nMaxPlayer == 2) {
+            if (playerId !== this.oScene.ownPlayerId) {
+                this.oScene.txt_opponentHandCardCounter.setText(oData.nCardCount);
+            }
+        }
+        if (this.oScene.nMaxPlayer == 3) {
+            for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+                if (this.oScene.playersContainer.getAll()[i].name === playerId) {
+                    if (this.oScene.playersContainer.getAll()[i].x < 540) {
+                        this.oScene.txt_opponent2HandCardCounter.setText(oData.nCardCount);
+
+                    }
+                    else {
+                        this.oScene.txt_opponent3HandCardCounter.setText(oData.nCardCount);
+                    }
+                }
+            }
         }
     }
 
@@ -303,7 +433,7 @@ class PlayerManager {
                     this.oScene.confirmButton.disableInteractive();
                 } else {
                     if (this.isOwnTurn) {
-                    //    this.handleDeclareButtonsVisibilityON()
+                        //    this.handleDeclareButtonsVisibilityON()
                         this.oScene.confirmButton.setAlpha(1);
                         this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
                             this.handleRingsVisibilityOFF();

@@ -28,7 +28,6 @@ function startProject() {
 	game.scene.add("Game", Game);
 	game.scene.add("Boot", Boot, true);
 	game.scene.start("Boot", {});
-	game.scene.add("ResultScreen",ResultScreen);
 }
 
 $(document).ready(function () {

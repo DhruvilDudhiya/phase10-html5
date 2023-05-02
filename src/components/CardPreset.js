@@ -54,7 +54,7 @@ class CardPreset {
 		this.gameObjectPreset.on('dragend', (pointer, dragX, dragY) => {
 			this.gameObjectPreset.x = pointer.x - dragX;
 			this.gameObjectPreset.y = pointer.y - dragY;
-			if (this.gameObject.scene.nMaxPlayer == 2) {
+			if (this.gameObject.scene.nMaxPlayer == 3 || this.gameObject.scene.nMaxPlayer == 2) {
 				//Opened Card Deck
 				if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
 					console.log("=======> isGrabCard1 ",this.gameObject.scene.isGrabCard);

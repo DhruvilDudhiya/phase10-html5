@@ -50,7 +50,7 @@ class Game extends Phaser.Scene {
 		footerContainer.add(btn_shuffle);
 
 		// body
-		const body = this.add.container(0, 1);
+		const body = this.add.container(0, 0);
 
 		// phaseContainer
 		const phaseContainer = this.add.container(0, 1);
@@ -106,25 +106,25 @@ class Game extends Phaser.Scene {
 		// totalPhasesText
 		const totalPhasesText = this.add.text(540, 1340, "", {});
 		totalPhasesText.setOrigin(0.5, 0.5);
-		totalPhasesText.setStyle({ "align": "center", "fixedWidth": 200, "fontFamily": "CHICKEN PIE Height", "fontSize": "32px", "fontStyle": "bold" });
+		totalPhasesText.setStyle({ "align": "center", "fixedWidth":200,"fontFamily": "CHICKEN PIE Height", "fontSize": "32px", "fontStyle": "bold" });
 		phaseTextContainer.add(totalPhasesText);
 
 		// phaseOneText
 		const phaseOneText = this.add.text(286, 1070, "", {});
 		phaseOneText.setOrigin(0.5, 0.5);
-		phaseOneText.setStyle({ "align": "center", "fixedWidth": 450, "fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
+		phaseOneText.setStyle({ "align": "center", "fixedWidth":450,"fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
 		phaseTextContainer.add(phaseOneText);
 
 		// phaseTwoText
 		const phaseTwoText = this.add.text(794, 1070, "", {});
 		phaseTwoText.setOrigin(0.5, 0.5);
-		phaseTwoText.setStyle({ "align": "center", "fixedWidth": 450, "fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
+		phaseTwoText.setStyle({ "align": "center", "fixedWidth":450,"fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
 		phaseTextContainer.add(phaseTwoText);
 
 		// phaseMiddleText
 		const phaseMiddleText = this.add.text(540, 1070, "", {});
 		phaseMiddleText.setOrigin(0.5, 0.5);
-		phaseMiddleText.setStyle({ "align": "center", "fixedWidth": 450, "fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
+		phaseMiddleText.setStyle({ "align": "center", "fixedWidth":450,"fontFamily": "CHICKEN PIE Height", "fontSize": "40px", "fontStyle": "bold" });
 		phaseTextContainer.add(phaseMiddleText);
 
 		// confirmButton
@@ -143,12 +143,24 @@ class Game extends Phaser.Scene {
 		body.add(threePlayerContainer);
 
 		// threePlayer2Container
-		const threePlayer2Container = this.add.container(2, 0);
+		const threePlayer2Container = this.add.container(0, 0);
 		threePlayerContainer.add(threePlayer2Container);
 
 		// threePlayer2Box
 		const threePlayer2Box = this.add.image(285, 383, "player-2-box");
 		threePlayer2Container.add(threePlayer2Box);
+
+		// txt_opponent2_phase_count
+		const txt_opponent2_phase_count = this.add.text(285, 661, "", {});
+		txt_opponent2_phase_count.setOrigin(0.5, 0.5);
+		txt_opponent2_phase_count.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "26px" });
+		threePlayer2Container.add(txt_opponent2_phase_count);
+
+		// txt_opponent2_phase_score
+		const txt_opponent2_phase_score = this.add.text(225, 330, "", {});
+		txt_opponent2_phase_score.setOrigin(0.5, 0.5);
+		txt_opponent2_phase_score.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "26px", "fontStyle": "bold" });
+		threePlayer2Container.add(txt_opponent2_phase_score);
 
 		// secondPlayer2UserNameText
 		const secondPlayer2UserNameText = this.add.text(225, 295, "", {});
@@ -182,8 +194,50 @@ class Game extends Phaser.Scene {
 		text.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
 		emptySeatTwoPlayer.add(text);
 
+		// opponent2HandCardCountContainer
+		const opponent2HandCardCountContainer = this.add.container(396, 204);
+		threePlayer2Container.add(opponent2HandCardCountContainer);
+
+		// opp_player_card_deck_1
+		const opp_player_card_deck_1 = this.add.image(0, 0, "opp-player-card-deck");
+		opponent2HandCardCountContainer.add(opp_player_card_deck_1);
+
+		// txt_opponent2HandCardCounter
+		const txt_opponent2HandCardCounter = this.add.text(0, 0, "", {});
+		txt_opponent2HandCardCounter.setOrigin(0.5, 0.5);
+		txt_opponent2HandCardCounter.setStyle({ "fontSize": "35px", "fontStyle": "bold" });
+		opponent2HandCardCountContainer.add(txt_opponent2HandCardCounter);
+
+		// opponent2HandInfoContainer
+		const opponent2HandInfoContainer = this.add.container(0, 0);
+		threePlayer2Container.add(opponent2HandInfoContainer);
+
+		// txt_set1_opponent2_info
+		const txt_set1_opponent2_info = this.add.text(285, 411, "", {});
+		txt_set1_opponent2_info.setOrigin(0.5, 0.5);
+		txt_set1_opponent2_info.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		opponent2HandInfoContainer.add(txt_set1_opponent2_info);
+
+		// txt_set2_opponent2_info
+		const txt_set2_opponent2_info = this.add.text(285, 548, "", {});
+		txt_set2_opponent2_info.setOrigin(0.5, 0.5);
+		txt_set2_opponent2_info.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		opponent2HandInfoContainer.add(txt_set2_opponent2_info);
+
+		// opponent2DeclareCardContainer
+		const opponent2DeclareCardContainer = this.add.container(0, 0);
+		threePlayer2Container.add(opponent2DeclareCardContainer);
+
+		// opponent2Grp2PhaseCardContainer
+		const opponent2Grp2PhaseCardContainer = this.add.container(0, 0);
+		opponent2DeclareCardContainer.add(opponent2Grp2PhaseCardContainer);
+
+		// opponent2Grp1PhaseCardContainer
+		const opponent2Grp1PhaseCardContainer = this.add.container(0, 0);
+		opponent2DeclareCardContainer.add(opponent2Grp1PhaseCardContainer);
+
 		// threePlayer3Container
-		const threePlayer3Container = this.add.container(0, -3);
+		const threePlayer3Container = this.add.container(0, 0);
 		threePlayerContainer.add(threePlayer3Container);
 
 		// threePlayer3Box
@@ -196,6 +250,18 @@ class Game extends Phaser.Scene {
 		secondPlayer3UserNameText.text = "Waiting..";
 		secondPlayer3UserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
 		threePlayer3Container.add(secondPlayer3UserNameText);
+
+		// txt_opponent3_phase_score
+		const txt_opponent3_phase_score = this.add.text(736, 330, "", {});
+		txt_opponent3_phase_score.setOrigin(0.5, 0.5);
+		txt_opponent3_phase_score.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "26px", "fontStyle": "bold" });
+		threePlayer3Container.add(txt_opponent3_phase_score);
+
+		// txt_opponent3_phase_count
+		const txt_opponent3_phase_count = this.add.text(795, 661, "", {});
+		txt_opponent3_phase_count.setOrigin(0.5, 0.5);
+		txt_opponent3_phase_count.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "26px" });
+		threePlayer3Container.add(txt_opponent3_phase_count);
 
 		// emptySeatThreePlayer
 		const emptySeatThreePlayer = this.add.container(734, 170);
@@ -222,13 +288,55 @@ class Game extends Phaser.Scene {
 		text_1.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
 		emptySeatThreePlayer.add(text_1);
 
+		// opponent3HandCardCountContainer
+		const opponent3HandCardCountContainer = this.add.container(907, 204);
+		threePlayer3Container.add(opponent3HandCardCountContainer);
+
+		// opp_player_card_deck_2
+		const opp_player_card_deck_2 = this.add.image(0, 0, "opp-player-card-deck");
+		opponent3HandCardCountContainer.add(opp_player_card_deck_2);
+
+		// txt_opponent3HandCardCounter
+		const txt_opponent3HandCardCounter = this.add.text(0, 0, "", {});
+		txt_opponent3HandCardCounter.setOrigin(0.5, 0.5);
+		txt_opponent3HandCardCounter.setStyle({ "fontSize": "35px", "fontStyle": "bold" });
+		opponent3HandCardCountContainer.add(txt_opponent3HandCardCounter);
+
+		// opponent3HandInfoContainer
+		const opponent3HandInfoContainer = this.add.container(0, 0);
+		threePlayer3Container.add(opponent3HandInfoContainer);
+
+		// txt_set1_opponent3_info
+		const txt_set1_opponent3_info = this.add.text(795, 411, "", {});
+		txt_set1_opponent3_info.setOrigin(0.5, 0.5);
+		txt_set1_opponent3_info.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		opponent3HandInfoContainer.add(txt_set1_opponent3_info);
+
+		// txt_set2_opponent3_info
+		const txt_set2_opponent3_info = this.add.text(795, 548, "", {});
+		txt_set2_opponent3_info.setOrigin(0.5, 0.5);
+		txt_set2_opponent3_info.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		opponent3HandInfoContainer.add(txt_set2_opponent3_info);
+
+		// opponent3DeclareCardContainer
+		const opponent3DeclareCardContainer = this.add.container(0, 0);
+		threePlayer3Container.add(opponent3DeclareCardContainer);
+
+		// opponent3Grp2PhaseCardContainer
+		const opponent3Grp2PhaseCardContainer = this.add.container(0, 0);
+		opponent3DeclareCardContainer.add(opponent3Grp2PhaseCardContainer);
+
+		// opponent3Grp1PhaseCardContainer
+		const opponent3Grp1PhaseCardContainer = this.add.container(0, 0);
+		opponent3DeclareCardContainer.add(opponent3Grp1PhaseCardContainer);
+
 		// twoPlayerContainer
-		const twoPlayerContainer = this.add.container(-1, 1);
+		const twoPlayerContainer = this.add.container(0, 0);
 		twoPlayerContainer.visible = false;
 		body.add(twoPlayerContainer);
 
 		// twoPlayer2Container
-		const twoPlayer2Container = this.add.container(1, 1);
+		const twoPlayer2Container = this.add.container(0, 0);
 		twoPlayerContainer.add(twoPlayer2Container);
 
 		// twoPlayer2Box
@@ -242,11 +350,17 @@ class Game extends Phaser.Scene {
 		secondPlayerUserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
 		twoPlayer2Container.add(secondPlayerUserNameText);
 
-		// secondPlayerScoreText
-		const secondPlayerScoreText = this.add.text(479, 332, "", {});
-		secondPlayerScoreText.setOrigin(0.5, 0.5);
-		secondPlayerScoreText.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "22px", "fontStyle": "bold" });
-		twoPlayer2Container.add(secondPlayerScoreText);
+		// txt_opponent_phase_score
+		const txt_opponent_phase_score = this.add.text(479, 332, "", {});
+		txt_opponent_phase_score.setOrigin(0.5, 0.5);
+		txt_opponent_phase_score.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
+		twoPlayer2Container.add(txt_opponent_phase_score);
+
+		// txt_opponent_phase_count
+		const txt_opponent_phase_count = this.add.text(540, 661, "", {});
+		txt_opponent_phase_count.setOrigin(0.5, 0.5);
+		txt_opponent_phase_count.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "26px" });
+		twoPlayer2Container.add(txt_opponent_phase_count);
 
 		// emptySeatPlayer2
 		const emptySeatPlayer2 = this.add.container(481, 173);
@@ -273,6 +387,22 @@ class Game extends Phaser.Scene {
 		text_2.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
 		emptySeatPlayer2.add(text_2);
 
+		// opponentHandInfoContainer
+		const opponentHandInfoContainer = this.add.container(0, 0);
+		twoPlayer2Container.add(opponentHandInfoContainer);
+
+		// txt_set1_opponent_info
+		const txt_set1_opponent_info = this.add.text(540, 411, "", {});
+		txt_set1_opponent_info.setOrigin(0.5, 0.5);
+		txt_set1_opponent_info.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		opponentHandInfoContainer.add(txt_set1_opponent_info);
+
+		// txt_set2_opponent_info
+		const txt_set2_opponent_info = this.add.text(540, 548, "", {});
+		txt_set2_opponent_info.setOrigin(0.5, 0.5);
+		txt_set2_opponent_info.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		opponentHandInfoContainer.add(txt_set2_opponent_info);
+
 		// declareCardContainer
 		const declareCardContainer = this.add.container(0, 0);
 		twoPlayer2Container.add(declareCardContainer);
@@ -285,12 +415,26 @@ class Game extends Phaser.Scene {
 		const opponentGrp2PhaseCardContainer = this.add.container(0, 0);
 		declareCardContainer.add(opponentGrp2PhaseCardContainer);
 
+		// opponentHandCardCountContainer
+		const opponentHandCardCountContainer = this.add.container(0, 0);
+		twoPlayer2Container.add(opponentHandCardCountContainer);
+
+		// opp_player_card_deck
+		const opp_player_card_deck = this.add.image(633, 215, "opp-player-card-deck");
+		opponentHandCardCountContainer.add(opp_player_card_deck);
+
+		// txt_opponentHandCardCounter
+		const txt_opponentHandCardCounter = this.add.text(633, 212, "", {});
+		txt_opponentHandCardCounter.setOrigin(0.5, 0.5);
+		txt_opponentHandCardCounter.setStyle({ "fontSize": "35px", "fontStyle": "bold" });
+		opponentHandCardCountContainer.add(txt_opponentHandCardCounter);
+
 		// ownPlayerContainer
 		const ownPlayerContainer = this.add.container(0, -1);
 		body.add(ownPlayerContainer);
 
 		// ownPlayerUserNameText
-		const ownPlayerUserNameText = this.add.text(538, 1880, "", {});
+		const ownPlayerUserNameText = this.add.text(540, 1875, "", {});
 		ownPlayerUserNameText.setOrigin(0.5, 0.5);
 		ownPlayerUserNameText.text = "YOU";
 		ownPlayerUserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "40px", "fontStyle": "bold" });
@@ -429,7 +573,7 @@ class Game extends Phaser.Scene {
 		refreshTablePopup.add(refreshTableTxt);
 
 		// manuContainer
-		const manuContainer = this.add.container(82, 1729);
+		const manuContainer = this.add.container(83, 1729);
 		manuContainer.visible = false;
 
 		// soundOffBtn
@@ -457,6 +601,100 @@ class Game extends Phaser.Scene {
 		exitIcon.scaleY = 0.5;
 		manuContainer.add(exitIcon);
 
+		// tableInfoContainer
+		const tableInfoContainer = this.add.container(0, 0);
+		tableInfoContainer.visible = false;
+
+		// text_3
+		const text_3 = this.add.text(488, 35, "", {});
+		text_3.setOrigin(0.5, 0.5);
+		text_3.text = "Table Id:#";
+		text_3.setStyle({ "color": "#c6c6c6ff", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px", "fontStyle": "bold" });
+		tableInfoContainer.add(text_3);
+
+		// txt_table_id
+		const txt_table_id = this.add.text(556, 35, "", {});
+		txt_table_id.setOrigin(0, 0.5);
+		txt_table_id.setStyle({ "color": "#c6c6c6ff", "fontFamily": "CHICKEN Pie Height", "fontSize": "30px", "fontStyle": "bold" });
+		tableInfoContainer.add(txt_table_id);
+
+		// rectangle_1
+		const rectangle_1 = this.add.rectangle(997, 35, 150, 50);
+		rectangle_1.alpha = 0.5;
+		rectangle_1.isFilled = true;
+		rectangle_1.fillColor = 0;
+		tableInfoContainer.add(rectangle_1);
+
+		// signal
+		const signal = this.add.image(947, 35, "Network");
+		signal.scaleX = 0.1;
+		signal.scaleY = 0.1;
+		tableInfoContainer.add(signal);
+
+		// networkTxt
+		const networkTxt = this.add.text(968, 35, "", {});
+		networkTxt.setOrigin(0, 0.5);
+		networkTxt.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "30px" });
+		tableInfoContainer.add(networkTxt);
+
+		// winnerShowContainer
+		const winnerShowContainer = this.add.container(0, 0);
+		winnerShowContainer.visible = false;
+
+		// background_1
+		const background_1 = this.add.image(540, 960, "background");
+		winnerShowContainer.add(background_1);
+
+		// txt_rank
+		const txt_rank = this.add.text(540, 420, "", {});
+		txt_rank.setOrigin(0.5, 0.5);
+		txt_rank.setStyle({ "fontSize": "130px" });
+		winnerShowContainer.add(txt_rank);
+
+		// text_4
+		const text_4 = this.add.text(540, 540, "", {});
+		text_4.setOrigin(0.5, 0.5);
+		text_4.text = "Rank";
+		text_4.setStyle({ "fontSize": "70px" });
+		winnerShowContainer.add(text_4);
+
+		// headerContainer
+		const headerContainer = this.add.container(540, 897);
+		winnerShowContainer.add(headerContainer);
+
+		// transparent_layer
+		const transparent_layer = this.add.image(0, 1, "transparent-layer");
+		transparent_layer.scaleY = 0.06;
+		headerContainer.add(transparent_layer);
+
+		// noHeader
+		const noHeader = this.add.text(-483, 0, "", {});
+		noHeader.setOrigin(0.5, 0.5);
+		noHeader.text = "No.";
+		noHeader.setStyle({ "fontSize": "50px" });
+		headerContainer.add(noHeader);
+
+		// nameHeader
+		const nameHeader = this.add.text(-304, 0, "", {});
+		nameHeader.setOrigin(0.5, 0.5);
+		nameHeader.text = "Name";
+		nameHeader.setStyle({ "fontSize": "50px" });
+		headerContainer.add(nameHeader);
+
+		// scoreHeader
+		const scoreHeader = this.add.text(105, 0, "", {});
+		scoreHeader.setOrigin(0.5, 0.5);
+		scoreHeader.text = "Score";
+		scoreHeader.setStyle({ "fontSize": "50px" });
+		headerContainer.add(scoreHeader);
+
+		// prizeHeader
+		const prizeHeader = this.add.text(400, 0, "", {});
+		prizeHeader.setOrigin(0.5, 0.5);
+		prizeHeader.text = "Prize";
+		prizeHeader.setStyle({ "fontSize": "50px" });
+		headerContainer.add(prizeHeader);
+
 		this.discardDeckContainer = discardDeckContainer;
 		this.openedCardDeck = openedCardDeck;
 		this.closedCardDeck = closedCardDeck;
@@ -475,17 +713,38 @@ class Game extends Phaser.Scene {
 		this.confirmButton = confirmButton;
 		this.cancelButton = cancelButton;
 		this.threePlayerContainer = threePlayerContainer;
+		this.txt_opponent2_phase_count = txt_opponent2_phase_count;
+		this.txt_opponent2_phase_score = txt_opponent2_phase_score;
 		this.secondPlayer2UserNameText = secondPlayer2UserNameText;
 		this.emptySeatTwoPlayer = emptySeatTwoPlayer;
+		this.txt_opponent2HandCardCounter = txt_opponent2HandCardCounter;
+		this.opponent2HandInfoContainer = opponent2HandInfoContainer;
+		this.txt_set1_opponent2_info = txt_set1_opponent2_info;
+		this.txt_set2_opponent2_info = txt_set2_opponent2_info;
+		this.opponent2Grp2PhaseCardContainer = opponent2Grp2PhaseCardContainer;
+		this.opponent2Grp1PhaseCardContainer = opponent2Grp1PhaseCardContainer;
 		this.secondPlayer3UserNameText = secondPlayer3UserNameText;
+		this.txt_opponent3_phase_score = txt_opponent3_phase_score;
+		this.txt_opponent3_phase_count = txt_opponent3_phase_count;
 		this.emptySeatThreePlayer = emptySeatThreePlayer;
+		this.txt_opponent3HandCardCounter = txt_opponent3HandCardCounter;
+		this.opponent3HandInfoContainer = opponent3HandInfoContainer;
+		this.txt_set1_opponent3_info = txt_set1_opponent3_info;
+		this.txt_set2_opponent3_info = txt_set2_opponent3_info;
+		this.opponent3Grp2PhaseCardContainer = opponent3Grp2PhaseCardContainer;
+		this.opponent3Grp1PhaseCardContainer = opponent3Grp1PhaseCardContainer;
 		this.twoPlayerContainer = twoPlayerContainer;
 		this.secondPlayerUserNameText = secondPlayerUserNameText;
-		this.secondPlayerScoreText = secondPlayerScoreText;
+		this.txt_opponent_phase_score = txt_opponent_phase_score;
+		this.txt_opponent_phase_count = txt_opponent_phase_count;
 		this.emptySeatPlayer2 = emptySeatPlayer2;
+		this.opponentHandInfoContainer = opponentHandInfoContainer;
+		this.txt_set1_opponent_info = txt_set1_opponent_info;
+		this.txt_set2_opponent_info = txt_set2_opponent_info;
 		this.declareCardContainer = declareCardContainer;
 		this.opponentGrp1PhaseCardContainer = opponentGrp1PhaseCardContainer;
 		this.opponentGrp2PhaseCardContainer = opponentGrp2PhaseCardContainer;
+		this.txt_opponentHandCardCounter = txt_opponentHandCardCounter;
 		this.ownPlayerUserNameText = ownPlayerUserNameText;
 		this.ownPlayerScoreText = ownPlayerScoreText;
 		this.playerHandContainer = playerHandContainer;
@@ -514,6 +773,18 @@ class Game extends Phaser.Scene {
 		this.soundOnBtn = soundOnBtn;
 		this.refreshIcon = refreshIcon;
 		this.exitIcon = exitIcon;
+		this.tableInfoContainer = tableInfoContainer;
+		this.txt_table_id = txt_table_id;
+		this.signal = signal;
+		this.networkTxt = networkTxt;
+		this.winnerShowContainer = winnerShowContainer;
+		this.txt_rank = txt_rank;
+		this.headerContainer = headerContainer;
+		this.transparent_layer = transparent_layer;
+		this.noHeader = noHeader;
+		this.nameHeader = nameHeader;
+		this.scoreHeader = scoreHeader;
+		this.prizeHeader = prizeHeader;
 
 		this.events.emit("scene-awake");
 	}
@@ -555,27 +826,69 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	threePlayerContainer;
 	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent2_phase_count;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent2_phase_score;
+	/** @type {Phaser.GameObjects.Text} */
 	secondPlayer2UserNameText;
 	/** @type {Phaser.GameObjects.Container} */
 	emptySeatTwoPlayer;
 	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent2HandCardCounter;
+	/** @type {Phaser.GameObjects.Container} */
+	opponent2HandInfoContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_set1_opponent2_info;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_set2_opponent2_info;
+	/** @type {Phaser.GameObjects.Container} */
+	opponent2Grp2PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	opponent2Grp1PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Text} */
 	secondPlayer3UserNameText;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent3_phase_score;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent3_phase_count;
 	/** @type {Phaser.GameObjects.Container} */
 	emptySeatThreePlayer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent3HandCardCounter;
+	/** @type {Phaser.GameObjects.Container} */
+	opponent3HandInfoContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_set1_opponent3_info;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_set2_opponent3_info;
+	/** @type {Phaser.GameObjects.Container} */
+	opponent3Grp2PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	opponent3Grp1PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
 	twoPlayerContainer;
 	/** @type {Phaser.GameObjects.Text} */
 	secondPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
-	secondPlayerScoreText;
+	txt_opponent_phase_score;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_opponent_phase_count;
 	/** @type {Phaser.GameObjects.Container} */
 	emptySeatPlayer2;
+	/** @type {Phaser.GameObjects.Container} */
+	opponentHandInfoContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_set1_opponent_info;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_set2_opponent_info;
 	/** @type {Phaser.GameObjects.Container} */
 	declareCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
 	opponentGrp1PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
 	opponentGrp2PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_opponentHandCardCounter;
 	/** @type {Phaser.GameObjects.Text} */
 	ownPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -632,6 +945,30 @@ class Game extends Phaser.Scene {
 	refreshIcon;
 	/** @type {Phaser.GameObjects.Image} */
 	exitIcon;
+	/** @type {Phaser.GameObjects.Container} */
+	tableInfoContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_table_id;
+	/** @type {Phaser.GameObjects.Image} */
+	signal;
+	/** @type {Phaser.GameObjects.Text} */
+	networkTxt;
+	/** @type {Phaser.GameObjects.Container} */
+	winnerShowContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	txt_rank;
+	/** @type {Phaser.GameObjects.Container} */
+	headerContainer;
+	/** @type {Phaser.GameObjects.Image} */
+	transparent_layer;
+	/** @type {Phaser.GameObjects.Text} */
+	noHeader;
+	/** @type {Phaser.GameObjects.Text} */
+	nameHeader;
+	/** @type {Phaser.GameObjects.Text} */
+	scoreHeader;
+	/** @type {Phaser.GameObjects.Text} */
+	prizeHeader;
 
 	/* START-USER-CODE */
 
@@ -654,6 +991,8 @@ class Game extends Phaser.Scene {
 		this.oPlayerPrefab = new PlayerPrefab(this);
 		this.isDeclarePhase = false;
 		this.isGrabCard = false;
+
+		this.pingTest()
 
 	}
 
@@ -688,12 +1027,12 @@ class Game extends Phaser.Scene {
 	}
 	grabOpenDeckCard() {
 		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
-			console.log("handResponse =============>",response,response.length, this.playerHandContainer.length);
-						// if (response.length >= this.playerHandContainer.length) {
+			// console.log("handResponse =============>", response, response.length, this.playerHandContainer.length);
+			// if (response.length >= this.playerHandContainer.length) {
 			// 	this.oPlayerHand.getNewCardData(response[response.length - 1]);
 			// }
 			this.playerHandContainer.removeAll(true);
-			for(let i = 0 ; i < response.length ; i++){
+			for (let i = 0; i < response.length; i++) {
 				this.oPlayerHand.getNewCardData(response[i]);
 			}
 		});
@@ -709,11 +1048,82 @@ class Game extends Phaser.Scene {
 		this.closedCardDeck.setX(540);
 		this.openedCardDeck.setX(540);
 		this.oGameManager.resetPhaseData();
+		this.oPlayerManager.resetPhaseData();
 		this.oPlayerHand.clearPlayerHandCard();
 		this.oPlayerPrefab.intervalTimeReset();
+		this.discardDeckContainer.removeAll();
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
 
+	}
+
+	winnerScene(oData) {
+
+		var resultPrefabX = 517
+		var resultPrefabY = 1004
+
+		this.winnerShowContainer.visible = true;
+
+		for (let i = 0; i < oData.length; i++) {
+			var resultPrefab = new ResultPrefab(this, resultPrefabX, resultPrefabY);
+			this.add.existing(resultPrefab);
+			resultPrefab.setDepth(10)
+			resultPrefab.playerRank.text = i + 1
+			resultPrefab.setUserData(oData[i])
+			let isOwnPlayer = oData[i].iUserId === this.oPlayerManager.ownPlayerId ? true : false;
+			resultPrefab.setOwnBackground(isOwnPlayer)
+			if (oData[i].nRank !== undefined) {
+				if (oData[i].iUserId === this.oPlayerManager.ownPlayerId) {
+					this.txt_rank.text = oData[i].nRank
+				}
+			}
+			resultPrefabY += 93
+		}
+	}
+
+
+
+
+	pingTest() {
+		let pinger = document.getElementById('pingTester');
+		let start = new Date().getTime();
+		pinger.setAttribute('src', 'https://www.google.com/');
+		pinger.onerror = () => {
+			let end = new Date().getTime();
+			let pingVal = end - start;
+			if (pingVal > 99) {
+				this.networkTxt.setFontSize(25);
+			} else {
+				this.networkTxt.setFontSize(30);
+			}
+			if (pingVal > 999 || !window.navigator.onLine) {
+				pingVal = 999;
+				this.networkTxt.setColor("#b30000");
+				this.networkTxt.setFill("#b30000");
+				this.signal.setTint(0xb30000);
+				// this.noConnectionPopup.visible = true
+			}
+			else if (pingVal > 700) {
+				this.networkTxt.setColor("#ffff00");
+				this.networkTxt.setFill("#ffff00");
+				this.signal.setTint(0xffff00);
+				// this.noConnectionPopup.visible = false
+			}
+			else {
+				this.networkTxt.setColor("#00ff00");
+				this.networkTxt.setFill("#00ff00");
+				this.signal.setTint(0x00ff00);
+				// this.noConnectionPopup.visible = false
+			}
+			// if (!window.navigator.onLine) {
+			// this.noConnectionPopup.visible = true
+			// }
+			this.networkTxt.text = pingVal + " ms";
+		}
+		var self = this;
+		setTimeout(() => {
+			self.pingTest();
+		}, 1000);
 	}
 	/* END-USER-CODE */
 }

@@ -23,7 +23,8 @@ class SocketManager {
             this.ownSocketId = this.oRootSocketConn.id;
             console.log("Connected to Socket :: ", this.oRootSocketConn.id, "\nTable ID: ", this.iTableId);
             
-
+            this.oScene.tableInfoContainer.visible = true
+            this.oScene.txt_table_id.text = this.iTableId.slice(-8);
             console.log("sRootURL :: ", this.sRootURL);
         });
         this.oRootSocketConn.on('disconnect', () => {
@@ -48,6 +49,8 @@ class SocketManager {
             this.oScene.waitingPopupContainer.setVisible(true);
             this.oScene.transparentLayer.setVisible(true);
             
+            // this.txt_table_id.text = this.iTableId
+
             this.onReceivedData(data);
         });
 
@@ -77,16 +80,12 @@ class SocketManager {
                 break;
             case "resPhaseData":
                 console.log("resPhaseData ::", data.oData);
-                // this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
             case "resHand":
-                console.log("resHand ::", data.oData);
-                // this.oScene.oPlayerHand.getHandData(data);
                 this.oScene.oTweenManager.startHandCardsDistribution(data);
-
                 break;
             case "resHighCards":
                 this.oScene.oPlayerHand.arrangePlayerHighCards(data.oData);
@@ -98,11 +97,11 @@ class SocketManager {
                 this.oScene.tempCardContainer.destroy();
                 break;
             case "resPlayerTurn":
-                this.oScene.oPlayerManager.changePlayerTurn(data.oData);
                 console.log("resPlayerTurn",data.oData);
+                this.oScene.oPlayerManager.changePlayerTurn(data.oData);
                 break;
             case "resHandCardCount":
-                console.log("resHandCardCount :: ", data.oData);
+                this.oScene.oPlayerManager.setOpponentHandCardCounter(data.oData)
                 break;
             case "resPlayersState":
                 console.log("resPlayersState :: ", data.oData);
@@ -120,15 +119,16 @@ class SocketManager {
                 console.log("resAutoDiscard :: ", data.oData);
                 break;
             case "resDeclarePhase":
+                console.log("resDeclarePhase",data.oData)
                 this.oScene.oPlayerManager.opponentDeclarePhase(data.oData)
                 break;
             case "resRoundOver":
+                console.log("resRoundOver",data.oData);
                 this.oScene.setRoundOver();
                 break;
             case "resGameOver":
-                // this.oScene.scene.stop('Game')
-                this.oScene.scene.start('ResultScreen', { data: data.oData });
-                // this.oScene.oResultScene.winnerScene(data.oData);
+                console.log("resGameOver",data.oData);
+                this.oScene.winnerScene(data.oData);
                 break;
             case "resClearTable":
                 console.log("resClearTable ::", data.oData);

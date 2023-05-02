@@ -66,34 +66,7 @@ class PlayerHand {
         this.oScene.phaseContainerTwo.getCardGroupChildren();
     }
 
-    // arrangeOpponentPlayerPhaseCards(data) {
-    //     let target
-    //     if (data.sGroup === "aGroup-1") {
-    //         target = this.oScene.opponentGrp1PhaseCardContainer
-    //     }
-    //     else if (data.sGroup === "aGroup-2") {
-    //         target = this.oScene.opponentGrp2PhaseCardContainer
-    //     }
-    //     let lengthOfHand = target.getAll().length;
-    //     let centerGap = 0;
-    //     let cardGap = 60;
-    //     if (Number.isInteger(lengthOfHand) && !isNaN(lengthOfHand)) {
-    //         centerGap = cardGap / 2;
-    //     }
-    //     let nFirstCardPosition = ((lengthOfHand / 2) - 1) * -cardGap;
-    //     target.getAll().forEach(card => {
-    //         card.setPosition(nFirstCardPosition - centerGap, 0);
-    //         nFirstCardPosition += cardGap;
-    //     });
-    //     this.oScene.opponentPhaseContainerOne.getCardGroupChildren();
-    //     this.oScene.opponentPhaseContainerTwo.getCardGroupChildren();
-    // }
-
     arrangePlayerHighCards(data) {
-
-        // this.oScene.oPlayerManager.ownPlayerId
-
-        console.log('Card Data', data);
 
         let tempCardPosX = 0;
         let tempCardPosY = 0;
@@ -121,7 +94,6 @@ class PlayerHand {
                                 tempCardPosX = 795;
                                 tempCardPosY = 875;
                             }
-                            // this.distributeHighCards(data[i], tempCardPosX, tempCardPosY);
                         }
                     }
                 }
@@ -167,13 +139,6 @@ class PlayerHand {
             this.discardCard.checkCardInformation(args[0], args[1], args[2]);
         }
     }
-
-    // sendChangeGroupDefault(cardId) {
-    //     console.log("Group - 0 :: ", cardId);
-    //     this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 0 }], (error, response) => {
-    //         console.log("reqChangeGroup :: ", response, error);
-    //     });
-    // }
 
     sendChangeGroupOne(cardId) {
         this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 1 }], (error, response) => {

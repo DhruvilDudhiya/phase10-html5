@@ -112,7 +112,6 @@
             "id": "281dd8fe-4cf3-4ebb-a90f-b2d9b24b328e",
             "label": "body",
             "components": [],
-            "y": 1,
             "list": [
                 {
                     "type": "Container",
@@ -342,7 +341,6 @@
                             "id": "3198e6ba-250c-4516-86c0-b482815327e4",
                             "label": "threePlayer2Container",
                             "components": [],
-                            "x": 2,
                             "list": [
                                 {
                                     "type": "Image",
@@ -354,6 +352,35 @@
                                     },
                                     "x": 285,
                                     "y": 383
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "6ac1de88-d200-40fd-b86e-34a36c548aa7",
+                                    "label": "txt_opponent2_phase_count",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 285,
+                                    "y": 661,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "26px"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "76b047e0-049a-4d1d-ad3f-9d7ef472b657",
+                                    "label": "txt_opponent2_phase_score",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 225,
+                                    "y": 330,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "26px",
+                                    "fontStyle": "bold",
+                                    "color": "#f8ca00"
                                 },
                                 {
                                     "type": "Text",
@@ -412,6 +439,95 @@
                                             "fontSize": "30px"
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "bf6b7b38-1afb-4af9-b251-fa3c6a536f3b",
+                                    "label": "opponent2HandCardCountContainer",
+                                    "components": [],
+                                    "x": 396,
+                                    "y": 204,
+                                    "list": [
+                                        {
+                                            "type": "Image",
+                                            "id": "8096c159-2407-4a89-a14a-0538035af42b",
+                                            "label": "opp_player_card_deck_1",
+                                            "components": [],
+                                            "texture": {
+                                                "key": "opp-player-card-deck"
+                                            }
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "d64cdb9f-645d-4a6f-b7c6-a483fc59d576",
+                                            "label": "txt_opponent2HandCardCounter",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontSize": "35px",
+                                            "fontStyle": "bold"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "feff0396-a599-47b1-b823-19f5a556bc43",
+                                    "label": "opponent2HandInfoContainer",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Text",
+                                            "id": "a6dcbb91-33ac-476f-89d2-dd6d5b3c3216",
+                                            "label": "txt_set1_opponent2_info",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 285,
+                                            "y": 411,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "931be855-176d-48dc-b001-4ec7969ac138",
+                                            "label": "txt_set2_opponent2_info",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 285,
+                                            "y": 548,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "9facc804-bfbe-43de-b11a-9f4dd8a5123d",
+                                    "label": "opponent2DeclareCardContainer",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Container",
+                                            "id": "0359b878-e77c-4c80-bf4b-f46c60d20084",
+                                            "label": "opponent2Grp2PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "list": []
+                                        },
+                                        {
+                                            "type": "Container",
+                                            "id": "7441523a-fb94-47ee-8fe2-b5b17b6a5840",
+                                            "label": "opponent2Grp1PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "list": []
+                                        }
+                                    ]
                                 }
                             ]
                         },
@@ -420,7 +536,6 @@
                             "id": "05be00e4-bdbe-4091-b065-969713d17e62",
                             "label": "threePlayer3Container",
                             "components": [],
-                            "y": -3,
                             "list": [
                                 {
                                     "type": "Image",
@@ -448,6 +563,35 @@
                                     "fontFamily": "CHICKEN Pie Height",
                                     "fontSize": "28px",
                                     "fontStyle": "bold"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "ce53cad8-85e3-4ad0-81e7-9a636c43c442",
+                                    "label": "txt_opponent3_phase_score",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 736,
+                                    "y": 330,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "align": "center",
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "26px",
+                                    "fontStyle": "bold",
+                                    "color": "#f8ca00"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "fbc621f9-4ee4-4eaa-9480-de74be921c0f",
+                                    "label": "txt_opponent3_phase_count",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 795,
+                                    "y": 661,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "26px"
                                 },
                                 {
                                     "type": "Container",
@@ -490,6 +634,95 @@
                                             "fontSize": "30px"
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "8685939e-75b0-47ef-bd4f-f92bb35e8f74",
+                                    "label": "opponent3HandCardCountContainer",
+                                    "components": [],
+                                    "x": 907,
+                                    "y": 204,
+                                    "list": [
+                                        {
+                                            "type": "Image",
+                                            "id": "d9993198-566c-4015-a315-16553814e9ec",
+                                            "label": "opp_player_card_deck_2",
+                                            "components": [],
+                                            "texture": {
+                                                "key": "opp-player-card-deck"
+                                            }
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "d80f91e1-b644-4864-8a9d-811b0696ce79",
+                                            "label": "txt_opponent3HandCardCounter",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontSize": "35px",
+                                            "fontStyle": "bold"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "e956458e-bdb9-49ac-993a-1486cec7324e",
+                                    "label": "opponent3HandInfoContainer",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Text",
+                                            "id": "295566bd-2d09-4e51-afab-8def90516744",
+                                            "label": "txt_set1_opponent3_info",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 795,
+                                            "y": 411,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "0a8bd25c-b958-4d93-9785-72a1c4294043",
+                                            "label": "txt_set2_opponent3_info",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 795,
+                                            "y": 548,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "3686248f-6a19-4664-ba37-c336a9fdf9a7",
+                                    "label": "opponent3DeclareCardContainer",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Container",
+                                            "id": "9910cc71-51fc-4efc-a039-95cdb04986c0",
+                                            "label": "opponent3Grp2PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "list": []
+                                        },
+                                        {
+                                            "type": "Container",
+                                            "id": "bbf9993c-d5d2-482b-a904-5cbf69df14c6",
+                                            "label": "opponent3Grp1PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "list": []
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -501,8 +734,6 @@
                     "label": "twoPlayerContainer",
                     "scope": "CLASS",
                     "components": [],
-                    "x": -1,
-                    "y": 1,
                     "visible": false,
                     "list": [
                         {
@@ -510,8 +741,6 @@
                             "id": "7a65c505-77e2-4a99-b3ba-124ad6eef87f",
                             "label": "twoPlayer2Container",
                             "components": [],
-                            "x": 1,
-                            "y": 1,
                             "list": [
                                 {
                                     "type": "Image",
@@ -543,7 +772,7 @@
                                 {
                                     "type": "Text",
                                     "id": "4ee345e4-2fd8-4a1f-9b07-2a512b009ea4",
-                                    "label": "secondPlayerScoreText",
+                                    "label": "txt_opponent_phase_score",
                                     "scope": "CLASS",
                                     "components": [],
                                     "x": 479,
@@ -552,9 +781,22 @@
                                     "originY": 0.5,
                                     "align": "center",
                                     "fontFamily": "CHICKEN Pie Height",
-                                    "fontSize": "22px",
+                                    "fontSize": "28px",
                                     "fontStyle": "bold",
                                     "color": "#f8ca00"
+                                },
+                                {
+                                    "type": "Text",
+                                    "id": "e1801d55-578b-45c5-a4e2-ad35b20f5970",
+                                    "label": "txt_opponent_phase_count",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "x": 540,
+                                    "y": 661,
+                                    "originX": 0.5,
+                                    "originY": 0.5,
+                                    "fontFamily": "CHICKEN Pie Height",
+                                    "fontSize": "26px"
                                 },
                                 {
                                     "type": "Container",
@@ -600,6 +842,41 @@
                                 },
                                 {
                                     "type": "Container",
+                                    "id": "91b461e1-ac72-457b-9f8b-71bf358e5e02",
+                                    "label": "opponentHandInfoContainer",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Text",
+                                            "id": "e17d5d6b-bcf1-4198-84b5-179931a37cf7",
+                                            "label": "txt_set1_opponent_info",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 540,
+                                            "y": 411,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "30a5d1f8-f216-430c-b9b3-57bc50493253",
+                                            "label": "txt_set2_opponent_info",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 540,
+                                            "y": 548,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontFamily": "CHICKEN Pie Height",
+                                            "fontSize": "30px"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Container",
                                     "id": "d2ff53ce-657f-4c04-b029-cdfc1fbaf2cc",
                                     "label": "declareCardContainer",
                                     "scope": "CLASS",
@@ -622,6 +899,38 @@
                                             "list": []
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "012180e6-8648-4444-a365-ca7996e4e745",
+                                    "label": "opponentHandCardCountContainer",
+                                    "components": [],
+                                    "list": [
+                                        {
+                                            "type": "Image",
+                                            "id": "d47fdcf6-47ab-4485-a146-04ebcbbdc74f",
+                                            "label": "opp_player_card_deck",
+                                            "components": [],
+                                            "texture": {
+                                                "key": "opp-player-card-deck"
+                                            },
+                                            "x": 633,
+                                            "y": 215
+                                        },
+                                        {
+                                            "type": "Text",
+                                            "id": "5337e2be-3fa5-4094-b993-f226567e4844",
+                                            "label": "txt_opponentHandCardCounter",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 633,
+                                            "y": 212,
+                                            "originX": 0.5,
+                                            "originY": 0.5,
+                                            "fontSize": "35px",
+                                            "fontStyle": "bold"
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -640,8 +949,8 @@
                             "label": "ownPlayerUserNameText",
                             "scope": "CLASS",
                             "components": [],
-                            "x": 538,
-                            "y": 1880,
+                            "x": 540,
+                            "y": 1875,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "YOU",
@@ -948,7 +1257,7 @@
             "label": "manuContainer",
             "scope": "CLASS",
             "components": [],
-            "x": 82,
+            "x": 83,
             "y": 1729,
             "visible": false,
             "list": [
@@ -1006,6 +1315,200 @@
                     "y": -175,
                     "scaleX": 0.5,
                     "scaleY": 0.5
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "8acb2103-9006-4093-af55-4c4ef9436c7c",
+            "label": "tableInfoContainer",
+            "scope": "CLASS",
+            "components": [],
+            "visible": false,
+            "list": [
+                {
+                    "type": "Text",
+                    "id": "7e587323-3dcb-4eed-85cd-4cf53ca6fc7c",
+                    "label": "text_3",
+                    "components": [],
+                    "x": 488,
+                    "y": 35,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Table Id:#",
+                    "fontFamily": "CHICKEN Pie Height",
+                    "fontSize": "30px",
+                    "fontStyle": "bold",
+                    "color": "#c6c6c6ff"
+                },
+                {
+                    "type": "Text",
+                    "id": "52281fc7-28c1-46f4-809c-cba50cfad1f2",
+                    "label": "txt_table_id",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 556,
+                    "y": 35,
+                    "originY": 0.5,
+                    "fontFamily": "CHICKEN Pie Height",
+                    "fontSize": "30px",
+                    "fontStyle": "bold",
+                    "color": "#c6c6c6ff"
+                },
+                {
+                    "type": "Rectangle",
+                    "id": "b463eab7-b8fa-45e5-88e3-ca7d59372aa3",
+                    "label": "rectangle_1",
+                    "components": [],
+                    "x": 997,
+                    "y": 35,
+                    "alpha": 0.5,
+                    "isFilled": true,
+                    "fillColor": "#000000",
+                    "width": 150,
+                    "height": 50
+                },
+                {
+                    "type": "Image",
+                    "id": "e2cf3fec-98d5-41e2-a248-5f4af33d3cf5",
+                    "label": "signal",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "Network"
+                    },
+                    "x": 947,
+                    "y": 35,
+                    "scaleX": 0.1,
+                    "scaleY": 0.1
+                },
+                {
+                    "type": "Text",
+                    "id": "8424c3ad-db96-40f0-8118-0d3390a51552",
+                    "label": "networkTxt",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 968,
+                    "y": 35,
+                    "originY": 0.5,
+                    "fontFamily": "CHICKEN Pie Height",
+                    "fontSize": "30px"
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "1f4bec03-f1ae-4ddb-bded-753be8300261",
+            "label": "winnerShowContainer",
+            "scope": "CLASS",
+            "components": [],
+            "visible": false,
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "8f19a377-c582-42b7-9ee4-63aa68987747",
+                    "label": "background_1",
+                    "components": [],
+                    "texture": {
+                        "key": "background"
+                    },
+                    "x": 540,
+                    "y": 960
+                },
+                {
+                    "type": "Text",
+                    "id": "d23a26cf-2c19-42e6-9e81-3dfd209be60d",
+                    "label": "txt_rank",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 420,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "fontSize": "130px"
+                },
+                {
+                    "type": "Text",
+                    "id": "70c8b6a7-eddf-4fe8-adc4-1da01dad8d40",
+                    "label": "text_4",
+                    "components": [],
+                    "x": 540,
+                    "y": 540,
+                    "originX": 0.5,
+                    "originY": 0.5,
+                    "text": "Rank",
+                    "fontSize": "70px"
+                },
+                {
+                    "type": "Container",
+                    "id": "f924dd26-e6cb-459b-8f49-f2a426fbc20b",
+                    "label": "headerContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 897,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "158349a3-0062-4342-a06c-18efad8f2b45",
+                            "label": "transparent_layer",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "transparent-layer"
+                            },
+                            "y": 1,
+                            "scaleY": 0.06
+                        },
+                        {
+                            "type": "Text",
+                            "id": "6a8337a5-4c9a-43ae-95f2-08ff8f5a63ef",
+                            "label": "noHeader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -483,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "No.",
+                            "fontSize": "50px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "58e74ccc-a651-45db-a43f-152ee87d1706",
+                            "label": "nameHeader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -304,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Name",
+                            "fontSize": "50px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "d999ab12-1eb2-4f13-b43f-d186819a9fa6",
+                            "label": "scoreHeader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 105,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Score",
+                            "fontSize": "50px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "fec0aaff-f307-482a-b48c-d8dcbf51471e",
+                            "label": "prizeHeader",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 400,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Prize",
+                            "fontSize": "50px"
+                        }
+                    ]
                 }
             ]
         }
