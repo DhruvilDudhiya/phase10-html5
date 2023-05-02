@@ -1013,12 +1013,7 @@ class Game extends Phaser.Scene {
 			console.log("reqDeclarePhase :: ", response, error);
 		});
 	}
-	sendDiscardCard(cardDiscard) {
-		console.log("put open deck card");
-		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDiscardCard', oData: { iCardId: cardDiscard } }, (error, response) => {
-			console.log("reqDiscardCard :: ", response, error);
-		});
-	}
+
 	sendHitCards(allCards, lastCard, agroups) {
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (error, response) => {
 			console.log("reqHitCard :: ", response, error);
@@ -1027,10 +1022,7 @@ class Game extends Phaser.Scene {
 	}
 	grabOpenDeckCard() {
 		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
-			// console.log("handResponse =============>", response, response.length, this.playerHandContainer.length);
-			// if (response.length >= this.playerHandContainer.length) {
-			// 	this.oPlayerHand.getNewCardData(response[response.length - 1]);
-			// }
+			console.log("handResponse =============>",response,response.length, this.playerHandContainer.length);
 			this.playerHandContainer.removeAll(true);
 			for (let i = 0; i < response.length; i++) {
 				this.oPlayerHand.getNewCardData(response[i]);

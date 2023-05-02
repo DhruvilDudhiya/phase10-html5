@@ -115,13 +115,16 @@ class PlayerHand {
 
     receiveOpenedDeckCard(data) {
         if(data.sAction == "put"){
+            console.log(" open deck ::",data.aOpenDeck)
             if (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel <= 12) {
                 this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].nLabel, data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
             }
             else {
+                console.log(" open deck ::",data.aOpenDeck)
                 this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
             }
         }else{
+            console.log(" open deck ::",data.aOpenDeck)
               data.aOpenDeck.pop();
               console.log("after grab open deck =>",data.aOpenDeck);
               this.oScene.isGrabCard = false;
@@ -149,6 +152,26 @@ class PlayerHand {
     sendChangeGroupTwo(cardId) {
         this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 2 }], (error, response) => {
             console.log("reqChangeGroup :: ", response, error);
+        });
+    }
+
+    setAutoDiscard(handData){
+        this.oScene.playerHandContainer.getAll().forEach((data) => {
+            if(handData.iDiscardCardId == data.__CardPreset.cardId){
+                this.oScene.playerHandContainer.remove(data, true);
+            }
+        });
+
+        this.oScene.doublePhaseOneCardContainer.getAll().forEach((data) => {
+            if(handData.iDiscardCardId == data.__CardPreset.cardId){
+                this.oScene.doublePhaseOneCardContainer.remove(data, true);
+            }
+        });
+
+        this.oScene.doublePhaseTwoCardContainer.getAll().forEach((data) => {
+            if(handData.iDiscardCardId == data.__CardPreset.cardId){
+                this.oScene.doublePhaseTwoCardContainer.remove(data, true);
+            }
         });
     }
 }

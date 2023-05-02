@@ -80,7 +80,7 @@ class SocketManager {
                 break;
             case "resPhaseData":
                 console.log("resPhaseData ::", data.oData);
-                this.oScene.oGameManager.resetPhaseData();
+                // this.oScene.oGameManager.resetPhaseData();
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
@@ -116,7 +116,8 @@ class SocketManager {
                 this.oScene.oPlayerManager.opponentHitPhaseCard(data.oData)
                 break;
             case "resAutoDiscard":
-                console.log("resAutoDiscard :: ", data.oData);
+                console.log("resAutoDiscard :: ", data);
+                this.oScene.oPlayerHand.setAutoDiscard(data.oData);
                 break;
             case "resDeclarePhase":
                 console.log("resDeclarePhase",data.oData)
@@ -136,6 +137,8 @@ class SocketManager {
             // case "":
             //     console.log(" :: ", data);
             //     break;
+            //resSkipPlayer
+            //resSkippedPlayer
             default:
                 console.log("New Event Detected :: ", data.sEventName, data);
                 break;

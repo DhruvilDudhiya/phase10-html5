@@ -354,11 +354,17 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
+        this.oScene.oGameManager.isOwnTurn = false;
         this.currentPlayerTurn = playerTurnData.iUserId;
+        console.log("this.oScene.discardDeckContainer ----->",this.oScene.discardDeckContainer);
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
-            this.isOwnTurn = true;
+            this.oScene.oGameManager.isOwnTurn = true;
+            this.oScene.oGameManager.isGrabCard = false
+            // this.oScene.discardDeckContainer.list[this.oScene.discardDeckContainer.list.length - 1].setInteractive();
         } else {
-            this.isOwnTurn = false;
+            this.oScene.oGameManager.isOwnTurn = false;
+            this.oScene.oGameManager.isGrabCard = true;
+            // this.oScene.discardDeckContainer.list[this.oScene.discardDeckContainer.list.length - 1].disableInteractive();
         }
 
         for (let i = 0; i < this.oScene.playersContainer.length; i++) {
@@ -439,6 +445,13 @@ class PlayerManager {
                             this.handleRingsVisibilityOFF();
                             this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data)
                             this.oScene.sendPhaseData();
+                            console.log(this.oScene.doublePhaseOneCardContainer);
+                            for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
+                                this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
+                            }
+                            for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
+                                this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
+                            }
                         });
                     } else {
                         this.oScene.confirmButton.setAlpha(0.75);

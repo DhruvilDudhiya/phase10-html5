@@ -20,7 +20,8 @@ class GameManager {
 		this.phaseOneTotalCards = "";
 		this.phaseTwoType = "";
 		this.phaseTwoTotalCards = "";
-
+		this.isOwnTurn = false;
+		this.isGrabCard = false;
 	}
 
 	resetPhaseData() {

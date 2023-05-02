@@ -6,12 +6,18 @@ class InputManager {
 
         //Closed Card Deck
         this.oScene.closedCardDeck.setInteractive().on('pointerdown', () => {
-            // this.oScene.closedCardDeck.disableInteractive();
-            this.oScene.oSocketManager.emit('reqClosedCard', {}, (error, response) => {
-                if (response.length > this.oScene.playerHandContainer.length) {
-                    this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
+            console.log("isOwn::",this.oScene.oGameManager.isOwnTurn)
+            if (this.oScene.oGameManager.isOwnTurn == true) {
+                if(this.oScene.oGameManager.isGrabCard == false){
+                    this.oScene.oSocketManager.emit('reqClosedCard', {}, (error, response) => {
+                        if (response.length > this.oScene.playerHandContainer.length) {
+                            this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
+                            this.oScene.oGameManager.isGrabCard = true;
+                        }
+                    });
                 }
-            });
+                    
+            }
         });
 
         //Opened Card Deck
@@ -24,7 +30,7 @@ class InputManager {
         //         }
         //     });
         // });
-       
+
         this.oScene.soundOnBtn.setInteractive().on('pointerdown', () => {
             if (this.oScene.soundOnBtn.visible) {
                 this.oScene.soundOffBtn.visible = true;
@@ -51,7 +57,7 @@ class InputManager {
         this.oScene.exitIcon.setInteractive().on('pointerdown', () => {
             this.oScene.leaveTablePopup.visible = true;
         });
-          
+
 
     }
 }
