@@ -8,12 +8,10 @@ class Ruleset {
     }
 
     validateRuleset(validateData) {
-        console.log("Fuction validRule ======> ",validateData.list.length ,this.oScene.oGameManager.phaseOneTotalCards ,2 )
         if (validateData.list.length == this.oScene.oGameManager.phaseOneTotalCards || validateData.list.length == this.oScene.oGameManager.phaseTwoTotalCards) {
             this.cardColors = [];
             this.cardNumbers = [];
             this.cardIds = [];
-            console.log(validateData.list.length);
             for (let i = 0; i < validateData.list.length; i++) {
                 this.cardColors.push(validateData.list[i].__CardPreset.cardColor);
                 this.cardNumbers.push(validateData.list[i].__CardPreset.cardNumber);
@@ -32,7 +30,6 @@ class Ruleset {
     }
 
     checkRulesetContainer(containerName, validateData) {
-        console.log("functionCheckRuleset", containerName, validateData);
         if (containerName == 'doublePhaseOneCardContainer') {
             this.checkRulesetCondition(this.oScene.oGameManager.phaseOneType, this.oScene.oGameManager.phaseOneTotalCards, containerName, validateData);
         }
@@ -42,7 +39,6 @@ class Ruleset {
     }
 
     checkRulesetCondition(ruleType, totalCards, containerName, validateData) {
-        console.log("rultype", ruleType);
         if (ruleType == 'SET') {
             this.validateRulesetOfSet(totalCards, containerName, validateData);
         } else if (ruleType == 'RUN') {
@@ -53,14 +49,11 @@ class Ruleset {
     }
     // Rule ==========> set
     validateRulesetOfSet(totalCards, containerName, validateData) {
-        console.log("Function Rule : SET =======>" , totalCards , containerName , validateData);
         this.cardNumbers.sort();
-        console.log("card Numbers :", this.cardNumbers);
         if (this.cardNumbers.every(element => element === this.cardNumbers[0] || element === 'w') && this.cardNumbers.length == totalCards) {
-            if(this.cardNumbers.every(element => element !== 's' )){
+            if (this.cardNumbers.every(element => element !== 's')) {
                 if (containerName == "doublePhaseOneCardContainer") {
                     this.grp1Data = [];
-                    console.log("isDeclarePhase", this.oScene.isDeclarePhase)
                     if (this.oScene.isDeclarePhase == false) {
                         this.oScene.dp_yellow_ring_1.setVisible(true);
                         this.oScene.oPlayerManager.handleDeclareButtons();
@@ -71,7 +64,6 @@ class Ruleset {
                 }
                 if (containerName == "doublePhaseTwoCardContainer") {
                     this.grp2Data = [];
-                    console.log("isDeclarePhase", this.oScene.isDeclarePhase)
                     if (this.oScene.isDeclarePhase == false) {
                         this.oScene.dp_yellow_ring_2.setVisible(true);
                         this.oScene.oPlayerManager.handleDeclareButtons();
@@ -83,7 +75,7 @@ class Ruleset {
             }
         }
     }
-// Rule ==========> Run
+    // Rule ==========> Run
     validateRulesetOfRun(totalCards, containerName) {
         let copy = this.cardNumbers;
         let wildArr = [];
@@ -121,11 +113,9 @@ class Ruleset {
 
         wildArr.push(...this.cardNumbers);
         wildArr.sort((a, b) => a - b);
-        console.log("wildArr", wildArr);
 
         if (temp >= t) {
             this.grp2Data = [];
-            console.log(copy);
             for (let i = 0; i < copy.length; i++) {
                 if (copy[i] == "w") {
                     this.grp2Data.push({ nLabel: 13, eColor: this.cardColors[i], _id: this.cardIds[i] })
@@ -136,10 +126,6 @@ class Ruleset {
             }
             this.oScene.dp_yellow_ring_2.setVisible(true);
             this.oScene.oPlayerManager.handleDeclareButtons()
-            console.log("yes", this.grp2Data);
-        }
-        else {
-            console.log("no", copy);
         }
 
         // if (this.cardNumbers.length == this.run.length == totalthis.cardNumbers.length) {
@@ -152,5 +138,11 @@ class Ruleset {
         //         this.oScene.oPlayerManager.handleDeclareButtons()
         //     }
         // }
+    }
+
+    validateSkipCard(cardData) {
+        this.oScene.oSocketManager.emit('reqSkipUser', { 'iCardId': cardData.__CardPreset.cardId , 'iUserId': this.oScene.secondPlayerId });
+
+        cardData.destroy();
     }
 }

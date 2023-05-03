@@ -332,7 +332,6 @@ class Game extends Phaser.Scene {
 
 		// twoPlayerContainer
 		const twoPlayerContainer = this.add.container(0, 0);
-		twoPlayerContainer.visible = false;
 		body.add(twoPlayerContainer);
 
 		// twoPlayer2Container
@@ -363,7 +362,7 @@ class Game extends Phaser.Scene {
 		twoPlayer2Container.add(txt_opponent_phase_count);
 
 		// emptySeatPlayer2
-		const emptySeatPlayer2 = this.add.container(481, 173);
+		const emptySeatPlayer2 = this.add.container(480, 172);
 		twoPlayer2Container.add(emptySeatPlayer2);
 
 		// player_profile_box
@@ -460,21 +459,61 @@ class Game extends Phaser.Scene {
 		// playersContainer
 		const playersContainer = this.add.container(0, 3);
 
+		// skipPlayerTurnContainer
+		const skipPlayerTurnContainer = this.add.container(0, 0);
+		skipPlayerTurnContainer.visible = false;
+
+		// skip_btn
+		const skip_btn = this.add.image(0, 0, "skip-btn");
+		skip_btn.scaleX = 0.5;
+		skip_btn.scaleY = 0.5;
+		skip_btn.angle = -15;
+		skipPlayerTurnContainer.add(skip_btn);
+
+		// menuContainer
+		const menuContainer = this.add.container(83, 1729);
+		menuContainer.visible = false;
+
+		// soundOffBtn
+		const soundOffBtn = this.add.image(0, 0, "Asset 8@2x");
+		soundOffBtn.scaleX = 0.3;
+		soundOffBtn.scaleY = 0.3;
+		soundOffBtn.visible = false;
+		menuContainer.add(soundOffBtn);
+
+		// soundOnBtn
+		const soundOnBtn = this.add.image(2, 1, "Asset 7@2x");
+		soundOnBtn.scaleX = 0.3;
+		soundOnBtn.scaleY = 0.3;
+		menuContainer.add(soundOnBtn);
+
+		// refreshIcon
+		const refreshIcon = this.add.image(-1, -87, "icons8-synchronize-50");
+		refreshIcon.scaleX = 1.5;
+		refreshIcon.scaleY = 1.5;
+		menuContainer.add(refreshIcon);
+
+		// exitIcon
+		const exitIcon = this.add.image(-2, -175, "exit (1)");
+		exitIcon.scaleX = 0.5;
+		exitIcon.scaleY = 0.5;
+		menuContainer.add(exitIcon);
+
 		// popupContainer
 		const popupContainer = this.add.container(0, 0);
 
 		// transparentLayer
-		const transparentLayer = this.add.image(540, 959, "transparent-layer");
+		const transparentLayer = this.add.image(540, 960, "transparent-layer");
 		transparentLayer.visible = false;
 		popupContainer.add(transparentLayer);
 
 		// waitingPopupContainer
-		const waitingPopupContainer = this.add.container(540, 958);
+		const waitingPopupContainer = this.add.container(540, 960);
 		waitingPopupContainer.visible = false;
 		popupContainer.add(waitingPopupContainer);
 
 		// popup
-		const popup = this.add.image(0, 1, "popup");
+		const popup = this.add.image(0, 0, "popup");
 		waitingPopupContainer.add(popup);
 
 		// popUpText
@@ -485,121 +524,109 @@ class Game extends Phaser.Scene {
 		waitingPopupContainer.add(popUpText);
 
 		// leaveTablePopup
-		const leaveTablePopup = this.add.container(298, 873);
+		const leaveTablePopup = this.add.container(540, 1075);
 		leaveTablePopup.visible = false;
 		popupContainer.add(leaveTablePopup);
 
 		// popupLeave
-		const popupLeave = this.add.image(240, 26, "Asset 3@2x");
-		popupLeave.scaleX = 0.62;
-		popupLeave.scaleY = 0.7;
+		const popupLeave = this.add.image(0, -210, "Asset 3@2x");
+		popupLeave.scaleX = 0.5;
+		popupLeave.scaleY = 0.5;
 		leaveTablePopup.add(popupLeave);
 
 		// yesLeaveBtn
-		const yesLeaveBtn = this.add.image(8, 297, "Asset 6@2x");
+		const yesLeaveBtn = this.add.image(-224, 96, "Asset 6@2x");
 		yesLeaveBtn.scaleX = 0.55;
 		yesLeaveBtn.scaleY = 0.55;
 		leaveTablePopup.add(yesLeaveBtn);
 
 		// cancleLeaveBtn
-		const cancleLeaveBtn = this.add.image(450, 294, "Asset 5@2x");
+		const cancleLeaveBtn = this.add.image(219, 96, "Asset 5@2x");
 		cancleLeaveBtn.scaleX = 0.55;
 		cancleLeaveBtn.scaleY = 0.55;
 		leaveTablePopup.add(cancleLeaveBtn);
 
 		// yesLeaveTxt
-		const yesLeaveTxt = this.add.text(0, 297, "", {});
+		const yesLeaveTxt = this.add.text(-224, 96, "", {});
 		yesLeaveTxt.setOrigin(0.5, 0.5);
 		yesLeaveTxt.text = "YES";
 		yesLeaveTxt.setStyle({ "fontSize": "60px" });
 		leaveTablePopup.add(yesLeaveTxt);
 
 		// noLeaveTxt
-		const noLeaveTxt = this.add.text(451, 294, "", {});
+		const noLeaveTxt = this.add.text(219, 96, "", {});
 		noLeaveTxt.setOrigin(0.5, 0.5);
 		noLeaveTxt.text = "NO";
 		noLeaveTxt.setStyle({ "fontSize": "60px" });
 		leaveTablePopup.add(noLeaveTxt);
 
 		// leaveTableTxt
-		const leaveTableTxt = this.add.text(247, 0, "", {});
+		const leaveTableTxt = this.add.text(0, -210, "", {});
 		leaveTableTxt.setOrigin(0.5, 0.5);
 		leaveTableTxt.text = "Are you sure you want to\n   leave this table?";
 		leaveTableTxt.setStyle({ "fontSize": "50px" });
 		leaveTablePopup.add(leaveTableTxt);
 
 		// refreshTablePopup
-		const refreshTablePopup = this.add.container(298, 873);
+		const refreshTablePopup = this.add.container(540, 1075);
 		refreshTablePopup.visible = false;
 		popupContainer.add(refreshTablePopup);
 
 		// popuprefresh
-		const popuprefresh = this.add.image(240, 26, "Asset 3@2x");
-		popuprefresh.scaleX = 0.62;
-		popuprefresh.scaleY = 0.7;
+		const popuprefresh = this.add.image(0, -200, "Asset 3@2x");
+		popuprefresh.scaleX = 0.5;
+		popuprefresh.scaleY = 0.5;
 		refreshTablePopup.add(popuprefresh);
 
 		// yesRefreshBtn
-		const yesRefreshBtn = this.add.image(8, 297, "Asset 6@2x");
+		const yesRefreshBtn = this.add.image(-223, 96, "Asset 6@2x");
 		yesRefreshBtn.scaleX = 0.55;
 		yesRefreshBtn.scaleY = 0.55;
 		refreshTablePopup.add(yesRefreshBtn);
 
 		// cancleRefreshBtn
-		const cancleRefreshBtn = this.add.image(450, 294, "Asset 5@2x");
+		const cancleRefreshBtn = this.add.image(219, 96, "Asset 5@2x");
 		cancleRefreshBtn.scaleX = 0.55;
 		cancleRefreshBtn.scaleY = 0.55;
 		refreshTablePopup.add(cancleRefreshBtn);
 
 		// yesRefreshTxt
-		const yesRefreshTxt = this.add.text(0, 297, "", {});
+		const yesRefreshTxt = this.add.text(-226, 96, "", {});
 		yesRefreshTxt.setOrigin(0.5, 0.5);
 		yesRefreshTxt.text = "YES";
 		yesRefreshTxt.setStyle({ "fontSize": "60px" });
 		refreshTablePopup.add(yesRefreshTxt);
 
 		// noRefreshTxt
-		const noRefreshTxt = this.add.text(451, 294, "", {});
+		const noRefreshTxt = this.add.text(219, 96, "", {});
 		noRefreshTxt.setOrigin(0.5, 0.5);
 		noRefreshTxt.text = "NO";
 		noRefreshTxt.setStyle({ "fontSize": "60px" });
 		refreshTablePopup.add(noRefreshTxt);
 
 		// refreshTableTxt
-		const refreshTableTxt = this.add.text(247, 0, "", {});
+		const refreshTableTxt = this.add.text(0, -200, "", {});
 		refreshTableTxt.setOrigin(0.5, 0.5);
-		refreshTableTxt.text = "Are you sure you want to\n   leave this table?";
+		refreshTableTxt.text = "Are you sure you want to\n   Refresh this table?";
 		refreshTableTxt.setStyle({ "fontSize": "50px" });
 		refreshTablePopup.add(refreshTableTxt);
 
-		// manuContainer
-		const manuContainer = this.add.container(83, 1729);
-		manuContainer.visible = false;
+		// roundWinnerPopupContainer
+		const roundWinnerPopupContainer = this.add.container(540, 960);
+		roundWinnerPopupContainer.visible = false;
+		popupContainer.add(roundWinnerPopupContainer);
 
-		// soundOffBtn
-		const soundOffBtn = this.add.image(0, 0, "Asset 8@2x");
-		soundOffBtn.scaleX = 0.3;
-		soundOffBtn.scaleY = 0.3;
-		soundOffBtn.visible = false;
-		manuContainer.add(soundOffBtn);
+		// asset_3_2x
+		const asset_3_2x = this.add.image(0, 0, "Asset 3@2x");
+		asset_3_2x.scaleX = 0.5;
+		asset_3_2x.scaleY = 0.5;
+		roundWinnerPopupContainer.add(asset_3_2x);
 
-		// soundOnBtn
-		const soundOnBtn = this.add.image(2, 1, "Asset 7@2x");
-		soundOnBtn.scaleX = 0.3;
-		soundOnBtn.scaleY = 0.3;
-		manuContainer.add(soundOnBtn);
-
-		// refreshIcon
-		const refreshIcon = this.add.image(-1, -87, "icons8-synchronize-50");
-		refreshIcon.scaleX = 1.5;
-		refreshIcon.scaleY = 1.5;
-		manuContainer.add(refreshIcon);
-
-		// exitIcon
-		const exitIcon = this.add.image(-2, -175, "exit (1)");
-		exitIcon.scaleX = 0.5;
-		exitIcon.scaleY = 0.5;
-		manuContainer.add(exitIcon);
+		// text_round_winner
+		const text_round_winner = this.add.text(0, 0, "", {});
+		text_round_winner.setOrigin(0.5, 0.5);
+		text_round_winner.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "40px" });
+		roundWinnerPopupContainer.add(text_round_winner);
 
 		// tableInfoContainer
 		const tableInfoContainer = this.add.container(0, 0);
@@ -750,6 +777,12 @@ class Game extends Phaser.Scene {
 		this.playerHandContainer = playerHandContainer;
 		this.tempCardContainer = tempCardContainer;
 		this.playersContainer = playersContainer;
+		this.skipPlayerTurnContainer = skipPlayerTurnContainer;
+		this.menuContainer = menuContainer;
+		this.soundOffBtn = soundOffBtn;
+		this.soundOnBtn = soundOnBtn;
+		this.refreshIcon = refreshIcon;
+		this.exitIcon = exitIcon;
 		this.popupContainer = popupContainer;
 		this.transparentLayer = transparentLayer;
 		this.waitingPopupContainer = waitingPopupContainer;
@@ -768,11 +801,8 @@ class Game extends Phaser.Scene {
 		this.yesRefreshTxt = yesRefreshTxt;
 		this.noRefreshTxt = noRefreshTxt;
 		this.refreshTableTxt = refreshTableTxt;
-		this.manuContainer = manuContainer;
-		this.soundOffBtn = soundOffBtn;
-		this.soundOnBtn = soundOnBtn;
-		this.refreshIcon = refreshIcon;
-		this.exitIcon = exitIcon;
+		this.roundWinnerPopupContainer = roundWinnerPopupContainer;
+		this.text_round_winner = text_round_winner;
 		this.tableInfoContainer = tableInfoContainer;
 		this.txt_table_id = txt_table_id;
 		this.signal = signal;
@@ -900,6 +930,18 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	playersContainer;
 	/** @type {Phaser.GameObjects.Container} */
+	skipPlayerTurnContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	menuContainer;
+	/** @type {Phaser.GameObjects.Image} */
+	soundOffBtn;
+	/** @type {Phaser.GameObjects.Image} */
+	soundOnBtn;
+	/** @type {Phaser.GameObjects.Image} */
+	refreshIcon;
+	/** @type {Phaser.GameObjects.Image} */
+	exitIcon;
+	/** @type {Phaser.GameObjects.Container} */
 	popupContainer;
 	/** @type {Phaser.GameObjects.Image} */
 	transparentLayer;
@@ -936,15 +978,9 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Text} */
 	refreshTableTxt;
 	/** @type {Phaser.GameObjects.Container} */
-	manuContainer;
-	/** @type {Phaser.GameObjects.Image} */
-	soundOffBtn;
-	/** @type {Phaser.GameObjects.Image} */
-	soundOnBtn;
-	/** @type {Phaser.GameObjects.Image} */
-	refreshIcon;
-	/** @type {Phaser.GameObjects.Image} */
-	exitIcon;
+	roundWinnerPopupContainer;
+	/** @type {Phaser.GameObjects.Text} */
+	text_round_winner;
 	/** @type {Phaser.GameObjects.Container} */
 	tableInfoContainer;
 	/** @type {Phaser.GameObjects.Text} */
@@ -1009,20 +1045,15 @@ class Game extends Phaser.Scene {
 	sendPhaseData() {
 		this.isDeclarePhase = true;
 		this.oPlayerManager.handleDeclareButtonsVisibilityOFF();
-		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } }, (error, response) => {
-			console.log("reqDeclarePhase :: ", response, error);
-		});
+		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } });
 	}
 
 	sendHitCards(allCards, lastCard, agroups) {
-		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (error, response) => {
-			console.log("reqHitCard :: ", response, error);
-		});
+		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } });
 
 	}
 	grabOpenDeckCard() {
 		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
-			console.log("handResponse =============>",response,response.length, this.playerHandContainer.length);
 			this.playerHandContainer.removeAll(true);
 			for (let i = 0; i < response.length; i++) {
 				this.oPlayerHand.getNewCardData(response[i]);
@@ -1032,7 +1063,7 @@ class Game extends Phaser.Scene {
 	changeScenes() {
 		this.scene.start("ResultScreen");
 	}
-	setRoundOver() {
+	setRoundOver(data) {
 		this.isDeclarePhase = false;
 		this.openedCardDeck.visible = false;
 		this.oRuleset.grp1Data = [];
@@ -1043,9 +1074,18 @@ class Game extends Phaser.Scene {
 		this.oPlayerManager.resetPhaseData();
 		this.oPlayerHand.clearPlayerHandCard();
 		this.oPlayerPrefab.intervalTimeReset();
-		this.discardDeckContainer.removeAll();
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
+
+		this.oTweenManager.openPopUp(this.roundWinnerPopupContainer);
+
+		if(data.iUserId === this.oPlayerManager.ownPlayerId){
+			this.text_round_winner.text = "YOU WON THIS ROUND."
+		}
+		else{
+			this.text_round_winner.text = ( data.sUserName.length == 0 ? data.sMobile : data.sUserName ).toUpperCase(); + " WON THIS ROUND."
+		}
+
 
 	}
 
@@ -1053,6 +1093,9 @@ class Game extends Phaser.Scene {
 
 		var resultPrefabX = 517
 		var resultPrefabY = 1004
+
+
+		this.discardDeckContainer.visible = false
 
 		this.winnerShowContainer.visible = true;
 

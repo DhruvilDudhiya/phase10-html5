@@ -19,6 +19,25 @@ class TweenManager {
         });
     }
 
+    skipPlayerTurnAnim(target) {
+        this.oScene.skipPlayerTurnContainer.setPosition(target.x, target.y);
+        this.oScene.skipPlayerTurnContainer.setDepth(100);
+        this.oScene.skipPlayerTurnContainer.setScale(0);
+        this.oScene.skipPlayerTurnContainer.visible = true;
+        this.oScene.tweens.add({
+            targets: this.oScene.skipPlayerTurnContainer,
+            scaleX: 1,
+            scaleY: 1,
+            duration : 500,
+            ease : 'Power4',
+            completeDelay: 1500,
+            onComplete: () => {
+                console.log(this.oScene.skipPlayerTurnContainer);
+                this.oScene.skipPlayerTurnContainer.visible = false;
+            }
+        })
+    }
+
     startHighCardsDistribution(card, targetPosX, targetPosY) {
         this.oScene.tweens.add({
             targets: card,
@@ -28,6 +47,36 @@ class TweenManager {
             ease: 'Power2',
         });
     }
+
+    openPopUp(oTarget) {
+        this.oScene.transparentLayer.setVisible(true);
+        oTarget.visible = true
+        oTarget.scaleX = 0;
+        this.oScene.tweens.add({
+            targets: oTarget,
+            scaleX: 1,
+            scaleY: 1,
+            duration: 400,
+            ease: 'Power4',
+        })
+    }
+
+    closePopUp(oTarget) {
+        this.oScene.transparentLayer.setVisible(false);
+        this.oScene.tweens.add({
+            targets: oTarget,
+            scaleX: 0,
+            duration: 400,
+            ease: 'Power4',
+            completeDelay: 1000,
+            onComplete: () => {
+                oTarget.visible = false
+                oTarget.setScale(1);
+            }
+        })
+    }
+
+
 
     startHandCardsDistribution(data) {
         let completeCount = 0;
@@ -64,7 +113,7 @@ class TweenManager {
         }
 
         for (let j = 0; j < 20; j++) {
-         
+
             if (j % 2 == 0) {
                 this.oScene.tweens.add({
                     targets: this.cards[j],
@@ -72,7 +121,7 @@ class TweenManager {
                     scaleX: 0,
                     scaleY: 1.1,
                     duration: 300,
-                    delay : 3000,
+                    delay: 3000,
                     flipX: true,
                     onComplete: () => {
                         this.cards[j].destroy();

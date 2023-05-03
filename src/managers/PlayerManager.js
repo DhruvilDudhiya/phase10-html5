@@ -27,6 +27,18 @@ class PlayerManager {
         target.removeAll(true)
     }
 
+    showSkipPlayer(data) {
+        console.log("data :: ", data);
+        for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+            if (this.oScene.playersContainer.getAll()[i].name === data.iUserId) {
+                let tempPlayer = this.oScene.playersContainer.getAll()[i]
+                console.log(tempPlayer.x, tempPlayer.y);
+                this.oScene.oTweenManager.skipPlayerTurnAnim(tempPlayer);
+                break;
+            }
+        }
+    }
+
     resetPhaseData() {
         let temp = [
             this.oScene.opponentGrp1PhaseCardContainer,
@@ -217,7 +229,6 @@ class PlayerManager {
                                 tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
                                 startY = 544;
                             }
-                            console.log("< 540", tempContainer);
                             startX = 255;
                         }
                         else {
@@ -231,7 +242,6 @@ class PlayerManager {
                                 tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
                                 startY = 544;
                             }
-                            console.log("> 540", tempContainer);
                             startX = 765;
                         }
                     }
@@ -275,6 +285,7 @@ class PlayerManager {
                 this.oppPlayerPrefab.setName(playerData.iUserId);
                 this.oppPlayerPrefab.setPosition(480, 170);
                 this.oScene.playersContainer.add(this.oppPlayerPrefab);
+                this.oScene.secondPlayerId = playerData.iUserId
             }
             else if (this.oScene.nMaxPlayer == 3) {
                 if (this.playerCounter == 1) {
@@ -284,6 +295,7 @@ class PlayerManager {
                     this.oppPlayerOnePrefab.setName(playerData.iUserId);
                     this.oppPlayerOnePrefab.setPosition(227, 170);
                     this.oScene.playersContainer.add(this.oppPlayerOnePrefab);
+                    this.oScene.secondPlayerId = playerData.iUserId
                     this.playerCounter++;
                 }
                 else {
@@ -293,6 +305,7 @@ class PlayerManager {
                     this.oppPlayerTwoPrefab.setName(playerData.iUserId);
                     this.oppPlayerTwoPrefab.setPosition(734, 170);
                     this.oScene.playersContainer.add(this.oppPlayerTwoPrefab);
+                    this.oScene.thirdPlayerId = playerData.iUserId
                     this.playerCounter++;
                 }
             }
@@ -356,7 +369,6 @@ class PlayerManager {
     changePlayerTurn(playerTurnData) {
         this.oScene.oGameManager.isOwnTurn = false;
         this.currentPlayerTurn = playerTurnData.iUserId;
-        console.log("this.oScene.discardDeckContainer ----->",this.oScene.discardDeckContainer);
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.oScene.oGameManager.isOwnTurn = true;
             this.oScene.oGameManager.isGrabCard = false
@@ -384,7 +396,6 @@ class PlayerManager {
     }
 
     setOpponentHandCardCounter(oData) {
-        console.log("resHandCardCount", oData);
         let playerId = oData.iUserId;
         if (this.oScene.nMaxPlayer == 2) {
             if (playerId !== this.oScene.ownPlayerId) {
@@ -429,7 +440,6 @@ class PlayerManager {
             if (this.oScene.isDeclarePhase == true) {
                 this.handleDeclareButtonsVisibilityOFF();
             } else {
-                console.log(this.oScene.isDeclarePhase);
                 this.handleDeclareButtonsVisibilityON()
                 if (this.oScene.dp_yellow_ring_1.visible == true && this.oScene.dp_yellow_ring_2.visible == false && this.isOwnTurn) {
                     this.oScene.confirmButton.setAlpha(0.75);
@@ -445,7 +455,6 @@ class PlayerManager {
                             this.handleRingsVisibilityOFF();
                             this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data)
                             this.oScene.sendPhaseData();
-                            console.log(this.oScene.doublePhaseOneCardContainer);
                             for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
                                 this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
                             }

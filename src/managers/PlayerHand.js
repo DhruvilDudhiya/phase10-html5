@@ -85,12 +85,10 @@ class PlayerHand {
                     for (let j = 0; j < this.oScene.playersContainer.length; j++) {
                         if (this.oScene.playersContainer.getAll()[j].name === data[i].iUserId) {
                             if (this.oScene.playersContainer.getAll()[j].x < 540) {
-                                console.log(this.oScene.playersContainer.getAll()[j].name);
                                 tempCardPosX = 285;
                                 tempCardPosY = 875;
                             }
                             else {
-                                console.log(this.oScene.playersContainer.getAll()[j].name);
                                 tempCardPosX = 795;
                                 tempCardPosY = 875;
                             }
@@ -115,18 +113,14 @@ class PlayerHand {
 
     receiveOpenedDeckCard(data) {
         if(data.sAction == "put"){
-            console.log(" open deck ::",data.aOpenDeck)
             if (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel <= 12) {
                 this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].nLabel, data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
             }
             else {
-                console.log(" open deck ::",data.aOpenDeck)
                 this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
             }
         }else{
-            console.log(" open deck ::",data.aOpenDeck)
               data.aOpenDeck.pop();
-              console.log("after grab open deck =>",data.aOpenDeck);
               this.oScene.isGrabCard = false;
         }
     }
@@ -144,15 +138,11 @@ class PlayerHand {
     }
 
     sendChangeGroupOne(cardId) {
-        this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 1 }], (error, response) => {
-            console.log("reqChangeGroup :: ", response, error);
-        });
+        this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 1 }]);
     }
 
     sendChangeGroupTwo(cardId) {
-        this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 2 }], (error, response) => {
-            console.log("reqChangeGroup :: ", response, error);
-        });
+        this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 2 }]);
     }
 
     setAutoDiscard(handData){

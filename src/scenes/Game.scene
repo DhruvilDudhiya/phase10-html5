@@ -734,7 +734,6 @@
                     "label": "twoPlayerContainer",
                     "scope": "CLASS",
                     "components": [],
-                    "visible": false,
                     "list": [
                         {
                             "type": "Container",
@@ -804,8 +803,8 @@
                                     "label": "emptySeatPlayer2",
                                     "scope": "CLASS",
                                     "components": [],
-                                    "x": 481,
-                                    "y": 173,
+                                    "x": 480,
+                                    "y": 172,
                                     "list": [
                                         {
                                             "type": "Image",
@@ -1014,247 +1013,30 @@
         },
         {
             "type": "Container",
-            "id": "cd342657-2878-4d55-b361-4472adc27a61",
-            "label": "popupContainer",
+            "id": "921ba299-efab-4838-97ab-da4323c0a961",
+            "label": "skipPlayerTurnContainer",
             "scope": "CLASS",
             "components": [],
+            "visible": false,
             "list": [
                 {
                     "type": "Image",
-                    "id": "9e408352-4a81-47e7-8f06-087f482347d9",
-                    "label": "transparentLayer",
-                    "scope": "CLASS",
+                    "id": "48c8c5b2-96db-49f0-85dd-ed634896e6eb",
+                    "label": "skip_btn",
                     "components": [],
                     "texture": {
-                        "key": "transparent-layer"
+                        "key": "skip-btn"
                     },
-                    "x": 540,
-                    "y": 959,
-                    "visible": false
-                },
-                {
-                    "type": "Container",
-                    "id": "498f6307-31c0-4737-8c2c-62b15c051f33",
-                    "label": "waitingPopupContainer",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 540,
-                    "y": 958,
-                    "visible": false,
-                    "list": [
-                        {
-                            "type": "Image",
-                            "id": "055f16d1-7063-41d4-bd21-b8a0ce44291d",
-                            "label": "popup",
-                            "components": [],
-                            "texture": {
-                                "key": "popup"
-                            },
-                            "y": 1
-                        },
-                        {
-                            "type": "Text",
-                            "id": "589de808-edf3-4325-b690-4a11f793844d",
-                            "label": "popUpText",
-                            "scope": "CLASS",
-                            "components": [],
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "WAITING FOR OTHER PLAYERS...",
-                            "align": "center",
-                            "fontFamily": "Comica_BD",
-                            "fontSize": "28px"
-                        }
-                    ]
-                },
-                {
-                    "type": "Container",
-                    "id": "c1b20eac-e7e0-4f01-9164-5992b18718a1",
-                    "label": "leaveTablePopup",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 298,
-                    "y": 873,
-                    "visible": false,
-                    "list": [
-                        {
-                            "type": "Image",
-                            "id": "8efa9bbd-8e02-4817-b3d4-05e2842efdc7",
-                            "label": "popupLeave",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "Asset 3@2x"
-                            },
-                            "x": 240,
-                            "y": 26,
-                            "scaleX": 0.62,
-                            "scaleY": 0.7
-                        },
-                        {
-                            "type": "Image",
-                            "id": "a04a0de4-8b45-4b7c-bd71-31b02ab272fd",
-                            "label": "yesLeaveBtn",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "Asset 6@2x"
-                            },
-                            "x": 8,
-                            "y": 297,
-                            "scaleX": 0.55,
-                            "scaleY": 0.55
-                        },
-                        {
-                            "type": "Image",
-                            "id": "d59c9267-be45-4cff-b281-ce14eed40b4c",
-                            "label": "cancleLeaveBtn",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "Asset 5@2x"
-                            },
-                            "x": 450,
-                            "y": 294,
-                            "scaleX": 0.55,
-                            "scaleY": 0.55
-                        },
-                        {
-                            "type": "Text",
-                            "id": "cb096e95-4237-4ee6-9598-930affa7fea5",
-                            "label": "yesLeaveTxt",
-                            "scope": "CLASS",
-                            "components": [],
-                            "y": 297,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "YES",
-                            "fontSize": "60px"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "2396f2f1-25be-4291-abbf-5ee38792d6ed",
-                            "label": "noLeaveTxt",
-                            "scope": "CLASS",
-                            "components": [],
-                            "x": 451,
-                            "y": 294,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "NO",
-                            "fontSize": "60px"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "ec8bcace-3e4e-4ebc-aeb7-f3b147cfe473",
-                            "label": "leaveTableTxt",
-                            "scope": "CLASS",
-                            "components": [],
-                            "x": 247,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "Are you sure you want to\n   leave this table?",
-                            "fontSize": "50px"
-                        }
-                    ]
-                },
-                {
-                    "type": "Container",
-                    "id": "a831902e-0dad-45ff-a039-39f887b1297c",
-                    "label": "refreshTablePopup",
-                    "scope": "CLASS",
-                    "components": [],
-                    "x": 298,
-                    "y": 873,
-                    "visible": false,
-                    "list": [
-                        {
-                            "type": "Image",
-                            "id": "108e0752-1517-427a-8939-50bf6bdb41ea",
-                            "label": "popuprefresh",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "Asset 3@2x"
-                            },
-                            "x": 240,
-                            "y": 26,
-                            "scaleX": 0.62,
-                            "scaleY": 0.7
-                        },
-                        {
-                            "type": "Image",
-                            "id": "5c2e5ec1-6e29-4ffd-902d-a7ddf262b5a9",
-                            "label": "yesRefreshBtn",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "Asset 6@2x"
-                            },
-                            "x": 8,
-                            "y": 297,
-                            "scaleX": 0.55,
-                            "scaleY": 0.55
-                        },
-                        {
-                            "type": "Image",
-                            "id": "8d9b169d-c2ff-4d9d-b6b6-83e791930282",
-                            "label": "cancleRefreshBtn",
-                            "scope": "CLASS",
-                            "components": [],
-                            "texture": {
-                                "key": "Asset 5@2x"
-                            },
-                            "x": 450,
-                            "y": 294,
-                            "scaleX": 0.55,
-                            "scaleY": 0.55
-                        },
-                        {
-                            "type": "Text",
-                            "id": "a16f2fd6-5a84-41db-a154-414d1e7c733f",
-                            "label": "yesRefreshTxt",
-                            "scope": "CLASS",
-                            "components": [],
-                            "y": 297,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "YES",
-                            "fontSize": "60px"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "8196f34c-4608-4e51-9a5e-07869559aff6",
-                            "label": "noRefreshTxt",
-                            "scope": "CLASS",
-                            "components": [],
-                            "x": 451,
-                            "y": 294,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "NO",
-                            "fontSize": "60px"
-                        },
-                        {
-                            "type": "Text",
-                            "id": "15c1db21-8917-45c1-a821-b14fadcdfab0",
-                            "label": "refreshTableTxt",
-                            "scope": "CLASS",
-                            "components": [],
-                            "x": 247,
-                            "originX": 0.5,
-                            "originY": 0.5,
-                            "text": "Are you sure you want to\n   leave this table?",
-                            "fontSize": "50px"
-                        }
-                    ]
+                    "scaleX": 0.5,
+                    "scaleY": 0.5,
+                    "angle": -15
                 }
             ]
         },
         {
             "type": "Container",
             "id": "a4216ce1-e097-4aa5-8898-2da07e874f58",
-            "label": "manuContainer",
+            "label": "menuContainer",
             "scope": "CLASS",
             "components": [],
             "x": 83,
@@ -1315,6 +1097,278 @@
                     "y": -175,
                     "scaleX": 0.5,
                     "scaleY": 0.5
+                }
+            ]
+        },
+        {
+            "type": "Container",
+            "id": "cd342657-2878-4d55-b361-4472adc27a61",
+            "label": "popupContainer",
+            "scope": "CLASS",
+            "components": [],
+            "list": [
+                {
+                    "type": "Image",
+                    "id": "9e408352-4a81-47e7-8f06-087f482347d9",
+                    "label": "transparentLayer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "transparent-layer"
+                    },
+                    "x": 540,
+                    "y": 960,
+                    "visible": false
+                },
+                {
+                    "type": "Container",
+                    "id": "498f6307-31c0-4737-8c2c-62b15c051f33",
+                    "label": "waitingPopupContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 960,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "055f16d1-7063-41d4-bd21-b8a0ce44291d",
+                            "label": "popup",
+                            "components": [],
+                            "texture": {
+                                "key": "popup"
+                            }
+                        },
+                        {
+                            "type": "Text",
+                            "id": "589de808-edf3-4325-b690-4a11f793844d",
+                            "label": "popUpText",
+                            "scope": "CLASS",
+                            "components": [],
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "WAITING FOR OTHER PLAYERS...",
+                            "align": "center",
+                            "fontFamily": "Comica_BD",
+                            "fontSize": "28px"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "c1b20eac-e7e0-4f01-9164-5992b18718a1",
+                    "label": "leaveTablePopup",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 1075,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "8efa9bbd-8e02-4817-b3d4-05e2842efdc7",
+                            "label": "popupLeave",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 3@2x"
+                            },
+                            "y": -210,
+                            "scaleX": 0.5,
+                            "scaleY": 0.5
+                        },
+                        {
+                            "type": "Image",
+                            "id": "a04a0de4-8b45-4b7c-bd71-31b02ab272fd",
+                            "label": "yesLeaveBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 6@2x"
+                            },
+                            "x": -224,
+                            "y": 96,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Image",
+                            "id": "d59c9267-be45-4cff-b281-ce14eed40b4c",
+                            "label": "cancleLeaveBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 5@2x"
+                            },
+                            "x": 219,
+                            "y": 96,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Text",
+                            "id": "cb096e95-4237-4ee6-9598-930affa7fea5",
+                            "label": "yesLeaveTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -224,
+                            "y": 96,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "YES",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "2396f2f1-25be-4291-abbf-5ee38792d6ed",
+                            "label": "noLeaveTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 219,
+                            "y": 96,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "NO",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "ec8bcace-3e4e-4ebc-aeb7-f3b147cfe473",
+                            "label": "leaveTableTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "y": -210,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Are you sure you want to\n   leave this table?",
+                            "fontSize": "50px"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "a831902e-0dad-45ff-a039-39f887b1297c",
+                    "label": "refreshTablePopup",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 1075,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "108e0752-1517-427a-8939-50bf6bdb41ea",
+                            "label": "popuprefresh",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 3@2x"
+                            },
+                            "y": -200,
+                            "scaleX": 0.5,
+                            "scaleY": 0.5
+                        },
+                        {
+                            "type": "Image",
+                            "id": "5c2e5ec1-6e29-4ffd-902d-a7ddf262b5a9",
+                            "label": "yesRefreshBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 6@2x"
+                            },
+                            "x": -223,
+                            "y": 96,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Image",
+                            "id": "8d9b169d-c2ff-4d9d-b6b6-83e791930282",
+                            "label": "cancleRefreshBtn",
+                            "scope": "CLASS",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 5@2x"
+                            },
+                            "x": 219,
+                            "y": 96,
+                            "scaleX": 0.55,
+                            "scaleY": 0.55
+                        },
+                        {
+                            "type": "Text",
+                            "id": "a16f2fd6-5a84-41db-a154-414d1e7c733f",
+                            "label": "yesRefreshTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": -226,
+                            "y": 96,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "YES",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "8196f34c-4608-4e51-9a5e-07869559aff6",
+                            "label": "noRefreshTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "x": 219,
+                            "y": 96,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "NO",
+                            "fontSize": "60px"
+                        },
+                        {
+                            "type": "Text",
+                            "id": "15c1db21-8917-45c1-a821-b14fadcdfab0",
+                            "label": "refreshTableTxt",
+                            "scope": "CLASS",
+                            "components": [],
+                            "y": -200,
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "text": "Are you sure you want to\n   Refresh this table?",
+                            "fontSize": "50px"
+                        }
+                    ]
+                },
+                {
+                    "type": "Container",
+                    "id": "461e72d9-c2c0-453a-8301-8d0f7cae7545",
+                    "label": "roundWinnerPopupContainer",
+                    "scope": "CLASS",
+                    "components": [],
+                    "x": 540,
+                    "y": 960,
+                    "visible": false,
+                    "list": [
+                        {
+                            "type": "Image",
+                            "id": "8c0be523-3f33-4494-8ea7-30346bebb0bf",
+                            "label": "asset_3_2x",
+                            "components": [],
+                            "texture": {
+                                "key": "Asset 3@2x"
+                            },
+                            "scaleX": 0.5,
+                            "scaleY": 0.5
+                        },
+                        {
+                            "type": "Text",
+                            "id": "cd08cbb6-8a02-42da-bde9-02023195a22c",
+                            "label": "text_round_winner",
+                            "scope": "CLASS",
+                            "components": [],
+                            "originX": 0.5,
+                            "originY": 0.5,
+                            "fontFamily": "CHICKEN Pie Height",
+                            "fontSize": "40px"
+                        }
+                    ]
                 }
             ]
         },

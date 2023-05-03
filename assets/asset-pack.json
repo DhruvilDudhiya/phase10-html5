@@ -222,6 +222,11 @@
                 "key": "single-phase-3"
             },
             {
+                "url": "assets/images/gameplay/skip-btn.png",
+                "type": "image",
+                "key": "skip-btn"
+            },
+            {
                 "url": "assets/images/gameplay/skipCard.png",
                 "type": "image",
                 "key": "skipCard"
