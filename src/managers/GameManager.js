@@ -22,6 +22,7 @@ class GameManager {
 		this.phaseTwoTotalCards = "";
 		this.isOwnTurn = false;
 		this.isGrabCard = false;
+		this.isGrabCardCloseDake = false;
 	}
 
 	resetPhaseData() {

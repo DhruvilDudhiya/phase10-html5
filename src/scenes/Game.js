@@ -1056,7 +1056,26 @@ class Game extends Phaser.Scene {
 		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
 			this.playerHandContainer.removeAll(true);
 			for (let i = 0; i < response.length; i++) {
-				this.oPlayerHand.getNewCardData(response[i]);
+				flag = false
+				if(flag == false){
+					for (let j = 0; j < this.doublePhaseOneCardContainer.getAll().length; j++) {
+						if (this.doublePhaseOneCardContainer.list[j].__CardPreset.cardId == response[i]._id) {
+							flag = true
+							break
+						}
+					}
+				}
+				if(flag == false){
+					for (let k = 0; k < this.doublePhaseTwoCardContainer.getAll().length; k++) {
+						if (this.doublePhaseTwoCardContainer.list[k].__CardPreset.cardId == response[i]._id) {
+							flag = true
+							break
+						}
+					}
+				}
+				if (flag == false) {
+					this.oPlayerHand.getNewCardData(response[i]);
+				}
 			}
 		});
 	}
@@ -1068,12 +1087,14 @@ class Game extends Phaser.Scene {
 		this.openedCardDeck.visible = false;
 		this.oRuleset.grp1Data = [];
 		this.oRuleset.grp2Data = [];
+		this.closedCardDeck.visible = false;
 		this.closedCardDeck.setX(540);
 		this.openedCardDeck.setX(540);
 		this.oGameManager.resetPhaseData();
 		this.oPlayerManager.resetPhaseData();
 		this.oPlayerHand.clearPlayerHandCard();
 		this.oPlayerPrefab.intervalTimeReset();
+		this.discardDeckContainer.removeAll(true);
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
 

@@ -110,6 +110,11 @@ class CardPrefab extends Phaser.GameObjects.Container {
 		/* START-USER-CTR-CODE */
 		// Write your code here.
 		this.oScene = scene;
+		this.cCardID = null;
+		this.cCardLable = null;
+		this.cCardColor = null;
+		this.cCardGroup = null;
+		
 		this.oGameManager = new GameManager(this.oScene);
 		this.oScene.input.setDraggable(this);
 
@@ -148,7 +153,7 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	// Write your code here.
 
 	checkHighCard(isHighCard) {
-		if(isHighCard) {
+		if (isHighCard) {
 			this.cardHighlightContainer.setVisible(true);
 		}
 		else {
@@ -157,7 +162,7 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	}
 
 	checkCardInformation(...args) {
-		if(arguments.length == 2) {
+		if (arguments.length == 2) {
 			this.setSpecialCard(args[0], args[1]);
 		}
 		else {
@@ -168,7 +173,7 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	setSpecialCard(specialCardName, specialCardId) {
 		this.normalCardsContainer.setVisible(false);
 		this.specialCardsContainer.setVisible(true);
-		switch(specialCardName) {
+		switch (specialCardName) {
 			case this.oGameManager.wildCard:
 				this.wildCard.setVisible(true);
 				break;
@@ -192,7 +197,8 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	}
 
 	setCardColor(cardColor) {
-		const color = eval("this.oGameManager."+cardColor+"Card");
+		console.log("cardColor :::::::::::::",cardColor);
+		const color = eval("this.oGameManager." + cardColor + "Card");
 		this.textMiddleNumber.setTintFill(color);
 		this.whiteCornerLower.setTintFill(color);
 		this.whiteCornerUpper.setTintFill(color);

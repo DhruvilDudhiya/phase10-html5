@@ -18,25 +18,52 @@ class CardPreset {
 		this.phaseTwoHitCardIds = [];
 		this.gameObjectPreset = this.gameObject.setInteractive(new Phaser.Geom.Rectangle(-137 / 2, -207 / 2, 137, 207), Phaser.Geom.Rectangle.Contains);
 		this.gameObjectPreset.input.cursor = 'pointer';
-		this.lastPosX = this.x;
-		this.lastPosY = this.y;
 		this.gameObjectPreset.on('pointerdown', (pointer) => {
+			this.lastPosX = this.x;
+			this.lastPosY = this.y;
 			this.currentOwnCardLabel = this.cardNumber;
 			this.currentOwnCardColor = this.cardColor;
 			this.currentOwnCardId = this.cardId;
 			this.currentCardScore = this.cardScore;
 			// grab open deck card..
-			if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
-				if (this.gameObject.scene.oGameManager.isOwnTurn == true) {
+			console.log(this.gameObject.scene.oGameManager.isOwnTurn);
+			if (this.gameObject.scene.oGameManager.isOwnTurn == true) {
+				
+				if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
+					// console.log(" :::::::::::::::::: pointerDown",this.gameObjectPreset)
+					// console.log("++++++++++++++++++++lastCardCheck",this.gameObject.scene.discardDeckContainer);
+
+					// if(this.gameObject.scene.discardDeckContainer.list[this.gameObject.scene.discardDeckContainer.list.length - 1].__CardPreset.cardNumber == 's'){
+					// 	console.log("++++++++++++++++++++lastCardCheck");
+					// 	for(var i = 0; i < this.gameObject.scene.discardDeckContainer.list.length; i++){
+					// 		this.gameObject.scene.discardDeckContainer.list[i].disableInteractive();
+					// 	}
+					// }
 					if(this.gameObject.scene.oGameManager.isGrabCard == false){
 						this.gameObject.scene.grabOpenDeckCard();
+						this.gameObject.scene.oGameManager.isGrabCard = true;
+					// console.log("++++++++++++++++++++lastCardCheck",this.gameObject.scene.discardDeckContainer);
+
+					// 	this.gameObject.scene.discardDeckContainer.list[this.gameObject.scene.discardDeckContainer.list.length -1 ].destroy();
+					// 	// this.gameObject.scene.discardDeckContainer.list.remove(this.gameObject.scene.discardDeckContainer.list[this.gameObject.scene.discardDeckContainer.list.length -1 ],true);
+
+					// console.log("++++++++++++++++++++lastCardCheck",this.gameObject.scene.discardDeckContainer);
+
+						// this.gameObject.scene.discardDeckContainer.list.pop()
+						// this.gameObject.scene.discardDeckContainer.getAll().forEach((data,i) => {
+						// 	console.log("OpenDEck CARD",data)
+						// });
+
+						for(var i = 0; i < this.gameObject.scene.discardDeckContainer.list.length; i++){
+							this.gameObject.scene.discardDeckContainer.list[i].disableInteractive();
+						}
 					}
-					this.gameObject.scene.oGameManager.isGrabCard = true;
 				}
 			}
 			//check declare phase card of both group
 			if (this.gameObject.scene.isDeclarePhase == true) {
 				this.checkMatchContainer(this.gameObject.scene.doublePhaseOneCardContainer.list, this.gameObject.scene.doublePhaseTwoCardContainer.list);
+
 			}
 			let parentContainerName = this.gameObjectPreset.parentContainer.name;
 			this.handleParentContainerOperations(parentContainerName, this.gameObjectPreset);
@@ -51,6 +78,8 @@ class CardPreset {
 		});
 
 		this.gameObjectPreset.on('drag', (pointer, dragX, dragY) => {
+			// console.log(" drag ++++++++++++++>",this.gameObject.scene.oGameManager.isGrabCard);
+
 			this.gameObjectPreset.x = pointer.x;
 			this.gameObjectPreset.y = pointer.y;
 		});
@@ -58,16 +87,22 @@ class CardPreset {
 		this.gameObjectPreset.on('dragend', (pointer, dragX, dragY) => {
 			this.gameObjectPreset.x = pointer.x - dragX;
 			this.gameObjectPreset.y = pointer.y - dragY;
+
+
 			if (this.gameObject.scene.nMaxPlayer == 3 || this.gameObject.scene.nMaxPlayer == 2) {
 				//Opened Card Deck
 				// Put card in openDeck
 				if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
-					if (this.gameObject.scene.oGameManager.isOwnTurn == true) {
+					if (this.gameObject.scene.oGameManager.isOwnTurn == true && this.gameObject.scene.oGameManager.isGrabCard == true) {
+						// console.log("dragend ++++++++++++++>",this.gameObject.scene.oGameManager.isGrabCard);
+
 						this.gameObjectPreset.setPosition(this.gameObject.scene.openedCardDeck.x, this.gameObject.scene.openedCardDeck.y);
+						// this.gameObject.scene.discardDeckContainer.add(this.gameObjectPreset);
 						this.gameObjectPreset.setVisible(false);
 						this.sendDiscardCard(this.cardId);
 					} else {
-						this.gameObjectPreset.setPosition(parseFloat(this.lastPosX), parseFloat(this.lastPosY));
+						console.log("this.lastPosX", this.gameObjectPreset.x, "this.lastPosY", this.gameObjectPreset.y);
+						this.gameObjectPreset.setPosition(parseFloat(this.gameObjectPreset.x), parseFloat(this.gameObjectPreset.y));
 						this.gameObject.scene.playerHandContainer.add(this.gameObjectPreset);
 						this.gameObjectPreset.setScale(1);
 					}

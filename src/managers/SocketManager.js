@@ -109,6 +109,7 @@ class SocketManager {
                 this.oScene.oPlayerManager.handleDeclareButtons();
                 break;
             case "resOpenedDeck":
+                console.log("resOpenedDeck", data);
                 this.oScene.oPlayerHand.receiveOpenedDeckCard(data.oData);
                 break;
             case 'resHit':

@@ -7,7 +7,13 @@ class PlayerHand {
     }
 
     getHandData(data) {
-        for (var i = 0; i <= 9; i++) {
+        for (let i = 0; i <= 9; i++) {
+
+            this.cCardID = data.oData[i]._id;
+            this.cCardLable = data.oData[i].nLabel;
+            this.cCardColor = data.oData[i].eColor;
+            this.cCardGroup = data.oData[i].nGroupId;
+
             if (data.oData[i].nLabel <= 12) {
                 this.setPlayerHand(data.oData[i].nLabel, data.oData[i].eColor, data.oData[i]._id);
             }
@@ -28,6 +34,11 @@ class PlayerHand {
 
     setPlayerHand(...args) {
         this.playerCard[this.playerCardCounter] = new CardPrefab(this.oScene, 0, 0);
+        this.playerCard[this.playerCardCounter].cCardID = this.cCardID;
+        this.playerCard[this.playerCardCounter].cCardLable = this.cCardLable;
+        this.playerCard[this.playerCardCounter].cCardColor = this.cCardColor;
+        this.playerCard[this.playerCardCounter].cCardGroup = this.cCardGroup;
+
         this.oScene.playerHandContainer.add(this.playerCard[this.playerCardCounter]);
         if (arguments.length == 2) {
             // Special Cards - cardName, cardId
@@ -71,7 +82,7 @@ class PlayerHand {
         let tempCardPosX = 0;
         let tempCardPosY = 0;
 
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             if (this.oScene.ownPlayerId == data[i].iUserId) {
                 tempCardPosX = 540;
                 tempCardPosY = 1550;
@@ -101,7 +112,8 @@ class PlayerHand {
     }
 
     distributeHighCards(cardData, xPos, yPos) {
-        var tempCard = new CardPrefab(this.oScene, 540, 875);
+        let tempCard = new CardPrefab(this.oScene, 540, 875);
+
         tempCard.disableInteractive();
         tempCard.setName(cardData.iUserId);
         this.oScene.tempCardContainer.add(tempCard);
@@ -112,8 +124,14 @@ class PlayerHand {
 
 
     receiveOpenedDeckCard(data) {
-        if(data.sAction == "put"){
+        this.chakeLastCardSkip = (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel == 14) ? true : false;
+        if (data.sAction == "put") {
+            console.log(" open deck ::", data.aOpenDeck)
             if (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel <= 12) {
+                this.cCardID = data.aOpenDeck[data.aOpenDeck.length - 1]._id;
+                this.cCardLable = data.aOpenDeck[data.aOpenDeck.length - 1].nLabel;
+                this.cCardColor = data.aOpenDeck[data.aOpenDeck.length - 1].eColor;
+                this.cCardGroup = data.aOpenDeck[data.aOpenDeck.length - 1].nGroupId;
                 this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].nLabel, data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
             }
             else {
@@ -127,6 +145,11 @@ class PlayerHand {
 
     setDiscardDeck(...args) {
         this.discardCard = new CardPrefab(this.oScene, 0, 0);
+        this.discardCard.cCardID = this.cCardID;
+        this.discardCard.cCardLable = this.cCardLable;
+        this.discardCard.cCardColor = this.cCardColor;
+        this.discardCard.cCardGroup = this.cCardGroup;
+
         this.oScene.discardDeckContainer.add(this.discardCard);
         this.discardCard.setPosition(this.oScene.openedCardDeck.x, this.oScene.openedCardDeck.y);
         if (arguments.length == 2) {
@@ -145,21 +168,21 @@ class PlayerHand {
         this.oScene.oSocketManager.emit('reqChangeGroup', [{ iCardId: cardId, nGroupId: 2 }]);
     }
 
-    setAutoDiscard(handData){
+    setAutoDiscard(handData) {
         this.oScene.playerHandContainer.getAll().forEach((data) => {
-            if(handData.iDiscardCardId == data.__CardPreset.cardId){
+            if (handData.iDiscardCardId == data.__CardPreset.cardId) {
                 this.oScene.playerHandContainer.remove(data, true);
             }
         });
 
         this.oScene.doublePhaseOneCardContainer.getAll().forEach((data) => {
-            if(handData.iDiscardCardId == data.__CardPreset.cardId){
+            if (handData.iDiscardCardId == data.__CardPreset.cardId) {
                 this.oScene.doublePhaseOneCardContainer.remove(data, true);
             }
         });
 
         this.oScene.doublePhaseTwoCardContainer.getAll().forEach((data) => {
-            if(handData.iDiscardCardId == data.__CardPreset.cardId){
+            if (handData.iDiscardCardId == data.__CardPreset.cardId) {
                 this.oScene.doublePhaseTwoCardContainer.remove(data, true);
             }
         });

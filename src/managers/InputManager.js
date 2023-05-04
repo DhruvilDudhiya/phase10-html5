@@ -7,30 +7,23 @@ class InputManager {
 
         //Closed Card Deck
         this.oScene.closedCardDeck.setInteractive().on('pointerdown', () => {
-            console.log("isOwn::", this.oScene.oGameManager.isOwnTurn)
+            // console.log("isOwn::", this.oScene.oGameManager.isOwnTurn)
             if (this.oScene.oGameManager.isOwnTurn == true) {
                 if (this.oScene.oGameManager.isGrabCard == false) {
                     this.oScene.oSocketManager.emit('reqClosedCard', {}, (error, response) => {
-                        if (response.length > this.oScene.playerHandContainer.length) {
+                        if (response.length > this.oScene.playerHandContainer.length) {-
                             this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
                             this.oScene.oGameManager.isGrabCard = true;
+                            this.oScene.oGameManager.isGrabCardCloseDake = true;
+                            for (let i = 0; i < this.oScene.discardDeckContainer.list.length; i++) {
+                                this.oScene.discardDeckContainer.list[i].disableInteractive();
+                            }
                         }
                     });
                 }
 
             }
         });
-
-        //Opened Card Deck
-        // this.oScene.openedCardDeck.setInteractive().on('pointerdown', () => {
-        //     console.log("clicked");
-        //     this.oScene.oSocketManager.emit('reqOpenedCard', { nLabel :this.currentOwnCardLabel ,eColor :this.currentOwnCardColor ,_id :this.currentOwnCardId  ,iUserId : this.oScene.ownPlayerId }, (error, response) => {
-        //         console.log("resOpenedCard ::1 ", response, error); //reqOpenedCard
-        //         if (response.length > this.oScene.playerHandContainer.length) {
-        //             this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
-        //         }
-        //     });
-        // });
 
         this.oScene.soundOnBtn.setInteractive().on('pointerdown', () => {
             if (this.oScene.soundOnBtn.visible) {

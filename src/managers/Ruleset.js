@@ -77,6 +77,7 @@ class Ruleset {
     }
     // Rule ==========> Run
     validateRulesetOfRun(totalCards, containerName) {
+        console.log("")
         let copy = this.cardNumbers;
         let wildArr = [];
         let count = 0;

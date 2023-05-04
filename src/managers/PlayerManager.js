@@ -2,7 +2,6 @@ class PlayerManager {
     constructor(oScene) {
         this.oScene = oScene;
         this.players = new Map();
-        this.isOwnTurn = null;
         this.ownPlayerId = this.oScene.ownPlayerId;
         this.playerCounter = 0;
     }
@@ -64,7 +63,7 @@ class PlayerManager {
     }
     setHandData(data) {
         this.oScene.playerHandContainer.setVisible(true);
-        for (var i = 0; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             if (data[i].nLabel <= 12) {
                 this.oScene.oPlayerHand.setPlayerHand(data[i].nLabel, data[i].eColor, data[i]._id);
             }
@@ -74,12 +73,12 @@ class PlayerManager {
         }
     }
     setGrup1CurrentData(data) {
-        var startX = -40;
+        let startX = -40;
         this.cardInfo = data.oCurrentPhase["aGroup-1"]
         if (data.iUserId == this.oScene.ownPlayerId) {
             if (data.oCurrentPhase["aGroup-1"][0] == undefined) {
             } else {
-                for (var i = 0; i < data.oCurrentPhase["aGroup-1"].length; i++) {
+                for (let i = 0; i < data.oCurrentPhase["aGroup-1"].length; i++) {
                     this.phaseGrp1Cards = new CardPrefab(this.oScene, startX, 0);
                     this.phaseGrp1Cards.setScale(0.6)
                     this.oScene.doublePhaseOneCardContainer.add(this.phaseGrp1Cards);
@@ -95,12 +94,12 @@ class PlayerManager {
         }
     }
     setGrup2CurrentData(data) {
-        var startX = -40;
+        let startX = -40;
         this.cardInfo = data.oCurrentPhase["aGroup-2"]
         if (data.iUserId == this.oScene.ownPlayerId) {
             if (data.oCurrentPhase["aGroup-2"][0] == undefined) {
             } else {
-                for (var i = 0; i < data.oCurrentPhase["aGroup-2"].length; i++) {
+                for (let i = 0; i < data.oCurrentPhase["aGroup-2"].length; i++) {
                     this.phaseGrp2Cards = new CardPrefab(this.oScene, startX, 0);
                     this.phaseGrp2Cards.setScale(0.6)
                     this.oScene.doublePhaseTwoCardContainer.add(this.phaseGrp2Cards);
@@ -144,8 +143,8 @@ class PlayerManager {
 
     opponemtGrpPhaseDeclare(data, phase) {
         this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
-        var startX = 510;
-        var startY = phase == 1 ? 410 : 544
+        let startX = 510;
+        let startY = phase == 1 ? 410 : 544
         if (this.declarePhaseCardInfo !== undefined) {
             for (let j = 0; j < this.declarePhaseCardInfo.length; j++) {
                 this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
@@ -167,8 +166,8 @@ class PlayerManager {
 
     opponemt2GrpPhaseDeclare(data, phase, player) {
         this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
-        var startX = player === "Player1" ? 255 : 765;
-        var startY = phase == 1 ? 407 : 543
+        let startX = player === "Player1" ? 255 : 765;
+        let startY = phase == 1 ? 407 : 543
         if (this.declarePhaseCardInfo !== undefined) {
             for (let j = 0; j < this.declarePhaseCardInfo.length; j++) {
 
@@ -368,14 +367,30 @@ class PlayerManager {
 
     changePlayerTurn(playerTurnData) {
         this.oScene.oGameManager.isOwnTurn = false;
+        this.oScene.oGameManager.isGrabCardCloseDake = false;
         this.currentPlayerTurn = playerTurnData.iUserId;
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.oScene.oGameManager.isOwnTurn = true;
-            this.oScene.oGameManager.isGrabCard = false
+            this.oScene.oGameManager.isGrabCard = false;
+
+            if (this.oScene.oPlayerHand.chakeLastCardSkip == false) {
+                for (let i = 0; i < this.oScene.discardDeckContainer.list.length; i++) {
+                    this.oScene.discardDeckContainer.list[i].setInteractive();
+                }
+            } else {
+                for (let i = 0; i < this.oScene.discardDeckContainer.list.length; i++) {
+                    this.oScene.discardDeckContainer.list[i].disableInteractive();
+                }
+            }
+            this.oScene.closedCardDeck.setInteractive();
             // this.oScene.discardDeckContainer.list[this.oScene.discardDeckContainer.list.length - 1].setInteractive();
         } else {
+
             this.oScene.oGameManager.isOwnTurn = false;
             this.oScene.oGameManager.isGrabCard = true;
+            for (let i = 0; i < this.oScene.discardDeckContainer.list.length; i++) {
+                this.oScene.discardDeckContainer.list[i].disableInteractive();
+            }
             // this.oScene.discardDeckContainer.list[this.oScene.discardDeckContainer.list.length - 1].disableInteractive();
         }
 
@@ -441,15 +456,15 @@ class PlayerManager {
                 this.handleDeclareButtonsVisibilityOFF();
             } else {
                 this.handleDeclareButtonsVisibilityON()
-                if (this.oScene.dp_yellow_ring_1.visible == true && this.oScene.dp_yellow_ring_2.visible == false && this.isOwnTurn) {
+                if (this.oScene.dp_yellow_ring_1.visible == true && this.oScene.dp_yellow_ring_2.visible == false && this.oScene.oGameManager.isOwnTurn) {
                     this.oScene.confirmButton.setAlpha(0.75);
                     this.oScene.confirmButton.disableInteractive();
-                } else if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == true && this.isOwnTurn) {
+                } else if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == true && this.oScene.oGameManager.isOwnTurn) {
                     this.oScene.confirmButton.setAlpha(0.75);
                     this.oScene.confirmButton.disableInteractive();
                 } else {
-                    if (this.isOwnTurn) {
-                        //    this.handleDeclareButtonsVisibilityON()
+                    if (this.oScene.oGameManager.isOwnTurn) {
+                        this.handleDeclareButtonsVisibilityON()
                         this.oScene.confirmButton.setAlpha(1);
                         this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
                             this.handleRingsVisibilityOFF();
