@@ -32,38 +32,25 @@
             ]
         },
         {
+            "type": "Image",
+            "id": "b9e19ba7-84bd-430f-8a37-d983d43274da",
+            "label": "openedCardDeck",
+            "scope": "CLASS",
+            "components": [],
+            "texture": {
+                "key": "cardHolder"
+            },
+            "x": 540,
+            "y": 876
+        },
+        {
             "type": "Container",
             "id": "be30b110-a734-4d30-b7f7-931a15a11c73",
             "label": "discardDeckContainer",
             "scope": "CLASS",
             "components": [],
             "y": 1,
-            "list": [
-                {
-                    "type": "Image",
-                    "id": "b9e19ba7-84bd-430f-8a37-d983d43274da",
-                    "label": "openedCardDeck",
-                    "scope": "CLASS",
-                    "components": [],
-                    "texture": {
-                        "key": "cardHolder"
-                    },
-                    "x": 540,
-                    "y": 875
-                },
-                {
-                    "type": "Image",
-                    "id": "128f3afc-c501-4118-897e-de1086595249",
-                    "label": "closedCardDeck",
-                    "scope": "CLASS",
-                    "components": [],
-                    "texture": {
-                        "key": "main-cards-deck"
-                    },
-                    "x": 540,
-                    "y": 875
-                }
-            ]
+            "list": []
         },
         {
             "type": "Container",
@@ -1018,6 +1005,18 @@
                             "color": "#f8ca00"
                         }
                     ]
+                },
+                {
+                    "type": "Image",
+                    "id": "128f3afc-c501-4118-897e-de1086595249",
+                    "label": "closedCardDeck",
+                    "scope": "CLASS",
+                    "components": [],
+                    "texture": {
+                        "key": "main-cards-deck"
+                    },
+                    "x": 540,
+                    "y": 876
                 }
             ]
         },

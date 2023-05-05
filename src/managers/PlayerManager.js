@@ -27,11 +27,9 @@ class PlayerManager {
     }
 
     showSkipPlayer(data) {
-        console.log("data :: ", data);
         for (let i = 0; i < this.oScene.playersContainer.length; i++) {
             if (this.oScene.playersContainer.getAll()[i].name === data.iUserId) {
                 let tempPlayer = this.oScene.playersContainer.getAll()[i]
-                console.log(tempPlayer.x, tempPlayer.y);
                 this.oScene.oTweenManager.skipPlayerTurnAnim(tempPlayer);
                 break;
             }
@@ -399,9 +397,10 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
-        this.oScene.oGameManager.isOwnTurn = false;
+        // this.oScene.oGameManager.isOwnTurn = false;
         this.oScene.oGameManager.isGrabCardCloseDake = false;
         this.currentPlayerTurn = playerTurnData.iUserId;
+
         if (playerTurnData.iUserId == this.oScene.ownPlayerId) {
             this.oScene.oGameManager.isOwnTurn = true;
             this.oScene.oGameManager.isGrabCard = false;

@@ -56,10 +56,6 @@ class PlayerHand {
         this.playerCardCounter++;
         this.arrangePlayerHandCards();
     }
-    clearPlayerHandCard() {
-        this.playerCardCounter = 0;
-        this.oScene.playerHandContainer.removeAll(true);
-    }
 
     arrangePlayerHandCards() {
         let lengthOfHand = this.oScene.playerHandContainer.getAll().length;
@@ -126,7 +122,6 @@ class PlayerHand {
     receiveOpenedDeckCard(data) {
         this.chakeLastCardSkip = (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel == 14) ? true : false;
         if (data.sAction == "put") {
-            console.log(" open deck ::", data.aOpenDeck)
             if (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel <= 12) {
                 this.cCardID = data.aOpenDeck[data.aOpenDeck.length - 1]._id;
                 this.cCardLable = data.aOpenDeck[data.aOpenDeck.length - 1].nLabel;

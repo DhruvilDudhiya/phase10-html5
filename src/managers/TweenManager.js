@@ -32,7 +32,6 @@ class TweenManager {
             ease : 'Power4',
             completeDelay: 1500,
             onComplete: () => {
-                console.log(this.oScene.skipPlayerTurnContainer);
                 this.oScene.skipPlayerTurnContainer.visible = false;
             }
         })
@@ -79,6 +78,7 @@ class TweenManager {
 
 
     startHandCardsDistribution(data) {
+        // this.oScene.closedCardDeck.visible = true;
         let completeCount = 0;
         var self = this;
         for (var i = 0; i < 20; i++) {

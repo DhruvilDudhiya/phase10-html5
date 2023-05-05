@@ -23,16 +23,11 @@ class Game extends Phaser.Scene {
 		const background = this.add.image(540, 960, "background");
 		backgroundImage.add(background);
 
+		// openedCardDeck
+		const openedCardDeck = this.add.image(540, 876, "cardHolder");
+
 		// discardDeckContainer
 		const discardDeckContainer = this.add.container(0, 1);
-
-		// openedCardDeck
-		const openedCardDeck = this.add.image(540, 875, "cardHolder");
-		discardDeckContainer.add(openedCardDeck);
-
-		// closedCardDeck
-		const closedCardDeck = this.add.image(540, 875, "main-cards-deck");
-		discardDeckContainer.add(closedCardDeck);
 
 		// footerContainer
 		const footerContainer = this.add.container(0, 0);
@@ -460,6 +455,10 @@ class Game extends Phaser.Scene {
 		ownPlayerScoreText.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "22px", "fontStyle": "bold" });
 		ownPlayerContainer.add(ownPlayerScoreText);
 
+		// closedCardDeck
+		const closedCardDeck = this.add.image(540, 876, "main-cards-deck");
+		body.add(closedCardDeck);
+
 		// playerHandContainer
 		const playerHandContainer = this.add.container(540, 1580);
 		playerHandContainer.name = "playerHandContainer";
@@ -736,9 +735,8 @@ class Game extends Phaser.Scene {
 		prizeHeader.setStyle({ "fontSize": "50px" });
 		headerContainer.add(prizeHeader);
 
-		this.discardDeckContainer = discardDeckContainer;
 		this.openedCardDeck = openedCardDeck;
-		this.closedCardDeck = closedCardDeck;
+		this.discardDeckContainer = discardDeckContainer;
 		this.btn_settings = btn_settings;
 		this.doublePhaseContainer = doublePhaseContainer;
 		this.dp_yellow_ring_1 = dp_yellow_ring_1;
@@ -790,6 +788,7 @@ class Game extends Phaser.Scene {
 		this.yellow_ring_opponentGrp2 = yellow_ring_opponentGrp2;
 		this.ownPlayerUserNameText = ownPlayerUserNameText;
 		this.ownPlayerScoreText = ownPlayerScoreText;
+		this.closedCardDeck = closedCardDeck;
 		this.playerHandContainer = playerHandContainer;
 		this.tempCardContainer = tempCardContainer;
 		this.playersContainer = playersContainer;
@@ -835,12 +834,10 @@ class Game extends Phaser.Scene {
 		this.events.emit("scene-awake");
 	}
 
-	/** @type {Phaser.GameObjects.Container} */
-	discardDeckContainer;
 	/** @type {Phaser.GameObjects.Image} */
 	openedCardDeck;
-	/** @type {Phaser.GameObjects.Image} */
-	closedCardDeck;
+	/** @type {Phaser.GameObjects.Container} */
+	discardDeckContainer;
 	/** @type {Phaser.GameObjects.Image} */
 	btn_settings;
 	/** @type {Phaser.GameObjects.Container} */
@@ -943,6 +940,8 @@ class Game extends Phaser.Scene {
 	ownPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
 	ownPlayerScoreText;
+	/** @type {Phaser.GameObjects.Image} */
+	closedCardDeck;
 	/** @type {Phaser.GameObjects.Container} */
 	playerHandContainer;
 	/** @type {Phaser.GameObjects.Container} */
@@ -1051,7 +1050,6 @@ class Game extends Phaser.Scene {
 		this.pingTest()
 
 	}
-
 	instantiateSocketManager() {
 		const queryString = window.location.search;
 		const urlParams = new URLSearchParams(queryString);
@@ -1067,7 +1065,6 @@ class Game extends Phaser.Scene {
 		this.oPlayerManager.handleDeclareButtonsVisibilityOFF();
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } });
 	}
-
 	sendHitCards(allCards, lastCard, agroups) {
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
 			console.log(response, error);
@@ -1087,7 +1084,7 @@ class Game extends Phaser.Scene {
 			this.playerHandContainer.removeAll(true);
 			for (let i = 0; i < response.length; i++) {
 				var flag = false
-				if (flag == false) {
+				if(flag == false){
 					for (let j = 0; j < this.doublePhaseOneCardContainer.getAll().length; j++) {
 						if (this.doublePhaseOneCardContainer.list[j].__CardPreset.cardId == response[i]._id) {
 							flag = true
@@ -1114,43 +1111,40 @@ class Game extends Phaser.Scene {
 	}
 	setRoundOver(data) {
 		this.isDeclarePhase = false;
-		this.openedCardDeck.visible = false;
 		this.oRuleset.grp1Data = [];
 		this.oRuleset.grp2Data = [];
-		this.closedCardDeck.visible = false;
-		this.closedCardDeck.setX(540);
+		
 		this.openedCardDeck.setX(540);
+		this.openedCardDeck.visible = true;
+
+		this.closedCardDeck.setX(540);
+		this.closedCardDeck.visible = true;
+
 		this.oGameManager.resetPhaseData();
-		this.oPlayerManager.resetPhaseData();
-		this.oPlayerHand.clearPlayerHandCard();
+		// this.oPlayerManager.resetPhaseData();
+		// this.oPlayerHand.clearPlayerHandCard();
+
 		this.oPlayerPrefab.intervalTimeReset();
+        this.playerHandContainer.removeAll(true);
 		this.discardDeckContainer.removeAll(true);
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
 
 		this.oTweenManager.openPopUp(this.roundWinnerPopupContainer);
-
-		if (data.iUserId === this.oPlayerManager.ownPlayerId) {
-			this.text_round_winner.text = "YOU WON THIS ROUND."
+		if(data.iUserId === this.oPlayerManager.ownPlayerId){
+			this.text_round_winner.text = "YOU WON THIS ROUND.";
 		}
-		else {
-			let tempName = data.sUserName.length == 0 ? data.sMobile : data.sUserName
-			this.text_round_winner.text = tempName.toUpperCase(); + " WON THIS ROUND."
+		else{
+			this.text_round_winner.text = (( data.sUserName.length == 0 ? data.sMobile : data.sUserName ).toUpperCase()) + " WON THIS ROUND.";
 		}
-
-
 	}
 
 	winnerScene(oData) {
 
 		var resultPrefabX = 517
 		var resultPrefabY = 1004
-
-
 		this.discardDeckContainer.visible = false
-
 		this.winnerShowContainer.visible = true;
-
 		for (let i = 0; i < oData.length; i++) {
 			var resultPrefab = new ResultPrefab(this, resultPrefabX, resultPrefabY);
 			this.add.existing(resultPrefab);
@@ -1167,10 +1161,6 @@ class Game extends Phaser.Scene {
 			resultPrefabY += 93
 		}
 	}
-
-
-
-
 	pingTest() {
 		let pinger = document.getElementById('pingTester');
 		let start = new Date().getTime();
@@ -1216,5 +1206,4 @@ class Game extends Phaser.Scene {
 }
 
 /* END OF COMPILED CODE */
-
 // You can write more code here

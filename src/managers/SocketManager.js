@@ -17,7 +17,6 @@ class SocketManager {
                 authorization: authToken,
             },
         });
-
         // Root Socket Connection Events - Start
         this.oRootSocketConn.on('connect', () => {
             this.ownSocketId = this.oRootSocketConn.id;
@@ -48,9 +47,6 @@ class SocketManager {
             // waiting popup visible
             this.oScene.waitingPopupContainer.setVisible(true);
             this.oScene.transparentLayer.setVisible(true);
-
-            // this.txt_table_id.text = this.iTableId
-
             this.onReceivedData(data);
         });
 
@@ -103,7 +99,6 @@ class SocketManager {
                 this.oScene.oPlayerManager.setOpponentHandCardCounter(data.oData)
                 break;
             case "resPlayersState":
-                console.log("resPlayersState :: ", data.oData);
                 break;
             case "resClosedCard":
                 this.oScene.oPlayerManager.handleDeclareButtons();
@@ -128,7 +123,7 @@ class SocketManager {
                 this.oScene.winnerScene(data.oData);
                 break;
             case "resClearTable":
-                console.log("resClearTable ::", data.oData);
+                break;
             case "resSkippedPlayer":
                 this.oScene.oPlayerManager.showSkipPlayer(data.oData)
                 break;

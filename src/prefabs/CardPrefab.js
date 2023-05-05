@@ -202,7 +202,6 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	}
 
 	setCardColor(cardColor) {
-		console.log("cardColor :::::::::::::",cardColor);
 		const color = eval("this.oGameManager." + cardColor + "Card");
 		this.textMiddleNumber.setTintFill(color);
 		this.whiteCornerLower.setTintFill(color);
