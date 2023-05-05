@@ -143,7 +143,8 @@ class Ruleset {
 
     validateSkipCard(cardData) {
         this.oScene.oSocketManager.emit('reqSkipUser', { 'iCardId': cardData.__CardPreset.cardId , 'iUserId': this.oScene.secondPlayerId });
-
         cardData.destroy();
     }
+
+    
 }

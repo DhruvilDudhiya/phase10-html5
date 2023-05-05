@@ -62,26 +62,28 @@ class CardPreset {
 			}
 			//check declare phase card of both group
 			if (this.gameObject.scene.isDeclarePhase == true) {
-				this.checkMatchContainer(this.gameObject.scene.doublePhaseOneCardContainer.list, this.gameObject.scene.doublePhaseTwoCardContainer.list);
-
+				this.checkMatchContainer(this.gameObject.scene.doublePhaseOneCardContainer.list, this.gameObject.scene.doublePhaseTwoCardContainer.list,this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.list,this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.list);
 			}
 			let parentContainerName = this.gameObjectPreset.parentContainer.name;
 			this.handleParentContainerOperations(parentContainerName, this.gameObjectPreset);
 			this.gameObjectPreset.x = pointer.x;
 			this.gameObjectPreset.y = pointer.y;
 		});
-		this.gameObjectPreset.on("pointerup", (pointer) => {
+		this.gameObjectPreset.on("pointerup", () => {
 			if (this.gameObject.scene.isDeclarePhase == true) {
 				this.gameObject.scene.dp_yellow_ring_1.setVisible(false);
 				this.gameObject.scene.dp_yellow_ring_2.setVisible(false);
+				this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(false);
+				this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(false);
 			}
-		});
+		},this);
 
 		this.gameObjectPreset.on('drag', (pointer, dragX, dragY) => {
 			// console.log(" drag ++++++++++++++>",this.gameObject.scene.oGameManager.isGrabCard);
 
 			this.gameObjectPreset.x = pointer.x;
 			this.gameObjectPreset.y = pointer.y;
+			// console.log("hhh",this.gameObjectPreset.x, this.gameObjectPreset.y)
 		});
 
 		this.gameObjectPreset.on('dragend', (pointer, dragX, dragY) => {
@@ -149,8 +151,38 @@ class CardPreset {
 
 					}
 				}
+				//set hit card
+				else if(this.gameObjectPreset.x >= 363 && this.gameObjectPreset.x<= 720 && this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.y >= 350 && this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.y <= 470) {
+					if(this.gameObject.scene.nMaxPlayer == 2){
+						for (var i = 0; i < this.gameObject.scene.opponentGrp1PhaseCardContainer.list.length; i++) {
+							this.opponentContainer1CardIds.push(this.gameObject.scene.opponentGrp1PhaseCardContainer.list[i].__CardPreset.cardId);
+						}
+						this.lastOwnHitCard = this.opponentContainer1CardIds[this.opponentContainer1CardIds - 1 ];
+						if (this.gameObject.scene.isDeclarePhase == true){
+
+						}
+						// let hitCardData = []
+						// for (let i = 0; i < this.gameObject.scene.opponentGrp1PhaseCardContainer.list.length; i++) {
+						// 	hitCardData.push(this.gameObject.scene.opponentGrp1PhaseCardContainer.list[i].__CardPreset.cardId);
+						// }
+						// let lastHitCardData = this.currentOwnCardId;
+						// console.log("opponentGrp1PhaseCardContainer",hitCardData,lastHitCardData);
+						// console.log("this.currentOwnCardId",this.currentOwnCardId);
+						// this.gameObject.scene.sendOpponentHitCards(hitCardData,lastHitCardData,'aGroup-1');
+					}
+				}
+				else if(this.gameObjectPreset.x >= 363 && this.gameObjectPreset.x<= 720 && this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.y>=485 && this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.y<= 605){
+					if(this.gameObject.scene.nMaxPlayer == 2){
+						let hitCardData = []
+						for (let i = 0; i < this.gameObject.scene.opponentGrp2PhaseCardContainer.list.length; i++) {
+							hitCardData.push(this.gameObject.scene.opponentGrp2PhaseCardContainer.list[i].__CardPreset.cardId);
+						}
+						let lastHitCardData = this.currentOwnCardId;
+						console.log("opponentGrp2PhaseCardContainer",hitCardData,lastHitCardData);
+						this.gameObject.scene.sendOpponentHitCards(hitCardData,lastHitCardData,'aGroup-2');
+					}
+				}
 				// skip player
-				// else if(this.gameObject.scene.nMaxPlayer == 2){
 				else if(this.gameObjectPreset.x >= 346 && this.gameObjectPreset.x <= 734 && this.gameObjectPreset.y >=74 && this.gameObjectPreset.y <= 697 ){
 					if(this.gameObject.__CardPreset.cardNumber === "s"){
 						this.gameObject.scene.oRuleset.validateSkipCard(this.gameObject);
@@ -222,7 +254,7 @@ class CardPreset {
 						}
 					}
 					
-					checkMatchContainer(containerOne, containerTwo) {
+					checkMatchContainer(containerOne, containerTwo , opponentContainer1 , opponentContainer2) {
 						this.posX = this.gameObject.x;
 						this.posY = this.gameObject.y;
 						for (let i = 0; i < containerOne.length; i++) {
@@ -244,6 +276,27 @@ class CardPreset {
 								this.gameObject.y = this.posY;
 							}
 						}
+
+						for (let i = 0; i < opponentContainer1.length; i++) {
+							if (this.currentOwnCardLabel === opponentContainer1[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
+								this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true);
+								//Handle the Ring Visibility and allow the card to be dragged their
+							} else {
+								this.gameObject.x = this.posX;
+								this.gameObject.y = this.posY;
+							}
+						}
+						
+						for (let i = 0; i < opponentContainer2.length; i++) {
+							if (this.currentOwnCardLabel === opponentContainer2[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
+								this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true);
+								//Handle the Ring Visibility and allow the card to be dragged their
+							} else {
+								this.gameObject.x = this.posX;
+								this.gameObject.y = this.posY;
+							}
+						}
+
 					}
 					static clearAllPhaseCards() {
 						this.gameObject.scene.doublePhaseOneCardContainer.remove(gameObjectPreset);

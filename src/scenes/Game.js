@@ -229,11 +229,11 @@ class Game extends Phaser.Scene {
 		threePlayer2Container.add(opponent2DeclareCardContainer);
 
 		// opponent2Grp2PhaseCardContainer
-		const opponent2Grp2PhaseCardContainer = this.add.container(0, 0);
+		const opponent2Grp2PhaseCardContainer = this.add.container(285, 540);
 		opponent2DeclareCardContainer.add(opponent2Grp2PhaseCardContainer);
 
 		// opponent2Grp1PhaseCardContainer
-		const opponent2Grp1PhaseCardContainer = this.add.container(0, 0);
+		const opponent2Grp1PhaseCardContainer = this.add.container(285, 405);
 		opponent2DeclareCardContainer.add(opponent2Grp1PhaseCardContainer);
 
 		// threePlayer3Container
@@ -323,11 +323,11 @@ class Game extends Phaser.Scene {
 		threePlayer3Container.add(opponent3DeclareCardContainer);
 
 		// opponent3Grp2PhaseCardContainer
-		const opponent3Grp2PhaseCardContainer = this.add.container(0, 0);
+		const opponent3Grp2PhaseCardContainer = this.add.container(795, 540);
 		opponent3DeclareCardContainer.add(opponent3Grp2PhaseCardContainer);
 
 		// opponent3Grp1PhaseCardContainer
-		const opponent3Grp1PhaseCardContainer = this.add.container(0, 0);
+		const opponent3Grp1PhaseCardContainer = this.add.container(795, 405);
 		opponent3DeclareCardContainer.add(opponent3Grp1PhaseCardContainer);
 
 		// twoPlayerContainer
@@ -406,13 +406,13 @@ class Game extends Phaser.Scene {
 		const declareCardContainer = this.add.container(0, 0);
 		twoPlayer2Container.add(declareCardContainer);
 
-		// opponentGrp1PhaseCardContainer
-		const opponentGrp1PhaseCardContainer = this.add.container(0, 0);
-		declareCardContainer.add(opponentGrp1PhaseCardContainer);
-
 		// opponentGrp2PhaseCardContainer
-		const opponentGrp2PhaseCardContainer = this.add.container(0, 0);
+		const opponentGrp2PhaseCardContainer = this.add.container(540, 545);
 		declareCardContainer.add(opponentGrp2PhaseCardContainer);
+
+		// opponentGrp1PhaseCardContainer
+		const opponentGrp1PhaseCardContainer = this.add.container(540, 410);
+		declareCardContainer.add(opponentGrp1PhaseCardContainer);
 
 		// opponentHandCardCountContainer
 		const opponentHandCardCountContainer = this.add.container(0, 0);
@@ -427,6 +427,20 @@ class Game extends Phaser.Scene {
 		txt_opponentHandCardCounter.setOrigin(0.5, 0.5);
 		txt_opponentHandCardCounter.setStyle({ "fontSize": "35px", "fontStyle": "bold" });
 		opponentHandCardCountContainer.add(txt_opponentHandCardCounter);
+
+		// yellow_ring_opponentGrp1
+		const yellow_ring_opponentGrp1 = this.add.image(540, 408, "yellow-ring");
+		yellow_ring_opponentGrp1.scaleX = 0.81;
+		yellow_ring_opponentGrp1.scaleY = 0.56;
+		yellow_ring_opponentGrp1.visible = false;
+		twoPlayer2Container.add(yellow_ring_opponentGrp1);
+
+		// yellow_ring_opponentGrp2
+		const yellow_ring_opponentGrp2 = this.add.image(540, 544, "yellow-ring");
+		yellow_ring_opponentGrp2.scaleX = 0.81;
+		yellow_ring_opponentGrp2.scaleY = 0.56;
+		yellow_ring_opponentGrp2.visible = false;
+		twoPlayer2Container.add(yellow_ring_opponentGrp2);
 
 		// ownPlayerContainer
 		const ownPlayerContainer = this.add.container(0, -1);
@@ -524,88 +538,88 @@ class Game extends Phaser.Scene {
 		waitingPopupContainer.add(popUpText);
 
 		// leaveTablePopup
-		const leaveTablePopup = this.add.container(540, 1075);
+		const leaveTablePopup = this.add.container(541, 981);
 		leaveTablePopup.visible = false;
 		popupContainer.add(leaveTablePopup);
 
 		// popupLeave
-		const popupLeave = this.add.image(0, -210, "Asset 3@2x");
+		const popupLeave = this.add.image(-1, -122, "Asset 3@2x");
 		popupLeave.scaleX = 0.5;
 		popupLeave.scaleY = 0.5;
 		leaveTablePopup.add(popupLeave);
 
 		// yesLeaveBtn
-		const yesLeaveBtn = this.add.image(-224, 96, "Asset 6@2x");
+		const yesLeaveBtn = this.add.image(-221, 61, "Asset 6@2x");
 		yesLeaveBtn.scaleX = 0.55;
 		yesLeaveBtn.scaleY = 0.55;
 		leaveTablePopup.add(yesLeaveBtn);
 
 		// cancleLeaveBtn
-		const cancleLeaveBtn = this.add.image(219, 96, "Asset 5@2x");
+		const cancleLeaveBtn = this.add.image(222, 61, "Asset 5@2x");
 		cancleLeaveBtn.scaleX = 0.55;
 		cancleLeaveBtn.scaleY = 0.55;
 		leaveTablePopup.add(cancleLeaveBtn);
 
 		// yesLeaveTxt
-		const yesLeaveTxt = this.add.text(-224, 96, "", {});
+		const yesLeaveTxt = this.add.text(-221, 61, "", {});
 		yesLeaveTxt.setOrigin(0.5, 0.5);
 		yesLeaveTxt.text = "YES";
 		yesLeaveTxt.setStyle({ "fontSize": "60px" });
 		leaveTablePopup.add(yesLeaveTxt);
 
 		// noLeaveTxt
-		const noLeaveTxt = this.add.text(219, 96, "", {});
+		const noLeaveTxt = this.add.text(222, 61, "", {});
 		noLeaveTxt.setOrigin(0.5, 0.5);
 		noLeaveTxt.text = "NO";
 		noLeaveTxt.setStyle({ "fontSize": "60px" });
 		leaveTablePopup.add(noLeaveTxt);
 
 		// leaveTableTxt
-		const leaveTableTxt = this.add.text(0, -210, "", {});
+		const leaveTableTxt = this.add.text(-1, -122, "", {});
 		leaveTableTxt.setOrigin(0.5, 0.5);
 		leaveTableTxt.text = "Are you sure you want to\n   leave this table?";
 		leaveTableTxt.setStyle({ "fontSize": "50px" });
 		leaveTablePopup.add(leaveTableTxt);
 
 		// refreshTablePopup
-		const refreshTablePopup = this.add.container(540, 1075);
+		const refreshTablePopup = this.add.container(538, 981);
 		refreshTablePopup.visible = false;
 		popupContainer.add(refreshTablePopup);
 
 		// popuprefresh
-		const popuprefresh = this.add.image(0, -200, "Asset 3@2x");
+		const popuprefresh = this.add.image(2, -121, "Asset 3@2x");
 		popuprefresh.scaleX = 0.5;
 		popuprefresh.scaleY = 0.5;
 		refreshTablePopup.add(popuprefresh);
 
 		// yesRefreshBtn
-		const yesRefreshBtn = this.add.image(-223, 96, "Asset 6@2x");
+		const yesRefreshBtn = this.add.image(-221, 61, "Asset 6@2x");
 		yesRefreshBtn.scaleX = 0.55;
 		yesRefreshBtn.scaleY = 0.55;
 		refreshTablePopup.add(yesRefreshBtn);
 
 		// cancleRefreshBtn
-		const cancleRefreshBtn = this.add.image(219, 96, "Asset 5@2x");
+		const cancleRefreshBtn = this.add.image(221, 61, "Asset 5@2x");
 		cancleRefreshBtn.scaleX = 0.55;
 		cancleRefreshBtn.scaleY = 0.55;
 		refreshTablePopup.add(cancleRefreshBtn);
 
 		// yesRefreshTxt
-		const yesRefreshTxt = this.add.text(-226, 96, "", {});
+		const yesRefreshTxt = this.add.text(-224, 61, "", {});
 		yesRefreshTxt.setOrigin(0.5, 0.5);
 		yesRefreshTxt.text = "YES";
 		yesRefreshTxt.setStyle({ "fontSize": "60px" });
 		refreshTablePopup.add(yesRefreshTxt);
 
 		// noRefreshTxt
-		const noRefreshTxt = this.add.text(219, 96, "", {});
+		const noRefreshTxt = this.add.text(221, 61, "", {});
 		noRefreshTxt.setOrigin(0.5, 0.5);
 		noRefreshTxt.text = "NO";
 		noRefreshTxt.setStyle({ "fontSize": "60px" });
 		refreshTablePopup.add(noRefreshTxt);
 
 		// refreshTableTxt
-		const refreshTableTxt = this.add.text(0, -200, "", {});
+		const refreshTableTxt = this.add.text(2, -121, "", {});
 		refreshTableTxt.setOrigin(0.5, 0.5);
 		refreshTableTxt.text = "Are you sure you want to\n   Refresh this table?";
 		refreshTableTxt.setStyle({ "fontSize": "50px" });
@@ -769,9 +783,11 @@ class Game extends Phaser.Scene {
 		this.txt_set1_opponent_info = txt_set1_opponent_info;
 		this.txt_set2_opponent_info = txt_set2_opponent_info;
 		this.declareCardContainer = declareCardContainer;
-		this.opponentGrp1PhaseCardContainer = opponentGrp1PhaseCardContainer;
 		this.opponentGrp2PhaseCardContainer = opponentGrp2PhaseCardContainer;
+		this.opponentGrp1PhaseCardContainer = opponentGrp1PhaseCardContainer;
 		this.txt_opponentHandCardCounter = txt_opponentHandCardCounter;
+		this.yellow_ring_opponentGrp1 = yellow_ring_opponentGrp1;
+		this.yellow_ring_opponentGrp2 = yellow_ring_opponentGrp2;
 		this.ownPlayerUserNameText = ownPlayerUserNameText;
 		this.ownPlayerScoreText = ownPlayerScoreText;
 		this.playerHandContainer = playerHandContainer;
@@ -914,11 +930,15 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	declareCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
-	opponentGrp1PhaseCardContainer;
-	/** @type {Phaser.GameObjects.Container} */
 	opponentGrp2PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	opponentGrp1PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Text} */
 	txt_opponentHandCardCounter;
+	/** @type {Phaser.GameObjects.Image} */
+	yellow_ring_opponentGrp1;
+	/** @type {Phaser.GameObjects.Image} */
+	yellow_ring_opponentGrp2;
 	/** @type {Phaser.GameObjects.Text} */
 	ownPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -1049,15 +1069,25 @@ class Game extends Phaser.Scene {
 	}
 
 	sendHitCards(allCards, lastCard, agroups) {
-		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } });
-
+		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
+			console.log(response, error);
+		});
 	}
+	sendOpponentHitCards(allCards, lastCard, agroups) {
+		console.log("called hit");
+		console.log(this.secondPlayerId);
+		console.log(allCards,lastCard,agroups);
+		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.secondPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
+			console.log(response, error);
+		});
+	}
+
 	grabOpenDeckCard() {
 		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
 			this.playerHandContainer.removeAll(true);
 			for (let i = 0; i < response.length; i++) {
-				flag = false
-				if(flag == false){
+				var flag = false
+				if (flag == false) {
 					for (let j = 0; j < this.doublePhaseOneCardContainer.getAll().length; j++) {
 						if (this.doublePhaseOneCardContainer.list[j].__CardPreset.cardId == response[i]._id) {
 							flag = true
@@ -1065,7 +1095,7 @@ class Game extends Phaser.Scene {
 						}
 					}
 				}
-				if(flag == false){
+				if (flag == false) {
 					for (let k = 0; k < this.doublePhaseTwoCardContainer.getAll().length; k++) {
 						if (this.doublePhaseTwoCardContainer.list[k].__CardPreset.cardId == response[i]._id) {
 							flag = true
@@ -1100,11 +1130,12 @@ class Game extends Phaser.Scene {
 
 		this.oTweenManager.openPopUp(this.roundWinnerPopupContainer);
 
-		if(data.iUserId === this.oPlayerManager.ownPlayerId){
+		if (data.iUserId === this.oPlayerManager.ownPlayerId) {
 			this.text_round_winner.text = "YOU WON THIS ROUND."
 		}
-		else{
-			this.text_round_winner.text = ( data.sUserName.length == 0 ? data.sMobile : data.sUserName ).toUpperCase(); + " WON THIS ROUND."
+		else {
+			let tempName = data.sUserName.length == 0 ? data.sMobile : data.sUserName
+			this.text_round_winner.text = tempName.toUpperCase(); + " WON THIS ROUND."
 		}
 
 

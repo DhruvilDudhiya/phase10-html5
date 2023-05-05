@@ -517,6 +517,8 @@
                                             "label": "opponent2Grp2PhaseCardContainer",
                                             "scope": "CLASS",
                                             "components": [],
+                                            "x": 285,
+                                            "y": 540,
                                             "list": []
                                         },
                                         {
@@ -525,6 +527,8 @@
                                             "label": "opponent2Grp1PhaseCardContainer",
                                             "scope": "CLASS",
                                             "components": [],
+                                            "x": 285,
+                                            "y": 405,
                                             "list": []
                                         }
                                     ]
@@ -712,6 +716,8 @@
                                             "label": "opponent3Grp2PhaseCardContainer",
                                             "scope": "CLASS",
                                             "components": [],
+                                            "x": 795,
+                                            "y": 540,
                                             "list": []
                                         },
                                         {
@@ -720,6 +726,8 @@
                                             "label": "opponent3Grp1PhaseCardContainer",
                                             "scope": "CLASS",
                                             "components": [],
+                                            "x": 795,
+                                            "y": 405,
                                             "list": []
                                         }
                                     ]
@@ -883,18 +891,22 @@
                                     "list": [
                                         {
                                             "type": "Container",
-                                            "id": "bacb0974-0180-4e71-a301-35f411c49624",
-                                            "label": "opponentGrp1PhaseCardContainer",
-                                            "scope": "CLASS",
-                                            "components": [],
-                                            "list": []
-                                        },
-                                        {
-                                            "type": "Container",
                                             "id": "77a9d60f-8973-437a-92bb-47b35dff91f2",
                                             "label": "opponentGrp2PhaseCardContainer",
                                             "scope": "CLASS",
                                             "components": [],
+                                            "x": 540,
+                                            "y": 545,
+                                            "list": []
+                                        },
+                                        {
+                                            "type": "Container",
+                                            "id": "bacb0974-0180-4e71-a301-35f411c49624",
+                                            "label": "opponentGrp1PhaseCardContainer",
+                                            "scope": "CLASS",
+                                            "components": [],
+                                            "x": 540,
+                                            "y": 410,
                                             "list": []
                                         }
                                     ]
@@ -930,6 +942,36 @@
                                             "fontStyle": "bold"
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "f5d55835-55ab-4ff1-aa7c-2b7ca6e66496",
+                                    "label": "yellow_ring_opponentGrp1",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 540,
+                                    "y": 408,
+                                    "scaleX": 0.81,
+                                    "scaleY": 0.56,
+                                    "visible": false
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "f154502d-57b0-4f32-a56b-a82d7465d74e",
+                                    "label": "yellow_ring_opponentGrp2",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 540,
+                                    "y": 544,
+                                    "scaleX": 0.81,
+                                    "scaleY": 0.56,
+                                    "visible": false
                                 }
                             ]
                         }
@@ -1160,8 +1202,8 @@
                     "label": "leaveTablePopup",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 540,
-                    "y": 1075,
+                    "x": 541,
+                    "y": 981,
                     "visible": false,
                     "list": [
                         {
@@ -1173,7 +1215,8 @@
                             "texture": {
                                 "key": "Asset 3@2x"
                             },
-                            "y": -210,
+                            "x": -1,
+                            "y": -122,
                             "scaleX": 0.5,
                             "scaleY": 0.5
                         },
@@ -1186,8 +1229,8 @@
                             "texture": {
                                 "key": "Asset 6@2x"
                             },
-                            "x": -224,
-                            "y": 96,
+                            "x": -221,
+                            "y": 61,
                             "scaleX": 0.55,
                             "scaleY": 0.55
                         },
@@ -1200,8 +1243,8 @@
                             "texture": {
                                 "key": "Asset 5@2x"
                             },
-                            "x": 219,
-                            "y": 96,
+                            "x": 222,
+                            "y": 61,
                             "scaleX": 0.55,
                             "scaleY": 0.55
                         },
@@ -1211,8 +1254,8 @@
                             "label": "yesLeaveTxt",
                             "scope": "CLASS",
                             "components": [],
-                            "x": -224,
-                            "y": 96,
+                            "x": -221,
+                            "y": 61,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "YES",
@@ -1224,8 +1267,8 @@
                             "label": "noLeaveTxt",
                             "scope": "CLASS",
                             "components": [],
-                            "x": 219,
-                            "y": 96,
+                            "x": 222,
+                            "y": 61,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "NO",
@@ -1237,7 +1280,8 @@
                             "label": "leaveTableTxt",
                             "scope": "CLASS",
                             "components": [],
-                            "y": -210,
+                            "x": -1,
+                            "y": -122,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "Are you sure you want to\n   leave this table?",
@@ -1251,8 +1295,8 @@
                     "label": "refreshTablePopup",
                     "scope": "CLASS",
                     "components": [],
-                    "x": 540,
-                    "y": 1075,
+                    "x": 538,
+                    "y": 981,
                     "visible": false,
                     "list": [
                         {
@@ -1264,7 +1308,8 @@
                             "texture": {
                                 "key": "Asset 3@2x"
                             },
-                            "y": -200,
+                            "x": 2,
+                            "y": -121,
                             "scaleX": 0.5,
                             "scaleY": 0.5
                         },
@@ -1277,8 +1322,8 @@
                             "texture": {
                                 "key": "Asset 6@2x"
                             },
-                            "x": -223,
-                            "y": 96,
+                            "x": -221,
+                            "y": 61,
                             "scaleX": 0.55,
                             "scaleY": 0.55
                         },
@@ -1291,8 +1336,8 @@
                             "texture": {
                                 "key": "Asset 5@2x"
                             },
-                            "x": 219,
-                            "y": 96,
+                            "x": 221,
+                            "y": 61,
                             "scaleX": 0.55,
                             "scaleY": 0.55
                         },
@@ -1302,8 +1347,8 @@
                             "label": "yesRefreshTxt",
                             "scope": "CLASS",
                             "components": [],
-                            "x": -226,
-                            "y": 96,
+                            "x": -224,
+                            "y": 61,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "YES",
@@ -1315,8 +1360,8 @@
                             "label": "noRefreshTxt",
                             "scope": "CLASS",
                             "components": [],
-                            "x": 219,
-                            "y": 96,
+                            "x": 221,
+                            "y": 61,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "NO",
@@ -1328,7 +1373,8 @@
                             "label": "refreshTableTxt",
                             "scope": "CLASS",
                             "components": [],
-                            "y": -200,
+                            "x": 2,
+                            "y": -121,
                             "originX": 0.5,
                             "originY": 0.5,
                             "text": "Are you sure you want to\n   Refresh this table?",

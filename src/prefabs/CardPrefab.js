@@ -164,9 +164,14 @@ class CardPrefab extends Phaser.GameObjects.Container {
 	checkCardInformation(...args) {
 		if (arguments.length == 2) {
 			this.setSpecialCard(args[0], args[1]);
+			this.__CardPreset.cardNumber = args[0];
+            this.__CardPreset.cardId = args[1];
 		}
 		else {
 			this.setNormalCardInformation(args[0], args[1]);
+			this.__CardPreset.cardNumber = args[0];
+            this.__CardPreset.cardColor = args[1];
+            this.__CardPreset.cardId = args[2];
 		}
 	}
 

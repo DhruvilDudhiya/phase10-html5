@@ -143,54 +143,78 @@ class PlayerManager {
 
     opponemtGrpPhaseDeclare(data, phase) {
         this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
-        let startX = 510;
-        let startY = phase == 1 ? 410 : 544
+        // let startX = 510;
+        // let startY = phase == 1 ? 410 : 544
         if (this.declarePhaseCardInfo !== undefined) {
-            for (let j = 0; j < this.declarePhaseCardInfo.length; j++) {
-                this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
+            for (let i = 0; i < this.declarePhaseCardInfo.length; i++) {
+                this.declarePhaseCard = new CardPrefab(this.oScene, 0, 0);
                 this.declarePhaseCard.setScale(0.5)
                 this.declarePhaseCard.disableInteractive();
 
-                if (phase == 1) this.oScene.opponentGrp1PhaseCardContainer.add(this.declarePhaseCard)
-                else if (phase == 2) this.oScene.opponentGrp2PhaseCardContainer.add(this.declarePhaseCard)
 
-                if (this.declarePhaseCardInfo[j].nLabel <= 12) {
-                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].nLabel, this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
+                if (this.declarePhaseCardInfo[i].nLabel <= 12) {
+                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[i].nLabel, this.declarePhaseCardInfo[i].eColor, this.declarePhaseCardInfo[i]._id);
+                    this.declarePhaseCard.__CardPreset.cardNumber = this.declarePhaseCardInfo[i].nLabel;
+                    this.declarePhaseCard.__CardPreset.cardColor = this.declarePhaseCardInfo[i].eColor;
+                    this.declarePhaseCard.__CardPreset.cardId = this.declarePhaseCardInfo[i]._id;
                 } else {
-                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
+                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[i].eColor, this.declarePhaseCardInfo[i]._id);
+                    this.declarePhaseCard.__CardPreset.cardNumber = this.declarePhaseCardInfo[i].eColor;
+                    this.declarePhaseCard.__CardPreset.cardId = this.declarePhaseCardInfo[i]._id;
                 }
-                startX += 30;
+                if (phase == 1) {
+                    this.oScene.opponentGrp1PhaseCardContainer.add(this.declarePhaseCard)
+                    this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponentGrp1PhaseCardContainer);
+                }
+                else if (phase == 2) {
+                    this.oScene.opponentGrp2PhaseCardContainer.add(this.declarePhaseCard)
+                    this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponentGrp2PhaseCardContainer);
+                }
             }
         }
     }
 
     opponemt2GrpPhaseDeclare(data, phase, player) {
         this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
-        let startX = player === "Player1" ? 255 : 765;
-        let startY = phase == 1 ? 407 : 543
+        // let startX = player === "Player1" ? 255 : 765;
+        // let startY = phase == 1 ? 407 : 543
         if (this.declarePhaseCardInfo !== undefined) {
-            for (let j = 0; j < this.declarePhaseCardInfo.length; j++) {
+            for (let i = 0; i < this.declarePhaseCardInfo.length; i++) {
 
-                this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
+                this.declarePhaseCard = new CardPrefab(this.oScene, 0, 0);
                 this.declarePhaseCard.setScale(0.5)
                 this.declarePhaseCard.disableInteractive();
 
+                if (this.declarePhaseCardInfo[i].nLabel <= 12) {
+                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[i].nLabel, this.declarePhaseCardInfo[i].eColor, this.declarePhaseCardInfo[i]._id);
+                    this.declarePhaseCard.__CardPreset.cardNumber = this.declarePhaseCardInfo[i].nLabel;
+                    this.declarePhaseCard.__CardPreset.cardColor = this.declarePhaseCardInfo[i].eColor;
+                    this.declarePhaseCard.__CardPreset.cardId = this.declarePhaseCardInfo[i]._id;
+                } else {
+                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[i].eColor, this.declarePhaseCardInfo[i]._id);
+                    this.declarePhaseCard.__CardPreset.cardNumber = this.declarePhaseCardInfo[i].eColor;
+                    this.declarePhaseCard.__CardPreset.cardId = this.declarePhaseCardInfo[i]._id;
+                }
                 if (player === "Player1") {
-                    if (phase == 1) this.oScene.opponent2Grp1PhaseCardContainer.add(this.declarePhaseCard)
-                    else if (phase == 2) this.oScene.opponent2Grp2PhaseCardContainer.add(this.declarePhaseCard)
+                    if (phase == 1) {
+                        this.oScene.opponent2Grp1PhaseCardContainer.add(this.declarePhaseCard)
+                        this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponent2Grp1PhaseCardContainer);
+                    }
+                    else if (phase == 2) {
+                        this.oScene.opponent2Grp2PhaseCardContainer.add(this.declarePhaseCard)
+                        this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponent2Grp2PhaseCardContainer);
+                    }
                 }
                 else {
-                    if (phase == 1) this.oScene.opponent3Grp1PhaseCardContainer.add(this.declarePhaseCard)
-                    else if (phase == 2) this.oScene.opponent3Grp2PhaseCardContainer.add(this.declarePhaseCard)
+                    if (phase == 1) {
+                        this.oScene.opponent3Grp1PhaseCardContainer.add(this.declarePhaseCard)
+                        this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponent3Grp1PhaseCardContainer);
+                    }
+                    else if (phase == 2) {
+                        this.oScene.opponent3Grp2PhaseCardContainer.add(this.declarePhaseCard)
+                        this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponent3Grp2PhaseCardContainer);
+                    }
                 }
-
-                if (this.declarePhaseCardInfo[j].nLabel <= 12) {
-                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].nLabel, this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
-                } else {
-                    this.declarePhaseCard.checkCardInformation(this.declarePhaseCardInfo[j].eColor, this.declarePhaseCardInfo[j]._id);
-                }
-
-                startX += 30;
             }
         }
     }
@@ -198,21 +222,21 @@ class PlayerManager {
 
     opponentHitPhaseCard(data) {
         let tempContainer;
-        let startY, startX;
+        // let startY, startX;
 
         if (this.oScene.ownPlayerId !== data.iHUserId) {
             if (this.oScene.nMaxPlayer === 2) {
                 if (data.sGroup === "aGroup-1") {
                     this.clearContainerData(this.oScene.opponentGrp1PhaseCardContainer)
                     tempContainer = this.oScene.opponentGrp1PhaseCardContainer;
-                    startY = 410;
+                    // startY = 0;
                 }
                 else if (data.sGroup === "aGroup-2") {
                     this.clearContainerData(this.oScene.opponentGrp2PhaseCardContainer)
                     tempContainer = this.oScene.opponentGrp2PhaseCardContainer;
-                    startY = 544;
+                    // startY = 0;
                 }
-                startX = 510;
+                // startX = 0;
             }
             else if (this.oScene.nMaxPlayer == 3) {
                 for (let i = 0; i < this.oScene.playersContainer.length; i++) {
@@ -221,48 +245,57 @@ class PlayerManager {
                             if (data.sGroup === "aGroup-1") {
                                 this.clearContainerData(this.oScene.opponent2Grp1PhaseCardContainer);
                                 tempContainer = this.oScene.opponent2Grp1PhaseCardContainer;
-                                startY = 410;
+                                // startY = 410;
                             }
                             else if (data.sGroup === "aGroup-2") {
                                 this.clearContainerData(this.oScene.opponent2Grp2PhaseCardContainer);
                                 tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
-                                startY = 544;
+                                // startY = 544;
                             }
-                            startX = 255;
+                            // startX = 255;
                         }
                         else {
                             if (data.sGroup === "aGroup-1") {
                                 this.clearContainerData(this.oScene.opponent3Grp1PhaseCardContainer);
                                 tempContainer = this.oScene.opponent3Grp1PhaseCardContainer;
-                                startY = 410;
+                                // startY = 410;
                             }
                             else if (data.sGroup === "aGroup-2") {
                                 this.clearContainerData(this.oScene.opponent3Grp2PhaseCardContainer);
                                 tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
-                                startY = 544;
+                                // startY = 544;
                             }
-                            startX = 765;
+                            // startX = 765;
                         }
                     }
                 }
             }
-            this.setOpponentHitPhaseCard(data, tempContainer, startX, startY);
+            this.setOpponentHitPhaseCard(data, tempContainer);
         }
     }
 
-    setOpponentHitPhaseCard(data, container, startX, startY) {
+    setOpponentHitPhaseCard(data, container) {
         for (let i = 0; i < data.aCards.length; i++) {
-            this.declarePhaseCard = new CardPrefab(this.oScene, startX, startY);
+            this.declarePhaseCard = new CardPrefab(this.oScene, 0, 0);
             this.declarePhaseCard.setScale(0.5)
-            container.add(this.declarePhaseCard)
+            this.declarePhaseCard.cCardID = data.aCards[i]._id;
+            this.declarePhaseCard.cCardLable = data.aCards[i].nLabel;
+            this.declarePhaseCard.cCardColor = data.aCards[i].eColor;
+
             this.declarePhaseCard.disableInteractive();
 
             if (data.aCards[i].nLabel <= 12) {
                 this.declarePhaseCard.checkCardInformation(data.aCards[i].nLabel, data.aCards[i].eColor, data.aCards[i]._id);
+                this.declarePhaseCard.__CardPreset.cardNumber = data.aCards[i].nLabel;
+                this.declarePhaseCard.__CardPreset.cardColor = data.aCards[i].eColor;
+                this.declarePhaseCard.__CardPreset.cardId = data.aCards[i]._id;
             } else {
                 this.declarePhaseCard.checkCardInformation(data.aCards[i].eColor, data.aCards[i]._id);
+                this.declarePhaseCard.__CardPreset.cardNumber = data.aCards[i].eColor;
+                this.declarePhaseCard.__CardPreset.cardId = data.aCards[i]._id;
             }
-            startX += 30;
+            container.add(this.declarePhaseCard)
+            this.oScene.oPlayerHand.arrangeOpponentDeclareCards(container);
         }
     }
 

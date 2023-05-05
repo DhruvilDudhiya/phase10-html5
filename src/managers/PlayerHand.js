@@ -137,9 +137,9 @@ class PlayerHand {
             else {
                 this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
             }
-        }else{
-              data.aOpenDeck.pop();
-              this.oScene.isGrabCard = false;
+        } else {
+            data.aOpenDeck.pop();
+            this.oScene.isGrabCard = false;
         }
     }
 
@@ -185,6 +185,20 @@ class PlayerHand {
             if (handData.iDiscardCardId == data.__CardPreset.cardId) {
                 this.oScene.doublePhaseTwoCardContainer.remove(data, true);
             }
+        });
+    }
+
+    arrangeOpponentDeclareCards(container) {
+        let lengthOfHand = container.getAll().length;
+        let centerGap = 0;
+        let cardGap = 30;
+        if (Number.isInteger(lengthOfHand) && !isNaN(lengthOfHand)) {
+            centerGap = cardGap / 2;
+        }
+        let nFirstCardPosition = ((lengthOfHand / 2) - 1) * -cardGap;
+        container.getAll().forEach(card => {
+            card.setPosition(nFirstCardPosition - centerGap, 0);
+            nFirstCardPosition += cardGap;
         });
     }
 }
