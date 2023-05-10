@@ -82,7 +82,6 @@ class Game extends Phaser.Scene {
 
 		// singlePhaseContainer
 		const singlePhaseContainer = this.add.container(0, 0);
-		singlePhaseContainer.visible = false;
 		phaseContainer.add(singlePhaseContainer);
 
 		// single_phase
@@ -93,6 +92,11 @@ class Game extends Phaser.Scene {
 		const sp_yellow_ring = this.add.image(540, 1215, "yellow-ring-single");
 		sp_yellow_ring.visible = false;
 		singlePhaseContainer.add(sp_yellow_ring);
+
+		// singlePhaseOneContainer
+		const singlePhaseOneContainer = this.add.container(540, 1220);
+		singlePhaseOneContainer.name = "singlePhaseOneContainer";
+		singlePhaseContainer.add(singlePhaseOneContainer);
 
 		// phaseTextContainer
 		const phaseTextContainer = this.add.container(0, 0);
@@ -745,6 +749,7 @@ class Game extends Phaser.Scene {
 		this.doublePhaseOneCardContainer = doublePhaseOneCardContainer;
 		this.singlePhaseContainer = singlePhaseContainer;
 		this.sp_yellow_ring = sp_yellow_ring;
+		this.singlePhaseOneContainer = singlePhaseOneContainer;
 		this.totalPhasesText = totalPhasesText;
 		this.phaseOneText = phaseOneText;
 		this.phaseTwoText = phaseTwoText;
@@ -854,6 +859,8 @@ class Game extends Phaser.Scene {
 	singlePhaseContainer;
 	/** @type {Phaser.GameObjects.Image} */
 	sp_yellow_ring;
+	/** @type {Phaser.GameObjects.Container} */
+	singlePhaseOneContainer;
 	/** @type {Phaser.GameObjects.Text} */
 	totalPhasesText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -1074,17 +1081,15 @@ class Game extends Phaser.Scene {
 	sendOpponentHitCards(allCards, lastCard, agroups) {
 		console.log("called hit");
 		console.log(this.secondPlayerId);
-		console.log(allCards,lastCard,agroups);
+		console.log(allCards, lastCard, agroups);
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.secondPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
 			console.log("------------>>>>>> sendOpponentHitCards ", "response", response, "error", error);
-			if(response != null) {
+			if (response != null) {
 				console.log("response", response);
-				// give the info fot the plase wait for your turn
-				if(response.message == "Please wait for your turn."){
-					return true;
-				}
+				// give the info fot the plase wait for your turn\
+				return true;
 			}
-			else if(error != undefined){
+			else if (error != undefined) {
 				console.log("error", error);
 				this.playerHandContainer.removeAll(true);
 				this.oPlayerHand.getHandData(error);
@@ -1098,7 +1103,7 @@ class Game extends Phaser.Scene {
 			this.playerHandContainer.removeAll(true);
 			for (let i = 0; i < response.length; i++) {
 				var flag = false
-				if(flag == false){
+				if (flag == false) {
 					for (let j = 0; j < this.doublePhaseOneCardContainer.getAll().length; j++) {
 						if (this.doublePhaseOneCardContainer.list[j].__CardPreset.cardId == response[i]._id) {
 							flag = true
@@ -1139,17 +1144,19 @@ class Game extends Phaser.Scene {
 		// this.oPlayerHand.clearPlayerHandCard();
 
 		this.oPlayerPrefab.intervalTimeReset();
-        this.playerHandContainer.removeAll(true);
+		this.playerHandContainer.removeAll(true);
 		this.discardDeckContainer.removeAll(true);
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
+		this.opponentGrp1PhaseCardContainer.removeAll(true);
+		this.opponentGrp2PhaseCardContainer.removeAll(true);
 
 		this.oTweenManager.openPopUp(this.roundWinnerPopupContainer);
-		if(data.iUserId === this.oPlayerManager.ownPlayerId){
+		if (data.iUserId === this.oPlayerManager.ownPlayerId) {
 			this.text_round_winner.text = "YOU WON THIS ROUND.";
 		}
-		else{
-			this.text_round_winner.text = (( data.sUserName.length == 0 ? data.sMobile : data.sUserName ).toUpperCase()) + " WON THIS ROUND.";
+		else {
+			this.text_round_winner.text = ((data.sUserName.length == 0 ? data.sMobile : data.sUserName).toUpperCase()) + " WON THIS ROUND.";
 		}
 	}
 

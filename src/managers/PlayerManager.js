@@ -226,34 +226,33 @@ class PlayerManager {
 
     opponentHitPhaseCard(data) {
         let tempContainer;
-        // let startY, startX;
-
-        if (this.oScene.ownPlayerId !== data.iHUserId) {
-            console.log("opponet card and player history");
+        if (this.oScene.ownPlayerId !== data.iHrUserId) {
             if (this.oScene.nMaxPlayer === 2) {
                 if (data.sGroup === "aGroup-1") {
-                    this.clearContainerData(this.oScene.opponentGrp1PhaseCardContainer)
+                    console.log("opponet card and player history11");
+                    console.log(this.oScene.opponentGrp1PhaseCardContainer);
+                    this.oScene.opponentGrp1PhaseCardContainer.removeAll(true);
                     tempContainer = this.oScene.opponentGrp1PhaseCardContainer;
-                    // startY = 0;
                 }
                 else if (data.sGroup === "aGroup-2") {
-                    this.clearContainerData(this.oScene.opponentGrp2PhaseCardContainer)
+                    console.log("opponet card and player history12");
+                    console.log(this.oScene.opponentGrp2PhaseCardContainer);
+                    this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
                     tempContainer = this.oScene.opponentGrp2PhaseCardContainer;
-                    // startY = 0;
                 }
-                // startX = 0;
             }
             else if (this.oScene.nMaxPlayer == 3) {
+                console.log("opponet card and player history3");
                 for (let i = 0; i < this.oScene.playersContainer.length; i++) {
                     if (this.oScene.playersContainer.getAll()[i].name === data.iHUserId) {
                         if (this.oScene.playersContainer.getAll()[i].x < 540) {
                             if (data.sGroup === "aGroup-1") {
-                                this.clearContainerData(this.oScene.opponent2Grp1PhaseCardContainer);
+                                this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
                                 tempContainer = this.oScene.opponent2Grp1PhaseCardContainer;
                                 // startY = 410;
                             }
                             else if (data.sGroup === "aGroup-2") {
-                                this.clearContainerData(this.oScene.opponent2Grp2PhaseCardContainer);
+                                this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
                                 tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
                                 // startY = 544;
                             }
@@ -261,12 +260,12 @@ class PlayerManager {
                         }
                         else {
                             if (data.sGroup === "aGroup-1") {
-                                this.clearContainerData(this.oScene.opponent3Grp1PhaseCardContainer);
+                                this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
                                 tempContainer = this.oScene.opponent3Grp1PhaseCardContainer;
                                 // startY = 410;
                             }
                             else if (data.sGroup === "aGroup-2") {
-                                this.clearContainerData(this.oScene.opponent3Grp2PhaseCardContainer);
+                                this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
                                 tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
                                 // startY = 544;
                             }

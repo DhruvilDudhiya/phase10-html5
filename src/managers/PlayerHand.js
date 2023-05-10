@@ -225,28 +225,18 @@ class PlayerHand {
             }
         });
     }
-
     arrangeOpponentDeclareCards(container) {
         let lengthOfHand = container.getAll().length;
         let centerGap = 0;
         let cardGap = 30;
-        console.log("arrange card successfully");
         if (Number.isInteger(lengthOfHand) && !isNaN(lengthOfHand)) {
             centerGap = cardGap / 2;
         }
-
         let nFirstCardPosition = ((lengthOfHand / 2) - 1) * (-cardGap);
-        console.log("card position", nFirstCardPosition);
 
         container.getAll().forEach(card => {
             card.setPosition(nFirstCardPosition - centerGap, 0);
             nFirstCardPosition += cardGap;
-            console.log("card position", nFirstCardPosition);
         });
-
-        // container.getAll().forEach(card => {
-        //     card.setPosition(nFirstCardPosition - centerGap, 0);
-        //     nFirstCardPosition += cardGap;
-        // });
     }
 }

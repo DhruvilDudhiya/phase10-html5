@@ -186,7 +186,6 @@
                             "label": "singlePhaseContainer",
                             "scope": "CLASS",
                             "components": [],
-                            "visible": false,
                             "list": [
                                 {
                                     "type": "Image",
@@ -211,6 +210,19 @@
                                     "x": 540,
                                     "y": 1215,
                                     "visible": false
+                                },
+                                {
+                                    "type": "Container",
+                                    "id": "a82ba741-37c7-4274-87b5-ae9ad9e24f32",
+                                    "label": "singlePhaseOneContainer",
+                                    "useGameObjectName": true,
+                                    "scope": "CLASS",
+                                    "components": [
+                                        "Ruleset"
+                                    ],
+                                    "x": 540,
+                                    "y": 1220,
+                                    "list": []
                                 }
                             ]
                         },

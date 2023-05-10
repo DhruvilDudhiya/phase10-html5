@@ -79,119 +79,70 @@ class Ruleset {
     // Rule ==========> Run
     validateRulesetOfRun(totalCards, containerName, validateData) {
         console.log(" ValidateRule of Run ===>", totalCards, containerName);
+        this.grp1Data = [];
+        this.grp2Data = [];
         if (this.cardNumbers.length == totalCards) {
-            if (this.cardNumbers.every(element => element !== 's')) {
-                if (containerName == 'doublePhaseOneCardContainer') {
-                    console.log("cont 1");
-                    this.grp1Data =[];
-                    // this.checkRule(this.cardNumbers , validateData , this.grp1Data);
-                    let copy = this.cardNumbers;
-                    let wildArr = [];
-                    let count = 0;
-                    let t = 0;
-                    
-                    wildArr = this.cardNumbers.filter((a) => a !== "w").sort((a, b) => a - b);
-                    let c = this.cardNumbers.length - wildArr.length;
-                    let temp = c;
-                    this.cardNumbers = [];
-                    let data = 0;
-                    for (let i = 0; i < wildArr.length - 1; i++) {
-                        data = wildArr[i];
-                        count = ((wildArr[i + 1] - wildArr[i]) - 1);
-                        t += count;
-                        while (count--) {
-                            if (c != 0) {
-                                this.cardNumbers.push(++data);
-                                c--;
-                            }
-                            else {
-                                break;
-                            }
-                        }
-                    }
-                    while (c--) {
-                        this.cardNumbers.push(wildArr[wildArr.length - 1]++);
-                    }
-            
-                    t = 0;
-                    for (let i = 0; i < wildArr.length - 1; i++) {
-                        count = ((wildArr[i + 1] - wildArr[i]) - 1);
-                        t += count;
-                    }
-            
-                    wildArr.push(...this.cardNumbers);
-                    wildArr.sort((a, b) => a - b);
-            
-                    if (temp >= t) {
-                        this.grp1Data = [];
-                        for (let i = 0; i < copy.length; i++) {
-                            if (copy[i] == "w") {
-                                this.grp1Data.push({ nLabel: 13, eColor: this.cardColors[i], _id: this.cardIds[i] })
-                            }
-                            else {
-                                this.grp1Data.push({ nLabel: copy[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
-                            }
-                        }
-                        this.oScene.dp_yellow_ring_1.setVisible(true);
-                        this.oScene.oPlayerManager.handleDeclareButtons()
-                    }
-                }
-                if (containerName == 'doublePhaseTwoCardContainer') {
-                    console.log("con 2");
-                    this.checkRule(this.cardNumbers , validateData , this.grp2Data) ;
-                    this.grp2Data =[];
-                    let copy = this.cardNumbers;
-                    let wildArr = [];
-                    let count = 0;
-                    let t = 0;
-                    wildArr = this.cardNumbers.filter((a) => a !== "w").sort((a, b) => a - b);
-                    let c = this.cardNumbers.length - wildArr.length;
-                    let temp = c;
-                    this.cardNumbers = [];
-                    let data = 0;
-                    for (let i = 0; i < wildArr.length - 1; i++) {
-                        data = wildArr[i];
-                        count = ((wildArr[i + 1] - wildArr[i]) - 1);
-                        t += count;
-                        while (count--) {
-                            if (c != 0) {
-                                this.cardNumbers.push(++data);
-                                c--;
-                            }
-                            else {
-                                break;
-                            }
-                        }
-                    }
-                    while (c--) {
-                        this.cardNumbers.push(wildArr[wildArr.length - 1]++);
-                    }
-            
-                    t = 0;
-                    for (let i = 0; i < wildArr.length - 1; i++) {
-                        count = ((wildArr[i + 1] - wildArr[i]) - 1);
-                        t += count;
-                    }
-            
-                    wildArr.push(...this.cardNumbers);
-                    wildArr.sort((a, b) => a - b);
-            
-                    if (temp >= t) {
-                        this.grp2Data = [];
-                        for (let i = 0; i < copy.length; i++) {
-                            if (copy[i] == "w") {
-                                this.grp2Data.push({ nLabel: 13, eColor: this.cardColors[i], _id: this.cardIds[i] })
-                            }
-                            else {
-                                this.grp2Data.push({ nLabel: copy[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
-                            }
-                        }
-                        this.oScene.dp_yellow_ring_2.setVisible(true);
-                        this.oScene.oPlayerManager.handleDeclareButtons()
-                    }
+            if (containerName == 'doublePhaseOneCardContainer') {
+                this.checkRule(this.cardNumbers, this.grp1Data, validateData)
+            }
+            if (containerName == 'doublePhaseTwoCardContainer') {
+                this.checkRule(this.cardNumbers, this.grp2Data, validateData)
+            }
+        }
+    }
+    checkRule(cardNumberArray, grp, containerData) {
+        console.log("cardData", cardNumberArray);
+        let sortedNumbers = [...cardNumberArray];
+        let tempArray = [];
+        let isWildCard = false;
+        let wildCount = 0;
+        let isSquence = true;
+        tempArray = cardNumberArray.filter((value) => {
+            if (value != "w") {
+                return value;
+            } else if (value == "w") {
+                wildCount++;
+            }
+        }).sort((a, b) => {
+            return a - b;
+        })
+        if (wildCount == 0) {
+            for (let i = 0; i < tempArray.length - 1; i++) {
+                if (tempArray[i] + 1 != tempArray[i + 1]) {
+                    isSquence = false;
+                    break;
                 }
             }
+            if (isSquence) {
+                isWildCard = true
+            }
+        } else {
+            for (let i = 0; i < tempArray.length - 1; i++) {
+                let x = tempArray[i];
+                let y = tempArray[i + 1];
+                let ans = (y - x) - 1;
+                wildCount = wildCount - ans;
+            } if (wildCount >= 0) {
+                isWildCard = true
+            }
 
+
+        }
+        if (isWildCard == true) {
+            for (let i = 0; i < sortedNumbers.length; i++) {
+                if (sortedNumbers[i] == "w") {
+                    sortedNumbers[i] = 13;
+                }
+            }
+            console.log("conform", sortedNumbers);
+            this.oScene.dp_yellow_ring_2.visible = true;
+            this.oScene.oPlayerManager.handleDeclareButtons();
+            for (let i = 0; i < containerData.list.length; i++) {
+                grp.push({ nLabel: this.cardNumbers[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
+            }
+            console.log("RunCARD DATA", grp);
+        } else {
+            console.log("not sequence", sortedNumbers);
         }
     }
 
@@ -199,9 +150,6 @@ class Ruleset {
         this.oScene.oSocketManager.emit('reqSkipUser', { 'iCardId': cardData.__CardPreset.cardId, 'iUserId': this.oScene.secondPlayerId });
 
         cardData.destroy();
-    }
-    checkRule(cardNumberArray ,validateData , grp){
-       
     }
 
 }
