@@ -80,7 +80,7 @@ class SocketManager {
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
             case "resHand":
-                this.oScene.oTweenManager.startHandCardsDistribution(data);
+                this.oScene.oTweenManager.startHandCardsDistribution(data.oData);
                 break;
             case "resHighCards":
                 this.oScene.oPlayerHand.arrangePlayerHighCards(data.oData);
@@ -108,13 +108,15 @@ class SocketManager {
                 this.oScene.oPlayerHand.receiveOpenedDeckCard(data.oData);
                 break;
             case 'resHit':
-                this.oScene.oPlayerManager.opponentHitPhaseCard(data.oData)
+                console.log("resHit", data);
+                this.oScene.oPlayerManager.opponentHitPhaseCard(data.oData);
                 break;
             case "resAutoDiscard":
                 this.oScene.oPlayerHand.setAutoDiscard(data.oData);
                 break;
             case "resDeclarePhase":
-                this.oScene.oPlayerManager.opponentDeclarePhase(data.oData)
+                console.log("resDeclarePhase", data);
+                    this.oScene.oPlayerManager.opponentDeclarePhase(data.oData);
                 break;
             case "resRoundOver":
                 this.oScene.setRoundOver(data.oData);

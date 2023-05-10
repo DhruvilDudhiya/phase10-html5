@@ -11,7 +11,8 @@ class InputManager {
             if (this.oScene.oGameManager.isOwnTurn == true) {
                 if (this.oScene.oGameManager.isGrabCard == false) {
                     this.oScene.oSocketManager.emit('reqClosedCard', {}, (error, response) => {
-                        if (response.length > this.oScene.playerHandContainer.length) {-
+                        console.log("responce", response,"error", error);
+                        if (response.length > this.oScene.playerHandContainer.length && this.oScene.oGameManager.isGrabCard == false) {
                             this.oScene.oPlayerHand.getNewCardData(response[response.length - 1]);
                             this.oScene.oGameManager.isGrabCard = true;
                             this.oScene.oGameManager.isGrabCardCloseDake = true;
@@ -21,7 +22,6 @@ class InputManager {
                         }
                     });
                 }
-
             }
         });
 

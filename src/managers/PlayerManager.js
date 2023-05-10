@@ -114,13 +114,19 @@ class PlayerManager {
     }
 
     opponentDeclarePhase(data) {
+        console.log("data =============> ", data);
         if (this.oScene.ownPlayerId != data.iUserId) {
+            this.oScene.opponentGrp1PhaseCardContainer.removeAll(true);
+            this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
+
             if (this.oScene.nMaxPlayer == 2) {
+                console.log("nMaxPlayer =============> ", this.oScene.nMaxPlayer);
                 this.oScene.txt_set2_opponent_info.text = this.oScene.txt_set1_opponent_info.text = "";
                 this.opponemtGrpPhaseDeclare(data, 1);
                 this.opponemtGrpPhaseDeclare(data, 2);
             }
             else if (this.oScene.nMaxPlayer == 3) {
+                console.log("nMaxPlayer =============> ", this.oScene.nMaxPlayer);
                 for (let i = 0; i < this.oScene.playersContainer.length; i++) {
                     if (this.oScene.playersContainer.getAll()[i].name === data.iUserId) {
                         if (this.oScene.playersContainer.getAll()[i].x < 540) {
@@ -143,7 +149,7 @@ class PlayerManager {
         this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
         // let startX = 510;
         // let startY = phase == 1 ? 410 : 544
-        if (this.declarePhaseCardInfo !== undefined) {
+        if (this.declarePhaseCardInfo != undefined) {
             for (let i = 0; i < this.declarePhaseCardInfo.length; i++) {
                 this.declarePhaseCard = new CardPrefab(this.oScene, 0, 0);
                 this.declarePhaseCard.setScale(0.5)
@@ -223,6 +229,7 @@ class PlayerManager {
         // let startY, startX;
 
         if (this.oScene.ownPlayerId !== data.iHUserId) {
+            console.log("opponet card and player history");
             if (this.oScene.nMaxPlayer === 2) {
                 if (data.sGroup === "aGroup-1") {
                     this.clearContainerData(this.oScene.opponentGrp1PhaseCardContainer)
@@ -279,6 +286,7 @@ class PlayerManager {
             this.declarePhaseCard.cCardID = data.aCards[i]._id;
             this.declarePhaseCard.cCardLable = data.aCards[i].nLabel;
             this.declarePhaseCard.cCardColor = data.aCards[i].eColor;
+            this.declarePhaseCard.nGroupId = data.aCards[i].nGroupId;
 
             this.declarePhaseCard.disableInteractive();
 

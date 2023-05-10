@@ -7,18 +7,18 @@ class PlayerHand {
     }
 
     getHandData(data) {
-        for (let i = 0; i <= 9; i++) {
+        for (let i = 0; i < data.length; i++) {
 
-            this.cCardID = data.oData[i]._id;
-            this.cCardLable = data.oData[i].nLabel;
-            this.cCardColor = data.oData[i].eColor;
-            this.cCardGroup = data.oData[i].nGroupId;
+            this.cCardID = data[i]._id;
+            this.cCardLable = data[i].nLabel;
+            this.cCardColor = data[i].eColor;
+            this.cCardGroup = data[i].nGroupId;
 
-            if (data.oData[i].nLabel <= 12) {
-                this.setPlayerHand(data.oData[i].nLabel, data.oData[i].eColor, data.oData[i]._id);
+            if (data[i].nLabel <= 12) {
+                this.setPlayerHand(data[i].nLabel, data[i].eColor, data[i]._id);
             }
             else {
-                this.setPlayerHand(data.oData[i].eColor, data.oData[i]._id);
+                this.setPlayerHand(data[i].eColor, data[i]._id);
             }
         }
     }
@@ -120,22 +120,56 @@ class PlayerHand {
 
 
     receiveOpenedDeckCard(data) {
-        this.chakeLastCardSkip = (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel == 14) ? true : false;
-        if (data.sAction == "put") {
-            if (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel <= 12) {
-                this.cCardID = data.aOpenDeck[data.aOpenDeck.length - 1]._id;
-                this.cCardLable = data.aOpenDeck[data.aOpenDeck.length - 1].nLabel;
-                this.cCardColor = data.aOpenDeck[data.aOpenDeck.length - 1].eColor;
-                this.cCardGroup = data.aOpenDeck[data.aOpenDeck.length - 1].nGroupId;
-                this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].nLabel, data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
-            }
-            else {
-                this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
-            }
-        } else {
-            data.aOpenDeck.pop();
-            this.oScene.isGrabCard = false;
+        console.log(data.aOpenDeck);
+        this.chakeLastCardSkip = true;
+        if(data.aOpenDeck.length != 0){
+            this.chakeLastCardSkip = (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel == 14) ? true : false;
         }
+        if(data.aOpenDeck.length != 0){
+            this.oScene.discardDeckContainer.removeAll(true);
+            for(let j = 0; j < data.aOpenDeck.length; j++){
+                if (data.aOpenDeck[j].nLabel <= 12) {
+                    this.setDiscardDeck(data.aOpenDeck[j].nLabel, data.aOpenDeck[j].eColor, data.aOpenDeck[j]._id);
+                }
+                else {
+                    this.setDiscardDeck(data.aOpenDeck[j].eColor, data.aOpenDeck[j]._id);
+                }
+            }
+            if (data.sAction != "put") {
+                this.oScene.isGrabCard = true;
+            }
+        }
+        // else if(data.sAction != "put"){
+        // }
+
+
+        // if (data.sAction == "put") {
+        //     console.log(data.sAction);
+        //     console.log(this.oScene.discardDeckContainer);
+        //     if (data.aOpenDeck[data.aOpenDeck.length - 1].nLabel <= 12) {
+        //         this.cCardID = data.aOpenDeck[data.aOpenDeck.length - 1]._id;
+        //         this.cCardLable = data.aOpenDeck[data.aOpenDeck.length - 1].nLabel;
+        //         this.cCardColor = data.aOpenDeck[data.aOpenDeck.length - 1].eColor;
+        //         this.cCardGroup = data.aOpenDeck[data.aOpenDeck.length - 1].nGroupId;
+        //         this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].nLabel, data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
+        //     }
+        //     else {
+        //         this.setDiscardDeck(data.aOpenDeck[data.aOpenDeck.length - 1].eColor, data.aOpenDeck[data.aOpenDeck.length - 1]._id);
+        //     }
+        // } else {
+        //     // remove last card in discard card container
+        //     // data.aOpenDeck.pop();
+        //     console.log(data.sAction);
+        //     console.log(this.oScene.discardDeckContainer);
+
+        //     this.oScene.discardDeckContainer.list.forEach((arrData, i) => {
+        //         if(i == data.aOpenDeck.length - 1){
+        //             this.oScene.discardDeckContainer.remove(arrData, true);
+        //         }
+        //     });
+
+        //     this.oScene.isGrabCard = false;
+        // }
     }
 
     setDiscardDeck(...args) {
@@ -145,13 +179,22 @@ class PlayerHand {
         this.discardCard.cCardColor = this.cCardColor;
         this.discardCard.cCardGroup = this.cCardGroup;
 
-        this.oScene.discardDeckContainer.add(this.discardCard);
+        this.oScene.discardDeckContainer.add(this.discardCard); // add to discard card container
+        this.discardCard.disableInteractive();
+
         this.discardCard.setPosition(this.oScene.openedCardDeck.x, this.oScene.openedCardDeck.y);
         if (arguments.length == 2) {
             this.discardCard.checkCardInformation(args[0], args[1]);
+
+            this.discardCard.__CardPreset.cardNumber = args[0];
+            this.discardCard.__CardPreset.cardId = args[1];
         }
         else {
             this.discardCard.checkCardInformation(args[0], args[1], args[2]);
+
+            this.discardCard.__CardPreset.cardNumber = args[0];
+            this.discardCard.__CardPreset.cardColor = args[1];
+            this.discardCard.__CardPreset.cardId = args[2];
         }
     }
 
@@ -187,13 +230,23 @@ class PlayerHand {
         let lengthOfHand = container.getAll().length;
         let centerGap = 0;
         let cardGap = 30;
+        console.log("arrange card successfully");
         if (Number.isInteger(lengthOfHand) && !isNaN(lengthOfHand)) {
             centerGap = cardGap / 2;
         }
-        let nFirstCardPosition = ((lengthOfHand / 2) - 1) * -cardGap;
+
+        let nFirstCardPosition = ((lengthOfHand / 2) - 1) * (-cardGap);
+        console.log("card position", nFirstCardPosition);
+
         container.getAll().forEach(card => {
             card.setPosition(nFirstCardPosition - centerGap, 0);
             nFirstCardPosition += cardGap;
+            console.log("card position", nFirstCardPosition);
         });
+
+        // container.getAll().forEach(card => {
+        //     card.setPosition(nFirstCardPosition - centerGap, 0);
+        //     nFirstCardPosition += cardGap;
+        // });
     }
 }

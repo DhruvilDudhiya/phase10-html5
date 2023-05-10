@@ -1066,8 +1066,9 @@ class Game extends Phaser.Scene {
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } });
 	}
 	sendHitCards(allCards, lastCard, agroups) {
+		console.log("send cards");
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.ownPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
-			console.log(response, error);
+			console.log("------------>>>>>> sendCards ", response, error);
 		});
 	}
 	sendOpponentHitCards(allCards, lastCard, agroups) {
@@ -1075,7 +1076,20 @@ class Game extends Phaser.Scene {
 		console.log(this.secondPlayerId);
 		console.log(allCards,lastCard,agroups);
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.secondPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
-			console.log(response, error);
+			console.log("------------>>>>>> sendOpponentHitCards ", "response", response, "error", error);
+			if(response != null) {
+				console.log("response", response);
+				// give the info fot the plase wait for your turn
+				if(response.message == "Please wait for your turn."){
+					return true;
+				}
+			}
+			else if(error != undefined){
+				console.log("error", error);
+				this.playerHandContainer.removeAll(true);
+				this.oPlayerHand.getHandData(error);
+				// give the handcard data info
+			}
 		});
 	}
 
@@ -1113,7 +1127,7 @@ class Game extends Phaser.Scene {
 		this.isDeclarePhase = false;
 		this.oRuleset.grp1Data = [];
 		this.oRuleset.grp2Data = [];
-		
+
 		this.openedCardDeck.setX(540);
 		this.openedCardDeck.visible = true;
 
