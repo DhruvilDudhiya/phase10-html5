@@ -226,8 +226,12 @@ class PlayerManager {
 
     opponentHitPhaseCard(data) {
         let tempContainer;
-        if (this.oScene.ownPlayerId !== data.iHrUserId) {
+        // let startY, startX;
+        console.log("resHit resHit resHit resHit resHit resHit resHit");
+        
+        if (this.oScene.ownPlayerId != data.iHrUserId) {
             if (this.oScene.nMaxPlayer === 2) {
+                console.log("opponet card and player history1");
                 if (data.sGroup === "aGroup-1") {
                     console.log("opponet card and player history11");
                     console.log(this.oScene.opponentGrp1PhaseCardContainer);
@@ -279,6 +283,8 @@ class PlayerManager {
     }
 
     setOpponentHitPhaseCard(data, container) {
+        console.log(container);
+        container.removeAll(true);
         for (let i = 0; i < data.aCards.length; i++) {
             this.declarePhaseCard = new CardPrefab(this.oScene, 0, 0);
             this.declarePhaseCard.setScale(0.5)
@@ -300,8 +306,8 @@ class PlayerManager {
                 this.declarePhaseCard.__CardPreset.cardId = data.aCards[i]._id;
             }
             container.add(this.declarePhaseCard)
-            this.oScene.oPlayerHand.arrangeOpponentDeclareCards(container);
         }
+        this.oScene.oPlayerHand.arrangeOpponentDeclareCards(container);
     }
 
     setUserInfo(playerData, rootSocketId) {
