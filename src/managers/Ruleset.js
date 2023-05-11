@@ -27,6 +27,9 @@ class Ruleset {
             if (validateData.name == "doublePhaseTwoCardContainer" && this.oScene.dp_yellow_ring_2.visible == true) {
                 this.oScene.dp_yellow_ring_2.setVisible(false);
             }
+            // if (validateData.name == "doublePhaseTwoCardContainer" && this.oScene.dp_yellow_ring_2.visible == true) {
+            //     this.oScene.dp_yellow_ring_2.setVisible(false);
+            // }
         }
     }
 
@@ -37,6 +40,9 @@ class Ruleset {
         if (containerName == 'doublePhaseTwoCardContainer') {
             this.checkRulesetCondition(this.oScene.oGameManager.phaseTwoType, this.oScene.oGameManager.phaseTwoTotalCards, containerName, validateData);
         }
+        // if(containerName == 'doublePhaseTwoCardContainer'){
+        //     this.checkRulesetCondition(this.oScene.oGameManager.phaseTwoType, this.oScene.oGameManager.phaseTwoTotalCards, containerName, validateData);
+        // }
     }
 
     checkRulesetCondition(ruleType, totalCards, containerName, validateData) {
@@ -144,6 +150,36 @@ class Ruleset {
         } else {
             console.log("not sequence", sortedNumbers);
         }
+    }
+    validateRulesetOfColor(totalCards, containerName, validateData){
+        this.grp1Data = [];
+        this.grp2Data = [];
+        if (this.cardNumbers.every(element => element === this.cardColors[0] || element === 'w') && this.cardNumbers.length == totalCards) {
+            if (this.cardNumbers.every(element => element !== 's')) {
+                if (containerName == "doublePhaseOneCardContainer") {
+                    this.grp1Data = [];
+                    if (this.oScene.isDeclarePhase == false) {
+                        this.oScene.dp_yellow_ring_1.setVisible(true);
+                        this.oScene.oPlayerManager.handleDeclareButtons();
+                    }
+                    for (let i = 0; i < validateData.list.length; i++) {
+                        this.grp1Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
+                    }
+                }
+                if (containerName == "doublePhaseTwoCardContainer") {
+                    this.grp2Data = [];
+                    if (this.oScene.isDeclarePhase == false) {
+                        this.oScene.dp_yellow_ring_2.setVisible(true);
+                        this.oScene.oPlayerManager.handleDeclareButtons();
+                    }
+                    for (let i = 0; i < validateData.list.length; i++) {
+                        this.grp2Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
+                    }
+                }
+            }
+        }
+
+
     }
 
     validateSkipCard(cardData) {

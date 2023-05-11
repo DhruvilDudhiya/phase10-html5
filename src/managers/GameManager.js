@@ -23,6 +23,7 @@ class GameManager {
 		this.isOwnTurn = false;
 		this.isGrabCard = false;
 		this.isGrabCardCloseDake = false;
+		this.phaseRules = "";
 	}
 
 	resetPhaseData() {

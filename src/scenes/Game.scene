@@ -57,6 +57,7 @@
             "id": "579161ab-a4f4-4576-af62-860e7513348e",
             "label": "footerContainer",
             "components": [],
+            "y": 1,
             "list": [
                 {
                     "type": "Image",
@@ -99,6 +100,7 @@
             "id": "281dd8fe-4cf3-4ebb-a90f-b2d9b24b328e",
             "label": "body",
             "components": [],
+            "y": 1,
             "list": [
                 {
                     "type": "Container",
@@ -113,6 +115,7 @@
                             "label": "doublePhaseContainer",
                             "scope": "CLASS",
                             "components": [],
+                            "y": 2,
                             "visible": false,
                             "list": [
                                 {
@@ -186,11 +189,14 @@
                             "label": "singlePhaseContainer",
                             "scope": "CLASS",
                             "components": [],
+                            "y": -2,
+                            "visible": false,
                             "list": [
                                 {
                                     "type": "Image",
                                     "id": "0a2956e9-a982-4129-ae24-744ce051eef6",
                                     "label": "single_phase",
+                                    "scope": "CLASS",
                                     "components": [],
                                     "texture": {
                                         "key": "single-phase"
@@ -208,7 +214,7 @@
                                         "key": "yellow-ring-single"
                                     },
                                     "x": 540,
-                                    "y": 1215,
+                                    "y": 1216,
                                     "visible": false
                                 },
                                 {
@@ -231,6 +237,7 @@
                             "id": "3c15fca4-02b4-4fce-821b-fd777bd582d2",
                             "label": "phaseTextContainer",
                             "components": [],
+                            "y": 1,
                             "list": [
                                 {
                                     "type": "Text",
@@ -308,7 +315,7 @@
                                 "key": "btn-confirm"
                             },
                             "x": 795,
-                            "y": 1400,
+                            "y": 1401,
                             "visible": false
                         },
                         {
@@ -321,7 +328,7 @@
                                 "key": "btn-cancel"
                             },
                             "x": 285,
-                            "y": 1400,
+                            "y": 1401,
                             "visible": false
                         }
                     ]
@@ -332,7 +339,7 @@
                     "label": "threePlayerContainer",
                     "scope": "CLASS",
                     "components": [],
-                    "y": 1,
+                    "y": 4,
                     "visible": false,
                     "list": [
                         {
@@ -741,17 +748,21 @@
                     "label": "twoPlayerContainer",
                     "scope": "CLASS",
                     "components": [],
+                    "y": -1,
                     "list": [
                         {
                             "type": "Container",
                             "id": "7a65c505-77e2-4a99-b3ba-124ad6eef87f",
-                            "label": "twoPlayer2Container",
+                            "label": "twoPlayerDoublePhaseContainer",
+                            "scope": "CLASS",
                             "components": [],
+                            "y": 1,
                             "list": [
                                 {
                                     "type": "Image",
                                     "id": "ad73f8a3-79e2-4dfe-9ee7-417f23d6a1c5",
                                     "label": "twoPlayer2Box",
+                                    "scope": "CLASS",
                                     "components": [],
                                     "texture": {
                                         "key": "player-2-box"
@@ -892,6 +903,7 @@
                                             "type": "Container",
                                             "id": "77a9d60f-8973-437a-92bb-47b35dff91f2",
                                             "label": "opponentGrp2PhaseCardContainer",
+                                            "useGameObjectName": true,
                                             "scope": "CLASS",
                                             "components": [],
                                             "x": 540,
@@ -902,6 +914,7 @@
                                             "type": "Container",
                                             "id": "bacb0974-0180-4e71-a301-35f411c49624",
                                             "label": "opponentGrp1PhaseCardContainer",
+                                            "useGameObjectName": true,
                                             "scope": "CLASS",
                                             "components": [],
                                             "x": 540,
@@ -981,7 +994,6 @@
                     "id": "3194901e-0e8c-4cc0-84c1-f0234ea1cbc0",
                     "label": "ownPlayerContainer",
                     "components": [],
-                    "y": -1,
                     "list": [
                         {
                             "type": "Text",
@@ -1028,7 +1040,7 @@
                         "key": "main-cards-deck"
                     },
                     "x": 540,
-                    "y": 876
+                    "y": 877
                 }
             ]
         },
@@ -1040,7 +1052,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 540,
-            "y": 1580,
+            "y": 1581,
             "scaleX": 1.2,
             "scaleY": 1.2,
             "visible": false,
@@ -1052,7 +1064,7 @@
             "label": "tempCardContainer",
             "scope": "CLASS",
             "components": [],
-            "y": 2,
+            "y": 3,
             "list": []
         },
         {
@@ -1061,7 +1073,7 @@
             "label": "playersContainer",
             "scope": "CLASS",
             "components": [],
-            "y": 3,
+            "y": 4,
             "list": []
         },
         {
@@ -1070,6 +1082,7 @@
             "label": "skipPlayerTurnContainer",
             "scope": "CLASS",
             "components": [],
+            "y": 1,
             "visible": false,
             "list": [
                 {
@@ -1093,7 +1106,7 @@
             "scope": "CLASS",
             "components": [],
             "x": 83,
-            "y": 1729,
+            "y": 1728,
             "visible": false,
             "list": [
                 {

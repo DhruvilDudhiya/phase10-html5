@@ -30,7 +30,7 @@ class Game extends Phaser.Scene {
 		const discardDeckContainer = this.add.container(0, 1);
 
 		// footerContainer
-		const footerContainer = this.add.container(0, 0);
+		const footerContainer = this.add.container(0, 1);
 
 		// footer
 		const footer = this.add.image(540, 1816.5, "footer");
@@ -45,14 +45,14 @@ class Game extends Phaser.Scene {
 		footerContainer.add(btn_shuffle);
 
 		// body
-		const body = this.add.container(0, 0);
+		const body = this.add.container(0, 1);
 
 		// phaseContainer
 		const phaseContainer = this.add.container(0, 1);
 		body.add(phaseContainer);
 
 		// doublePhaseContainer
-		const doublePhaseContainer = this.add.container(0, 0);
+		const doublePhaseContainer = this.add.container(0, 2);
 		doublePhaseContainer.visible = false;
 		phaseContainer.add(doublePhaseContainer);
 
@@ -81,7 +81,8 @@ class Game extends Phaser.Scene {
 		doublePhaseContainer.add(doublePhaseOneCardContainer);
 
 		// singlePhaseContainer
-		const singlePhaseContainer = this.add.container(0, 0);
+		const singlePhaseContainer = this.add.container(0, -2);
+		singlePhaseContainer.visible = false;
 		phaseContainer.add(singlePhaseContainer);
 
 		// single_phase
@@ -89,7 +90,7 @@ class Game extends Phaser.Scene {
 		singlePhaseContainer.add(single_phase);
 
 		// sp_yellow_ring
-		const sp_yellow_ring = this.add.image(540, 1215, "yellow-ring-single");
+		const sp_yellow_ring = this.add.image(540, 1216, "yellow-ring-single");
 		sp_yellow_ring.visible = false;
 		singlePhaseContainer.add(sp_yellow_ring);
 
@@ -99,7 +100,7 @@ class Game extends Phaser.Scene {
 		singlePhaseContainer.add(singlePhaseOneContainer);
 
 		// phaseTextContainer
-		const phaseTextContainer = this.add.container(0, 0);
+		const phaseTextContainer = this.add.container(0, 1);
 		phaseContainer.add(phaseTextContainer);
 
 		// totalPhasesText
@@ -127,17 +128,17 @@ class Game extends Phaser.Scene {
 		phaseTextContainer.add(phaseMiddleText);
 
 		// confirmButton
-		const confirmButton = this.add.image(795, 1400, "btn-confirm");
+		const confirmButton = this.add.image(795, 1401, "btn-confirm");
 		confirmButton.visible = false;
 		phaseContainer.add(confirmButton);
 
 		// cancelButton
-		const cancelButton = this.add.image(285, 1400, "btn-cancel");
+		const cancelButton = this.add.image(285, 1401, "btn-cancel");
 		cancelButton.visible = false;
 		phaseContainer.add(cancelButton);
 
 		// threePlayerContainer
-		const threePlayerContainer = this.add.container(0, 1);
+		const threePlayerContainer = this.add.container(0, 4);
 		threePlayerContainer.visible = false;
 		body.add(threePlayerContainer);
 
@@ -330,39 +331,39 @@ class Game extends Phaser.Scene {
 		opponent3DeclareCardContainer.add(opponent3Grp1PhaseCardContainer);
 
 		// twoPlayerContainer
-		const twoPlayerContainer = this.add.container(0, 0);
+		const twoPlayerContainer = this.add.container(0, -1);
 		body.add(twoPlayerContainer);
 
-		// twoPlayer2Container
-		const twoPlayer2Container = this.add.container(0, 0);
-		twoPlayerContainer.add(twoPlayer2Container);
+		// twoPlayerDoublePhaseContainer
+		const twoPlayerDoublePhaseContainer = this.add.container(0, 1);
+		twoPlayerContainer.add(twoPlayerDoublePhaseContainer);
 
 		// twoPlayer2Box
 		const twoPlayer2Box = this.add.image(540, 385, "player-2-box");
-		twoPlayer2Container.add(twoPlayer2Box);
+		twoPlayerDoublePhaseContainer.add(twoPlayer2Box);
 
 		// secondPlayerUserNameText
 		const secondPlayerUserNameText = this.add.text(479, 300, "", {});
 		secondPlayerUserNameText.setOrigin(0.5, 0.5);
 		secondPlayerUserNameText.text = "Waiting..";
 		secondPlayerUserNameText.setStyle({ "align": "center", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
-		twoPlayer2Container.add(secondPlayerUserNameText);
+		twoPlayerDoublePhaseContainer.add(secondPlayerUserNameText);
 
 		// txt_opponent_phase_score
 		const txt_opponent_phase_score = this.add.text(479, 332, "", {});
 		txt_opponent_phase_score.setOrigin(0.5, 0.5);
 		txt_opponent_phase_score.setStyle({ "align": "center", "color": "#f8ca00", "fontFamily": "CHICKEN Pie Height", "fontSize": "28px", "fontStyle": "bold" });
-		twoPlayer2Container.add(txt_opponent_phase_score);
+		twoPlayerDoublePhaseContainer.add(txt_opponent_phase_score);
 
 		// txt_opponent_phase_count
 		const txt_opponent_phase_count = this.add.text(540, 661, "", {});
 		txt_opponent_phase_count.setOrigin(0.5, 0.5);
 		txt_opponent_phase_count.setStyle({ "fontFamily": "CHICKEN Pie Height", "fontSize": "26px" });
-		twoPlayer2Container.add(txt_opponent_phase_count);
+		twoPlayerDoublePhaseContainer.add(txt_opponent_phase_count);
 
 		// emptySeatPlayer2
 		const emptySeatPlayer2 = this.add.container(480, 172);
-		twoPlayer2Container.add(emptySeatPlayer2);
+		twoPlayerDoublePhaseContainer.add(emptySeatPlayer2);
 
 		// player_profile_box
 		const player_profile_box = this.add.image(0, 0, "player-profile-box");
@@ -387,7 +388,7 @@ class Game extends Phaser.Scene {
 
 		// opponentHandInfoContainer
 		const opponentHandInfoContainer = this.add.container(0, 0);
-		twoPlayer2Container.add(opponentHandInfoContainer);
+		twoPlayerDoublePhaseContainer.add(opponentHandInfoContainer);
 
 		// txt_set1_opponent_info
 		const txt_set1_opponent_info = this.add.text(540, 411, "", {});
@@ -403,19 +404,21 @@ class Game extends Phaser.Scene {
 
 		// declareCardContainer
 		const declareCardContainer = this.add.container(0, 0);
-		twoPlayer2Container.add(declareCardContainer);
+		twoPlayerDoublePhaseContainer.add(declareCardContainer);
 
 		// opponentGrp2PhaseCardContainer
 		const opponentGrp2PhaseCardContainer = this.add.container(540, 545);
+		opponentGrp2PhaseCardContainer.name = "opponentGrp2PhaseCardContainer";
 		declareCardContainer.add(opponentGrp2PhaseCardContainer);
 
 		// opponentGrp1PhaseCardContainer
 		const opponentGrp1PhaseCardContainer = this.add.container(540, 410);
+		opponentGrp1PhaseCardContainer.name = "opponentGrp1PhaseCardContainer";
 		declareCardContainer.add(opponentGrp1PhaseCardContainer);
 
 		// opponentHandCardCountContainer
 		const opponentHandCardCountContainer = this.add.container(0, 0);
-		twoPlayer2Container.add(opponentHandCardCountContainer);
+		twoPlayerDoublePhaseContainer.add(opponentHandCardCountContainer);
 
 		// opp_player_card_deck
 		const opp_player_card_deck = this.add.image(633, 215, "opp-player-card-deck");
@@ -432,17 +435,17 @@ class Game extends Phaser.Scene {
 		yellow_ring_opponentGrp1.scaleX = 0.81;
 		yellow_ring_opponentGrp1.scaleY = 0.56;
 		yellow_ring_opponentGrp1.visible = false;
-		twoPlayer2Container.add(yellow_ring_opponentGrp1);
+		twoPlayerDoublePhaseContainer.add(yellow_ring_opponentGrp1);
 
 		// yellow_ring_opponentGrp2
 		const yellow_ring_opponentGrp2 = this.add.image(540, 544, "yellow-ring");
 		yellow_ring_opponentGrp2.scaleX = 0.81;
 		yellow_ring_opponentGrp2.scaleY = 0.56;
 		yellow_ring_opponentGrp2.visible = false;
-		twoPlayer2Container.add(yellow_ring_opponentGrp2);
+		twoPlayerDoublePhaseContainer.add(yellow_ring_opponentGrp2);
 
 		// ownPlayerContainer
-		const ownPlayerContainer = this.add.container(0, -1);
+		const ownPlayerContainer = this.add.container(0, 0);
 		body.add(ownPlayerContainer);
 
 		// ownPlayerUserNameText
@@ -460,24 +463,24 @@ class Game extends Phaser.Scene {
 		ownPlayerContainer.add(ownPlayerScoreText);
 
 		// closedCardDeck
-		const closedCardDeck = this.add.image(540, 876, "main-cards-deck");
+		const closedCardDeck = this.add.image(540, 877, "main-cards-deck");
 		body.add(closedCardDeck);
 
 		// playerHandContainer
-		const playerHandContainer = this.add.container(540, 1580);
+		const playerHandContainer = this.add.container(540, 1581);
 		playerHandContainer.name = "playerHandContainer";
 		playerHandContainer.scaleX = 1.2;
 		playerHandContainer.scaleY = 1.2;
 		playerHandContainer.visible = false;
 
 		// tempCardContainer
-		const tempCardContainer = this.add.container(0, 2);
+		const tempCardContainer = this.add.container(0, 3);
 
 		// playersContainer
-		const playersContainer = this.add.container(0, 3);
+		const playersContainer = this.add.container(0, 4);
 
 		// skipPlayerTurnContainer
-		const skipPlayerTurnContainer = this.add.container(0, 0);
+		const skipPlayerTurnContainer = this.add.container(0, 1);
 		skipPlayerTurnContainer.visible = false;
 
 		// skip_btn
@@ -488,7 +491,7 @@ class Game extends Phaser.Scene {
 		skipPlayerTurnContainer.add(skip_btn);
 
 		// menuContainer
-		const menuContainer = this.add.container(83, 1729);
+		const menuContainer = this.add.container(83, 1728);
 		menuContainer.visible = false;
 
 		// soundOffBtn
@@ -748,6 +751,7 @@ class Game extends Phaser.Scene {
 		this.doublePhaseTwoCardContainer = doublePhaseTwoCardContainer;
 		this.doublePhaseOneCardContainer = doublePhaseOneCardContainer;
 		this.singlePhaseContainer = singlePhaseContainer;
+		this.single_phase = single_phase;
 		this.sp_yellow_ring = sp_yellow_ring;
 		this.singlePhaseOneContainer = singlePhaseOneContainer;
 		this.totalPhasesText = totalPhasesText;
@@ -778,6 +782,8 @@ class Game extends Phaser.Scene {
 		this.opponent3Grp2PhaseCardContainer = opponent3Grp2PhaseCardContainer;
 		this.opponent3Grp1PhaseCardContainer = opponent3Grp1PhaseCardContainer;
 		this.twoPlayerContainer = twoPlayerContainer;
+		this.twoPlayerDoublePhaseContainer = twoPlayerDoublePhaseContainer;
+		this.twoPlayer2Box = twoPlayer2Box;
 		this.secondPlayerUserNameText = secondPlayerUserNameText;
 		this.txt_opponent_phase_score = txt_opponent_phase_score;
 		this.txt_opponent_phase_count = txt_opponent_phase_count;
@@ -858,6 +864,8 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	singlePhaseContainer;
 	/** @type {Phaser.GameObjects.Image} */
+	single_phase;
+	/** @type {Phaser.GameObjects.Image} */
 	sp_yellow_ring;
 	/** @type {Phaser.GameObjects.Container} */
 	singlePhaseOneContainer;
@@ -917,6 +925,10 @@ class Game extends Phaser.Scene {
 	opponent3Grp1PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
 	twoPlayerContainer;
+	/** @type {Phaser.GameObjects.Container} */
+	twoPlayerDoublePhaseContainer;
+	/** @type {Phaser.GameObjects.Image} */
+	twoPlayer2Box;
 	/** @type {Phaser.GameObjects.Text} */
 	secondPlayerUserNameText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -1078,16 +1090,16 @@ class Game extends Phaser.Scene {
 			console.log("------------>>>>>> sendCards ", response, error);
 		});
 	}
-	sendOpponentHitCards(allCards, lastCard, agroups, gameObjectPreset) {
+	sendOpponentHitCards(allCards, lastCard, agroups) {
 		console.log("called hit");
 		console.log(this.secondPlayerId);
 		console.log(allCards, lastCard, agroups);
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.secondPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
 			console.log("------------>>>>>> sendOpponentHitCards ", "response", response, "error", error);
-			if(response != null) {
-				// give the info fot the plase wait for your turn\
+			if (response != null) {
 				console.log("response", response);
-				gameObjectPreset.setPositionOpponetPly();
+				// give the info fot the plase wait for your turn\
+				return true;
 			}
 			else if (error != undefined) {
 				console.log("error", error);
@@ -1097,8 +1109,6 @@ class Game extends Phaser.Scene {
 			}
 		});
 	}
-
-
 
 	grabOpenDeckCard() {
 		this.oSocketManager.emit('reqOpenedCard', { nLabel: this.currentOwnCardLabel, eColor: this.currentOwnCardColor, _id: this.currentOwnCardId, iUserId: this.ownPlayerId }, (error, response) => {
