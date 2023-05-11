@@ -1096,10 +1096,9 @@ class Game extends Phaser.Scene {
 		console.log(allCards, lastCard, agroups);
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.secondPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
 			console.log("------------>>>>>> sendOpponentHitCards ", "response", response, "error", error);
-			if (response != null) {
+			if(response != null) {
+				// give the info fot the plase wait for your turn
 				console.log("response", response);
-				// give the info fot the plase wait for your turn\
-				return true;
 			}
 			else if (error != undefined) {
 				console.log("error", error);
@@ -1160,6 +1159,7 @@ class Game extends Phaser.Scene {
 		this.discardDeckContainer.removeAll(true);
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
+		
 		this.opponentGrp1PhaseCardContainer.removeAll(true);
 		this.opponentGrp2PhaseCardContainer.removeAll(true);
 

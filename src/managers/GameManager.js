@@ -24,6 +24,8 @@ class GameManager {
 		this.isGrabCard = false;
 		this.isGrabCardCloseDake = false;
 		this.phaseRules = "";
+		this.ownPly = false;
+		this.opponetPly = false;
 	}
 
 	resetPhaseData() {

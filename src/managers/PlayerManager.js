@@ -225,57 +225,72 @@ class PlayerManager {
 
 
     opponentHitPhaseCard(data) {
-        let tempContainer;
-        if (this.oScene.ownPlayerId !== data.iHrUserId) {
-            if (this.oScene.nMaxPlayer === 2) {
-                if (data.sGroup === "aGroup-1") {
-                    console.log("opponet card and player history11");
-                    console.log(this.oScene.opponentGrp1PhaseCardContainer);
+        let tempContainer1;
+        if (this.oScene.nMaxPlayer === 2) {
+            // console.log("opponet card and player history1");
+            if (data.sGroup === "aGroup-1") {
+                // console.log("opponet card and player history11");
+                // console.log(this.oScene.opponentGrp1PhaseCardContainer);
+
+                if(this.oScene.ownPlayerId != data.iHrUserId) {
                     this.oScene.opponentGrp1PhaseCardContainer.removeAll(true);
-                    tempContainer = this.oScene.opponentGrp1PhaseCardContainer;
+                    tempContainer1 = this.oScene.opponentGrp1PhaseCardContainer;
                 }
-                else if (data.sGroup === "aGroup-2") {
-                    console.log("opponet card and player history12");
-                    console.log(this.oScene.opponentGrp2PhaseCardContainer);
-                    this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
-                    tempContainer = this.oScene.opponentGrp2PhaseCardContainer;
+                else {
+                    this.oScene.doublePhaseOneCardContainer.removeAll(true);
+                    tempContainer1 = this.oScene.doublePhaseOneCardContainer;
                 }
             }
-            else if (this.oScene.nMaxPlayer == 3) {
-                console.log("opponet card and player history3");
-                for (let i = 0; i < this.oScene.playersContainer.length; i++) {
-                    if (this.oScene.playersContainer.getAll()[i].name === data.iHUserId) {
-                        if (this.oScene.playersContainer.getAll()[i].x < 540) {
-                            if (data.sGroup === "aGroup-1") {
-                                this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
-                                tempContainer = this.oScene.opponent2Grp1PhaseCardContainer;
-                                // startY = 410;
-                            }
-                            else if (data.sGroup === "aGroup-2") {
-                                this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
-                                tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
-                                // startY = 544;
-                            }
-                            // startX = 255;
+            else if (data.sGroup === "aGroup-2") {
+                // console.log("opponet card and player history12");
+                // console.log(this.oScene.opponentGrp2PhaseCardContainer);
+
+                if(this.oScene.ownPlayerId != data.iHrUserId) {
+                    this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
+                    tempContainer1 = this.oScene.opponentGrp2PhaseCardContainer;
+                }
+                else {
+                    this.oScene.doublePhaseTwoCardContainer.removeAll(true);
+                    tempContainer1 = this.oScene.doublePhaseTwoCardContainer;
+                }
+            }
+        }
+        else if (this.oScene.nMaxPlayer == 3) {
+            console.log("opponet card and player history3");
+            for (let i = 0; i < this.oScene.playersContainer.length; i++) {
+                if (this.oScene.playersContainer.getAll()[i].name === data.iHUserId) {
+                    if (this.oScene.playersContainer.getAll()[i].x < 540) {
+                        if (data.sGroup === "aGroup-1") {
+                            this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
+                            tempContainer = this.oScene.opponent2Grp1PhaseCardContainer;
+                            // startY = 410;
                         }
-                        else {
-                            if (data.sGroup === "aGroup-1") {
-                                this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
-                                tempContainer = this.oScene.opponent3Grp1PhaseCardContainer;
-                                // startY = 410;
-                            }
-                            else if (data.sGroup === "aGroup-2") {
-                                this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
-                                tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
-                                // startY = 544;
-                            }
-                            // startX = 765;
+                        else if (data.sGroup === "aGroup-2") {
+                            this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
+                            tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
+                            // startY = 544;
                         }
+                        // startX = 255;
+                    }
+                    else {
+                        if (data.sGroup === "aGroup-1") {
+                            this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
+                            tempContainer = this.oScene.opponent3Grp1PhaseCardContainer;
+                            // startY = 410;
+                        }
+                        else if (data.sGroup === "aGroup-2") {
+                            this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
+                            tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
+                            // startY = 544;
+                        }
+                        // startX = 765;
                     }
                 }
             }
-            this.setOpponentHitPhaseCard(data, tempContainer);
         }
+        this.setOpponentHitPhaseCard(data, tempContainer1);
+
+
     }
 
     setOpponentHitPhaseCard(data, container) {
