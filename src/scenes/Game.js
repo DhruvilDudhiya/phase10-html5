@@ -1082,6 +1082,16 @@ class Game extends Phaser.Scene {
 	sendPhaseData() {
 		this.isDeclarePhase = true;
 		this.oPlayerManager.handleDeclareButtonsVisibilityOFF();
+		let arrObj = {
+			sEventName: 'reqDeclarePhase', 
+			oData: { 
+				nPhase: this.oGameManager.nCurrentPhase, 
+				aGroup_1: this.oRuleset.grp1Data, 
+				aGroup_2: this.oRuleset.grp2Data
+			}
+		};
+		console.log("<><><><><><><><><><><><><><><><><><><>", arrObj);
+
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } });
 	}
 	sendHitCards(allCards, lastCard, agroups) {
@@ -1143,6 +1153,9 @@ class Game extends Phaser.Scene {
 		this.isDeclarePhase = false;
 		this.oRuleset.grp1Data = [];
 		this.oRuleset.grp2Data = [];
+		this.oRuleset.sendCardData = [];
+		this.oRuleset.hitCardsData = [];
+
 
 		this.openedCardDeck.setX(540);
 		this.openedCardDeck.visible = true;
@@ -1154,12 +1167,13 @@ class Game extends Phaser.Scene {
 		// this.oPlayerManager.resetPhaseData();
 		// this.oPlayerHand.clearPlayerHandCard();
 
-		this.oPlayerPrefab.intervalTimeReset();
+		this.oPlayerManager.ownPlayerTurnReset.intervalTimeReset();
+		
 		this.playerHandContainer.removeAll(true);
 		this.discardDeckContainer.removeAll(true);
 		this.doublePhaseOneCardContainer.removeAll(true);
 		this.doublePhaseTwoCardContainer.removeAll(true);
-		
+
 		this.opponentGrp1PhaseCardContainer.removeAll(true);
 		this.opponentGrp2PhaseCardContainer.removeAll(true);
 

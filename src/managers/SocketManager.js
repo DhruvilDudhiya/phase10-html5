@@ -116,7 +116,8 @@ class SocketManager {
                 break;
             case "resDeclarePhase":
                 console.log("resDeclarePhase", data);
-                    this.oScene.oPlayerManager.opponentDeclarePhase(data.oData);
+                console.log("backed data ===========......>>>>>>>");
+                this.oScene.oPlayerManager.opponentDeclarePhase(data.oData);
                 break;
             case "resRoundOver":
                 this.oScene.setRoundOver(data.oData);

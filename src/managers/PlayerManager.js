@@ -4,6 +4,20 @@ class PlayerManager {
         this.players = new Map();
         this.ownPlayerId = this.oScene.ownPlayerId;
         this.playerCounter = 0;
+        this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
+            console.log("sendData ........+++++++++++");
+            this.handleRingsVisibilityOFF();
+            console.log(this.oScene.oRuleset.sendCardData);
+            this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data)
+            console.log("PhaseData ::::::::::::::::::>>>>>>",this.oScene.oRuleset.sendCardData,this.oScene.oRuleset.grp1Data,this.oScene.oRuleset.grp2Data);
+            this.oScene.sendPhaseData();
+            for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
+                this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
+            }
+            for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
+                this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
+            }
+        });
     }
 
     addPlayer(playerId, player) {
@@ -366,6 +380,8 @@ class PlayerManager {
     setPlayerPhaseData(phaseData) {
         this.oScene.oGameManager.nCurrentPhase = phaseData.nCurrentPhase;
         this.oScene.oGameManager.nTotalPhasesCount = phaseData.nTotalPhasesCount;
+        this.oScene.oGameManager.phaseRules= phaseData.aRules.length;
+
         //OwnPlayerData
         if (this.oScene.ownPlayerId == phaseData.iUserId) {
             this.oScene.totalPhasesText.setText("PHASE " + phaseData.nCurrentPhase + "/" + phaseData.nTotalPhasesCount);
@@ -458,6 +474,7 @@ class PlayerManager {
             }
 
             if (this.oScene.playersContainer.getAll()[i].name === this.currentPlayerTurn) {
+                this.ownPlayerTurnReset = this.oScene.playersContainer.getAll()[i];
                 this.oScene.playersContainer.getAll()[i].startTimerInit(this.oScene.playersContainer.getAll()[i].x, this.oScene.playersContainer.getAll()[i].y, playerTurnData);
                 break;
             }
@@ -521,17 +538,21 @@ class PlayerManager {
                     if (this.oScene.oGameManager.isOwnTurn) {
                         this.handleDeclareButtonsVisibilityON()
                         this.oScene.confirmButton.setAlpha(1);
-                        this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
-                            this.handleRingsVisibilityOFF();
-                            this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data)
-                            this.oScene.sendPhaseData();
-                            for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
-                                this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
-                            }
-                            for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
-                                this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
-                            }
-                        });
+                        this.oScene.confirmButton.setInteractive();
+                        // this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
+                        //     console.log("sendData ........+++++++++++");
+                        //     this.handleRingsVisibilityOFF();
+                        //     console.log(this.oScene.oRuleset.sendCardData);
+                        //     this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data);
+                        //     console.log(this.oScene.oRuleset.sendCardData);
+                        //     this.oScene.sendPhaseData();
+                        //     for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
+                        //         this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
+                        //     }
+                        //     for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
+                        //         this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
+                        //     }
+                        // });
                     } else {
                         this.oScene.confirmButton.setAlpha(0.75);
                         this.oScene.confirmButton.disableInteractive();
