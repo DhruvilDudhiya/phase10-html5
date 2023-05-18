@@ -8,10 +8,9 @@ class UIManager {
         if (oData.aRules.length == "2") {
             this.oScene.doublePhaseContainer.setVisible(true);
             this.oScene.singlePhaseContainer.setVisible(false);
-        }
-        else {
-            this.oScene.singlePhaseContainer.setVisible(true);
+        }  else {
             this.oScene.doublePhaseContainer.setVisible(false);
+            this.oScene.singlePhaseContainer.setVisible(true);
             this.oScene.twoPlayer2Box.setTexture("single-phase-2");
         }
     }
@@ -20,8 +19,10 @@ class UIManager {
         this.oScene.nMaxPlayer = nMaxPlayer;
         if (nMaxPlayer == 2) {
             this.oScene.twoPlayerContainer.setVisible(true);
+            this.oScene.threePlayerContainer.setVisible(false);
         }
         else {
+            this.oScene.twoPlayerContainer.setVisible(false);
             this.oScene.threePlayerContainer.setVisible(true);
         }
     }

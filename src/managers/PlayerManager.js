@@ -9,13 +9,16 @@ class PlayerManager {
             this.handleRingsVisibilityOFF();
             console.log(this.oScene.oRuleset.sendCardData);
             this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data)
-            console.log("PhaseData ::::::::::::::::::>>>>>>",this.oScene.oRuleset.sendCardData,this.oScene.oRuleset.grp1Data,this.oScene.oRuleset.grp2Data);
+            console.log("PhaseData ::::::::::::::::::>>>>>>", this.oScene.oRuleset.sendCardData, this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data);
             this.oScene.sendPhaseData();
             for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
                 this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
             }
             for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
                 this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
+            }
+            for (let i = 0; i < this.oScene.singlePhaseOneContainer.list.length; i++) {
+                this.oScene.singlePhaseOneContainer.list[i].disableInteractive();
             }
         });
     }
@@ -130,10 +133,12 @@ class PlayerManager {
     opponentDeclarePhase(data) {
         console.log("data =============> ", data);
         if (this.oScene.ownPlayerId != data.iUserId) {
-            this.oScene.opponentGrp1PhaseCardContainer.removeAll(true);
-            this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
-
+            
             if (this.oScene.nMaxPlayer == 2) {
+                this.oScene.opponentGrp1PhaseCardContainer.removeAll(true);
+                this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
+
+
                 console.log("nMaxPlayer =============> ", this.oScene.nMaxPlayer);
                 this.oScene.txt_set2_opponent_info.text = this.oScene.txt_set1_opponent_info.text = "";
                 this.opponemtGrpPhaseDeclare(data, 1);
@@ -141,6 +146,12 @@ class PlayerManager {
             }
             else if (this.oScene.nMaxPlayer == 3) {
                 console.log("nMaxPlayer =============> ", this.oScene.nMaxPlayer);
+                
+                this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
+                this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
+                this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
+                this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
+
                 for (let i = 0; i < this.oScene.playersContainer.length; i++) {
                     if (this.oScene.playersContainer.getAll()[i].name === data.iUserId) {
                         if (this.oScene.playersContainer.getAll()[i].x < 540) {
@@ -193,6 +204,7 @@ class PlayerManager {
     }
 
     opponemt2GrpPhaseDeclare(data, phase, player) {
+        console.log("oppnent hit card ");
         this.declarePhaseCardInfo = phase == 1 ? data["aGroup_1"] : data["aGroup_2"];
         // let startX = player === "Player1" ? 255 : 765;
         // let startY = phase == 1 ? 407 : 543
@@ -223,7 +235,7 @@ class PlayerManager {
                         this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponent2Grp2PhaseCardContainer);
                     }
                 }
-                else {
+                else if(player === "Player2"){
                     if (phase == 1) {
                         this.oScene.opponent3Grp1PhaseCardContainer.add(this.declarePhaseCard)
                         this.oScene.oPlayerHand.arrangeOpponentDeclareCards(this.oScene.opponent3Grp1PhaseCardContainer);
@@ -246,7 +258,7 @@ class PlayerManager {
                 // console.log("opponet card and player history11");
                 // console.log(this.oScene.opponentGrp1PhaseCardContainer);
 
-                if(this.oScene.ownPlayerId != data.iHrUserId) {
+                if (this.oScene.ownPlayerId != data.iHrUserId) {
                     this.oScene.opponentGrp1PhaseCardContainer.removeAll(true);
                     tempContainer1 = this.oScene.opponentGrp1PhaseCardContainer;
                 }
@@ -259,7 +271,7 @@ class PlayerManager {
                 // console.log("opponet card and player history12");
                 // console.log(this.oScene.opponentGrp2PhaseCardContainer);
 
-                if(this.oScene.ownPlayerId != data.iHrUserId) {
+                if (this.oScene.ownPlayerId != data.iHrUserId) {
                     this.oScene.opponentGrp2PhaseCardContainer.removeAll(true);
                     tempContainer1 = this.oScene.opponentGrp2PhaseCardContainer;
                 }
@@ -270,41 +282,52 @@ class PlayerManager {
             }
         }
         else if (this.oScene.nMaxPlayer == 3) {
-            console.log("opponet card and player history3");
-            for (let i = 0; i < this.oScene.playersContainer.length; i++) {
-                if (this.oScene.playersContainer.getAll()[i].name === data.iHUserId) {
-                    if (this.oScene.playersContainer.getAll()[i].x < 540) {
-                        if (data.sGroup === "aGroup-1") {
-                            this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
-                            tempContainer = this.oScene.opponent2Grp1PhaseCardContainer;
-                            // startY = 410;
-                        }
-                        else if (data.sGroup === "aGroup-2") {
-                            this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
-                            tempContainer = this.oScene.opponent2Grp2PhaseCardContainer;
-                            // startY = 544;
-                        }
-                        // startX = 255;
+            // console.log("opponet card and player history3");
+            // this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp1 == true
+			// this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp1 == true
+			// this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp2 == true
+			// this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp2 == true
+            // for(let i = 0; i < this.oScene.playersContainer.getAll().length; i++) {
+            //     if (this.oScene.playersContainer.getAll()[i] === "aGroup-1") {
+
+            //     }
+            // }
+
+            console.log(this.oScene.playersContainer);
+            if (data.sGroup === "aGroup-1") {
+                if (this.oScene.ownPlayerId != data.iHrUserId) {
+                    if(data.iHrUserId == this.oScene.secondPlayerId){
+                        this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
+                        tempContainer1 = this.oScene.opponent2Grp1PhaseCardContainer;
                     }
-                    else {
-                        if (data.sGroup === "aGroup-1") {
-                            this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
-                            tempContainer = this.oScene.opponent3Grp1PhaseCardContainer;
-                            // startY = 410;
-                        }
-                        else if (data.sGroup === "aGroup-2") {
-                            this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
-                            tempContainer = this.oScene.opponent3Grp2PhaseCardContainer;
-                            // startY = 544;
-                        }
-                        // startX = 765;
+                    else{
+                        this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
+                        tempContainer1 = this.oScene.opponent3Grp1PhaseCardContainer;
                     }
+                }
+                else {
+                    this.oScene.doublePhaseOneCardContainer.removeAll(true);
+                    tempContainer1 = this.oScene.doublePhaseOneCardContainer;
+                }
+            }
+            else if (data.sGroup === "aGroup-2") {
+                if (this.oScene.ownPlayerId != data.iHrUserId) {
+                    if(data.iHrUserId == this.oScene.secondPlayerId){
+                        this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
+                        tempContainer1 = this.oScene.opponent2Grp2PhaseCardContainer;
+                    }
+                    else{
+                        this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
+                        tempContainer1 = this.oScene.opponent3Grp2PhaseCardContainer;
+                    }
+                }
+                else {
+                    this.oScene.doublePhaseTwoCardContainer.removeAll(true);
+                    tempContainer1 = this.oScene.doublePhaseTwoCardContainer;
                 }
             }
         }
         this.setOpponentHitPhaseCard(data, tempContainer1);
-
-
     }
 
     setOpponentHitPhaseCard(data, container) {
@@ -335,6 +358,8 @@ class PlayerManager {
 
     setUserInfo(playerData, rootSocketId) {
         if (rootSocketId == playerData.sRootSocket) {
+            console.log("playerCounter", this.playerCounter);
+            console.log("555555");
             this.oScene.ownPlayerId = playerData.iUserId;
             this.ownPlayerId = playerData.iUserId;
             this.ownPlayerPrefab = new PlayerPrefab(this.oScene);
@@ -343,8 +368,11 @@ class PlayerManager {
             this.oScene.playersContainer.add(this.ownPlayerPrefab);
             this.playerCounter++;
         }
+        
         else {
+            console.log("6666666");
             if (this.oScene.nMaxPlayer == 2) {
+                console.log("playerCounter", this.playerCounter);
                 this.oScene.emptySeatPlayer2.destroy()
                 this.oScene.secondPlayerUserNameText.text = playerData.sUserName.length == 0 ? playerData.sMobile.substring(0, 4) + "****" : playerData.sUserName;
                 this.oppPlayerPrefab = new PlayerPrefab(this.oScene);
@@ -355,6 +383,7 @@ class PlayerManager {
             }
             else if (this.oScene.nMaxPlayer == 3) {
                 if (this.playerCounter == 1) {
+                    console.log("playerCounter", this.playerCounter);
                     this.oScene.emptySeatTwoPlayer.destroy();
                     this.oScene.secondPlayer2UserNameText.text = playerData.sUserName.length == 0 ? playerData.sMobile.substring(0, 4) + "****" : playerData.sUserName;
                     this.oppPlayerOnePrefab = new PlayerPrefab(this.oScene);
@@ -362,9 +391,10 @@ class PlayerManager {
                     this.oppPlayerOnePrefab.setPosition(227, 170);
                     this.oScene.playersContainer.add(this.oppPlayerOnePrefab);
                     this.oScene.secondPlayerId = playerData.iUserId
-                    this.playerCounter++;
+                    console.log("oppPlayerOne");
                 }
                 else {
+                    console.log("playerCounter", this.playerCounter);
                     this.oScene.emptySeatThreePlayer.destroy();
                     this.oScene.secondPlayer3UserNameText.text = playerData.sUserName.length == 0 ? playerData.sMobile.substring(0, 4) + "****" : playerData.sUserName;
                     this.oppPlayerTwoPrefab = new PlayerPrefab(this.oScene);
@@ -372,15 +402,16 @@ class PlayerManager {
                     this.oppPlayerTwoPrefab.setPosition(734, 170);
                     this.oScene.playersContainer.add(this.oppPlayerTwoPrefab);
                     this.oScene.thirdPlayerId = playerData.iUserId
-                    this.playerCounter++;
+                    console.log("oppPlayerTwo");
                 }
+                this.playerCounter++;
             }
         }
     }
     setPlayerPhaseData(phaseData) {
         this.oScene.oGameManager.nCurrentPhase = phaseData.nCurrentPhase;
         this.oScene.oGameManager.nTotalPhasesCount = phaseData.nTotalPhasesCount;
-        this.oScene.oGameManager.phaseRules= phaseData.aRules.length;
+        this.oScene.oGameManager.phaseRules = phaseData.aRules.length;
 
         //OwnPlayerData
         if (this.oScene.ownPlayerId == phaseData.iUserId) {
@@ -419,7 +450,7 @@ class PlayerManager {
                             this.oScene.txt_opponent2_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
                             this.oScene.txt_opponent2_phase_score.setText(phaseData.nScore);
                         }
-                        else {
+                        else if(this.oScene.playersContainer.getAll()[i].x >= 540){
                             this.oScene.txt_set1_opponent3_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
                             this.oScene.txt_set2_opponent3_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
                             this.oScene.txt_opponent3_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
@@ -435,7 +466,7 @@ class PlayerManager {
 
 
     changePlayerTurn(playerTurnData) {
-        console.log("oWnPlayeR",this.oScene.ownPlayerId);
+        console.log("oWnPlayeR", this.oScene.ownPlayerId);
         // this.oScene.oGameManager.isOwnTurn = false;
         this.oScene.oGameManager.isGrabCardCloseDake = false;
         this.currentPlayerTurn = playerTurnData.iUserId;
@@ -469,6 +500,7 @@ class PlayerManager {
 
             for (let j = 0; j < this.oScene.playersContainer.length; j++) {
                 if (this.oScene.playersContainer.getAll()[j].name !== this.currentPlayerTurn) {
+                    this.ownPlayerTurnReset = "";
                     this.oScene.playersContainer.getAll()[j].intervalTimeReset();
                 }
             }
@@ -520,7 +552,7 @@ class PlayerManager {
     }
 
     handleDeclareButtons() {
-        if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == false) {
+        if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == false && this.oScene.sp_yellow_ring.visible == false) {
             this.handleDeclareButtonsVisibilityOFF()
         }
         else {
@@ -536,23 +568,17 @@ class PlayerManager {
                     this.oScene.confirmButton.disableInteractive();
                 } else {
                     if (this.oScene.oGameManager.isOwnTurn) {
+                        if (this.oScene.sp_yellow_ring.visible == true) {
+                            this.handleDeclareButtonsVisibilityON()
+                            this.oScene.confirmButton.setAlpha(1);
+                            this.oScene.confirmButton.setInteractive();
+                        } else {
+                            this.oScene.confirmButton.setAlpha(0.75);
+                            this.oScene.confirmButton.disableInteractive();
+                        }
                         this.handleDeclareButtonsVisibilityON()
                         this.oScene.confirmButton.setAlpha(1);
                         this.oScene.confirmButton.setInteractive();
-                        // this.oScene.confirmButton.setInteractive().on('pointerdown', () => {
-                        //     console.log("sendData ........+++++++++++");
-                        //     this.handleRingsVisibilityOFF();
-                        //     console.log(this.oScene.oRuleset.sendCardData);
-                        //     this.oScene.oRuleset.sendCardData.push(this.oScene.oRuleset.grp1Data, this.oScene.oRuleset.grp2Data);
-                        //     console.log(this.oScene.oRuleset.sendCardData);
-                        //     this.oScene.sendPhaseData();
-                        //     for (let i = 0; i < this.oScene.doublePhaseOneCardContainer.list.length; i++) {
-                        //         this.oScene.doublePhaseOneCardContainer.list[i].disableInteractive();
-                        //     }
-                        //     for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
-                        //         this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
-                        //     }
-                        // });
                     } else {
                         this.oScene.confirmButton.setAlpha(0.75);
                         this.oScene.confirmButton.disableInteractive();
@@ -566,3 +592,51 @@ class PlayerManager {
     }
 
 }
+
+
+
+// if (data.sGroup === "aGroup-1") {
+
+//     if (this.oScene.ownPlayerId != data.iHrUserId) {
+//         this.oScene.opponent2Grp1PhaseCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.opponent2Grp1PhaseCardContainer;
+//     }
+
+//     else{
+//         this.oScene.doublePhaseOneCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.doublePhaseOneCardContainer;
+//     }
+// }
+// else if (data.sGroup === "aGroup-2"){
+//     if (this.oScene.ownPlayerId != data.iHrUserId) {
+//         this.oScene.opponent2Grp2PhaseCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.opponent2Grp2PhaseCardContainer;
+//     }
+//     else{
+//         this.oScene.doublePhaseTwoCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.doublePhaseTwoCardContainer;
+//     }
+// }
+// // }
+// // else{
+// if (data.sGroup === "aGroup-1") {
+//     if (this.oScene.ownPlayerId != data.iHrUserId) {
+//         this.oScene.opponent3Grp1PhaseCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.opponent3Grp1PhaseCardContainer;
+//     }
+//     else{
+//         this.oScene.doublePhaseOneCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.doublePhaseOneCardContainer;
+//     }
+// }
+// else if (data.sGroup === "aGroup-2"){
+//     if (this.oScene.ownPlayerId != data.iHrUserId) {
+//         this.oScene.opponent3Grp2PhaseCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.opponent3Grp2PhaseCardContainer;
+//     }
+//     else{
+//         this.oScene.doublePhaseTwoCardContainer.removeAll(true);
+//         tempContainer1 = this.oScene.doublePhaseTwoCardContainer;
+//     }
+// }
+

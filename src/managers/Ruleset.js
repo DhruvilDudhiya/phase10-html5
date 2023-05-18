@@ -30,12 +30,12 @@ class Ruleset {
             if (validateData.name == "singlePhaseOneContainer" && this.oScene.sp_yellow_ring.visible == true) {
                 this.oScene.sp_yellow_ring.setVisible(false);
             }
+
         }
     }
 
     checkRulesetContainer(containerName, validateData) {
         if (containerName == 'doublePhaseOneCardContainer') {
-
             console.log("PhaseOneData ------------------>", this.oScene.oGameManager.phaseOneTotalCards);
             this.checkRulesetCondition(this.oScene.oGameManager.phaseOneType, this.oScene.oGameManager.phaseOneTotalCards, containerName, validateData);
         }
@@ -59,23 +59,18 @@ class Ruleset {
     // Rule ==========> set
     validateRulesetOfSet(totalCards, containerName, validateData) {
         this.cardNumbers.sort();
-        console.log("TOtalCardNumbers =================>", this.cardNumbers , totalCards);
+        console.log("TOtalCardNumbers =================>", this.cardNumbers, totalCards);
         if (this.cardNumbers.every(element => element === this.cardNumbers[0] || element === 'w') && this.cardNumbers.length == totalCards) {
             if (this.cardNumbers.every(element => element !== 's')) {
                 if (containerName == "doublePhaseOneCardContainer") {
                     this.grp1Data = [];
-                    if (this.oScene.isDeclarePhase == false) {
-                        this.oScene.dp_yellow_ring_1.setVisible(true);
-                        this.oScene.oPlayerManager.handleDeclareButtons();
-                    }
-                    console.log("validListCount  ---------->", validateData.list);
+                        if (this.oScene.isDeclarePhase == false) {
+                            this.oScene.dp_yellow_ring_1.setVisible(true);
+                            this.oScene.oPlayerManager.handleDeclareButtons();
+                        }
                     for (let i = 0; i < validateData.list.length; i++) {
-
                         this.grp1Data.push({ nLabel: this.cardNumbers[i], eColor: this.cardColors[i], _id: this.cardIds[i] })
-                        console.log("groupOneDAta from VAlidruleSEt /************>", this.grp1Data);
                     }
-                    console.log("groupOneDAta from VAlidruleSEt =====>", this.grp1Data);
-                    
                 }
                 if (containerName == "doublePhaseTwoCardContainer") {
                     this.grp2Data = [];
@@ -103,24 +98,24 @@ class Ruleset {
     // Rule ==========> Run
     validateRulesetOfRun(totalCards, containerName, validateData) {
         console.log(" ValidateRule of Run ===>", totalCards, containerName);
-        
-       
+
+
         if (this.cardNumbers.length == totalCards) {
             if (containerName == 'doublePhaseOneCardContainer') {
                 this.grp1Data = [];
-                this.checkRule(this.cardNumbers, this.grp1Data, validateData ,this.oScene.dp_yellow_ring_1 )
+                    this.checkRule(this.cardNumbers, this.grp1Data, validateData, this.oScene.dp_yellow_ring_1)
             }
             if (containerName == 'doublePhaseTwoCardContainer') {
                 this.grp2Data = [];
-                this.checkRule(this.cardNumbers, this.grp2Data, validateData ,this.oScene.dp_yellow_ring_2)
+                this.checkRule(this.cardNumbers, this.grp2Data, validateData, this.oScene.dp_yellow_ring_2)
             }
-            if(containerName == 'singlePhaseOneContainer'){
+            if (containerName == 'singlePhaseOneContainer') {
                 this.grp1Data = [];
-                this.checkRule(this.cardNumbers, this.grp1Data, validateData ,this.oScene.sp_yellow_ring)
+                this.checkRule(this.cardNumbers, this.grp1Data, validateData, this.oScene.sp_yellow_ring)
             }
         }
     }
-    checkRule(cardNumberArray, grp, containerData ,yellowRing) {
+    checkRule(cardNumberArray, grp, containerData, yellowRing) {
         console.log("cardData", cardNumberArray);
         let sortedNumbers = [...cardNumberArray];
         let tempArray = [];

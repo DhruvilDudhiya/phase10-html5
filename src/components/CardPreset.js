@@ -17,6 +17,12 @@ class CardPreset {
 		// opponentGrp1PhaseCardContainer
 		this.opponentGrp1PhaseCardIds = [];
 		this.opponentGrp2PhaseCardIds = [];
+
+		this.opponent2Grp1PhaseCardIds = [];
+		this.opponent2Grp2PhaseCardIds = [];
+		this.opponent3Grp1PhaseCardIds = [];
+		this.opponent3Grp2PhaseCardIds = [];
+
 		this.gameObjectPreset = this.gameObject.setInteractive(
 			new Phaser.Geom.Rectangle(-137 / 2, -207 / 2, 137, 207),
 			Phaser.Geom.Rectangle.Contains
@@ -46,7 +52,14 @@ class CardPreset {
 			//check declare phase card of both group
 			if (this.gameObject.scene.isDeclarePhase == true) {
 				this.checkOwnMatchContainer(this.gameObject.scene.doublePhaseOneCardContainer.list, this.gameObject.scene.doublePhaseTwoCardContainer.list);
-				this.checkOpponentMatchContainer(this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.list, this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.list)
+
+				if(this.gameObjectPreset.scene.nMaxPlayer == 2){
+					this.checkOpponentMatchContainer(this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.list, this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.list, this.gameObjectPreset.scene.nMaxPlayer)
+				}
+				else{
+					this.checkOpponentMatchContainer(this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.list, this.gameObjectPreset.scene.opponent3Grp1PhaseCardContainer.list, this.gameObjectPreset.scene.nMaxPlayer)
+					this.checkOpponentMatchContainer(this.gameObjectPreset.scene.opponent2Grp2PhaseCardContainer.list, this.gameObjectPreset.scene.opponent3Grp2PhaseCardContainer.list, this.gameObjectPreset.scene.nMaxPlayer)
+				}
 			}
 			let parentContainerName = this.gameObjectPreset.parentContainer.name;
 			this.handleParentContainerOperations(parentContainerName, this.gameObjectPreset);
@@ -59,6 +72,14 @@ class CardPreset {
 				this.gameObject.scene.dp_yellow_ring_2.setVisible(false);
 				this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(false);
 				this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(false);
+
+				this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(false);
+				this.gameObject.scene.yellow_ring_opponentGrp_22.setVisible(false);
+				this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(false);
+				this.gameObject.scene.yellow_ring_opponentGrp_32.setVisible(false);
+
+
+
 			}
 		}, this);
 
@@ -76,8 +97,20 @@ class CardPreset {
 			this.gameObjectPreset.scene.oGameManager.opponetPly = false;
 			this.ownPly = false;
 			this.opponetPly = false;
+			this.opponetPlayer2Grp1 = false;
+			this.opponetPlayer2Grp2 = false;
+			this.opponetPlayer3Grp1 = false;
+			this.opponetPlayer3Grp2 = false;
+
+
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp1 = false;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp1 = false;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp2 = false;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp2 = false;
+
+
 			if (this.gameObject.scene.oGameManager.phaseRules == 2) {
-				if (this.gameObject.scene.nMaxPlayer == 3 || this.gameObject.scene.nMaxPlayer == 2) {
+				if (this.gameObject.scene.nMaxPlayer == 2) {
 					//Opened Card Deck
 					// Put card in openDeck
 					if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
@@ -100,12 +133,35 @@ class CardPreset {
 						this.playerHandPosition()
 					}
 				}
-
+				else if (this.gameObject.scene.nMaxPlayer == 3) {
+					//Opened Card Deck
+					// Put card in openDeck
+					if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
+						this.putOpenDeckPosition();
+					}
+					//Group One
+					else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 515 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460) || (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)) {
+						this.doublePlayerGroupOnePosition()
+					}
+					//Group Two
+					else if ((this.gameObjectPreset.x >= 565 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 490 && this.gameObjectPreset.y <= 600) || (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 490 && this.gameObjectPreset.y <= 600)) {
+						this.doublePlayerGroupTwoPosition()
+					}
+					// skip player
+					else if (this.gameObjectPreset.x >= 346 && this.gameObjectPreset.x <= 734 && this.gameObjectPreset.y >= 74 && this.gameObjectPreset.y <= 697) {
+						this.skipPlayerPosition()
+					}
+					//Player Hand Container
+					else {
+						this.playerHandPosition()
+					}
+				}
 			}
 			else if (this.gameObject.scene.oGameManager.phaseRules == 1) {
+				console.log("single container phase start");
 				if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
 					this.putOpenDeckPosition();
-				} else if ((this.gameObjectPreset.x >= 80 && this.gameObjectPreset.x <= 960 && this.gameObjectPreset.y >= 1100 && this.gameObjectPreset.y <= 1100) || (this.gameObjectPreset.x >= 80 && this.gameObjectPreset.x <= 1300 && this.gameObjectPreset.y >= 950 && this.gameObjectPreset.y <= 1300)) {
+				} else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 360 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 380 && this.gameObjectPreset.y <= 490)) {
 					this.ruleOneGroupPosition()
 				} else if (this.gameObjectPreset.x >= 346 && this.gameObjectPreset.x <= 734 && this.gameObjectPreset.y >= 74 && this.gameObjectPreset.y <= 697) {
 					this.skipPlayerPosition()
@@ -165,6 +221,22 @@ class CardPreset {
 				console.log("group two container");
 				this.gameObject.scene.opponentGrp2PhaseCardContainer.remove(gameObjectPreset);
 				break;
+			case "opponent2Grp1PhaseCardContainer":
+				console.log("group one container");
+				this.gameObject.scene.opponent2Grp1PhaseCardContainer.remove(gameObjectPreset);
+				break;
+			case "opponent2Grp2PhaseCardContainer":
+				console.log("group two container");
+				this.gameObject.scene.opponent2Grp2PhaseCardContainer.remove(gameObjectPreset);
+				break;
+			case "opponent3Grp1PhaseCardContainer":
+				console.log("group two container");
+				this.gameObject.scene.opponent3Grp1PhaseCardContainer.remove(gameObjectPreset);
+				break;
+			case "opponent3Grp2PhaseCardContainer":
+				console.log("group two container");
+				this.gameObject.scene.opponent3Grp2PhaseCardContainer.remove(gameObjectPreset);
+				break;
 			default:
 				console.log("defauly add container");
 				this.gameObject.scene.playerHandContainer.add(gameObjectPreset);
@@ -209,12 +281,17 @@ class CardPreset {
 			this.lastHitcards = this.opponentGrp1PhaseCardIds[this.opponentGrp1PhaseCardIds.length - 1];
 		}
 		if (this.gameObject.scene.isDeclarePhase == true) {
-			if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
-				this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
-			} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
-				this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
-			} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
-				this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
+			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
+				if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
+					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
+					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
+					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
+				}
+			}
+			else{
+				this.playerHandPosition();
 			}
 		}
 		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly);
@@ -223,7 +300,6 @@ class CardPreset {
 		if (this.gameObjectPreset.x >= 565 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) {
 			this.ownPly = true;
 			this.gameObjectPreset.scene.oGameManager.ownPly = true;
-
 			this.gameObject.scene.doublePhaseTwoCardContainer.add(this.gameObjectPreset);
 			this.gameObjectPreset.setScale(0.6);
 			this.gameObjectPreset.setPosition(0, 0);
@@ -249,16 +325,187 @@ class CardPreset {
 			this.lastHitcards1 = this.opponentGrp2PhaseCardIds[this.opponentGrp2PhaseCardIds.length - 1];
 		}
 		if (this.gameObject.scene.isDeclarePhase == true) {
-			if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
-				this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : this.opponentGrp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
-			} else if (this.gameObject.scene.oGameManager.phaseTwoType == "RUN") {
-				this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : this.opponentGrp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
-			} else if (this.gameObject.scene.oGameManager.phaseTwoType == "color") {
-				this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer,);
+
+
+			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
+				if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
+					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : this.opponentGrp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
+				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "RUN") {
+					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : this.opponentGrp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
+				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "color") {
+					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer,);
+				}
+			}
+			else{
+				this.playerHandPosition();
 			}
 		}
 		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly);
 	}
+
+
+	// --------------------------------------------------------------------------------------------------------------------
+
+	// doubl player oppnent players card drag and drop functionality 3 Player join 
+
+	// this.oScene.opponentGrp1PhaseCardContainer,
+	// this.oScene.opponentGrp2PhaseCardContainer,
+	// this.oScene.opponent2Grp1PhaseCardContainer,
+	// this.oScene.opponent2Grp2PhaseCardContainer,
+	// this.oScene.opponent3Grp1PhaseCardContainer,
+	// this.oScene.opponent3Grp2PhaseCardContainer,
+
+
+
+		// this.opponent2Grp1PhaseCardIds = [];
+		// this.opponent2Grp2PhaseCardIds = [];
+		// this.opponent3Grp1PhaseCardIds = [];
+		// this.opponent3Grp2PhaseCardIds = [];
+		
+	
+	doublePlayerGroupOnePosition() {
+		if (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 515 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) {
+			this.ownPly = true;
+			this.gameObjectPreset.scene.oGameManager.ownPly = true;
+			this.gameObject.scene.doublePhaseOneCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.doublePhaseOneCardContainer);
+			this.gameObjectPreset.setScale(0.6);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.doublePhaseOneCardContainer.list.length; i++) {
+				this.phaseOneHitCardIds.push(this.gameObject.scene.doublePhaseOneCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.phaseOneHitCardIds[this.phaseOneHitCardIds.length - 1];
+		}
+
+		else if (this.gameObject.scene.isDeclarePhase == true && (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)) {
+			this.opponetPly = true;
+			this.opponetPlayer2Grp1 = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp1 = true;
+			this.gameObject.scene.opponent2Grp1PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponent2Grp1PhaseCardContainer);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.opponent2Grp1PhaseCardContainer.list.length; i++) {
+				this.opponent2Grp1PhaseCardIds.push(this.gameObject.scene.opponent2Grp1PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.opponent2Grp1PhaseCardIds[this.opponent2Grp1PhaseCardIds.length - 1];
+		}
+		
+		else if (this.gameObject.scene.isDeclarePhase == true && (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)) {
+			this.opponetPly = true;
+			this.opponetPlayer3Grp1 = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp1 = true;
+			this.gameObject.scene.opponent3Grp1PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponent3Grp1PhaseCardContainer);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.opponent3Grp1PhaseCardContainer.list.length; i++) {
+				this.opponent3Grp1PhaseCardIds.push(this.gameObject.scene.opponent3Grp1PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.opponent3Grp1PhaseCardIds[this.opponent3Grp1PhaseCardIds.length - 1];
+		}
+
+
+		
+		if (this.gameObject.scene.isDeclarePhase == true) {
+			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
+				if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
+					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : (this.opponetPlayer2Grp1 == true) ? this.gameObject.scene.opponent2Grp1PhaseCardContainer : this.gameObject.scene.opponent3Grp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : (this.opponetPlayer2Grp1 == true) ? this.opponent2Grp1PhaseCardIds : this.opponent3Grp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
+					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : (this.opponetPlayer2Grp1 == true) ? this.gameObject.scene.opponent2Grp1PhaseCardContainer : this.gameObject.scene.opponent3Grp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : (this.opponetPlayer2Grp1 == true) ? this.opponent2Grp1PhaseCardIds : this.opponent3Grp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
+					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
+				}
+			}
+			else{
+				this.playerHandPosition();
+			}
+		}
+		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly, "this.opponetPlayer2Grp1", this.opponetPlayer2Grp1);
+	}
+
+
+
+	
+	doublePlayerGroupTwoPosition() {
+		// this.opponent2Grp1PhaseCardIds = [];
+		// this.opponent2Grp2PhaseCardIds = [];
+		// this.opponent3Grp1PhaseCardIds = [];
+		// this.opponent3Grp2PhaseCardIds = [];
+
+		if (this.gameObjectPreset.x >= 565 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) {
+			this.ownPly = true;
+			this.gameObjectPreset.scene.oGameManager.ownPly = true;
+			this.gameObject.scene.doublePhaseTwoCardContainer.add(this.gameObjectPreset);
+			this.gameObjectPreset.setScale(0.6);
+			this.gameObjectPreset.setPosition(0, 0);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.doublePhaseTwoCardContainer);
+			for (let i = 0; i < this.gameObject.scene.doublePhaseTwoCardContainer.list.length; i++) {
+				this.phaseTwoHitCardIds.push(this.gameObject.scene.doublePhaseTwoCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards1 = this.phaseTwoHitCardIds[this.phaseTwoHitCardIds.length - 1];
+
+		}
+		
+		else if (this.gameObject.scene.isDeclarePhase == true && (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 490 && this.gameObjectPreset.y <= 600)) {
+			this.opponetPly = true;
+			this.opponetPlayer2Grp2 = true;
+
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp2 = true;
+
+			this.gameObject.scene.opponent2Grp2PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponent2Grp2PhaseCardContainer);
+			
+			for (let i = 0; i < this.gameObject.scene.opponent2Grp2PhaseCardContainer.list.length; i++) {
+				this.opponent2Grp2PhaseCardIds.push(this.gameObject.scene.opponent2Grp2PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards1 = this.opponent2Grp2PhaseCardIds[this.opponent2Grp2PhaseCardIds.length - 1];
+		}
+
+		else if (this.gameObject.scene.isDeclarePhase == true && (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 490 && this.gameObjectPreset.y <= 600)) {
+			this.opponetPly = true;
+			this.opponetPlayer3Grp2 = true;
+
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp2 = true;
+
+			this.gameObject.scene.opponent3Grp2PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponent3Grp2PhaseCardContainer);
+			for (let i = 0; i < this.gameObject.scene.opponent3Grp2PhaseCardContainer.list.length; i++) {
+				this.opponent3Grp2PhaseCardIds.push(this.gameObject.scene.opponent3Grp2PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards1 = this.opponent3Grp2PhaseCardIds[this.opponent3Grp2PhaseCardIds.length - 1];
+		}
+
+
+
+
+
+		if (this.gameObject.scene.isDeclarePhase == true) {
+			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
+				if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
+					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : (this.opponetPlayer2Grp2 == true) ? this.gameObject.scene.opponent2Grp2PhaseCardContainer : this.gameObject.scene.opponent3Grp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : (this.opponetPlayer2Grp2 == true) ? this.opponent2Grp2PhaseCardIds : this.opponent3Grp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
+				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "RUN") {
+					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : (this.opponetPlayer2Grp2 == true) ? this.gameObject.scene.opponent2Grp2PhaseCardContainer : this.gameObject.scene.opponent3Grp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : (this.opponetPlayer2Grp2 == true) ? this.opponent2Grp2PhaseCardIds : this.opponent3Grp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
+				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "color") {
+					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer,);
+				}
+			}
+			else{
+				this.playerHandPosition();
+			}
+		}
+		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly, "this.opponetPlayer2Grp2", this.opponetPlayer2Grp2);
+	}
+	// --------------------------------------------------------------------------------------------------------------------
+
 	playerHandPosition() {
 		this.gameObjectPreset.setPosition(parseFloat(this.lastPosX), parseFloat(this.lastPosY));
 		this.gameObject.scene.playerHandContainer.add(this.gameObjectPreset);
@@ -268,7 +515,41 @@ class CardPreset {
 		// this.gameObject.scene.oPlayerHand.sendChangeGroupDefault(this.cardId);
 	}
 	ruleOneGroupPosition() {
-	
+		if (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) {
+			this.ownPly = true;
+			// this.gameObject.scene.oGameManager.onePhaseContainer = true
+			this.gameObjectPreset.scene.oGameManager.ownPly = true;
+			this.gameObject.scene.singlePhaseOneContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.singlePhaseOneContainer);
+			this.gameObjectPreset.setScale(0.7);
+			this.gameObjectPreset.setPosition(0,0);
+			for (let i = 0; i < this.gameObject.scene.singlePhaseOneContainer.list.length; i++) {
+				this.phaseOneHitCardIds.push(this.gameObject.scene.singlePhaseOneContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.phaseOneHitCardIds[this.phaseOneHitCardIds.length - 1];
+		}
+		else if (this.gameObject.scene.isDeclarePhase == true && this.gameObjectPreset.x >= 360 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 380 && this.gameObjectPreset.y <= 490) {
+			this.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObject.scene.opponentGrp1PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponentGrp1PhaseCardContainer);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.opponentGrp1PhaseCardContainer.list.length; i++) {
+				this.opponentGrp1PhaseCardIds.push(this.gameObject.scene.opponentGrp1PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.opponentGrp1PhaseCardIds[this.opponentGrp1PhaseCardIds.length - 1];
+		}
+		if (this.gameObject.scene.isDeclarePhase == true) {
+			if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
+				this.setContition((this.ownPly == true) ? this.gameObject.scene.singlePhaseOneContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+			} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
+				this.runContition((this.ownPly == true) ? this.gameObject.scene.singlePhaseOneContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+			} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
+				this.colorContition((this.ownPly == true) ? this.gameObject.scene.singlePhaseOneContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
+			}
+		}
+		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly);
 	}
 	skipPlayerPosition() {
 		if (this.gameObject.__CardPreset.cardNumber === "s") {
@@ -349,13 +630,14 @@ class CardPreset {
 			}
 		}
 	}
-	checkOpponentMatchContainer(opponentContainer1, opponentContainer2) {
-		if (this.gameObject.scene.opponentGrp1PhaseCardContainer.name == "opponentGrp1PhaseCardContainer") {
+	checkOpponentMatchContainer(opponentContainer1, opponentContainer2, nMaxPlayers) {
+		if (this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.name == "opponentGrp1PhaseCardContainer" || this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer" || this.gameObjectPreset.scene.opponent3Grp1PhaseCardContainer.name == "opponent3Grp1PhaseCardContainer") {
 			let cardContTwoArray = [];
 			if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
 				for (let i = 0; i < opponentContainer1.length; i++) {
 					if (this.currentOwnCardLabel == opponentContainer1[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
-						this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true);
+						console.log("visible");
+						(nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(true);
 					}
 				}
 			}
@@ -374,17 +656,21 @@ class CardPreset {
 				let minNo = Math.min(...cardContTwoArray);
 				console.log("min :", minNo, "max :", maxNo);
 				if (minNo - 1 == this.currentOwnCardLabel || maxNo + 1 == this.currentOwnCardLabel || this.currentOwnCardLabel == 'w') {
-					this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true);
+					console.log("visible");
+					(nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(true);
+					// this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true);
 				}
-
+				
 			}
 		}
-		if (this.gameObject.scene.opponentGrp2PhaseCardContainer.name == "opponentGrp2PhaseCardContainer") {
+		if (this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.name == "opponentGrp2PhaseCardContainer" || this.gameObjectPreset.scene.opponent2Grp2PhaseCardContainer.name == "opponent2Grp2PhaseCardContainer" || this.gameObjectPreset.scene.opponent3Grp2PhaseCardContainer.name == "opponent3Grp2PhaseCardContainer") {
 			let cardContTwoArray = [];
 			if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
 				for (let i = 0; i < opponentContainer2.length; i++) {
 					if (this.currentOwnCardLabel == opponentContainer2[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
-						this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true);
+						console.log("visible");
+						(nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp2PhaseCardContainer.name == "opponent2Grp2PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_22.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_32.setVisible(true);
+						// this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true);
 					}
 				}
 			}
@@ -403,11 +689,14 @@ class CardPreset {
 				let minNo = Math.min(...cardContTwoArray);
 				console.log("min :", minNo, "max :", maxNo);
 				if (minNo - 1 == this.currentOwnCardLabel || maxNo + 1 == this.currentOwnCardLabel || this.currentOwnCardLabel == 'w') {
-					this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true);
+					console.log("visible");
+					(nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp2PhaseCardContainer.name == "opponent2Grp2PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_22.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_32.setVisible(true);
+					// this.gameObject.scene.yellow_ring_opponentGrp2.setVisible(true);
 				}
 			}
 		}
 	}
+	
 	static clearAllPhaseCards() {
 		this.gameObject.scene.doublePhaseOneCardContainer.remove(gameObjectPreset);
 		this.gameObject.scene.doublePhaseTwoCardContainer.remove(gameObjectPreset);
@@ -437,7 +726,18 @@ class CardPreset {
 			}
 			else {
 				console.log("Play for the not own player");
-				this.gameObject.scene.sendOpponentHitCards(phaseHitCardIds, lastHitcard, grp);
+				// thirdPlayerId
+				if(this.gameObject.scene.nMaxPlayer == 3){
+					if(this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp1 == true || this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp2 == true){
+						this.gameObjectPreset.scene.oGameManager.whichPlayer = 2;
+					}else if(this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp1 == true || this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp2 == true){
+						this.gameObjectPreset.scene.oGameManager.whichPlayer = 3;
+					}
+				}
+				// console.log(this.gameObjectPreset.scene.oPlayerManager.secondPlayerId, this.gameObjectPreset.scene.oPlayerManager.thirdPlayerId, this.gameObjectPreset.scene.oPlayerManager.iOwnPlayerId);
+
+				this.gameObject.scene.sendOpponentHitCards(phaseHitCardIds, lastHitcard, grp, this.gameObjectPreset);
+
 			}
 		} else {
 			console.log("all are not done to work it");
@@ -473,7 +773,7 @@ class CardPreset {
 			}
 			else {
 				console.log("Play for the not own player");
-				this.gameObject.scene.sendOpponentHitCards(phaseHitCardIds, lastHitcard, grp);
+				this.gameObject.scene.sendOpponentHitCards(phaseHitCardIds, lastHitcard, grp, this.gameObjectPreset);
 			}
 		} else {
 			this.gameObject.scene.playerHandContainer.add(this.gameObjectPreset);

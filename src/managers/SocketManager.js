@@ -20,11 +20,11 @@ class SocketManager {
         // Root Socket Connection Events - Start
         this.oRootSocketConn.on('connect', () => {
             this.ownSocketId = this.oRootSocketConn.id;
-            console.log("Connected to Socket :: ", this.oRootSocketConn.id, "\nTable ID: ", this.iTableId);
+            // console.log("Connected to Socket :: ", this.oRootSocketConn.id, "\nTable ID: ", this.iTableId, "this.ownSocketId", this.ownSocketId);
 
             this.oScene.tableInfoContainer.visible = true
             this.oScene.txt_table_id.text = this.iTableId.slice(-8);
-            console.log("sRootURL :: ", this.sRootURL);
+            // console.log("sRootURL :: ", this.sRootURL);
         });
         this.oRootSocketConn.on('disconnect', () => {
             console.log("Disconnected from Socket");
@@ -59,37 +59,42 @@ class SocketManager {
     onReceivedData(data) {
         switch (data.sEventName) {
             case undefined:
+                console.log("undefined", data,"total playter join it", data.oData.aParticipant.length);
                 this.oScene.oUIManager.setPlayerBoxes(data.oData.nMaxPlayer);
                 if (data.oData.aParticipant.length == data.oData.nMaxPlayer) {
-                    for (var i = 0; i <= data.oData.aParticipant.length; i++) {
+                    for (let i = 0; i <= data.oData.aParticipant.length; i++) {
                         console.info("data.oData.aParticipant[i] : ", data.oData.aParticipant[i])
                         if (data.oData.aParticipant[i].sRootSocket != this.ownSocketId) {
                             this.oScene.oPlayerManager.setUsersData(data.oData.aParticipant[i]);
-                            break;
                         }
                     }
                 }
                 break;
             case "resUserJoined":
-                console.log("resUserJoined ::: ", data.oData.iUserId);
+                console.log("resUserJoined ::: ", data);
                 this.oScene.oPlayerManager.setUsersData(data.oData, this.ownSocketId);
                 this.oScene.oPlayerManager.setHandData(data.oData.aHand);
                 break;
             case "resPhaseData":
+                console.log("resPhaseData", data);
                 this.oScene.oUIManager.setPhaseContainer(data.oData);
                 this.oScene.oPlayerManager.setPlayerPhaseData(data.oData);
                 break;
             case "resHand":
+                console.log("resHand", data);
                 this.oScene.oTweenManager.startHandCardsDistribution(data.oData);
                 break;
             case "resHighCards":
+                console.log("resHighCards", data);
                 this.oScene.oPlayerHand.arrangePlayerHighCards(data.oData);
                 break;
             case "resGameInitializeTimer":
+                console.log("resGameInitializeTimer", data);
                 this.oScene.oTweenManager.closePopUp(this.oScene.roundWinnerPopupContainer);
                 this.oScene.oUIManager.startRoundTimer(data.oData);
                 break;
             case "resGameState":
+                console.log("resGameState", data);
                 this.oScene.tempCardContainer.destroy();
                 break;
             case "resPlayerTurn":
@@ -116,7 +121,6 @@ class SocketManager {
                 break;
             case "resDeclarePhase":
                 console.log("resDeclarePhase", data);
-                console.log("backed data ===========......>>>>>>>");
                 this.oScene.oPlayerManager.opponentDeclarePhase(data.oData);
                 break;
             case "resRoundOver":

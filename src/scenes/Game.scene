@@ -115,13 +115,14 @@
                             "label": "doublePhaseContainer",
                             "scope": "CLASS",
                             "components": [],
-                            "y": 2,
+                            "y": 3,
                             "visible": false,
                             "list": [
                                 {
                                     "type": "Image",
                                     "id": "1c999496-9954-4aab-b32c-e9430984c129",
                                     "label": "double_phase",
+                                    "scope": "CLASS",
                                     "components": [],
                                     "texture": {
                                         "key": "double-phase"
@@ -187,14 +188,14 @@
                             "type": "Container",
                             "id": "f8f37786-f1c2-489d-b783-e97f99aa5deb",
                             "label": "singlePhaseContainer",
+                            "useGameObjectName": true,
                             "scope": "CLASS",
                             "components": [],
                             "y": -2,
-                            "visible": false,
                             "list": [
                                 {
                                     "type": "Image",
-                                    "id": "0a2956e9-a982-4129-ae24-744ce051eef6",
+                                    "id": "d36d731d-6088-4a80-b9c6-2a0a21a0d1a5",
                                     "label": "single_phase",
                                     "scope": "CLASS",
                                     "components": [],
@@ -202,11 +203,11 @@
                                         "key": "single-phase"
                                     },
                                     "x": 540,
-                                    "y": 1210
+                                    "y": 1211
                                 },
                                 {
                                     "type": "Image",
-                                    "id": "f321f6d8-3fc5-4b1a-8519-217efbfb31d7",
+                                    "id": "afc2f6df-314c-452b-9375-8f7094d74bab",
                                     "label": "sp_yellow_ring",
                                     "scope": "CLASS",
                                     "components": [],
@@ -214,7 +215,7 @@
                                         "key": "yellow-ring-single"
                                     },
                                     "x": 540,
-                                    "y": 1216,
+                                    "y": 1210,
                                     "visible": false
                                 },
                                 {
@@ -538,6 +539,36 @@
                                             "list": []
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "1538525f-3cce-42e0-8789-9516da9312c0",
+                                    "label": "yellow_ring_opponentGrp_22",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 287,
+                                    "y": 543,
+                                    "scaleX": 0.81,
+                                    "scaleY": 0.56,
+                                    "visible": false
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "28bb29d6-efc4-426f-8b07-85f96596aac1",
+                                    "label": "yellow_ring_opponentGrp_21",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 287,
+                                    "y": 407,
+                                    "scaleX": 0.81,
+                                    "scaleY": 0.56,
+                                    "visible": false
                                 }
                             ]
                         },
@@ -737,6 +768,36 @@
                                             "list": []
                                         }
                                     ]
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "a243b986-6854-40d9-aa7e-5c10a91a6297",
+                                    "label": "yellow_ring_opponentGrp_32",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 795,
+                                    "y": 543,
+                                    "scaleX": 0.81,
+                                    "scaleY": 0.56,
+                                    "visible": false
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "fa5635f8-5b0c-4d8c-939a-d6ebd78e7758",
+                                    "label": "yellow_ring_opponentGrp_31",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring"
+                                    },
+                                    "x": 795,
+                                    "y": 407,
+                                    "scaleX": 0.81,
+                                    "scaleY": 0.56,
+                                    "visible": false
                                 }
                             ]
                         }

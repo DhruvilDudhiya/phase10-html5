@@ -109,7 +109,6 @@ class PlayerHand {
 
     distributeHighCards(cardData, xPos, yPos) {
         let tempCard = new CardPrefab(this.oScene, 540, 875);
-
         tempCard.disableInteractive();
         tempCard.setName(cardData.iUserId);
         this.oScene.tempCardContainer.add(tempCard);

@@ -26,6 +26,16 @@ class GameManager {
 		this.phaseRules = "";
 		this.ownPly = false;
 		this.opponetPly = false;
+		this.onePhaseContainer = false;
+
+
+		this.opponetPlayer2Grp1 = false;
+		this.opponetPlayer3Grp1 = false;
+		this.opponetPlayer2Grp2 = false;
+		this.opponetPlayer3Grp2 = false;
+
+		this.whichPlayer = undefined;
+
 	}
 
 	resetPhaseData() {

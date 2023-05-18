@@ -52,7 +52,7 @@ class Game extends Phaser.Scene {
 		body.add(phaseContainer);
 
 		// doublePhaseContainer
-		const doublePhaseContainer = this.add.container(0, 2);
+		const doublePhaseContainer = this.add.container(0, 3);
 		doublePhaseContainer.visible = false;
 		phaseContainer.add(doublePhaseContainer);
 
@@ -82,15 +82,15 @@ class Game extends Phaser.Scene {
 
 		// singlePhaseContainer
 		const singlePhaseContainer = this.add.container(0, -2);
-		singlePhaseContainer.visible = false;
+		singlePhaseContainer.name = "singlePhaseContainer";
 		phaseContainer.add(singlePhaseContainer);
 
 		// single_phase
-		const single_phase = this.add.image(540, 1210, "single-phase");
+		const single_phase = this.add.image(540, 1211, "single-phase");
 		singlePhaseContainer.add(single_phase);
 
 		// sp_yellow_ring
-		const sp_yellow_ring = this.add.image(540, 1216, "yellow-ring-single");
+		const sp_yellow_ring = this.add.image(540, 1210, "yellow-ring-single");
 		sp_yellow_ring.visible = false;
 		singlePhaseContainer.add(sp_yellow_ring);
 
@@ -236,6 +236,20 @@ class Game extends Phaser.Scene {
 		const opponent2Grp1PhaseCardContainer = this.add.container(285, 405);
 		opponent2DeclareCardContainer.add(opponent2Grp1PhaseCardContainer);
 
+		// yellow_ring_opponentGrp_22
+		const yellow_ring_opponentGrp_22 = this.add.image(287, 543, "yellow-ring");
+		yellow_ring_opponentGrp_22.scaleX = 0.81;
+		yellow_ring_opponentGrp_22.scaleY = 0.56;
+		yellow_ring_opponentGrp_22.visible = false;
+		threePlayer2Container.add(yellow_ring_opponentGrp_22);
+
+		// yellow_ring_opponentGrp_21
+		const yellow_ring_opponentGrp_21 = this.add.image(287, 407, "yellow-ring");
+		yellow_ring_opponentGrp_21.scaleX = 0.81;
+		yellow_ring_opponentGrp_21.scaleY = 0.56;
+		yellow_ring_opponentGrp_21.visible = false;
+		threePlayer2Container.add(yellow_ring_opponentGrp_21);
+
 		// threePlayer3Container
 		const threePlayer3Container = this.add.container(0, 0);
 		threePlayerContainer.add(threePlayer3Container);
@@ -329,6 +343,20 @@ class Game extends Phaser.Scene {
 		// opponent3Grp1PhaseCardContainer
 		const opponent3Grp1PhaseCardContainer = this.add.container(795, 405);
 		opponent3DeclareCardContainer.add(opponent3Grp1PhaseCardContainer);
+
+		// yellow_ring_opponentGrp_32
+		const yellow_ring_opponentGrp_32 = this.add.image(795, 543, "yellow-ring");
+		yellow_ring_opponentGrp_32.scaleX = 0.81;
+		yellow_ring_opponentGrp_32.scaleY = 0.56;
+		yellow_ring_opponentGrp_32.visible = false;
+		threePlayer3Container.add(yellow_ring_opponentGrp_32);
+
+		// yellow_ring_opponentGrp_31
+		const yellow_ring_opponentGrp_31 = this.add.image(795, 407, "yellow-ring");
+		yellow_ring_opponentGrp_31.scaleX = 0.81;
+		yellow_ring_opponentGrp_31.scaleY = 0.56;
+		yellow_ring_opponentGrp_31.visible = false;
+		threePlayer3Container.add(yellow_ring_opponentGrp_31);
 
 		// twoPlayerContainer
 		const twoPlayerContainer = this.add.container(0, -1);
@@ -746,6 +774,7 @@ class Game extends Phaser.Scene {
 		this.discardDeckContainer = discardDeckContainer;
 		this.btn_settings = btn_settings;
 		this.doublePhaseContainer = doublePhaseContainer;
+		this.double_phase = double_phase;
 		this.dp_yellow_ring_1 = dp_yellow_ring_1;
 		this.dp_yellow_ring_2 = dp_yellow_ring_2;
 		this.doublePhaseTwoCardContainer = doublePhaseTwoCardContainer;
@@ -771,6 +800,8 @@ class Game extends Phaser.Scene {
 		this.txt_set2_opponent2_info = txt_set2_opponent2_info;
 		this.opponent2Grp2PhaseCardContainer = opponent2Grp2PhaseCardContainer;
 		this.opponent2Grp1PhaseCardContainer = opponent2Grp1PhaseCardContainer;
+		this.yellow_ring_opponentGrp_22 = yellow_ring_opponentGrp_22;
+		this.yellow_ring_opponentGrp_21 = yellow_ring_opponentGrp_21;
 		this.secondPlayer3UserNameText = secondPlayer3UserNameText;
 		this.txt_opponent3_phase_score = txt_opponent3_phase_score;
 		this.txt_opponent3_phase_count = txt_opponent3_phase_count;
@@ -781,6 +812,8 @@ class Game extends Phaser.Scene {
 		this.txt_set2_opponent3_info = txt_set2_opponent3_info;
 		this.opponent3Grp2PhaseCardContainer = opponent3Grp2PhaseCardContainer;
 		this.opponent3Grp1PhaseCardContainer = opponent3Grp1PhaseCardContainer;
+		this.yellow_ring_opponentGrp_32 = yellow_ring_opponentGrp_32;
+		this.yellow_ring_opponentGrp_31 = yellow_ring_opponentGrp_31;
 		this.twoPlayerContainer = twoPlayerContainer;
 		this.twoPlayerDoublePhaseContainer = twoPlayerDoublePhaseContainer;
 		this.twoPlayer2Box = twoPlayer2Box;
@@ -854,6 +887,8 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	doublePhaseContainer;
 	/** @type {Phaser.GameObjects.Image} */
+	double_phase;
+	/** @type {Phaser.GameObjects.Image} */
 	dp_yellow_ring_1;
 	/** @type {Phaser.GameObjects.Image} */
 	dp_yellow_ring_2;
@@ -903,6 +938,10 @@ class Game extends Phaser.Scene {
 	opponent2Grp2PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
 	opponent2Grp1PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Image} */
+	yellow_ring_opponentGrp_22;
+	/** @type {Phaser.GameObjects.Image} */
+	yellow_ring_opponentGrp_21;
 	/** @type {Phaser.GameObjects.Text} */
 	secondPlayer3UserNameText;
 	/** @type {Phaser.GameObjects.Text} */
@@ -923,6 +962,10 @@ class Game extends Phaser.Scene {
 	opponent3Grp2PhaseCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
 	opponent3Grp1PhaseCardContainer;
+	/** @type {Phaser.GameObjects.Image} */
+	yellow_ring_opponentGrp_32;
+	/** @type {Phaser.GameObjects.Image} */
+	yellow_ring_opponentGrp_31;
 	/** @type {Phaser.GameObjects.Container} */
 	twoPlayerContainer;
 	/** @type {Phaser.GameObjects.Container} */
@@ -1083,15 +1126,14 @@ class Game extends Phaser.Scene {
 		this.isDeclarePhase = true;
 		this.oPlayerManager.handleDeclareButtonsVisibilityOFF();
 		let arrObj = {
-			sEventName: 'reqDeclarePhase', 
-			oData: { 
-				nPhase: this.oGameManager.nCurrentPhase, 
-				aGroup_1: this.oRuleset.grp1Data, 
+			sEventName: 'reqDeclarePhase',
+			oData: {
+				nPhase: this.oGameManager.nCurrentPhase,
+				aGroup_1: this.oRuleset.grp1Data,
 				aGroup_2: this.oRuleset.grp2Data
 			}
 		};
 		console.log("<><><><><><><><><><><><><><><><><><><>", arrObj);
-
 		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqDeclarePhase', oData: { nPhase: this.oGameManager.nCurrentPhase, aGroup_1: this.oRuleset.grp1Data, aGroup_2: this.oRuleset.grp2Data } });
 	}
 	sendHitCards(allCards, lastCard, agroups) {
@@ -1100,21 +1142,28 @@ class Game extends Phaser.Scene {
 			console.log("------------>>>>>> sendCards ", response, error);
 		});
 	}
-	sendOpponentHitCards(allCards, lastCard, agroups) {
+	sendOpponentHitCards(allCards, lastCard, agroups, gameObject) {
 		console.log("called hit");
 		console.log(this.secondPlayerId);
 		console.log(allCards, lastCard, agroups);
-		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: this.secondPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
+
+		this.oSocketManager.oRootSocketConn.emit(this.oSocketManager.iTableId, { sEventName: 'reqHitCard', oData: { iUserId: (this.nMaxPlayer != 3) ? this.secondPlayerId : (this.oGameManager.whichPlayer == 2) ? this.secondPlayerId : this.thirdPlayerId, cardId: lastCard, sGroup: agroups, aCardId: allCards } }, (response, error) => {
 			console.log("------------>>>>>> sendOpponentHitCards ", "response", response, "error", error);
+			let temp = false;
 			if(response != null) {
 				// give the info fot the plase wait for your turn
 				console.log("response", response);
+				temp = true;
 			}
 			else if (error != undefined) {
 				console.log("error", error);
 				this.playerHandContainer.removeAll(true);
 				this.oPlayerHand.getHandData(error);
 				// give the handcard data info
+			}
+
+			if(temp == true){
+				gameObject.playerHandPosition();
 			}
 		});
 	}
@@ -1151,32 +1200,14 @@ class Game extends Phaser.Scene {
 	}
 	setRoundOver(data) {
 		this.isDeclarePhase = false;
-		this.oRuleset.grp1Data = [];
-		this.oRuleset.grp2Data = [];
-		this.oRuleset.sendCardData = [];
-		this.oRuleset.hitCardsData = [];
-
-
+		this.clearContainerData()
+		this.clearGroupData()
 		this.openedCardDeck.setX(540);
 		this.openedCardDeck.visible = true;
-
 		this.closedCardDeck.setX(540);
 		this.closedCardDeck.visible = true;
-
 		this.oGameManager.resetPhaseData();
-		// this.oPlayerManager.resetPhaseData();
-		// this.oPlayerHand.clearPlayerHandCard();
-
 		this.oPlayerManager.ownPlayerTurnReset.intervalTimeReset();
-		
-		this.playerHandContainer.removeAll(true);
-		this.discardDeckContainer.removeAll(true);
-		this.doublePhaseOneCardContainer.removeAll(true);
-		this.doublePhaseTwoCardContainer.removeAll(true);
-
-		this.opponentGrp1PhaseCardContainer.removeAll(true);
-		this.opponentGrp2PhaseCardContainer.removeAll(true);
-
 		this.oTweenManager.openPopUp(this.roundWinnerPopupContainer);
 		if (data.iUserId === this.oPlayerManager.ownPlayerId) {
 			this.text_round_winner.text = "YOU WON THIS ROUND.";
@@ -1184,6 +1215,29 @@ class Game extends Phaser.Scene {
 		else {
 			this.text_round_winner.text = ((data.sUserName.length == 0 ? data.sMobile : data.sUserName).toUpperCase()) + " WON THIS ROUND.";
 		}
+	}
+	clearContainerData() {
+		this.playerHandContainer.removeAll(true);
+		this.discardDeckContainer.removeAll(true);
+		this.doublePhaseOneCardContainer.removeAll(true);
+		this.doublePhaseTwoCardContainer.removeAll(true);
+		this.opponentGrp1PhaseCardContainer.removeAll(true);
+		this.opponentGrp2PhaseCardContainer.removeAll(true);
+
+
+
+		this.opponent2Grp1PhaseCardContainer.removeAll(true);
+		this.opponent2Grp2PhaseCardContainer.removeAll(true);
+		this.opponent3Grp1PhaseCardContainer.removeAll(true);
+		this.opponent3Grp2PhaseCardContainer.removeAll(true);
+
+		this.singlePhaseContainer.removeAll(true);
+	}
+	clearGroupData() {
+		this.oRuleset.grp1Data = [];
+		this.oRuleset.grp2Data = [];
+		this.oRuleset.sendCardData = [];
+		this.oRuleset.hitCardsData = [];
 	}
 
 	winnerScene(oData) {
