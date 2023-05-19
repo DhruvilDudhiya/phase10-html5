@@ -53,12 +53,15 @@ class Game extends Phaser.Scene {
 
 		// doublePhaseContainer
 		const doublePhaseContainer = this.add.container(0, 3);
-		doublePhaseContainer.visible = false;
 		phaseContainer.add(doublePhaseContainer);
 
 		// double_phase
 		const double_phase = this.add.image(540, 1210, "double-phase");
 		doublePhaseContainer.add(double_phase);
+
+		// single_phase
+		const single_phase = this.add.image(540, 1210, "single-phase");
+		doublePhaseContainer.add(single_phase);
 
 		// dp_yellow_ring_1
 		const dp_yellow_ring_1 = this.add.image(291, 1220, "yellow-ring");
@@ -69,6 +72,11 @@ class Game extends Phaser.Scene {
 		const dp_yellow_ring_2 = this.add.image(796, 1216, "yellow-ring");
 		dp_yellow_ring_2.visible = false;
 		doublePhaseContainer.add(dp_yellow_ring_2);
+
+		// sp_yellow_ring_1
+		const sp_yellow_ring_1 = this.add.image(538, 1216, "yellow-ring-single");
+		sp_yellow_ring_1.visible = false;
+		doublePhaseContainer.add(sp_yellow_ring_1);
 
 		// doublePhaseTwoCardContainer
 		const doublePhaseTwoCardContainer = this.add.container(795, 1220);
@@ -83,11 +91,12 @@ class Game extends Phaser.Scene {
 		// singlePhaseContainer
 		const singlePhaseContainer = this.add.container(0, -2);
 		singlePhaseContainer.name = "singlePhaseContainer";
+		singlePhaseContainer.visible = false;
 		phaseContainer.add(singlePhaseContainer);
 
-		// single_phase
-		const single_phase = this.add.image(540, 1211, "single-phase");
-		singlePhaseContainer.add(single_phase);
+		// single_phase_1
+		const single_phase_1 = this.add.image(540, 1211, "single-phase");
+		singlePhaseContainer.add(single_phase_1);
 
 		// sp_yellow_ring
 		const sp_yellow_ring = this.add.image(540, 1210, "yellow-ring-single");
@@ -775,12 +784,14 @@ class Game extends Phaser.Scene {
 		this.btn_settings = btn_settings;
 		this.doublePhaseContainer = doublePhaseContainer;
 		this.double_phase = double_phase;
+		this.single_phase = single_phase;
 		this.dp_yellow_ring_1 = dp_yellow_ring_1;
 		this.dp_yellow_ring_2 = dp_yellow_ring_2;
+		this.sp_yellow_ring_1 = sp_yellow_ring_1;
 		this.doublePhaseTwoCardContainer = doublePhaseTwoCardContainer;
 		this.doublePhaseOneCardContainer = doublePhaseOneCardContainer;
 		this.singlePhaseContainer = singlePhaseContainer;
-		this.single_phase = single_phase;
+		this.single_phase_1 = single_phase_1;
 		this.sp_yellow_ring = sp_yellow_ring;
 		this.singlePhaseOneContainer = singlePhaseOneContainer;
 		this.totalPhasesText = totalPhasesText;
@@ -889,9 +900,13 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Image} */
 	double_phase;
 	/** @type {Phaser.GameObjects.Image} */
+	single_phase;
+	/** @type {Phaser.GameObjects.Image} */
 	dp_yellow_ring_1;
 	/** @type {Phaser.GameObjects.Image} */
 	dp_yellow_ring_2;
+	/** @type {Phaser.GameObjects.Image} */
+	sp_yellow_ring_1;
 	/** @type {Phaser.GameObjects.Container} */
 	doublePhaseTwoCardContainer;
 	/** @type {Phaser.GameObjects.Container} */
@@ -899,7 +914,7 @@ class Game extends Phaser.Scene {
 	/** @type {Phaser.GameObjects.Container} */
 	singlePhaseContainer;
 	/** @type {Phaser.GameObjects.Image} */
-	single_phase;
+	single_phase_1;
 	/** @type {Phaser.GameObjects.Image} */
 	sp_yellow_ring;
 	/** @type {Phaser.GameObjects.Container} */

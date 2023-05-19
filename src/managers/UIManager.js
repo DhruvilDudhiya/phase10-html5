@@ -4,14 +4,34 @@ class UIManager {
     }
 
     setPhaseContainer(oData) {
-        this.oScene.oGameManager.phaseRules = oData.aRules.length; 
-        if (oData.aRules.length == "2") {
-            this.oScene.doublePhaseContainer.setVisible(true);
-            this.oScene.singlePhaseContainer.setVisible(false);
-        }  else {
-            this.oScene.doublePhaseContainer.setVisible(false);
-            this.oScene.singlePhaseContainer.setVisible(true);
-            this.oScene.twoPlayer2Box.setTexture("single-phase-2");
+        if(this.oScene.nMaxPlayer === 2){
+            if (oData.aRules.length == 2) {
+                if(this.oScene.secondPlayerId == oData.iUserId){
+                    console.log("Player");
+                    this.oScene.twoPlayer2Box.setTexture("player-2-box");
+                }
+            }  else if (oData.aRules.length == 1){
+                if(this.oScene.secondPlayerId == oData.iUserId){
+                    this.oScene.twoPlayer2Box.setTexture("single-phase-2");
+                }
+            }
+        }
+        else if(this.oScene.nMaxPlayer === 3){
+            if (oData.aRules.length == 2) {
+                if(this.oScene.secondPlayerId == oData.iUserId){
+                    this.oScene.threePlayer2Box.setTexture("player-2-box");
+                }
+                else if(this.oScene.thirdPlayerId == oData.iUserId){
+                    this.oScene.threePlayer3Box.setTexture("player-3-box");
+                }
+            }  else if (oData.aRules.length == 1){
+                if(this.oScene.secondPlayerId == oData.iUserId){
+                    this.oScene.threePlayer2Box.setTexture("single-phase-2");
+                }
+                else if(this.oScene.thirdPlayerId == oData.iUserId){
+                    this.oScene.threePlayer3Box.setTexture("single-phase-3");
+                }
+            }
         }
     }
 

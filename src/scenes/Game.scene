@@ -116,7 +116,6 @@
                             "scope": "CLASS",
                             "components": [],
                             "y": 3,
-                            "visible": false,
                             "list": [
                                 {
                                     "type": "Image",
@@ -126,6 +125,18 @@
                                     "components": [],
                                     "texture": {
                                         "key": "double-phase"
+                                    },
+                                    "x": 540,
+                                    "y": 1210
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "08c5f253-b19a-4f32-a4eb-830a2ce18437",
+                                    "label": "single_phase",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "single-phase"
                                     },
                                     "x": 540,
                                     "y": 1210
@@ -153,6 +164,19 @@
                                         "key": "yellow-ring"
                                     },
                                     "x": 796,
+                                    "y": 1216,
+                                    "visible": false
+                                },
+                                {
+                                    "type": "Image",
+                                    "id": "10e0e565-2032-4ba1-944c-0e37b81f0077",
+                                    "label": "sp_yellow_ring_1",
+                                    "scope": "CLASS",
+                                    "components": [],
+                                    "texture": {
+                                        "key": "yellow-ring-single"
+                                    },
+                                    "x": 538,
                                     "y": 1216,
                                     "visible": false
                                 },
@@ -192,11 +216,12 @@
                             "scope": "CLASS",
                             "components": [],
                             "y": -2,
+                            "visible": false,
                             "list": [
                                 {
                                     "type": "Image",
                                     "id": "d36d731d-6088-4a80-b9c6-2a0a21a0d1a5",
-                                    "label": "single_phase",
+                                    "label": "single_phase_1",
                                     "scope": "CLASS",
                                     "components": [],
                                     "texture": {

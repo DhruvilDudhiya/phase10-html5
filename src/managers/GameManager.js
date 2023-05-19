@@ -14,8 +14,6 @@ class GameManager {
 		this.skipCard = "s"; //Skip Card
 
 		//Set Ruleset Condition
-		this.nCurrentPhase = 0;
-		this.nTotalPhasesCount = 0;
 		this.phaseOneType = "";
 		this.phaseOneTotalCards = "";
 		this.phaseTwoType = "";
@@ -23,28 +21,39 @@ class GameManager {
 		this.isOwnTurn = false;
 		this.isGrabCard = false;
 		this.isGrabCardCloseDake = false;
-		this.phaseRules = "";
 		this.ownPly = false;
 		this.opponetPly = false;
 		this.onePhaseContainer = false;
-
-
 		this.opponetPlayer2Grp1 = false;
 		this.opponetPlayer3Grp1 = false;
 		this.opponetPlayer2Grp2 = false;
 		this.opponetPlayer3Grp2 = false;
-
 		this.whichPlayer = undefined;
-
-	}
-
-	resetPhaseData() {
-		//Set Ruleset Condition
+		
 		this.nCurrentPhase = 0;
 		this.nTotalPhasesCount = 0;
+		this.phaseRules = 0;
+		this.nNumberOfRules = 0;
+
+		this.twoPlayerNumberOfRules = 0;
+		this.threePlayer1NumberOfRules = 0;
+		this.threePlayer2NumberOfRules = 0;
+	}
+	
+	resetPhaseData() {
+		//Set Ruleset Condition
 		this.phaseOneType = "";
 		this.phaseOneTotalCards = "";
 		this.phaseTwoType = "";
 		this.phaseTwoTotalCards = "";
+		
+		this.nCurrentPhase = 0;
+		this.nTotalPhasesCount = 0;
+		this.phaseRules = 0;
+		this.nNumberOfRules = 0;
+
+		this.twoPlayerNumberOfRules = 0;
+		this.threePlayer1NumberOfRules = 0;
+		this.threePlayer2NumberOfRules = 0;
 	}
 }

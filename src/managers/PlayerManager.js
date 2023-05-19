@@ -17,9 +17,9 @@ class PlayerManager {
             for (let i = 0; i < this.oScene.doublePhaseTwoCardContainer.list.length; i++) {
                 this.oScene.doublePhaseTwoCardContainer.list[i].disableInteractive();
             }
-            for (let i = 0; i < this.oScene.singlePhaseOneContainer.list.length; i++) {
-                this.oScene.singlePhaseOneContainer.list[i].disableInteractive();
-            }
+            // for (let i = 0; i < this.oScene.singlePhaseOneContainer.list.length; i++) {
+            //     this.oScene.singlePhaseOneContainer.list[i].disableInteractive();
+            // }
         });
     }
 
@@ -412,30 +412,40 @@ class PlayerManager {
         this.oScene.oGameManager.nCurrentPhase = phaseData.nCurrentPhase;
         this.oScene.oGameManager.nTotalPhasesCount = phaseData.nTotalPhasesCount;
         this.oScene.oGameManager.phaseRules = phaseData.aRules.length;
-
+        
         //OwnPlayerData
         if (this.oScene.ownPlayerId == phaseData.iUserId) {
+            this.oScene.oGameManager.nNumberOfRules = phaseData.nNumberOfRules;
             this.oScene.totalPhasesText.setText("PHASE " + phaseData.nCurrentPhase + "/" + phaseData.nTotalPhasesCount);
             if (phaseData.aRules.length == 2) {
+                this.oScene.double_phase.setVisible(true);
+                this.oScene.single_phase.setVisible(false);
+
                 this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
                 this.oScene.phaseOneText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
-
+                
                 this.oScene.oGameManager.phaseTwoType = phaseData.aRules[1].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseTwoTotalCards = phaseData.aRules[1].nNumberOfCards.toString().toUpperCase();
                 this.oScene.phaseTwoText.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
+                this.setGrup1CurrentData(phaseData);
+                this.setGrup2CurrentData(phaseData);
             }
             else {
+                this.oScene.doublePhaseOneCardContainer.x = 540;
+                this.oScene.double_phase.setVisible(false);
+                this.oScene.single_phase.setVisible(true);
+
                 this.oScene.oGameManager.phaseOneType = phaseData.aRules[0].sRuleType.toUpperCase();
                 this.oScene.oGameManager.phaseOneTotalCards = phaseData.aRules[0].nNumberOfCards.toString().toUpperCase();
                 this.oScene.phaseMiddleText.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
+                this.setGrup1CurrentData(phaseData);
             }
             //setownPlayerGroup
-            this.setGrup1CurrentData(phaseData);
-            this.setGrup2CurrentData(phaseData);
         }
         else {
             if (this.oScene.nMaxPlayer == 2) {
+                this.oScene.oGameManager.twoPlayerNumberOfRules = phaseData.nNumberOfRules;
                 this.oScene.txt_set1_opponent_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
                 this.oScene.txt_set2_opponent_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
                 this.oScene.txt_opponent_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
@@ -444,13 +454,15 @@ class PlayerManager {
             else if (this.oScene.nMaxPlayer == 3) {
                 for (let i = 0; i < this.oScene.playersContainer.length; i++) {
                     if (this.oScene.playersContainer.getAll()[i].name === phaseData.iUserId) {
-                        if (this.oScene.playersContainer.getAll()[i].x < 540) {
+                        if (this.oScene.secondPlayerId == phaseData.iUserId) {
+                            this.oScene.oGameManager.threePlayer1NumberOfRules = phaseData.nNumberOfRules;
                             this.oScene.txt_set1_opponent2_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
                             this.oScene.txt_set2_opponent2_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
                             this.oScene.txt_opponent2_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
                             this.oScene.txt_opponent2_phase_score.setText(phaseData.nScore);
                         }
-                        else if(this.oScene.playersContainer.getAll()[i].x >= 540){
+                        else if(this.oScene.thirdPlayerId == phaseData.iUserId){
+                            this.oScene.oGameManager.threePlayer2NumberOfRules = phaseData.nNumberOfRules;
                             this.oScene.txt_set1_opponent3_info.setText(phaseData.aRules[0].sRuleType.toUpperCase() + " of " + phaseData.aRules[0].nNumberOfCards.toString().toUpperCase());
                             this.oScene.txt_set2_opponent3_info.setText(phaseData.aRules[1].sRuleType.toUpperCase() + " of " + phaseData.aRules[1].nNumberOfCards.toString().toUpperCase());
                             this.oScene.txt_opponent3_phase_count.setText("PHASE " + phaseData.nCurrentPhase);
@@ -549,10 +561,11 @@ class PlayerManager {
     handleRingsVisibilityOFF() {
         this.oScene.dp_yellow_ring_1.setVisible(false);
         this.oScene.dp_yellow_ring_2.setVisible(false);
+        this.oScene.sp_yellow_ring_1.setVisible(false);
     }
 
     handleDeclareButtons() {
-        if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == false && this.oScene.sp_yellow_ring.visible == false) {
+        if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == false && this.oScene.sp_yellow_ring_1.visible == false) {
             this.handleDeclareButtonsVisibilityOFF()
         }
         else {
@@ -560,15 +573,19 @@ class PlayerManager {
                 this.handleDeclareButtonsVisibilityOFF();
             } else {
                 this.handleDeclareButtonsVisibilityON()
-                if (this.oScene.dp_yellow_ring_1.visible == true && this.oScene.dp_yellow_ring_2.visible == false && this.oScene.oGameManager.isOwnTurn) {
+                if ((this.oScene.oGameManager.nNumberOfRules == 2) && this.oScene.dp_yellow_ring_1.visible == true && this.oScene.dp_yellow_ring_2.visible == false && this.oScene.oGameManager.isOwnTurn) {
                     this.oScene.confirmButton.setAlpha(0.75);
                     this.oScene.confirmButton.disableInteractive();
-                } else if (this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == true && this.oScene.oGameManager.isOwnTurn) {
+                } else if ((this.oScene.oGameManager.nNumberOfRules == 2) && this.oScene.dp_yellow_ring_1.visible == false && this.oScene.dp_yellow_ring_2.visible == true && this.oScene.oGameManager.isOwnTurn) {
                     this.oScene.confirmButton.setAlpha(0.75);
                     this.oScene.confirmButton.disableInteractive();
-                } else {
+                }else if ((this.oScene.oGameManager.nNumberOfRules == 1) && this.oScene.sp_yellow_ring_1.visible == false && this.oScene.oGameManager.isOwnTurn) {
+                    this.oScene.confirmButton.setAlpha(0.75);
+                    this.oScene.confirmButton.disableInteractive();
+                }
+                 else {
                     if (this.oScene.oGameManager.isOwnTurn) {
-                        if (this.oScene.sp_yellow_ring.visible == true) {
+                        if (this.oScene.sp_yellow_ring_1.visible == true) {
                             this.handleDeclareButtonsVisibilityON()
                             this.oScene.confirmButton.setAlpha(1);
                             this.oScene.confirmButton.setInteractive();

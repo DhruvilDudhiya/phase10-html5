@@ -51,7 +51,7 @@ class CardPreset {
 			}
 			//check declare phase card of both group
 			if (this.gameObject.scene.isDeclarePhase == true) {
-				this.checkOwnMatchContainer(this.gameObject.scene.doublePhaseOneCardContainer.list, this.gameObject.scene.doublePhaseTwoCardContainer.list);
+					this.checkOwnMatchContainer(this.gameObject.scene.doublePhaseOneCardContainer.list, this.gameObject.scene.doublePhaseTwoCardContainer.list);
 
 				if(this.gameObjectPreset.scene.nMaxPlayer == 2){
 					this.checkOpponentMatchContainer(this.gameObjectPreset.scene.opponentGrp1PhaseCardContainer.list, this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.list, this.gameObjectPreset.scene.nMaxPlayer)
@@ -109,16 +109,26 @@ class CardPreset {
 			this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp2 = false;
 
 
-			if (this.gameObject.scene.oGameManager.phaseRules == 2) {
+			// if (this.gameObject.scene.oGameManager.nNumberOfRules == 2) {
 				if (this.gameObject.scene.nMaxPlayer == 2) {
 					//Opened Card Deck
 					// Put card in openDeck
 					if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
 						this.putOpenDeckPosition();
 					}
+					// this.twoPlayerNumberOfRules = 0;
+					// this.threePlayer1NumberOfRules = 0;
+					// this.threePlayer2NumberOfRules = 0;
 					//Group One
-					else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 515 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 363 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 350 && this.gameObjectPreset.y <= 470)) {
-						this.groupOnePosition()
+					else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 515 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 363 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 350 && this.gameObjectPreset.y <= 470) || /*...*/ (this.gameObject.scene.oGameManager.nNumberOfRules == 1 && (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 360 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 380 && this.gameObjectPreset.y <= 490))) {
+
+						if(this.gameObject.scene.oGameManager.twoPlayerNumberOfRules == 1 && ((this.gameObjectPreset.x >= 363 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 350 && this.gameObjectPreset.y <= 470) || (this.gameObjectPreset.x >= 360 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 380 && this.gameObjectPreset.y <= 490))){
+							this.ruleOneGroupPosition()
+						} else if (this.gameObject.scene.oGameManager.nNumberOfRules == 1 && (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305)){
+							this.ruleOneGroupPosition()
+						}else if (this.gameObject.scene.oGameManager.nNumberOfRules == 2){
+							this.groupOnePosition()
+						}
 					}
 					//Group Two
 					else if ((this.gameObjectPreset.x >= 565 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 363 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 485 && this.gameObjectPreset.y <= 605)) {
@@ -140,8 +150,18 @@ class CardPreset {
 						this.putOpenDeckPosition();
 					}
 					//Group One
-					else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 515 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460) || (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)) {
-						this.doublePlayerGroupOnePosition()
+					else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 515 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460) || (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460) || /*...*/ (this.gameObject.scene.oGameManager.nNumberOfRules == 1 && (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305))) {						
+						
+						if(this.gameObject.scene.oGameManager.threePlayer1NumberOfRules == 1 && (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)){
+							this.doublePlayerRuleOneGroupPosition()
+						} else if(this.gameObject.scene.oGameManager.threePlayer2NumberOfRules == 1 && (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)){
+							this.doublePlayerRuleOneGroupPosition()
+						} else if (this.gameObject.scene.oGameManager.nNumberOfRules == 1 && (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305)){
+							this.doublePlayerRuleOneGroupPosition()
+						} else if (this.gameObject.scene.oGameManager.nNumberOfRules == 2){
+							this.doublePlayerGroupOnePosition()
+						}
+
 					}
 					//Group Two
 					else if ((this.gameObjectPreset.x >= 565 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 490 && this.gameObjectPreset.y <= 600) || (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 490 && this.gameObjectPreset.y <= 600)) {
@@ -156,19 +176,19 @@ class CardPreset {
 						this.playerHandPosition()
 					}
 				}
-			}
-			else if (this.gameObject.scene.oGameManager.phaseRules == 1) {
-				console.log("single container phase start");
-				if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
-					this.putOpenDeckPosition();
-				} else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 360 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 380 && this.gameObjectPreset.y <= 490)) {
-					this.ruleOneGroupPosition()
-				} else if (this.gameObjectPreset.x >= 346 && this.gameObjectPreset.x <= 734 && this.gameObjectPreset.y >= 74 && this.gameObjectPreset.y <= 697) {
-					this.skipPlayerPosition()
-				} else {
-					this.playerHandPosition();
-				}
-			}
+			// }
+			// else if (this.gameObject.scene.oGameManager.nNumberOfRules == 1) {
+			// 	console.log("single container phase start");
+			// 	if (this.gameObjectPreset.x >= 350 && this.gameObjectPreset.x <= 500 && this.gameObjectPreset.y >= 750 && this.gameObjectPreset.y <= 1000) {
+			// 		this.putOpenDeckPosition();
+			// 	} else if ((this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) || (this.gameObjectPreset.x >= 360 && this.gameObjectPreset.x <= 720 && this.gameObjectPreset.y >= 380 && this.gameObjectPreset.y <= 490)) {
+			// 		this.ruleOneGroupPosition()
+			// 	} else if (this.gameObjectPreset.x >= 346 && this.gameObjectPreset.x <= 734 && this.gameObjectPreset.y >= 74 && this.gameObjectPreset.y <= 697) {
+			// 		this.skipPlayerPosition()
+			// 	} else {
+			// 		this.playerHandPosition();
+			// 	}
+			// }
 			this.gameObject.scene.oPlayerHand.arrangePlayerHandCards();
 		});
 		/* END-USER-CTR-CODE */
@@ -286,7 +306,7 @@ class CardPreset {
 					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
 				} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
 					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
-				} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "COLOR") {
 					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
 				}
 			}
@@ -325,14 +345,12 @@ class CardPreset {
 			this.lastHitcards1 = this.opponentGrp2PhaseCardIds[this.opponentGrp2PhaseCardIds.length - 1];
 		}
 		if (this.gameObject.scene.isDeclarePhase == true) {
-
-
 			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
 				if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
 					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : this.opponentGrp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
 				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "RUN") {
 					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : this.opponentGrp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
-				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "color") {
+				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "COLOR") {
 					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer,);
 				}
 			}
@@ -415,7 +433,7 @@ class CardPreset {
 					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : (this.opponetPlayer2Grp1 == true) ? this.gameObject.scene.opponent2Grp1PhaseCardContainer : this.gameObject.scene.opponent3Grp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : (this.opponetPlayer2Grp1 == true) ? this.opponent2Grp1PhaseCardIds : this.opponent3Grp1PhaseCardIds, this.lastHitcards, "aGroup-1");
 				} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
 					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : (this.opponetPlayer2Grp1 == true) ? this.gameObject.scene.opponent2Grp1PhaseCardContainer : this.gameObject.scene.opponent3Grp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : (this.opponetPlayer2Grp1 == true) ? this.opponent2Grp1PhaseCardIds : this.opponent3Grp1PhaseCardIds, this.lastHitcards, "aGroup-1");
-				} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "COlOR") {
 					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
 				}
 			}
@@ -483,18 +501,13 @@ class CardPreset {
 			}
 			this.lastHitcards1 = this.opponent3Grp2PhaseCardIds[this.opponent3Grp2PhaseCardIds.length - 1];
 		}
-
-
-
-
-
 		if (this.gameObject.scene.isDeclarePhase == true) {
 			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
 				if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
 					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : (this.opponetPlayer2Grp2 == true) ? this.gameObject.scene.opponent2Grp2PhaseCardContainer : this.gameObject.scene.opponent3Grp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : (this.opponetPlayer2Grp2 == true) ? this.opponent2Grp2PhaseCardIds : this.opponent3Grp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
 				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "RUN") {
 					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : (this.opponetPlayer2Grp2 == true) ? this.gameObject.scene.opponent2Grp2PhaseCardContainer : this.gameObject.scene.opponent3Grp2PhaseCardContainer, (this.ownPly == true) ? this.phaseTwoHitCardIds : (this.opponetPlayer2Grp2 == true) ? this.opponent2Grp2PhaseCardIds : this.opponent3Grp2PhaseCardIds, this.lastHitcards1, "aGroup-2");
-				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "color") {
+				} else if (this.gameObject.scene.oGameManager.phaseTwoType == "COLOR") {
 					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseTwoCardContainer : this.gameObject.scene.opponentGrp2PhaseCardContainer,);
 				}
 			}
@@ -517,14 +530,13 @@ class CardPreset {
 	ruleOneGroupPosition() {
 		if (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) {
 			this.ownPly = true;
-			// this.gameObject.scene.oGameManager.onePhaseContainer = true
 			this.gameObjectPreset.scene.oGameManager.ownPly = true;
-			this.gameObject.scene.singlePhaseOneContainer.add(this.gameObjectPreset);
-			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.singlePhaseOneContainer);
-			this.gameObjectPreset.setScale(0.7);
-			this.gameObjectPreset.setPosition(0,0);
-			for (let i = 0; i < this.gameObject.scene.singlePhaseOneContainer.list.length; i++) {
-				this.phaseOneHitCardIds.push(this.gameObject.scene.singlePhaseOneContainer.list[i].__CardPreset.cardId);
+			this.gameObject.scene.doublePhaseOneCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.doublePhaseOneCardContainer);
+			this.gameObjectPreset.setScale(0.6);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.doublePhaseOneCardContainer.list.length; i++) {
+				this.phaseOneHitCardIds.push(this.gameObject.scene.doublePhaseOneCardContainer.list[i].__CardPreset.cardId);
 			}
 			this.lastHitcards = this.phaseOneHitCardIds[this.phaseOneHitCardIds.length - 1];
 		}
@@ -541,16 +553,98 @@ class CardPreset {
 			this.lastHitcards = this.opponentGrp1PhaseCardIds[this.opponentGrp1PhaseCardIds.length - 1];
 		}
 		if (this.gameObject.scene.isDeclarePhase == true) {
-			if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
-				this.setContition((this.ownPly == true) ? this.gameObject.scene.singlePhaseOneContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
-			} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
-				this.runContition((this.ownPly == true) ? this.gameObject.scene.singlePhaseOneContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
-			} else if (this.gameObject.scene.oGameManager.phaseOneType == "color") {
-				this.colorContition((this.ownPly == true) ? this.gameObject.scene.singlePhaseOneContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
+			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
+				if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
+					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
+					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "COLOR") {
+					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : this.opponentGrp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				}
+			}
+			else{
+				this.playerHandPosition();
 			}
 		}
 		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly);
 	}
+
+	doublePlayerRuleOneGroupPosition(){
+		if (this.gameObjectPreset.x >= 60 && this.gameObjectPreset.x <= 1020 && this.gameObjectPreset.y >= 1105 && this.gameObjectPreset.y <= 1305) {
+			this.ownPly = true;
+			this.gameObjectPreset.scene.oGameManager.ownPly = true;
+			this.gameObject.scene.doublePhaseOneCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.doublePhaseOneCardContainer);
+			this.gameObjectPreset.setScale(0.6);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.doublePhaseOneCardContainer.list.length; i++) {
+				this.phaseOneHitCardIds.push(this.gameObject.scene.doublePhaseOneCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.phaseOneHitCardIds[this.phaseOneHitCardIds.length - 1];
+		}
+
+		else if (this.gameObject.scene.isDeclarePhase == true && (this.gameObjectPreset.x >= 105 && this.gameObjectPreset.x <= 460 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)) {
+			this.opponetPly = true;
+			this.opponetPlayer2Grp1 = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer2Grp1 = true;
+			this.gameObject.scene.opponent2Grp1PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponent2Grp1PhaseCardContainer);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.opponent2Grp1PhaseCardContainer.list.length; i++) {
+				this.opponent2Grp1PhaseCardIds.push(this.gameObject.scene.opponent2Grp1PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.opponent2Grp1PhaseCardIds[this.opponent2Grp1PhaseCardIds.length - 1];
+		}
+		
+		else if (this.gameObject.scene.isDeclarePhase == true && (this.gameObjectPreset.x >= 615 && this.gameObjectPreset.x <= 970 && this.gameObjectPreset.y >= 355 && this.gameObjectPreset.y <= 460)) {
+			this.opponetPly = true;
+			this.opponetPlayer3Grp1 = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPly = true;
+			this.gameObjectPreset.scene.oGameManager.opponetPlayer3Grp1 = true;
+			this.gameObject.scene.opponent3Grp1PhaseCardContainer.add(this.gameObjectPreset);
+			this.gameObject.scene.oRuleset.validateRuleset(this.gameObject.scene.opponent3Grp1PhaseCardContainer);
+			this.gameObjectPreset.setScale(0.5);
+			this.gameObjectPreset.setPosition(0, 0);
+			for (let i = 0; i < this.gameObject.scene.opponent3Grp1PhaseCardContainer.list.length; i++) {
+				this.opponent3Grp1PhaseCardIds.push(this.gameObject.scene.opponent3Grp1PhaseCardContainer.list[i].__CardPreset.cardId);
+			}
+			this.lastHitcards = this.opponent3Grp1PhaseCardIds[this.opponent3Grp1PhaseCardIds.length - 1];
+		}
+
+
+		
+		if (this.gameObject.scene.isDeclarePhase == true) {
+			if(this.gameObject.oScene.oGameManager.isOwnTurn == true){
+				if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
+					this.setContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : (this.opponetPlayer2Grp1 == true) ? this.gameObject.scene.opponent2Grp1PhaseCardContainer : this.gameObject.scene.opponent3Grp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : (this.opponetPlayer2Grp1 == true) ? this.opponent2Grp1PhaseCardIds : this.opponent3Grp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "RUN") {
+					this.runContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : (this.opponetPlayer2Grp1 == true) ? this.gameObject.scene.opponent2Grp1PhaseCardContainer : this.gameObject.scene.opponent3Grp1PhaseCardContainer, (this.ownPly == true) ? this.phaseOneHitCardIds : (this.opponetPlayer2Grp1 == true) ? this.opponent2Grp1PhaseCardIds : this.opponent3Grp1PhaseCardIds, this.lastHitcards, "aGroup-1");
+				} else if (this.gameObject.scene.oGameManager.phaseOneType == "COLOR") {
+					this.colorContition((this.ownPly == true) ? this.gameObject.scene.doublePhaseOneCardContainer : this.gameObject.scene.opponentGrp1PhaseCardContainer,);
+				}
+			}
+			else{
+				this.playerHandPosition();
+			}
+		}
+		console.log("this.ownPly", this.ownPly, "this.opponetPly", this.opponetPly, "this.opponetPlayer2Grp1", this.opponetPlayer2Grp1);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	skipPlayerPosition() {
 		if (this.gameObject.__CardPreset.cardNumber === "s") {
 			this.gameObject.scene.oRuleset.validateSkipCard(this.gameObject);
@@ -569,7 +663,7 @@ class CardPreset {
 			if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
 				for (let i = 0; i < containerOne.length; i++) {
 					if (this.currentOwnCardLabel === containerOne[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
-						this.gameObject.scene.dp_yellow_ring_1.setVisible(true);
+						(this.gameObjectPreset.scene.oGameManager.nNumberOfRules == 2) ? this.gameObject.scene.dp_yellow_ring_1.setVisible(true) : this.gameObject.scene.sp_yellow_ring_1.setVisible(true);
 						//Handle the Ring Visibility and allow the card to be dragged their
 					} else {
 						this.gameObject.x = this.posX;
@@ -592,16 +686,18 @@ class CardPreset {
 				let minNo = Math.min(...cardContOneArray);
 				console.log("min :", minNo, "max :", maxNo);
 				if (minNo - 1 == this.currentOwnCardLabel || maxNo + 1 == this.currentOwnCardLabel || this.currentOwnCardLabel == 'w') {
-					this.gameObject.scene.dp_yellow_ring_1.setVisible(true);
+					(this.gameObjectPreset.scene.oGameManager.nNumberOfRules == 2) ? this.gameObject.scene.dp_yellow_ring_1.setVisible(true) : this.gameObject.scene.sp_yellow_ring_1.setVisible(true);
 				}
 			}
 		}
-		if (this.gameObject.scene.doublePhaseTwoCardContainer.name == "doublePhaseTwoCardContainer") {
+		if ((this.gameObjectPreset.scene.oGameManager.nNumberOfRules == 2) && this.gameObject.scene.doublePhaseTwoCardContainer.name == "doublePhaseTwoCardContainer") {
 			let cardContTwoArray = []
 			if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
 				for (let i = 0; i < containerTwo.length; i++) {
 					if (
 						this.currentOwnCardLabel === containerTwo[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
+			console.log("not go");
+
 						this.gameObject.scene.dp_yellow_ring_2.setVisible(true);
 						//Handle the Ring Visibility and allow the card to be dragged their
 					} else {
@@ -625,6 +721,8 @@ class CardPreset {
 				let minNo = Math.min(...cardContTwoArray);
 				console.log("min :", minNo, "max :", maxNo);
 				if (minNo - 1 == this.currentOwnCardLabel || maxNo + 1 == this.currentOwnCardLabel || this.currentOwnCardLabel == 'w') {
+			console.log("not go");
+
 					this.gameObject.scene.dp_yellow_ring_2.setVisible(true);
 				}
 			}
@@ -636,8 +734,12 @@ class CardPreset {
 			if (this.gameObject.scene.oGameManager.phaseOneType == "SET") {
 				for (let i = 0; i < opponentContainer1.length; i++) {
 					if (this.currentOwnCardLabel == opponentContainer1[i].__CardPreset.cardNumber || this.currentOwnCardLabel === "w") {
-						console.log("visible");
-						(nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(true);
+						console.log("visible");					
+						let ring = (nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(true);
+						ring.setY(408);
+						if (this.gameObjectPreset.scene.oGameManager.twoPlayerNumberOfRules == 1 || this.gameObjectPreset.scene.oGameManager.threePlayer1NumberOfRules == 1 || this.gameObjectPreset.scene.oGameManager.threePlayer2NumberOfRules == 1){
+							ring.setY(440);
+						}
 					}
 				}
 			}
@@ -657,13 +759,17 @@ class CardPreset {
 				console.log("min :", minNo, "max :", maxNo);
 				if (minNo - 1 == this.currentOwnCardLabel || maxNo + 1 == this.currentOwnCardLabel || this.currentOwnCardLabel == 'w') {
 					console.log("visible");
-					(nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(true);
+					let ring = (nMaxPlayers == 2) ? this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true) : (this.gameObjectPreset.scene.opponent2Grp1PhaseCardContainer.name == "opponent2Grp1PhaseCardContainer") ? this.gameObject.scene.yellow_ring_opponentGrp_21.setVisible(true) :  this.gameObject.scene.yellow_ring_opponentGrp_31.setVisible(true);
+					ring.setY(408);
+					if (this.gameObjectPreset.scene.oGameManager.twoPlayerNumberOfRules == 1 || this.gameObjectPreset.scene.oGameManager.threePlayer1NumberOfRules == 1 || this.gameObjectPreset.scene.oGameManager.threePlayer2NumberOfRules == 1){
+						ring.setY(440);
+					}
 					// this.gameObject.scene.yellow_ring_opponentGrp1.setVisible(true);
 				}
 				
 			}
 		}
-		if (this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.name == "opponentGrp2PhaseCardContainer" || this.gameObjectPreset.scene.opponent2Grp2PhaseCardContainer.name == "opponent2Grp2PhaseCardContainer" || this.gameObjectPreset.scene.opponent3Grp2PhaseCardContainer.name == "opponent3Grp2PhaseCardContainer") {
+		if (((this.gameObjectPreset.scene.oGameManager.twoPlayerNumberOfRules == 2 || this.gameObjectPreset.scene.oGameManager.threePlayer1NumberOfRules == 2 || this.gameObjectPreset.scene.oGameManager.threePlayer2NumberOfRules == 2) && this.gameObjectPreset.scene.opponentGrp2PhaseCardContainer.name == "opponentGrp2PhaseCardContainer" || this.gameObjectPreset.scene.opponent2Grp2PhaseCardContainer.name == "opponent2Grp2PhaseCardContainer" || this.gameObjectPreset.scene.opponent3Grp2PhaseCardContainer.name == "opponent3Grp2PhaseCardContainer")) {
 			let cardContTwoArray = [];
 			if (this.gameObject.scene.oGameManager.phaseTwoType == "SET") {
 				for (let i = 0; i < opponentContainer2.length; i++) {
@@ -784,7 +890,9 @@ class CardPreset {
 			);
 		}
 	}
-	colorContition() { }
+	colorContition() { 
+
+	}
 	sendDiscardCard(cardDiscard) {
 		console.log("cardDiscard", cardDiscard);
 
